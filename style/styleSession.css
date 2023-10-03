@@ -1,0 +1,69 @@
+
+
+.navbar-nav a.nav-link {
+  color: #001219; /* Cambia este valor al color deseado */
+}
+
+/* Cambiar color del botón */
+.btn-outline-success {
+  color: #C70039;            /* Color del texto en el botón */
+  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
+  border-color: #C70039;      /* Cambia este valor al color deseado para el borde del botón */
+}
+
+/* Cambiar color del botón */
+.btn-primary1 {
+  color: #C70039;            /* Color del texto en el botón */
+  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
+  border-color: #C70039;      /* Cambia este valor al color deseado para el borde del botón */
+}
+
+/* Cambiar color del botón */
+.btn-primary1:hover {
+  color: #C70039;            /* Color del texto en el botón */
+  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
+  border-color: #001219;      /* Cambia este valor al color deseado para el borde del botón */
+}
+/* Cambiar color del botón en el hover */
+.btn-outline-success:hover {
+  color: #C70039;             /* Cambia este valor al color deseado para el texto en hover */
+  background-color: #001219; /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #001219;      /* Cambia este valor al color deseado para el borde en hover */
+}
+
+
+.btn-outline-success:active {
+  color: #C70039 !important;           /* Cambia este valor al color deseado para el texto en el clic */
+  background-color: #001219 !important; /* Cambia este valor al color deseado para el fondo en el clic */
+  border-color: #C70039 !important;     /* Cambia este valor al color deseado para el borde en el clic */
+}
+
+.dropdown-item:active {
+  color: #C70039 !important;           /* Cambia este valor al color deseado para el texto en el clic */
+  background-color: #001219 !important; /* Cambia este valor al color deseado para el fondo en el clic */
+  border-color: #001219 !important;     /* Cambia este valor al color deseado para el borde en el clic */
+}
+
+.nav-item:hover {
+  color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
+  background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
+  border-radius: 25px;
+}
+.dropdown-item:hover {
+  color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
+  background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
+  border-radius: 25px;
+}
+
+.dropdown:active {
+             /* Cambia este valor al color deseado para el texto en el clic */
+  background-color: #001219;   /* Cambia este valor al color deseado para el borde en el clic */
+}
+.dropdown-menu {       /* Cambia este valor al color deseado para el borde en hover */
+  border-radius: 25px;
+}
+.offcanvas-body:hover {       /* Cambia este valor al color deseado para el borde en hover */
+  border-radius: 50px;
+}
