@@ -1,6 +1,6 @@
 <?php
 require_once 'layout/headerIndex.php';
-
+require_once 'modal/modalLogIn.php';
 ?>
 <!DOCTYPE html>
 <html>
