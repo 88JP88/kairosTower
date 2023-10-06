@@ -56,7 +56,7 @@ require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiCore/v1/validateLogIn/93q89NnAwIUNiOn2mOl5DqbC8";
+$url = $sub_domain . "/kairosGateway/apiCore/v1/validateLogInInternal/93q89NnAwIUNiOn2mOl5DqbC8";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
