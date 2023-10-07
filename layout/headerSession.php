@@ -43,8 +43,7 @@
   <ul class="dropdown-menu">
     <!-- Dropdown menu links -->
     <li><button class="dropdown-item nav-item" onclick="openModCloseSession();" type="button" role="tab" style="color: #C70039;">Salir</button></li>
-        
-        <li><a class="dropdown-item nav-item" href="#" style="color: #C70039;">Compartir</a></li>
+      
         <li><a class="dropdown-item nav-item" href="#" style="color: #C70039;">Informe de errores</a></li>
   </ul>
   <button class="nav-link" id="actualizarButton" onclick="openModMyProfile('importantes');profileInfoLog();" type="button" role="tab" style="color: #C70039;">Perfil</button>
