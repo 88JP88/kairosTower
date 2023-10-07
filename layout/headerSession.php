@@ -30,7 +30,7 @@
     <button class="nav-link" onclick="changeSection('tools');" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools-tab-pane" type="button" role="tab" aria-controls="tools-tab-pane" aria-selected="false" style="color: #C70039;">Clientes</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" onclick="changeSection('spam');" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#alerts-tab-pane" type="button" role="tab" aria-controls="alerts-tab-pane" aria-selected="false" style="color: #C70039;">Roles </button>
+    <button class="nav-link" onclick="changeSection('spam');" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#alerts-tab-pane" type="button" role="tab" aria-controls="alerts-tab-pane" aria-selected="false" style="color: #C70039;">Soporte </button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" onclick="changeSection('privgroups');" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false" style="color: #C70039;">Informes</button>

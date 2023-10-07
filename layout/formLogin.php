@@ -46,8 +46,8 @@
 <body>
 <div class="center-image">
     <img src="public/KAIROS.gif" alt="Descripción de la imagen" style="width: 150px; height: auto;">
-</div>
-
+</div><br>
+<div class="row g-3 align-items-center">
     <form id="loginForm" action="controller/controllerValidateLogIn.php" method="post">
         <div class="row g-3 align-items-center">
             <div class="col-auto">
@@ -69,6 +69,7 @@
 
         <button type="submit" class="btn btn-primary1">Iniciar</button>
     </form>
+</div>
 </body>
 </html>
 
