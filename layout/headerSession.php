@@ -279,7 +279,7 @@ function sessionStatus() {
         }if(sessionStatus==1){
 
 
-          console.log("Ejecutando sessionStatus() cada 10 segundos");
+          //console.log("Ejecutando sessionStatus() cada 10 segundos");
 
         }
 
@@ -304,7 +304,7 @@ setInterval(sessionStatus, 60000); // 10000 milisegundos = 10 segundos
 
 
 
-/*
+
 function profileInfoLog() {
   
   fetch('controller/profileInfoLog.php')
@@ -328,9 +328,6 @@ function profileInfoLog() {
       sessionStorage.setItem('sessionCounter',sessionCounter);
     sessionStorage.setItem('name',name);
     sessionStorage.setItem('lastName',lastName);
-    sessionStorage.setItem('subDays',subDays);
-    sessionStorage.setItem('subId',subId);
-    sessionStorage.setItem('isPublic',isPublic);
 
     actualizarCampos();
       
@@ -343,5 +340,5 @@ function profileInfoLog() {
       console.error('Error al obtener las variables PHP:', error);
     });
 }
-*/
+
 </script>

@@ -15,10 +15,11 @@
 
 
 <script>
-const my_profyle1 = sessionStorage.getItem("profileId");
+const my_profyle1 = sessionStorage.getItem("userId");
 const apiKey1 = sessionStorage.getItem("key");
+const rancode = sessionStorage.getItem("ranCode");
 const subDomain2 = sessionStorage.getItem("subDomain");
-const subdominiopagesmodelshislogs = `${subDomain2}/koiosGateway/apiCore/v1/getMySessions/317Mi5bpB2rvGy6K481x/${apiKey1}/${my_profyle1}`;
+const subdominiopagesmodelshislogs = `${subDomain2}/kairosGateway/apiCore/v1/getMySessionsInternal/${rancode}/${apiKey1}/${my_profyle1}`;
 
   </script>
 
