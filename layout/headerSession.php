@@ -299,10 +299,6 @@ function profileInfoLog() {
       
       var sessionCounter = data.sessionCounter;
       
-      var subDays = data.subDays;
-      
-      var subId = data.subId;
-      var isPublic = data.isPublic;
       
 
 
