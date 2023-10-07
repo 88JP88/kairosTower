@@ -42,19 +42,17 @@
             <a class="nav-link" href="#" style="color: #C70039;">Foros</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #C70039;">
-              Más
-            </a>
+            
             <ul class="dropdown-menu">
-            <li><button type="button" class="dropdown-item" onclick="openModLogIn()" data-bs-toggle="tooltip" title="Tooltip">Iniciar Sesión</button></li>
+      
               
               
-              <li><button type="button" class="dropdown-item" onclick="openModCreateUser()" data-bs-toggle="tooltip" title="Tooltip">Crear cuenta</button></li>
-              <li><button type="button" class="dropdown-item" onclick="openModValCode()" data-bs-toggle="tooltip" title="Tooltip">Código de validación</button></li>
+              
+            
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Acerca de nosotros</a></li>
+           
             </ul>
           </li>
         </ul>
