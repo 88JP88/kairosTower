@@ -92,7 +92,7 @@ $data = json_decode($_SESSION['userInfo']);
   foreach ($data->users as $character) {
     
     //echo "<h3 align='center'>Bienveni@:</h3><h4 align='center'>" . $character->name." ";
-    $_SESSION['profileId'] =$character->profileId;
+    $_SESSION['userId'] =$character->userId;
     $_SESSION['mail'] =$character->mail;
     $_SESSION['userName'] =$character->userName;
     $_SESSION['sessionCounter'] =$character->sessionCounter;

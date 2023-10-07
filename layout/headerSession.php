@@ -141,7 +141,7 @@ function obtenerVariablesPHPSession() {
         
 
         
-      var profileId = data.profileId;
+      var userId = data.userId;
       var userName = data.userName;
       var mail = data.mail;
       var sessionCounter = data.sessionCounter;
@@ -151,14 +151,11 @@ function obtenerVariablesPHPSession() {
       var isActive = data.isActive;
       var status = data.status;
       var contact = data.contact;
-      var subDays = data.subDays;
-      var subId = data.subId;
       var sessionId = data.sessionId;
       var key = data.key;
       var ranCode = data.ranCode;
-      var isPublic = data.isPublic;
       var subDomain = data.subDomain;
-    sessionStorage.setItem('profileId',profileId);
+    sessionStorage.setItem('userId',userId);
     sessionStorage.setItem('userName',userName);
     sessionStorage.setItem('mail',mail);
     sessionStorage.setItem('sessionCounter',sessionCounter);
@@ -168,12 +165,9 @@ function obtenerVariablesPHPSession() {
     sessionStorage.setItem('isActive',isActive);
     sessionStorage.setItem('status',status);
     sessionStorage.setItem('contact',contact);
-    sessionStorage.setItem('subDays',subDays);
-    sessionStorage.setItem('subId',subId);
     sessionStorage.setItem('sessionId',sessionId);
     sessionStorage.setItem('key',key);
     sessionStorage.setItem('ranCode',ranCode);
-    sessionStorage.setItem('isPublic',isPublic);
     sessionStorage.setItem('subDomain',subDomain);
         var re="success";
         
@@ -262,7 +256,7 @@ if(nuevoMensaje==""){
 
 
 <script>
-
+/*
 function sessionStatus() {
   
   fetch('controller/sessionStatus.php')
@@ -306,11 +300,11 @@ setInterval(sessionStatus, 60000); // 10000 milisegundos = 10 segundos
 
 
 
+*/
 
 
 
-
-
+/*
 function profileInfoLog() {
   
   fetch('controller/profileInfoLog.php')
@@ -349,4 +343,5 @@ function profileInfoLog() {
       console.error('Error al obtener las variables PHP:', error);
     });
 }
+*/
 </script>
