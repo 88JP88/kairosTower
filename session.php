@@ -1,9 +1,8 @@
 <! DOCTYPE html>
-<html>
+
 <?php
 
-echo "acá";
-//require_once 'view/viewSessionCoor.php';
+
+require_once 'view/viewSession.php';
 ?>
 
-</html>
