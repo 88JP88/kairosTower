@@ -106,6 +106,7 @@ $data = json_decode($_SESSION['userInfo']);
     $_SESSION['sessionId'] =$character->sessionId;
     $_SESSION['ranCode'] =$character->ranCode;
     $_SESSION['response'] =$character->response;
+    $_SESSION['key'] =$character->key;
     $_SESSION['message'] =$character->message;
     $_SESSION['subDomain'] =$sub_domain;
     

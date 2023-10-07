@@ -15,7 +15,7 @@ $isActive = $_SESSION['isActive'];
 $status = $_SESSION['status'];
 $contact = $_SESSION['contact'];
 $sessionId = $_SESSION['sessionId'];
-
+$key = $_SESSION['key'];
 $ranCode = $_SESSION['ranCode'];
 $subDomain = $_SESSION['subDomain'];
 
@@ -37,7 +37,7 @@ $response = [
   'status' => $status,
   'contact' => $contact,
   'sessionId' => $sessionId,
- 
+  'key' => $key,
   'ranCode' => $ranCode,
   'subDomain' => $subDomain
 ];
