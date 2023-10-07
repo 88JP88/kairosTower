@@ -180,25 +180,6 @@ function obtenerVariablesPHPSession() {
       
 
      
-if(nuevoMensaje==""){
-  if(subDays==0){
-    openModSub();
-  }if(subDays>0 && subDays<6){
-    var mess="¡Tienes "+sessionStorage.getItem('subDays')+" días de suscripción!"
-    mostrarNotificacion(mess, "error");
-
-  }
-}else{
-  mostrarNotificacion(nuevoMensaje, re);
-  if(subDays==0){
-    openModSub();
-    
-  }if(subDays>0 && subDays<6){
-    var mess="¡Tienes "+sessionStorage.getItem('subDays')+" días de suscripción!"
-    mostrarNotificacion(mess, "error");
-  }
-}
-     
 
     })
     .catch(error => {

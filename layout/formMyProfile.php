@@ -148,13 +148,10 @@ fetch('layout/getPHPVariablesSession.php')
     var isActive = data.isActive;
     var status = data.status;
     var contact = data.contact;
-    var subDays = data.subDays;
-    var subId = data.subId;
     var sessionId = data.sessionId;
     var key = data.key;
     var ranCode = data.ranCode;
-    var isPublic = data.isPublic;
-  sessionStorage.setItem('profileId',profileId);
+  sessionStorage.setItem('userId',userId);
   sessionStorage.setItem('userName',userName);
   sessionStorage.setItem('mail',mail);
   sessionStorage.setItem('sessionCounter',sessionCounter);
@@ -164,12 +161,9 @@ fetch('layout/getPHPVariablesSession.php')
   sessionStorage.setItem('isActive',isActive);
   sessionStorage.setItem('status',status);
   sessionStorage.setItem('contact',contact);
-  sessionStorage.setItem('subDays',subDays);
-  sessionStorage.setItem('subId',subId);
   sessionStorage.setItem('sessionId',sessionId);
   sessionStorage.setItem('key',key);
   sessionStorage.setItem('ranCode',ranCode);
-  sessionStorage.setItem('isPublic',isPublic);
      
       
   //actualizarCampos();
@@ -198,10 +192,8 @@ function actualizarCampos() {
   const staticSubscriptionDaysInputac = document.getElementById("staticSubscriptionDaysac");
 
   // Asignar valores desde sessionStorage a los campos
-  staticProfileIdInput.value = sessionStorage.getItem("profileId");
-  staticSubscriptionDaysInput.value = sessionStorage.getItem("subDays");
+  staticProfileIdInput.value = sessionStorage.getItem("userId");
   inputPasswordInput.value = sessionStorage.getItem("name");
-  inputPasswordInputpublic.value = sessionStorage.getItem("isPublic");
   inputPassword2Input.value = sessionStorage.getItem("lastName");
   inputPassword2Input1.value = sessionStorage.getItem("mail");
   inputPassword2Input2.value = sessionStorage.getItem("userName");
