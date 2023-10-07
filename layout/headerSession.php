@@ -279,7 +279,7 @@ function sessionStatus() {
         }if(sessionStatus==1){
 
 
-          //console.log("Ejecutando sessionStatus() cada 10 segundos");
+          console.log("Ejecutando sessionStatus() cada 10 segundos");
 
         }
 
