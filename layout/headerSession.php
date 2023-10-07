@@ -27,33 +27,51 @@
 
   <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Tareas
+        Gestión de usuarios
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Tareas personales</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Tareas generales</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios generales</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios internos</a></li>
+       
+      </ul>
+    </div> 
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Gestión de clientes
+      </button>
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Crear cliente</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Lista de clientes</a></li>
        
       </ul>
     </div> 
 
 
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" onclick="changeSection('copias');" id="api-tab" data-bs-toggle="tab" data-bs-target="#api-tab-pane" type="button" role="tab" aria-controls="api-tab-pane" aria-selected="false" style="color: #C70039;">Gestión de usuarios</button>
-  </li>
-  
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" onclick="changeSection('tools');" id="tools-tab" data-bs-toggle="tab" data-bs-target="#tools-tab-pane" type="button" role="tab" aria-controls="tools-tab-pane" aria-selected="false" style="color: #C70039;">Clientes</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" onclick="changeSection('spam');" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#alerts-tab-pane" type="button" role="tab" aria-controls="alerts-tab-pane" aria-selected="false" style="color: #C70039;">Soporte </button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" onclick="changeSection('privgroups');" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false" style="color: #C70039;">Informes</button>
-  </li>
-  <li class="nav-item" role="presentation">
+    
+  <div class="btn-group">
+      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Soporte
+      </button>
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Soporte externo</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Soporte interno</a></li>
+       
+      </ul>
+    </div> 
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Informes
+      </button>
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Generar informe</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Verificar informes</a></li>
+       
+      </ul>
+    </div> 
 
-    <!-- Split dropstart button -->
-<div class="btn-group nav-item">
+
+
   
   <ul class="dropdown-menu">
     <!-- Dropdown menu links -->
@@ -66,6 +84,7 @@
     <span class="visually-hidden nav-link" >Toggle Dropstart</span>
   </button>
 </div>
+    </div> 
 
 
    
