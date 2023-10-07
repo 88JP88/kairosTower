@@ -256,7 +256,7 @@ if(nuevoMensaje==""){
 
 
 <script>
-/*
+
 function sessionStatus() {
   
   fetch('controller/sessionStatus.php')
@@ -300,7 +300,7 @@ setInterval(sessionStatus, 60000); // 10000 milisegundos = 10 segundos
 
 
 
-*/
+
 
 
 

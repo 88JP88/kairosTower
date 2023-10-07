@@ -7,7 +7,7 @@ $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "".$sub_domain."/kairosGateway/apiCore/v1/getProfileInfoLog/".$_SESSION['profileId']."/".$_SESSION['sessionId'],
+  CURLOPT_URL => "".$sub_domain."/kairosGateway/apiCore/v1/getProfileInfoLogInternal/".$_SESSION['userId']."/".$_SESSION['sessionId'],
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_MAXREDIRS => 10,
