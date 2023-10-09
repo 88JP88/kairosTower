@@ -56,7 +56,7 @@ require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiCore/v1/validateLogInInternal/93q89NnAwIUNiOn2mOl5DqbC8";
+$url = $sub_domain . "/kairosGateway/apiCore/v1/validateLogInInternal/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
@@ -108,8 +108,9 @@ $data = json_decode($_SESSION['userInfo']);
     $_SESSION['response'] =$character->response;
     $_SESSION['key'] =$character->key;
     $_SESSION['message'] =$character->message;
-    $_SESSION['subDomain'] =$sub_domain;
     
+    $_SESSION['clientId1'] =$character->clientId;
+    $_SESSION['subDomain'] =$sub_domain;
     
   }
 
@@ -118,8 +119,8 @@ if (strtolower($_SESSION['response']) === "true") { // Convertir la respuesta a 
     $_SESSION["respuesta"] = $_SESSION['response'];
     $_SESSION["mensaje"] = $_SESSION['message'];
     $_SESSION["error"] = $_SESSION['message'];
-    
-   header ('Location: ../session.php');
+    //echo $_SESSION['clientId1'];
+  header ('Location: ../session.php');
 }
 
 elseif (strtolower($_SESSION['response']) === "false") { // Convertir la respuesta a minúsculas antes de comparar

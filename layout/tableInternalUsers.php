@@ -1,30 +1,18 @@
 
 
-<div class="mb-3">
-<select class="form-select" aria-label="Default select example" id="filterNow">
-  
-  <option value="all">Todos</option>
-  <option value="created">Creadas</option>
-  <option value="start">Iniciadas</option>
-  <option value="finished">Finalizadas</option>
-  <option value="pause">Pausadas</option>
-  <option value="block">Bloqueadas</option>
-</select>
-</div>
 
-
-<button type="button" class="btn btn-primary1" id="crearButton123">Filtrar</button>
-
-
-<table class="table" id ="tablePersonalTask">
+<table class="table" id ="tableInternalUsers">
   <thead>
     <tr>
     <th scope="col"><i>Acciones</i></th>
-      <th scope="col"><i>Tarea</i></th>
-      <th scope="col"><i>Inicio</i></th>
-      <th scope="col"><i>Entrega</i></th>
-      <th scope="col"><i>Recordar(1=sí,2=no)</i></th>
-      <th scope="col"><i>Recordatorio</i></th>
+      <th scope="col"><i>ID</i></th>
+      <th scope="col"><i>Usuario</i></th>
+      <th scope="col"><i>Nombre</i></th>
+      <th scope="col"><i>Contacto</i></th>
+      <th scope="col"><i>Correo</i></th>
+      <th scope="col"><i>Rol</i></th>
+      <th scope="col"><i>Estado</i></th>
+      <th scope="col"><i>Activo</i></th>
     </tr>
   </thead>
   <tbody>
@@ -32,7 +20,7 @@
 
 
 <script>
-const my_profyletask = sessionStorage.getItem("profileId");
+const my_profyletask = sessionStorage.getItem("userId");
 const ranCodetask = sessionStorage.getItem("ranCode");
 const apiKeytask = sessionStorage.getItem("key");
 const subDomain = sessionStorage.getItem("subDomain");
@@ -52,49 +40,34 @@ const subDomain = sessionStorage.getItem("subDomain");
 
  
  // Función para obtener los datos del API
- async function getPersonalTask(param) {
+ async function getInternalUsers() {
   
   //const my_profyle = sessionStorage.getItem("profileId");
   //const subdominiopagesmodelshislogs = "https://dev-koiosgateway.lugma.tech/koiosGateway/apiCore/v1/getMySessions/317Mi5bpB2rvGy6K481x/93q89NnAwIUNiOn2mOl5DqbC8/${my_profyle}/${param}";
 
-	const subPersonalTask = `${subDomain}/koiosGateway/apiIntegrations/v1/getPersonalTask/${ranCodetask} ${apiKeytask}/${my_profyletask}/${param}`;
+	const subInternalUsers = `${subDomain}/kairosGateway/apiCore/v1/getInternalUsers/${ranCodetask} ${apiKeytask}/`;
 
-	fetch(subPersonalTask)
+	fetch(subInternalUsers)
    
   .then(response => response.json())
   .then(data => {
-    const publicgroupsTableBody = document.querySelector("#tablePersonalTask tbody");
+    const publicgroupsTableBody = document.querySelector("#tableInternalUsers tbody");
     // Borramos los datos antiguos
     publicgroupsTableBody.innerHTML = "";
-    data.task.forEach(schedule => {
+    data.users.forEach(schedule => {
       const row = document.createElement("tr");
       row.innerHTML = `
      
-   
-     
-      <td>
-      <select class="form-select" aria-label="Default select example" id="rol11" value="${schedule.status}">
-  <option selected>${schedule.status}</option>
-  <option value="start">Iniciar</option>
-  <option value="finished">Finalizar</option>
-  <option value="pause">Pausar</option>
-  <option value="block">Bloqueo</option>
-</select>
-      
-<button onclick="editarStatusPTask1(this,&quot;${schedule.taskId}&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Estado</button>
     
-      <button onclick="editarStatusPTask(this,&quot;${schedule.taskId}&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button></td>
-    
-      <td><input type="text" class="form-control" id="${schedule.taskId}" value="${schedule.taskValue}"> <button onclick="editarPTask(this,&quot;${schedule.taskId}&quot;,&quot;taskValue&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="date" class="form-control" id="${schedule.taskId}" value="${schedule.startDate}"> <button onclick="editarPTask(this,&quot;${schedule.taskId}&quot;,&quot;startDate&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="date" class="form-control" id="${schedule.taskId}" value="${schedule.endDate}"> <button onclick="editarPTask(this,&quot;${schedule.taskId}&quot;,&quot;endDate&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Editar</button></td>
-    
-     
-      <td><input type="text" class="form-control" id="${schedule.taskId}" value="${schedule.isRemember}"> <button onclick="editarPTask(this,&quot;${schedule.taskId}&quot;,&quot;isRemember&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="date" class="form-control" id="${schedule.taskId}" value="${schedule.rememberDate}"> <button onclick="editarPTask(this,&quot;${schedule.taskId}&quot;,&quot;rememberDate&quot;,&quot;${param}&quot;)" class="btn btn-primary1">Editar</button></td>
-    
-      
-       
+      <td><button onclick="editarStatusPTask(this,&quot;${schedule.userId}&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button></td>
+      <td>${schedule.userId}</td>
+      <td>${schedule.userName}</td>
+      <td>${schedule.name} ${schedule.lastName}</td>
+      <td>${schedule.contact}</td>
+      <td>${schedule.email}</td>
+      <td>${schedule.rolId}</td>
+      <td>${schedule.status}</td>
+      <td>${schedule.isActive}</td>
         
        
         

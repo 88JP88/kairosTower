@@ -18,6 +18,7 @@ $sessionId = $_SESSION['sessionId'];
 $key = $_SESSION['key'];
 $ranCode = $_SESSION['ranCode'];
 $subDomain = $_SESSION['subDomain'];
+$clientId1 = $_SESSION['clientId1'];
 
 
 
@@ -39,7 +40,8 @@ $response = [
   'sessionId' => $sessionId,
   'key' => $key,
   'ranCode' => $ranCode,
-  'subDomain' => $subDomain
+  'subDomain' => $subDomain,
+  'clientId' => $clientId1
 ];
 
 header('Content-Type: application/json');
