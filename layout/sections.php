@@ -8,7 +8,7 @@ require_once 'sections/sectionHome.php';
 require_once 'sections/sectionTools.php';
 require_once 'sections/sectionSchedule.php';
 require_once 'sections/sectionSessions.php';
-require_once 'sections/sectionPersonalTask.php';
+require_once 'sections/sectionInternalClients.php';
 require_once 'sections/sectionInternalUsers.php';
 require_once 'sections/sectionPrivateGroups.php';
 require_once 'sections/sectionRepos.php';
