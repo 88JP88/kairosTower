@@ -5,26 +5,30 @@ session_start();
 $names = $_GET['nombres'];
 $lastnames = $_GET['apellidos'];
 $pmail = $_GET['correo'];
-$rol = $_GET['rol'];
 $pass1 = $_GET['contrasena'];
 $contact = $_GET['contacto'];
+$ccomments = $_GET['comments'];
+$cname = $_GET['clientname'];
+$type = $_GET['type'];
 
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiCore/v1/postInternalUsersIntegration/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+$url = $sub_domain . "/kairosGateway/apiCore/v1/postClient/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
-    'name' => $names, 
-    'lastName' => $lastnames,
-    'personalMail' => $pmail,
+    'ownerName' => $names, 
+    'ownerLastName' => $lastnames,
+    'email' => $pmail,
 
     'keyWord' => $pass1,
     'contact' => $contact,
-    'rolId' => $rol,
-    'clientId'=>$_SESSION['clientId1']
+    'rolId' => $type,
+    'clientName'=>$cname,
+    'comments'=>$ccomments,
+    'clientType'=>$type
     
 );
 

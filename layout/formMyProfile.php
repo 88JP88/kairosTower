@@ -33,7 +33,7 @@
     <label for="staticSubscriptionDays" class="col-sm-2 col-form-label"><i>Sesiones activas</i></label>
     <div class="col-sm-10">
       <input type="text" readonly class="form-control-plaintext" id="staticSubscriptionDaysac" value="">
-      <button type="button" class="btn btn-primary1" id="" onclick="changeSection('sessions');getPagesAssignModelsHislogs();">Verificar</button>
+      <button type="button" class="btn btn-primary1" id="" onclick="changeSection('sessions');getMySessions();">Verificar</button>
     </div>
 
 

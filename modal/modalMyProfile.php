@@ -7,7 +7,7 @@
       <div class="modal-header" style="background-color: #001219; color: #C70039;">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><img src="public/KAIROS2.png" alt="LUGMA" width="30" height="30">Mi perfil</h1>
         
-        <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModMyProfile()" ></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModMyProfile()" ></button>
       </div>
       <div class="modal-body">
      <?php 

@@ -7,7 +7,7 @@
       <div class="modal-header" style="background-color: #fcc627;">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><img src="idea3.png" alt="LUGMA" width="30" height="30">¡Cerrar sesión!</h1>
         
-        <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModCloseSessions()"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModCloseSessions()"></button>
       </div>
       <div class="modal-body">
         <h2>¿Seguro deseas cerrar sesión?</h2>

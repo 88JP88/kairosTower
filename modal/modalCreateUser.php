@@ -7,7 +7,8 @@
       <div class="modal-header" style="background-color: #001219; color: #C70039;">
         <h1 class="modal-title fs-5" id="staticBackdropLabel"><img src="public/KAIROS2.png" alt="LUGMA" width="30" height="30" style="background-color: #001219; color: #C70039;">Crear usuario</h1>
         
-        <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModCreateUser()"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModCreateUser()"></button>
+
       </div>
       <div class="modal-body">
      <?php 

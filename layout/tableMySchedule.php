@@ -17,14 +17,6 @@
 
 
 
-<script>
-const my_profyle = sessionStorage.getItem("profileId");
-const ranCode = sessionStorage.getItem("ranCode");
-const apiKey = sessionStorage.getItem("key");
-const subDomain1 = sessionStorage.getItem("subDomain");
-const subGetMySchedule = `${subDomain1}/koiosGateway/apiIntegrations/v1/getMySchedule/${ranCode} ${apiKey}/${my_profyle}`;
-
-  </script>
 
 <?php
 
@@ -119,7 +111,7 @@ function editar(button, id, day) {
       
       getMySchedule();
       
-      obtenerVariablesPHP();
+      getMessage();
       
  
     })

@@ -12,7 +12,7 @@
   </head>
   <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+<script></script>
     
 <div class="notification" id="notification">
         <p id="notificationText"></p>
@@ -30,7 +30,7 @@
         Gestión de usuarios
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios generales</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getInternalUsers();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios generales</a></li>
         <li> <a class="dropdown-item" onclick="changeSection('gtask');getInternalUsers();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios internos</a></li>
        
       </ul>
@@ -41,7 +41,7 @@
         Gestión de clientes
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('ptask');getInternalClients();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Clientes externos</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('ptask');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Clientes externos</a></li>
         <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Clientes internos</a></li>
        
       </ul>
@@ -76,7 +76,7 @@
   <ul class="dropdown-menu">
     <!-- Dropdown menu links -->
     <li><button class="dropdown-item nav-item" onclick="openModCloseSession();" type="button" role="tab" style="color: #C70039;">Salir</button></li>
-    <li><a class="dropdown-item" onclick="changeSection('sessions');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #C70039;">Sesiones activas</a></li>
+    <li><a class="dropdown-item" onclick="changeSection('sessions');getMySessions();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #C70039;">Sesiones activas</a></li>
         <li><a class="dropdown-item nav-item" href="#" style="color: #C70039;">Informe de errores</a></li>
   </ul>
   <button class="nav-link" id="actualizarButton" onclick="openModMyProfile('importantes');profileInfoLog();" type="button" role="tab" style="color: #C70039;">Perfil</button>
@@ -92,7 +92,7 @@
   
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">rtyu</div>
   <div class="tab-pane fade" id="api-tab-pane" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
   <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
   <div class="tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
@@ -101,94 +101,22 @@
 </div>
 </body>
 </html>
+<script  src="scripts/data/credentials.js"></script>
+<script  src="scripts/data/endPoints.js"></script>
+<script  src="scripts/data/showNotify.js"></script>
+<script  src="scripts/gets/messageVariables.js"></script>
+<script  src="scripts/gets/getSessionVariables.js"></script>
+<script  src="scripts/gets/sessionStatus.js"></script>
+<script  src="scripts/gets/profileInfoLog.js"></script>
+<script  src="scripts/gets/getMySessions.js"></script>
 
-<script>
-// Función para mostrar la notificación
-function mostrarNotificacion(mensaje, tipo) {
-    const notificacion = document.getElementById('notification');
-    const notificacionText = document.getElementById('notificationText');
 
-    notificacionText.textContent = mensaje;
-    notificacion.classList.remove('error'); // Remover clase de error (en caso de que esté presente)
-
-    if (tipo === 'error') {
-        notificacion.classList.add('error');
-    }
-   
-    notificacion.style.display = 'block';
-
-    // Desaparecer la notificación después de 3 segundos
-    setTimeout(() => {
-        notificacion.style.display = 'none';
-    }, 3000);
-}
+<div id="loading-container" class="loading-container">
+  <div class="loading-icon"></div>
+</div>
 
 
 
-function obtenerVariablesPHPSession() {
-
-  fetch('layout/getPHPVariablesSession.php')
-    .then(response => response.json())
-    .then(data => {
-      // Aquí obtienes los nuevos valores de las variables PHP en el objeto "data"
-      // Puedes acceder a los valores como data.mensaje y data.error
-      // Por ejemplo:
-      var nuevoMensaje = data.mensaje;
-      var nuevoError = data.error;
-
-
-      if(nuevoError==="true"){
-        
-
-        
-      var userId = data.userId;
-      var userName = data.userName;
-      var mail = data.mail;
-      var sessionCounter = data.sessionCounter;
-      var name = data.name;
-      var lastName = data.lastName;
-      var rolId = data.rolId;
-      var isActive = data.isActive;
-      var status = data.status;
-      var contact = data.contact;
-      var sessionId = data.sessionId;
-      var key = data.key;
-      var ranCode = data.ranCode;
-      var subDomain = data.subDomain;
-      var clientId = data.clientId;
-    sessionStorage.setItem('userId',userId);
-    sessionStorage.setItem('userName',userName);
-    sessionStorage.setItem('mail',mail);
-    sessionStorage.setItem('sessionCounter',sessionCounter);
-    sessionStorage.setItem('name',name);
-    sessionStorage.setItem('lastName',lastName);
-    sessionStorage.setItem('rolId',rolId);
-    sessionStorage.setItem('isActive',isActive);
-    sessionStorage.setItem('status',status);
-    sessionStorage.setItem('contact',contact);
-    sessionStorage.setItem('sessionId',sessionId);
-    sessionStorage.setItem('key',key);
-    sessionStorage.setItem('ranCode',ranCode);
-    sessionStorage.setItem('subDomain',subDomain);
-    sessionStorage.setItem('clientId',clientId);
-        var re="success";
-        
-      }
-      if(nuevoError==="false"){
-      
-        var re="error";
-        
-      }
-      
-
-     
-
-    })
-    .catch(error => {
-      console.error('Error al obtener las variables PHP:', error);
-    });
-}
-</script>
 <style>
 .notification {
     position: fixed;
@@ -231,93 +159,14 @@ function obtenerVariablesPHPSession() {
     }
 }
 </style>
+<style>
+    .password-container {
+        position: relative;
+    }
 
-<script>obtenerVariablesPHPSession();</script>
-
-
-
-
-
-<script>
-
-function sessionStatus() {
-  
-  fetch('controller/sessionStatus.php')
-    .then(response => response.json())
-    .then(data => {
-      // Aquí obtienes los nuevos valores de las variables PHP en el objeto "data"
-      // Puedes acceder a los valores como data.mensaje y data.error
-      // Por ejemplo:
-      var sessionStatus = data.sessionStatus;
-      
-
-
-    
-        if(sessionStatus==0){
-
-
-          sessionStorage.clear();
-          openModCloseSessionf();
-
-        }if(sessionStatus==1){
-
-
-          //console.log("Ejecutando sessionStatus() cada 10 segundos");
-
-        }
-
-
-    
-      
-
-     
-     
-
-    })
-    .catch(error => {
-      console.error('Error al obtener las variables PHP:', error);
-    });
-}
-sessionStatus();
-setInterval(sessionStatus, 60000); // 10000 milisegundos = 10 segundos
-
-
-
-
-
-
-
-
-function profileInfoLog() {
-  
-  fetch('controller/profileInfoLog.php')
-    .then(response => response.json())
-    .then(data => {
-      // Aquí obtienes los nuevos valores de las variables PHP en el objeto "data"
-      // Puedes acceder a los valores como data.mensaje y data.error
-      // Por ejemplo:
-      var name = data.name;
-      var lastName = data.lastName;
-      
-      var sessionCounter = data.sessionCounter;
-      
-      
-
-
-      sessionStorage.setItem('sessionCounter',sessionCounter);
-    sessionStorage.setItem('name',name);
-    sessionStorage.setItem('lastName',lastName);
-
-    actualizarCampos();
-      
-
-     
-     
-
-    })
-    .catch(error => {
-      console.error('Error al obtener las variables PHP:', error);
-    });
-}
-
-</script>
+    .toggle-password {
+        display: block; /* Muestra el botón como un bloque, debajo del campo de contraseña */
+        margin-top: 5px; /* Agrega un margen superior para separar el botón del campo de contraseña */
+        cursor: pointer;
+    }
+</style>

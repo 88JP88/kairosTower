@@ -324,7 +324,7 @@ function editarStatusPTask(button, id,value,param) {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      getPersonalTask(param);
+      getInternalClients();
       
       obtenerVariablesPHP();
       
@@ -351,7 +351,7 @@ function editarStatusPTask1(button, id,param) {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      getPersonalTask(param);
+      getInternalClients();
       
       obtenerVariablesPHP();
       
@@ -402,7 +402,7 @@ document.getElementById("crearButton123").addEventListener("click", function() {
   // Obtén los valores de los campos
   var nombres = document.getElementById("filterNow").value;
 
-  getPersonalTask(nombres);
+  getInternalClients();
   document.getElementById("filterNow").value = "Filtro";
   // Construye la URL para la solicitud GET
  
