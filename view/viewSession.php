@@ -8,4 +8,5 @@ require_once 'modal/modalCloseSession.php';
 require_once 'modal/modalCloseSessionForce.php';
 require_once 'modal/modalCreateUser.php';
 require_once 'modal/modalCreateExtClients.php';
+require_once 'modal/modalCreateUserClient.php';
 ?>

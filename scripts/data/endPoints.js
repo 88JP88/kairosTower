@@ -2,5 +2,7 @@ const epGetInternalClients= `${subDomain}/kairosGateway/apiCore/v1/getInternalCl
 
 const epGetInternalUsers= `${subDomain}/kairosGateway/apiCore/v1/getInternalUsers/${ranCodetask} ${apiKeytask}/`;//llama los usuarios internos de KAIROS TOWER
 
+const epGetGeneralUsers= `${subDomain}/kairosGateway/apiCore/v1/getGeneralUsers/${ranCodetask} ${apiKeytask}/`;//llama los usuarios internos de KAIROS TOWER
+
 const epGetMySessionsInternal= `${subDomain}/kairosGateway/apiCore/v1/getMySessionsInternal/${ranCodetask}/${apiKeytask}/${myProfile}`;//llama todas las sesiones abiertas por usuario
 

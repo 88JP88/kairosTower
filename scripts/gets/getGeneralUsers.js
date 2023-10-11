@@ -1,13 +1,13 @@
 
- async function getInternalUsers(param) {
+ async function getGeneralUsers(param) {
   if(param=="unlock"){
 
     document.getElementById("loading-container").style.display = "flex";
-    fetch(epGetInternalUsers+param)
+    fetch(epGetGeneralUsers+param)
    
   .then(response => response.json())
   .then(data => {
-    const publicgroupsTableBody = document.querySelector("#tableInternalUsers tbody");
+    const publicgroupsTableBody = document.querySelector("#tableGeneralUsers tbody");
  
     publicgroupsTableBody.innerHTML = "";
     data.users.forEach(info => {
@@ -15,14 +15,15 @@
       row.innerHTML = `
      
     
-      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button></td>
+    
+      <td><button onclick="editGenUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button></td>
       <td>${info.userId}</td>
       <td>${info.userName}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.contact}</td>
       <td>${info.email}</td>
       <td>${info.rolId}</td>
-      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editGenUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
         
         
       `;
@@ -43,19 +44,19 @@
   if(param=="lock"){
 
     document.getElementById("loading-container").style.display = "flex";
-    fetch(epGetInternalUsers+param)
+    fetch(epGetGeneralUsers+param)
    
   .then(response => response.json())
   .then(data => {
-    const publicgroupsTableBody = document.querySelector("#tableInternalUsers tbody");
+    const publicgroupsTableBody = document.querySelector("#tableGeneralUsers tbody");
  
     publicgroupsTableBody.innerHTML = "";
     data.users.forEach(info => {
       const row = document.createElement("tr");
       row.innerHTML = `
      
-      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1">Desbloquear</button>
-      <button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
+      <td><button onclick="editGenUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1">Desbloquear</button>
+      <button onclick="editGenUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
     </td>
     
       <td>${info.userId}</td>
@@ -64,7 +65,7 @@
       <td>${info.contact}</td>
       <td>${info.email}</td>
       <td>${info.rolId}</td>
-      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editGenUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
      
         
       `;
@@ -86,8 +87,7 @@
    
   
   
-
-function editIntUser(button, id,filter) {
+function editGenUser(button, id,filter) {
   // Obtener el valor del campo de texto correspondiente al botón
   var input = button.previousElementSibling;
   var nombre = input.value;
@@ -97,7 +97,7 @@ function editIntUser(button, id,filter) {
     showNotify('¡No puedes editar el Activo de tu propio usuario!','error');
      }else{
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putIntUser.php?userId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(nombre);
+  var url = 'controller/putGenUser.php?userId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(nombre);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
@@ -106,7 +106,7 @@ function editIntUser(button, id,filter) {
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
 
       getMessage();
-      getInternalUsers('unlock');
+      getGeneralUsers('unlock');
       
       
  
@@ -119,7 +119,7 @@ function editIntUser(button, id,filter) {
 }
 
 
-function editIntUserStatus(button, id,filter,status) {
+function editGenUserStatus(button, id,filter,status) {
   // Obtener el valor del campo de texto correspondiente al botón
   var input = button.previousElementSibling;
  // var nombre = input.value;
@@ -130,7 +130,7 @@ function editIntUserStatus(button, id,filter,status) {
 showNotify('¡No puedes Bloquear tu propio usuario!','error');
  }else{
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putIntUser.php?userId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(status);
+  var url = 'controller/putGenUser.php?userId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(status);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
@@ -140,10 +140,10 @@ showNotify('¡No puedes Bloquear tu propio usuario!','error');
 
       getMessage();
       if(status==1 || status=="del"){
-        getInternalUsers('unlock');
+        getGeneralUsers('unlock');
       }
       if(status==0){
-        getInternalUsers('lock');
+        getGeneralUsers('lock');
       }
       
       
@@ -158,5 +158,3 @@ showNotify('¡No puedes Bloquear tu propio usuario!','error');
     });
   }
 }
-
-

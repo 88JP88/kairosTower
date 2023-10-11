@@ -58,7 +58,11 @@ document.getElementById("postInternalUser").addEventListener("click", function()
   var correo = document.getElementById("pmail").value;
   var rol = document.getElementById("rol").value;
   var contrasena = document.getElementById("pass1").value;
+
+  if(nombres=="" || apellidos=="" || contact=="" || correo=="" || rol=="" || contrasena==""){
+    showNotify("¡Faltan campos por llenar!","error");
   
+  }else{
   // Construye la URL para la solicitud GET
   var url = "controller/postInternalUsersIntegrations.php?" +
             "nombres=" + encodeURIComponent(nombres) +
@@ -89,6 +93,7 @@ document.getElementById("postInternalUser").addEventListener("click", function()
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
+}
 });
 
 

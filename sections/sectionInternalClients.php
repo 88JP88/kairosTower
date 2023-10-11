@@ -1,6 +1,6 @@
 <div class="container">
 
-<div id="ptask" class="email-section" style="text-align: center;">
+<div id="internalClients" class="email-section" style="text-align: center;">
     <h2>
     <button type="button" class="btn btn-primary1" onclick="openModCreateExtClients();"  style="color: #C70039;">Crear cliente</button>
     <button type="button" class="btn btn-primary1" onclick="getInternalClients('unlock');"  style="color: #C70039;">Clientes activos</button>

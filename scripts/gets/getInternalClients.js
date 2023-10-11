@@ -18,15 +18,15 @@ if(param=="unlock"){
      
     
       <td>
-      <button onclick="editarStatusPTask(this,&quot;${info.clientId}&quot;,&quot;del&quot;)" class="btn btn-primary1">Bloquear</button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button>
       </td>
       <td>${info.clientId}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>${info.clientType}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.email} / ${info.contact}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>
       <div class="password-container">
           <input type="password" class="form-control" id="${info.clientId}" value="${info.key}">
@@ -67,17 +67,17 @@ if(param=="lock"){
      
     
       <td>
-      <button onclick="editarStatusPTask(this,&quot;${info.clientId}&quot;,&quot;unlock&quot;)" class="btn btn-primary1">Desbloquear</button>
-      <button onclick="editarStatusPTask(this,&quot;${info.clientId}&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
-      <button onclick="editarStatusPTask(this,&quot;${info.clientId}&quot;,&quot;delall&quot;)" class="btn btn-primary1">Remover en cadena</button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1">Desbloquear</button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;delAll&quot;)" class="btn btn-primary1">Remover en cadena</button>
       </td>
       <td>${info.clientId}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>${info.clientType}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.email} / ${info.contact}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editar(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>
       <div class="password-container">
           <input type="password" class="form-control" id="${info.clientId}" value="${info.key}">
@@ -134,23 +134,23 @@ if(param=="lock"){
 
 
 
-function editarPTask(button, id,dbType,param) {
+function editExtClient(button, id,filter) {
   // Obtener el valor del campo de texto correspondiente al botón
   var input = button.previousElementSibling;
   var nombre = input.value;
 
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/editPersonalTask.php?taskId=' + encodeURIComponent(id)  + '&value=' + encodeURIComponent(nombre)+ '&tvalue=' + encodeURIComponent(dbType);
+  var url = 'controller/putExtClient.php?clientId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(nombre);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
-      getInternalClients();
-      
+
       getMessage();
+      getInternalClients('unlock');
+      
       
  
     })
@@ -161,26 +161,30 @@ function editarPTask(button, id,dbType,param) {
 }
 
 
-
-
-
-function editarStatusPTask(button, id,value,param) {
+function editExtClientStatus(button, id,filter,status) {
   // Obtener el valor del campo de texto correspondiente al botón
   var input = button.previousElementSibling;
-  //var nombre = input.value;
+ // var nombre = input.value;
 
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/updateStatusPersonalTask.php?taskId=' + encodeURIComponent(id)  + '&value=' + encodeURIComponent(value);
+  var url = 'controller/putExtClient.php?clientId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(status);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
-      getInternalClients();
-      
+
       getMessage();
+      if(status==1){
+        getInternalClients('unlock');
+      }
+      if(status==0){
+        getInternalClients('lock');
+      }
+      
+      
+     
       
  
     })
@@ -191,42 +195,28 @@ function editarStatusPTask(button, id,value,param) {
 }
 
 
-function editarStatusPTask1(button, id,param) {
-  // Obtener el valor del campo de texto correspondiente al botón
-  var input = button.previousElementSibling;
-  var nombre = input.value;
 
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/updateStatusPersonalTask.php?taskId=' + encodeURIComponent(id)  + '&value=' + encodeURIComponent(nombre);
 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
-      getInternalClients();
-      
-      getMessage();
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
+
+
+async function getInternalClientsList() {
+
+  const reposSelect = document.getElementById("repos-select234");
+
+	fetch(epGetInternalClients+"unlock")
+  .then(response => response.json())
+  .then(data => {
+    data.clients.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.clientId;
+      option.text = info.clientName;
+      reposSelect.add(option);
     });
-}
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
 
+ }
 
-document.getElementById("crearButton123").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var nombres = document.getElementById("filterNow").value;
-
-  getInternalClients();
-  document.getElementById("filterNow").value = "Filtro";
-  // Construye la URL para la solicitud GET
- 
-  
-  // Realizar la solicitud GET utilizando fetch
- 
-});
+ // Llamar a la función para obtener los datos del API

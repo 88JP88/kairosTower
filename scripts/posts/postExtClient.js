@@ -64,6 +64,15 @@ document.getElementById("postClient").addEventListener("click", function() {
   var ccomments = document.getElementById("clientcomments").value;
   var cnames = document.getElementById("clientnames").value;
   
+
+
+
+  if(nombres=="" || apellidos=="" || contact=="" || correo=="" || rol=="" || contrasena=="" || ccomments=="" || cnames=="" ){
+    showNotify("¡Faltan campos por llenar!","error");
+  
+  }
+else{
+
   // Construye la URL para la solicitud GET
   var url = "controller/postClients.php?" +
             "nombres=" + encodeURIComponent(nombres) +
@@ -98,6 +107,7 @@ document.getElementById("postClient").addEventListener("click", function() {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
+}
 });
 
 
