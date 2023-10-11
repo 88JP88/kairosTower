@@ -31,7 +31,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
         <li> <a class="dropdown-item" onclick="changeSection('ptask');getInternalUsers();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios generales</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getInternalUsers();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios internos</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios internos</a></li>
        
       </ul>
     </div> 
