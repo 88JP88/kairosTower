@@ -146,3 +146,22 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+
+
+/* Estilos para las tarjetas */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 0.5px solid #C70039;
+    border-radius: 5px;
+}

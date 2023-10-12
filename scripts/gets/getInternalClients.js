@@ -19,6 +19,7 @@ if(param=="unlock"){
     
       <td>
       <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button>
+      <button onclick="openModClientConfig();getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1">Configuración</button>
       </td>
       <td>${info.clientId}</td>
       <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>

@@ -9,4 +9,7 @@ require_once 'modal/modalCloseSessionForce.php';
 require_once 'modal/modalCreateUser.php';
 require_once 'modal/modalCreateExtClients.php';
 require_once 'modal/modalCreateUserClient.php';
+require_once 'modal/modalClientConfig.php';
+require_once 'modal/modalCalendarDaysAssign.php';
+require_once 'modal/modalCalendarTime.php';
 ?>

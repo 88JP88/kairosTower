@@ -6,3 +6,8 @@ const epGetGeneralUsers= `${subDomain}/kairosGateway/apiCore/v1/getGeneralUsers/
 
 const epGetMySessionsInternal= `${subDomain}/kairosGateway/apiCore/v1/getMySessionsInternal/${ranCodetask}/${apiKeytask}/${myProfile}`;//llama todas las sesiones abiertas por usuario
 
+const epGetCalendarDays= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarDays/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetCalendarDaysAssign= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarDaysAssign/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetCalendarTime= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarTime/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
