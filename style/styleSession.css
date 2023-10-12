@@ -165,3 +165,16 @@
     border: 0.5px solid #C70039;
     border-radius: 5px;
 }
+
+
+
+
+
+
+        /* Estilos para el cuadrado de color */
+        .color-square {
+            width: 85px;
+            height: 25px;
+            display: inline-block;
+            margin-right: 10px;
+        }

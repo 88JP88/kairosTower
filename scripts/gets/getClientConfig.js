@@ -25,7 +25,8 @@ async function getCalendarDays(param) {
           const createCalendarButton = document.createElement("button");
           createCalendarButton.textContent = "Crear Calendario";
           createCalendarButton.className = "btn btn-primary1";
-          createCalendarButton.onclick = () => createCalendar(data.clientId); // Reemplaza "createCalendar" con tu función
+          createCalendarButton.onclick = () => createCalendar(); // Supongo que es el primer elemento del array "calendarDays"
+
           cardContainer.appendChild(createCalendarButton);
 
           document.getElementById("loading-container").style.display = "none";
@@ -34,11 +35,15 @@ async function getCalendarDays(param) {
           console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
       });
+      
 }
 
-function createCalendar(clientId) {
+function createCalendar() {
   // Realiza la acción de creación de calendario utilizando el clientId
   // Puedes implementar esta función según tus necesidades
+
+ 
+  openModCreateCalendar();
 }
 
 
@@ -115,3 +120,42 @@ async function getCalendarTime(param) {
           document.getElementById("loading-container").style.display = "none";
       });
 }
+
+
+
+async function getClientStyle(param) {
+  document.getElementById("loading-container").style.display = "flex";
+  fetch(epGetClientStyle + param)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientStyle");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.clientStyle.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+
+              card11.innerHTML = `
+                  <div class="card-body">
+                 
+                  <h5 class="card-title">Color de fondo: <input type="text" id="${info.clientId}" value="${info.bgColor}" style="background-color: #${info.bgColor};"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></h5>
+                  <h5 class="card-title">Color de fondo: <input type="text" id="${info.clientId}" value="${info.textColor}" style="background-color: #${info.textColor};"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></h5>
+       
+                 
+                      <h5 class="card-title">Icono: ${info.imgIcon}</h5>
+                      <h5 class="card-title">Logo: ${info.imgLogo}</h5>
+                      <h5 class="card-title">Gif: ${info.imgGif}</h5>
+                      <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.calendarId}&quot;);" class="btn btn-primary1">Días disponibles</button>
+                  </div>
+              `;
+
+              cardContainer11.appendChild(card11);
+          });
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+      
+}
+

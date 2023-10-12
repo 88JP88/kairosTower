@@ -11,7 +11,7 @@ require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiCompanies/v1/postCalendar/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+$url = $sub_domain . "/kairosGateway/apiCompanies/v1/postClientCalendar/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(

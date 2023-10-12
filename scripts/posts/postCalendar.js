@@ -1,34 +1,19 @@
 
-
-
-
-document.getElementById("postClient").addEventListener("click", function() {
+document.getElementById("postCalendar").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var nombres = document.getElementById("names1").value;
-  var apellidos = document.getElementById("lastnames156").value;
-  var contact = document.getElementById("lastnames123").value;
-  var correo = document.getElementById("pmail134").value;
-  var rol = document.getElementById("rol1").value;
-  var contrasena = document.getElementById("pass11").value;
-  var ccomments = document.getElementById("clientcomments").value;
-  var cnames = document.getElementById("clientnames").value;
+  var month = document.getElementById("cmonth").value;
+  var day = document.getElementById("cday").value;
+  var week = document.getElementById("cweek").value;
   
-
-
-
-  if(nombres=="" || apellidos=="" || contact=="" || correo=="" || rol=="" || contrasena=="" || ccomments=="" || cnames=="" ){
-    showNotify("¡Faltan campos por llenar!","error");
-  
-  }
-else{
+var clientIdNow=sessionStorage.getItem('clientNow');
 
   // Construye la URL para la solicitud GET
   var url = "controller/postCalendar.php?" +
-            "clientId=" + encodeURIComponent(nombres) +
-            "&month=" + encodeURIComponent(apellidos) +
-            "&monthDays=" + encodeURIComponent(correo) +
-            "&dayWeek=" + encodeURIComponent(rol);
-  
+            "clientId=" + encodeURIComponent(clientIdNow) +
+            "&month=" + encodeURIComponent(month) +
+            "&monthDays=" + encodeURIComponent(day) +
+            "&dayWeek=" + encodeURIComponent(week);
+
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
@@ -45,14 +30,12 @@ else{
       document.getElementById("clientcomments").value = "";
       document.getElementById("clientnames").value = "";
       getMessage();
-      getInternalClients('unlock');
       
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
-}
 });
 
 

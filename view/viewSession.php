@@ -12,4 +12,5 @@ require_once 'modal/modalCreateUserClient.php';
 require_once 'modal/modalClientConfig.php';
 require_once 'modal/modalCalendarDaysAssign.php';
 require_once 'modal/modalCalendarTime.php';
+require_once 'modal/modalCreateCalendar.php';
 ?>

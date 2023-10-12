@@ -11,3 +11,5 @@ const epGetCalendarDays= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendar
 const epGetCalendarDaysAssign= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarDaysAssign/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 const epGetCalendarTime= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarTime/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetClientStyle= `${subDomain}/kairosGateway/apiCore/v1/getClientStyle/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

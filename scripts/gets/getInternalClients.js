@@ -19,7 +19,7 @@ if(param=="unlock"){
     
       <td>
       <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button>
-      <button onclick="openModClientConfig();getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1">Configuración</button>
+      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1">Configuración</button>
       </td>
       <td>${info.clientId}</td>
       <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
@@ -221,3 +221,11 @@ async function getInternalClientsList() {
  }
 
  // Llamar a la función para obtener los datos del API
+
+ function createCalendarId(clientId) {
+  // Realiza la acción de creación de calendario utilizando el clientId
+  // Puedes implementar esta función según tus necesidades
+  sessionStorage.setItem('clientNow',clientId);
+ 
+  
+}
