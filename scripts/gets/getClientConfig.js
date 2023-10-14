@@ -191,7 +191,8 @@ async function getClientElements() {
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                   <h5 class="card-title">
-                  <img src="${info.imgElements}" alt="Icono" style="width: 100px; height: 100px;">
+                  <img src="${info.imgElements}" alt="Icono" style="max-width: 120px; max-height: 120px;">
+
                   <input type="text" class="form-control" id="${info.elementId}" value="${info.imgElements}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;imgElements&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button>
               </h5>
                       <h5 class="card-title"><input type="text" class="form-control" id="${info.elementId}" value="${info.elementName}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></h5>
