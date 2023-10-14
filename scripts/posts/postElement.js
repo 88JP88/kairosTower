@@ -3,7 +3,7 @@ document.getElementById("postElement").addEventListener("click", function() {
   // Obtén los valores de los campos
   var name = document.getElementById("eName").value;
   var carac = document.getElementById("eCaract").value;
-  var comments = document.getElementById("eComments").value;
+  var comments = document.getElementById("eCommentse").value;
   var brand = document.getElementById("eBrand").value;
   var type = document.getElementById("eType").value;
   var img = document.getElementById("eImg").value;
@@ -15,7 +15,7 @@ var clientIdNow=sessionStorage.getItem('clientNow');
             "clientId=" + encodeURIComponent(clientIdNow) +
             "&name=" + encodeURIComponent(name) +
             "&caract=" + encodeURIComponent(carac) +
-            "&commnets=" + encodeURIComponent(comments)+
+            "&comments=" + encodeURIComponent(comments)+
             "&brand=" + encodeURIComponent(brand)+
             "&type=" + encodeURIComponent(type)+
             "&img=" + encodeURIComponent(img);
