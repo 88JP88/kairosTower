@@ -46,10 +46,28 @@
             }
         }
     </script>
-    <p class="expand-button1" onclick="toggleExpandableSection1()">ESTILO-></p>
+
+
+
+
+
+    <p class="expand-button1" onclick="toggleExpandableSection1()">RECURSOS-></p>
     <div class="expandable-section1" id="expandable-section1">
-        <div id="card-clientStyle" class="card-container">
+        <div id="card-clientresources" class="card-container">
             <!-- Contenido de la sección expandible -->
+            <div class="card-body">
+                      <h5 style="color: #C70039">Rooms</h5>
+                      <p class="card-text"><button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1">Verificar</button>
+                      <p class="card-text"><button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1">Crear room</button>
+            </p>
+                      
+                  </div>
+                  <div class="card-body">
+                      <h5 style="color: #C70039">Elementos</h5>
+                      <p class="card-text"><button onclick="editExtClient()" class="btn btn-primary1">Veridicar</button>
+            </p>
+                      
+                  </div>
         </div>
     </div>
     <script>
@@ -59,6 +77,25 @@
                 expandableSection1.style.display = "none";
             } else {
                 expandableSection1.style.display = "block";
+            }
+        }
+    </script>
+
+
+
+<p class="expand-button1" onclick="toggleExpandableSection2()">ESTILO-></p>
+    <div class="expandable-section1" id="expandable-section2">
+        <div id="card-clientStyle" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+    </div>
+    <script>
+        function toggleExpandableSection2() {
+            const expandableSection2 = document.getElementById("expandable-section2");
+            if (expandableSection2.style.display === "block") {
+                expandableSection2.style.display = "none";
+            } else {
+                expandableSection2.style.display = "block";
             }
         }
     </script>

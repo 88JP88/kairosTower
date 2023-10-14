@@ -1,5 +1,6 @@
 
 
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -52,79 +53,53 @@
 <div class="mb-3 row">
     <label for="inputPassword" class="col-sm-2 col-form-label"><i>Nombres</i></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword">
+      <input type="text" class="form-control" id="myName">
+      <button onclick="editIntUserMy(this,'name')" class="btn btn-primary1">Editar</button>
     </div>
 </div>
+
+
 <div class="mb-3 row">
     <label for="inputPassword2" class="col-sm-2 col-form-label"><i>Apellidos</i></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword2">
+      <input type="text" class="form-control" id="myLastname">
+      <button onclick="editIntUserMy(this,'lastName')" class="btn btn-primary1">Editar</button>
     </div>
 </div>
 
-<button type="button" class="btn btn-primary1" id="updateButton9">Actualizar</button>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Obtener los elementos del DOM
-  const staticProfileIdInput = document.getElementById("staticProfileId");
-  const inputPasswordInput = document.getElementById("inputPassword");
-  const inputPassword2Input = document.getElementById("inputPassword2");
-  const inputPassword2Input1 = document.getElementById("staticEmail2");
-  const inputPassword2Input2 = document.getElementById("staticEmail");
-  const staticProfileIdInput1 = document.getElementById("staticPerfil");
-  const staticSubscriptionDaysInputac = document.getElementById("staticSubscriptionDaysac");
 
-  // Asignar valores desde sessionStorage a los campos
-  staticProfileIdInput.value = sessionStorage.getItem("userId");
-  inputPasswordInput.value = sessionStorage.getItem("name");
-  inputPassword2Input.value = sessionStorage.getItem("lastName");
-  inputPassword2Input1.value = sessionStorage.getItem("mail");
-  inputPassword2Input2.value = sessionStorage.getItem("userName");
-  staticProfileIdInput1.value = sessionStorage.getItem("rolId");
-  staticSubscriptionDaysInputac.value = sessionStorage.getItem("sessionCounter");
   
+function editIntUserMy(button,filter) {
+  // Obtener el valor del campo de texto correspondiente al botón
+  var input = button.previousElementSibling;
+  var nombre = input.value;
 
-  // Agregar evento al botón de actualizar
-  const updateButton = document.getElementById("updateButton9");
-  updateButton.addEventListener("click", function() {
-    // Obtener valores de los campos y hacer algo con ellos (por ejemplo, enviar a PHP)
-    const inputValue = ispublic.value;
-    const input2Value = inputPassword.value;
-    const input2Value1 = inputPassword2.value;
-
+  var uid= sessionStorage.getItem('userId');
+  
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/editMyProfile.php?name=' + encodeURIComponent(input2Value)  + '&lastName=' + encodeURIComponent(input2Value1)+ '&isPublic=' + encodeURIComponent(inputValue);
+  var url = 'controller/putIntUser.php?userId=' + encodeURIComponent(uid)  + '&filter=' + encodeURIComponent(filter)+ '&value=' + encodeURIComponent(nombre);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
       
       
-
-
-
-      obtenerVariablesPHPSession1();
-   //actualizarCampos();
-
-   
-   ispublic.value = sessionStorage.getItem("isPublic");
-   inputPassword.value = sessionStorage.getItem("name");
-   inputPassword2.value = sessionStorage.getItem("lastName");
-      obtenerVariablesPHP();
+      
  
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
+  
+}
 
-    // ...
-    // Luego puedes realizar acciones adicionales, como enviar datos a PHP
-  });
-});
 
 
 function obtenerVariablesPHPSession1() {
@@ -183,9 +158,9 @@ function actualizarCampos() {
   // Obtener los elementos del DOM
   const staticProfileIdInput = document.getElementById("staticProfileId");
   const staticSubscriptionDaysInput = document.getElementById("staticSubscriptionDays");
-  const inputPasswordInput = document.getElementById("inputPassword");
+  const inputPasswordInput = document.getElementById("myName");
   const inputPasswordInputpublic = document.getElementById("ispublic");
-  const inputPassword2Input = document.getElementById("inputPassword2");
+  const inputPassword2Input = document.getElementById("myLastname");
   const inputPassword2Input1 = document.getElementById("staticEmail2");
   const inputPassword2Input2 = document.getElementById("staticEmail");
   const staticProfileIdInput1 = document.getElementById("staticPerfil");
