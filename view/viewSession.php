@@ -14,4 +14,7 @@ require_once 'modal/modalCalendarDaysAssign.php';
 require_once 'modal/modalCalendarTime.php';
 require_once 'modal/modalCreateCalendar.php';
 require_once 'modal/modalClientRooms.php';
+require_once 'modal/modalCreateRoom.php';
+require_once 'modal/modalClientElements.php';
+require_once 'modal/modalClientElementsCreate.php';
 ?>

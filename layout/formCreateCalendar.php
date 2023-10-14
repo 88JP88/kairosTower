@@ -14,17 +14,6 @@
 
 
 
-
-  <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Contacto</label>
-  <input type="tect" class="form-control" id="lastnames123" placeholder="Ingresa contacto">
-</div>
-  
-
-
-
-
-
 <div class="row g-3 align-items-center">
 <label for="exampleFormControlInput1" class="form-label">Mes</label>
 <select class="form-select" aria-label="Default select example" id="cmonth">

@@ -16,3 +16,5 @@ const epGetClientStyle= `${subDomain}/kairosGateway/apiCore/v1/getClientStyle/${
 
 
 const epGetClientRooms= `${subDomain}/kairosGateway/apiCompanies/v1/getClientRooms/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetClientElements= `${subDomain}/kairosGateway/apiCompanies/v1/getClientElements/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

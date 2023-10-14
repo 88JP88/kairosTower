@@ -155,10 +155,54 @@ async function getClientRooms() {
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class="card-title">${info.comments}</h5>
-                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientCalendar(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
+                      <h5 class="card-title"><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;comments&quot;,&quot;comments&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></h5>
+
+                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
                      
                      
+                  </div>
+              `;
+
+              cardContainer11.appendChild(card11);
+          });
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+
+
+async function getClientElements() {
+  document.getElementById("loading-container").style.display = "flex";
+  var param=sessionStorage.getItem('clientNow');
+  fetch(epGetClientElements + param)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientElements");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.clientElement.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+              const assign1 = info.isApply === "0" ? assig="NO ASIGNADO" : assig="ASIGNADO";
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <img src="${info.imgElements}" alt="Icono" style="width: 80px; height: 80px;">
+              </h5>
+                      <h5 class="card-title"><input type="text" class="form-control" id="${info.elementId}" value="${info.elementName}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></h5>
+
+                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
+                      <p class="card-text">Caracteristicas: <input type="text" class="form-control" id="${info.elementId}" value="${info.caracts}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
+                      <p class="card-text">Marca: <input type="text" class="form-control" id="${info.elementId}" value="${info.brand}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
+                      <p class="card-text">Tipo de elemnto: <input type="text" class="form-control" id="${info.elementId}" value="${info.type}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
+                      <p class="card-text">Asignado: <p class="card-text">Estado: ${assign1}</p>
+                     
+                      <p class="card-text">Comentarios: <input type="text" class="form-control" id="${info.elementId}" value="${info.comments}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
+                   
                   </div>
               `;
 
@@ -261,6 +305,78 @@ function editClientCalendar(button, id,filter,reason,value,recharge) {
 
        
       }
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+}
+
+function editClientRoom(button, id,filter,reason,value,recharge) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="comments"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  }
+
+ 
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientRoom.php?roomId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientRooms();
+
+       
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+}
+
+
+
+function editClientElement(button, id,filter,reason,value,recharge) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="comments"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  }
+
+ 
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientElement.php?elementId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientElements();
+
+       
       
  
     })

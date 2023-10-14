@@ -58,14 +58,15 @@
             <div class="card-body">
                       <h5 style="color: #C70039">Rooms</h5>
                       <p class="card-text"><button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1">Verificar</button>
-                      <p class="card-text"><button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1">Crear room</button>
+                      <p class="card-text"><button onclick="openModClientRoomsCreate();" class="btn btn-primary1">Crear room</button>
             </p>
                       
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039">Elementos</h5>
-                      <p class="card-text"><button onclick="editExtClient()" class="btn btn-primary1">Veridicar</button>
-            </p>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1">Verificar</button>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1">Crear elemento</button>
+                    </p>
                       
                   </div>
         </div>

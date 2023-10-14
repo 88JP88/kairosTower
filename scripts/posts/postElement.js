@@ -1,18 +1,24 @@
 
-document.getElementById("postCalendar").addEventListener("click", function() {
+document.getElementById("postElement").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var month = document.getElementById("cmonth").value;
-  var day = document.getElementById("cday").value;
-  var week = document.getElementById("cweek").value;
+  var name = document.getElementById("eName").value;
+  var carac = document.getElementById("eCaract").value;
+  var comments = document.getElementById("eComments").value;
+  var brand = document.getElementById("eBrand").value;
+  var type = document.getElementById("eType").value;
+  var img = document.getElementById("eImg").value;
   
 var clientIdNow=sessionStorage.getItem('clientNow');
 
   // Construye la URL para la solicitud GET
-  var url = "controller/postCalendar.php?" +
+  var url = "controller/postElement.php?" +
             "clientId=" + encodeURIComponent(clientIdNow) +
-            "&month=" + encodeURIComponent(month) +
-            "&monthDays=" + encodeURIComponent(day) +
-            "&dayWeek=" + encodeURIComponent(week);
+            "&name=" + encodeURIComponent(name) +
+            "&caract=" + encodeURIComponent(carac) +
+            "&commnets=" + encodeURIComponent(comments)+
+            "&brand=" + encodeURIComponent(brand)+
+            "&type=" + encodeURIComponent(type)+
+            "&img=" + encodeURIComponent(img);
 
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
