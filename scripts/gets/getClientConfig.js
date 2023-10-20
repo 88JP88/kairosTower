@@ -22,10 +22,10 @@ async function getCalendarDays(param) {
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class "card-title">${info.month}  / ${año}</h5>
+                      <h5 class "card-title"><i class="fas fa-calendar-alt"></i>${info.month}  / ${año}</h5>
                       <p class="card-text">Días del Mes: ${info.monthDays}</p>
-                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
-                      ${info.isActive !== "0" ? `<button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.calendarId}&quot;);" class="btn btn-primary1">Días disponibles</button>` : ''}
+                      <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="DEACTIVAR"><i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}${activo1}</p>
+                      ${info.isActive !== "0" ? `<button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.calendarId}&quot;);" class="btn btn-primary1 edit-button" title="DÍAS DISPONIBLES"><i class="fas fa-calendar-alt"></i></button>` : ''}
                   </div>
               `;
 
@@ -87,10 +87,10 @@ async function getCalendarDaysAssign(param) {
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card1.innerHTML = `
                   <div class="card-body"  style="background-color: ${backgroundColor};">
-                      <h5 class="card-title">${info.calendarDay} ${info.calendarNumber}</h5>
-                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;0&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;1&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
+                      <h5 class="card-title"><i class="fas fa-calendar-alt"></i>${info.calendarDay} ${info.calendarNumber}</h5>
+                      <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;0&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR">  <i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;1&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}${activo1}</p>
                      
-                      ${info.isActive !== "0" ? ` <button onclick="openModCalendarTime();getCalendarTime(&quot;${info.registId}&quot;);" class="btn btn-primary1">Horas disponibles</button>` : ''}
+                      ${info.isActive !== "0" ? ` <button onclick="openModCalendarTime();getCalendarTime(&quot;${info.registId}&quot;);" class="btn btn-primary1 edit-button" title="HORAS DISPONIBLES"><i class="fas fa-clock"></i></button>` : ''}
                       </div>
               `;
 
@@ -121,11 +121,11 @@ async function getCalendarTime(param) {
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class="card-title">${info.calendarTime}</h5>
-                      <p class="card-text">Estado: ${activo1} ${info.notApply == "free" ? `${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;0&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;1&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1">Activar</button>`}` : ''}</p>
-                      <p class="card-text">Disponible: ${info.notApply} ${info.isActive == "1" ? ` ${info.notApply == "free" ? ` <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1">Asignar</button>` : `<button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1">Liberar</button>`}` :''}</p>
+                      <h5 class="card-title"><i class="fas fa-clock"></i>${info.calendarTime}</h5>
+                      <p class="card-text">${info.notApply == "free" ? `${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;0&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR"><i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;1&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}` : ''}${activo1}</p>
+                      <p class="card-text">${info.isActive == "1" ? ` ${info.notApply == "free" ? `<i class="fas fa-check-circle"></i> <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>` : `<i class="fas fa-times-circle"></i><button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button"><i class="fas fa-unlink"></i></button>`}` :''}</p>
                       <p class="card-text">Usuario: ${info.userApply}</p>
-                      ${info.notApply !== "free" ? ` <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1">Información de evento</button>` : ''}
+                      ${info.notApply !== "free" ? ` <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button"><i class="fas fa-info-circle"></i></button>` : ''}
                   </div>
               `;
 
@@ -155,11 +155,12 @@ async function getClientRooms() {
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class="card-title"><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;comments&quot;,&quot;comments&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></h5>
+                  <p class="card-text"><i class="fas fa-home"></i>${info.comments}</p>
+                  <p class="card-text"><div class="edit-container"><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}" title="${info.comments}"> <button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;comments&quot;,&quot;comments&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR"><i class="fas fa-edit"></i></button></div></p>
 
-                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
+                      <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR"><i class="fas fa-ban"></i></button><i class="fas fa-check-circle"></i>` : `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button><i class="fas fa-times-circle"></i>`}</p>
                      
-                      <p class="card-text"><button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Remover</button></p>
+                      <p class="card-text"><button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR"><i class="fas fa-trash"></i></button></p>
                   </div>
               `;
 
@@ -191,25 +192,95 @@ async function getClientElements() {
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                   <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
                   <img src="${info.imgElements}" alt="Icono" style="max-width: 120px; max-height: 120px;">
 
-                  <input type="text" class="form-control" id="${info.elementId}" value="${info.imgElements}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;imgElements&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button>
-              </h5>
-                      <h5 class="card-title"><input type="text" class="form-control" id="${info.elementId}" value="${info.elementName}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></h5>
+                  <div class="edit-container">
+                  <input type="text" class="form-control" id="${info.elementId}" value="${info.imgElements}" title="${info.imgElements}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;imgElements&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
 
-                      <p class="card-text">Estado: ${activo1} ${info.isActive !== "0" ? `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Desactivar</button>` : `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Activar</button>`}</p>
-                      <p class="card-text">Caracteristicas: <input type="text" class="form-control" id="${info.elementId}" value="${info.caracts}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;caracts&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
-                      <p class="card-text">Marca: <input type="text" class="form-control" id="${info.elementId}" value="${info.brand}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;brand&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
-                      <p class="card-text">Tipo de elemnto: <input type="text" class="form-control" id="${info.elementId}" value="${info.type}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
-                      <p class="card-text">Asignado: <p class="card-text">Estado: ${assign1}</p>
+              </h5>
+              <p class="card-text">Elemento:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.elementName}" title="${info.elementName}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;elementName&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              
+              
+              
+              
+             <p class="card-text">
+              <div class="edit-container">
+              ${info.isActive !== "0" ? `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR">
+  <i class="fas fa-ban"></i>
+  </button>` 
+  : `<button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR">
+  <i class="fas fa-check"></i>
+  </button>`}${activo1} 
+    
+</div>
                      
-                      <p class="card-text">Comentarios: <input type="text" class="form-control" id="${info.elementId}" value="${info.comments}"> <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Editar</button></p>
-                      <p class="card-text"><button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1">Remover</button></p>
+                      <p class="card-text">Caracteristicas:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.caracts}" title="${info.caracts}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;caracts&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Marca:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.brand}" title="${info.brand}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;brand&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Tipo de elemento:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.type}" title="${info.type}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+                        
+              <p class="card-text">Estado: ${assign1}</p>
+                     
+
+
+              <p class="card-text">Comentarios:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.comments}" title="${info.comments}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
+              </p>
+                      
                   </div>
               `;
 
               cardContainer11.appendChild(card11);
           });
+          
           document.getElementById("loading-container").style.display = "none";
       })
       .catch(error => {
@@ -387,3 +458,5 @@ function editClientElement(button, id,filter,reason,value,recharge) {
       console.log('Error en la petición:', error);
     });
 }
+
+

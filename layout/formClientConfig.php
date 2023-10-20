@@ -56,16 +56,33 @@
         <div id="card-clientresources" class="card-container">
             <!-- Contenido de la sección expandible -->
             <div class="card-body">
-                      <h5 style="color: #C70039">Rooms</h5>
-                      <p class="card-text"><button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1">Verificar</button>
-                      <p class="card-text"><button onclick="openModClientRoomsCreate();" class="btn btn-primary1">Crear room</button>
+                      <h5 style="color: #C70039"><i class="fas fa-home"></i>Rooms</h5>
+
+                      <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;">
+    <i class="fas fa-eye"></i>
+  </button>
+</div>
+              </p>
+                      
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="openModClientRoomsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+              </p>
+
             </p>
                       
                   </div>
                   <div class="card-body">
-                      <h5 style="color: #C70039">Elementos</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1">Verificar</button>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1">Crear elemento</button>
+                      <h5 style="color: #C70039"><i class="fas fa-guitar"></i>Elementos</h5>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>

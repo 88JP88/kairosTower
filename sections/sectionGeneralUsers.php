@@ -1,16 +1,16 @@
 <div class="container">
 
 <div id="generalUsers" class="email-section" style="text-align: center;">
-    <h2>
-    <button type="button" class="btn btn-primary1" onclick="openModCreateUserClient();getInternalClientsList();" style="color: #C70039;">Crear usuario cliente</button>
-    <button type="button" class="btn btn-primary1" onclick="getGeneralUsers('unlock');"  style="color: #C70039;">Usuarios activos</button>
-    <button type="button" class="btn btn-primary1" onclick="getGeneralUsers('lock');" style="color: #C70039;">Usuarios inactivos</button>
-
-  </h2>
+   
     
   <p><H2><I>USUARIOS GENERALES</I></H2>
 
- 
+  <h2>
+    <button type="button" class="btn btn-primary1 edit-button1" onclick="openModCreateUserClient();getInternalClientsList();" style="color: #C70039;" title="CREAR USUARIO PARA CLIENTE"><i class="fas fa-user-plus"></i></button>
+    <button type="button" class="btn btn-primary1 edit-button1" onclick="getGeneralUsers('unlock');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-eye"></i></button>
+    <button type="button" class="btn btn-primary1 edit-button1" onclick="getGeneralUsers('lock');" style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-eye-slash"></i></button>
+
+  </h2>
     
 <?php
 

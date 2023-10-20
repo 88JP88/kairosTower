@@ -101,7 +101,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-primary1" id="postClientUser">Crear usuario cliente</button>
+<button type="button" class="btn btn-primary1 edit-button" id="postClientUser" title="CREAR USUARIO PARA CLIENTE"><i class="fas fa-user-plus"></i></button>
 
 </form>
 <script  src="scripts/posts/postGeneralUser.js"></script>

@@ -15,14 +15,15 @@
       row.innerHTML = `
      
     
-      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button></td>
+      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1 edit-button" title="BLOQUEAR"><i class="fas fa-ban"></i></button></td>
       <td>${info.userId}</td>
       <td>${info.userName}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.contact}</td>
       <td>${info.email}</td>
       <td>${info.rolId}</td>
-      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td>
+      <div class="edit-container"><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"><button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1 edit-button" title="EDITAR"><i class="fas fa-edit"></i></button></div></td>
         
         
       `;
@@ -54,8 +55,8 @@
       const row = document.createElement("tr");
       row.innerHTML = `
      
-      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1">Desbloquear</button>
-      <button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
+      <td><button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1 edit-button" title="DESBLOQUEAR"><i class="fas fa-check"></i></button>
+      <button onclick="editIntUserStatus(this,&quot;${info.userId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR"><i class="fas fa-trash"></i></button>
     </td>
     
       <td>${info.userId}</td>
@@ -64,7 +65,8 @@
       <td>${info.contact}</td>
       <td>${info.email}</td>
       <td>${info.rolId}</td>
-      <td><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"> <button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td>
+      <div class="edit-container"><input type="text" class="form-control" id="${info.userId}" value="${info.isActive}"><button onclick="editIntUser(this,&quot;${info.userId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1 edit-button" title="EDITAR"><i class="fas fa-edit"></i></button></div></td>
      
         
       `;

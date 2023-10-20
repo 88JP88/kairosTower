@@ -9,6 +9,8 @@
 
   
     <link rel="icon" type="image/x-icon" href="public/KAIROS2.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
   <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -27,22 +29,22 @@
 
   <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Gestión de usuarios
+      <i class="fas fa-users"></i> Gestión de usuarios
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('generalUsers');getGeneralUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios generales</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('internalUsers');getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Usuarios internos</a></li>
+        <li><a class="dropdown-item" onclick="changeSection('generalUsers');getGeneralUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-users"></i> Usuarios generales</a></li>
+        <li><a class="dropdown-item" onclick="changeSection('internalUsers');getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-toolbox"></i> Usuarios internos</a></li>
        
       </ul>
     </div> 
 
     <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Gestión de clientes
+      <i class="fas fa-building"></i> Gestión de clientes
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('internalClients');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Clientes externos</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Clientes internos</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('internalClients');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-building"></i> Clientes externos</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-warehouse"></i> Clientes internos</a></li>
        
       </ul>
     </div> 
@@ -51,7 +53,7 @@
     
   <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Soporte
+      <i class="fas fa-headset"></i> Soporte
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
         <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Soporte externo</a></li>
@@ -61,7 +63,7 @@
     </div> 
     <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Informes
+      <i class="fas fa-info"></i> Informes
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
         <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Generar informe</a></li>
@@ -79,9 +81,9 @@
     <li><a class="dropdown-item" onclick="changeSection('sessions');getMySessions();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #C70039;">Sesiones activas</a></li>
         <li><a class="dropdown-item nav-item" href="#" style="color: #C70039;">Informe de errores</a></li>
   </ul>
-  <button class="nav-link" id="actualizarButton" onclick="openModMyProfile('importantes');profileInfoLog();" type="button" role="tab" style="color: #C70039;">Perfil</button>
+  <button class="nav-link" id="actualizarButton" onclick="openModMyProfile('importantes');profileInfoLog();" type="button" role="tab" style="color: #C70039;"><i class="fas fa-user-check"></i> Perfil</button>
   <button type="button" class="btn nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" style="color: #C70039;">
-    <span class="visually-hidden nav-link" >Toggle Dropstart</span>
+  <i class="fas fa-exclamation"></i><span class="visually-hidden nav-link" >Toggle Dropstart</span>
   </button>
 </div>
     </div> 

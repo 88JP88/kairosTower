@@ -95,7 +95,7 @@
   </div>
 </div>
 
-<button type="button" class="btn btn-primary1" id="postInternalUser">Crear usuario interno</button>
+<button type="button" class="btn btn-primary1 edit-button" id="postInternalUser" title="CREAR USUARIO INTERNO"><i class="fas fa-user-plus"></i></button>
 
 
 <script  src="scripts/posts/postInternalUser.js"></script>

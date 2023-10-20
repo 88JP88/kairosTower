@@ -16,37 +16,37 @@
 
 
   <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Nombre del elemento</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Nombre del elemento</label>
   <input type="text" class="form-control" id="eName" placeholder="Ingresa nombre de room">
 </div>
   
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Caracteristicas del elemento</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Caracteristicas del elemento</label>
   <input type="text" class="form-control" id="eCaract" placeholder="Ingresa nombre de room">
 </div>
   
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Comentarios</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Comentarios</label>
   <input type="text" class="form-control" id="eCommentse" placeholder="Ingresa nombre de room">
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Marca</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Marca</label>
   <input type="text" class="form-control" id="eBrand" placeholder="Ingresa nombre de room">
 </div>
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Tipo de elemento</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Tipo de elemento</label>
   <input type="text" class="form-control" id="eType" placeholder="Ingresa nombre de room">
 </div>
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Imagen de elemento (url/link)</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Imagen de elemento (url/link)</label>
   <input type="text" class="form-control" id="eImg" placeholder="Ingresa nombre de room">
 </div>
 
-<button type="button" class="btn btn-primary1" id="postElement">Crear elemento</button>
+<button type="button" class="btn btn-primary1 edit-button" id="postElement" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
 
 <script  src="scripts/posts/postElement.js"></script>
 

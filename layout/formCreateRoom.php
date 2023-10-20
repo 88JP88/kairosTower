@@ -16,7 +16,7 @@
 
 
   <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Nombre del room</label>
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-home"></i>Nombre del room</label>
   <input type="tect" class="form-control" id="cRoomc" placeholder="Ingresa nombre de room">
 </div>
   
@@ -26,7 +26,7 @@
 
 
 
-<button type="button" class="btn btn-primary1" id="postRoom">Crear room</button>
+<button type="button" class="btn btn-primary1 edit-button" id="postRoom" title="Crear room"><i class="fas fa-plus"></i></button>
 
 <script  src="scripts/posts/postRoom.js"></script>
 

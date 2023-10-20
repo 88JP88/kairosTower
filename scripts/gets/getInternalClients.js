@@ -18,21 +18,58 @@ if(param=="unlock"){
      
     
       <td>
-      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1">Bloquear</button>
-      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1">Configuración</button>
+      
+      <div class="edit-container">
+  
+     
+    
+      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
+        <i class="fas fa-cog"></i>
+      </button>
+
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;)" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
+      <i class="fas fa-ban"></i>
+    </button>
+    </div>
+
+
+
       </td>
       <td>${info.clientId}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}" title="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
+
+      <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.comments}" title="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
       <td>${info.clientType}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.email} / ${info.contact}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
+      <td>
+      <div class="edit-container">
       <div class="password-container">
           <input type="password" class="form-control" id="${info.clientId}" value="${info.key}">
           
-          <button class="toggle-password btn btn-primary1" onclick="togglePassword(this)">Mostrar</button>
+          <button class="toggle-password btn btn-primary1 edit-button" onclick="togglePassword(this)">
+          <i class="fas fa-eye"></i>
+          </button>
+      </div>
       </div>
   </td>
   
@@ -68,22 +105,54 @@ if(param=="lock"){
      
     
       <td>
-      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1">Desbloquear</button>
-      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1">Remover</button>
-      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;delAll&quot;)" class="btn btn-primary1">Remover en cadena</button>
+      <div class="edit-container">
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;1&quot;)" class="btn btn-primary1 edit-button" title="DESBLOQUEAR">
+      <i class="fas fa-check"></i>
+      </button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR SOLO CLIENTE">
+      <i class="fas fa-times"></i>
+      </button>
+      <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;delAll&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR TODA LA INFORMACIÓN DEL CLIENTE INCLUYENDO USUARIOS">
+      <i class="fas fa-trash"></i>
+      </button>
+      
+      </div>
       </td>
       <td>${info.clientId}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1">Editar</button></td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1">Editar</button></td>
+      <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.clientName}" title="${info.clientName}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
+
+      <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.comments}" title="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
       <td>${info.clientType}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.email} / ${info.contact}</td>
-      <td><input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1">Editar</button></td>
       <td>
+      <div class="edit-container">
+      <input type="text" class="form-control" id="${info.clientId}" value="${info.isActive}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;isActive&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div>
+      </td>
+      <td>
+      <div class="edit-container">
       <div class="password-container">
           <input type="password" class="form-control" id="${info.clientId}" value="${info.key}">
           
-          <button class="toggle-password btn btn-primary1" onclick="togglePassword(this)">Mostrar</button>
+          <button class="toggle-password btn btn-primary1 edit-button" onclick="togglePassword(this)">
+          <i class="fas fa-eye"></i>
+          </button>
+      </div>
       </div>
   </td>
   
