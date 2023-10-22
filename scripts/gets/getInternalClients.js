@@ -272,7 +272,9 @@ function editExtClientStatus(button, id,filter,status) {
 async function getInternalClientsList() {
 
   const reposSelect = document.getElementById("repos-select234");
-
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
 	fetch(epGetInternalClients+"unlock")
   .then(response => response.json())
   .then(data => {
@@ -280,6 +282,77 @@ async function getInternalClientsList() {
       const option = document.createElement("option");
       option.value = info.clientId;
       option.text = info.clientName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ // Llamar a la función para obtener los datos del API
+
+ function createCalendarId(clientId) {
+  // Realiza la acción de creación de calendario utilizando el clientId
+  // Puedes implementar esta función según tus necesidades
+  sessionStorage.setItem('clientNow',clientId);
+ 
+  
+}
+
+
+
+async function getInternalUserList(param) {
+
+  const reposSelect = document.getElementById("list-internalusers");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetGeneralUsers+param+"/"+uid)
+  .then(response => response.json())
+  .then(data => {
+    data.users.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.userId+"|"+info.name+" "+info.lastName;
+      option.text = info.name+" "+info.lastName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ // Llamar a la función para obtener los datos del API
+
+ function createCalendarId(clientId) {
+  // Realiza la acción de creación de calendario utilizando el clientId
+  // Puedes implementar esta función según tus necesidades
+  sessionStorage.setItem('clientNow',clientId);
+ 
+  
+}
+
+
+
+async function getClientRoomsList(timeid) {
+
+  const reposSelect = document.getElementById("list-clientroom");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+sessionStorage.setItem('timeNow',timeid);
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientRooms+uid+"/"+timeid)
+  .then(response => response.json())
+  .then(data => {
+    data.clientRoom.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.roomId;
+      option.text = info.comments;
       reposSelect.add(option);
     });
   })

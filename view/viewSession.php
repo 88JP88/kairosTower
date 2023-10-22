@@ -17,4 +17,6 @@ require_once 'modal/modalClientRooms.php';
 require_once 'modal/modalCreateRoom.php';
 require_once 'modal/modalClientElements.php';
 require_once 'modal/modalClientElementsCreate.php';
+require_once 'modal/modalAssignUserTime.php';
+require_once 'modal/modaldesAssignUserTime.php';
 ?>

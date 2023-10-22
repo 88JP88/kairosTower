@@ -18,12 +18,13 @@ async function getCalendarDays(param) {
 
               // Define un color de fondo basado en el valor de info.isActive
               var activo="";
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : info.counterId === "0" ? "  #008f39" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                       <h5 class "card-title"><i class="fas fa-calendar-alt"></i>${info.month}  / ${año}</h5>
                       <p class="card-text">Días del Mes: ${info.monthDays}</p>
+                      <p class="card-text">Días disponibles: ${info.counterId}</p>
                       <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="DEACTIVAR"><i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.calendarId}&quot;,&quot;isActive&quot;,&quot;calendarDays&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}${activo1}</p>
                       ${info.isActive !== "0" ? `<button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.calendarId}&quot;);" class="btn btn-primary1 edit-button" title="DÍAS DISPONIBLES"><i class="fas fa-calendar-alt"></i></button>` : ''}
                   </div>
@@ -75,6 +76,7 @@ async function getCalendarDaysAssign(param) {
   
 
   document.getElementById("loading-container").style.display = "flex";
+  sessionStorage.setItem('calendarNow',param);
   fetch(epGetCalendarDaysAssign + param)
       .then(response => response.json())
       .then(data => {
@@ -83,11 +85,13 @@ async function getCalendarDaysAssign(param) {
           data.calendarDaysAssign.forEach(info => {
               const card1 = document.createElement("div");
               card1.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : info.counterId === "0" ? "  #008f39" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card1.innerHTML = `
                   <div class="card-body"  style="background-color: ${backgroundColor};">
                       <h5 class="card-title"><i class="fas fa-calendar-alt"></i>${info.calendarDay} ${info.calendarNumber}</h5>
+                     
+                      <p class="card-text">Horas disponibles: ${info.counterId}</p>
                       <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;0&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR">  <i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.registId}&quot;,&quot;isActive&quot;,&quot;calendarDaysAssign&quot;,&quot;1&quot;,&quot;${info.calendarId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}${activo1}</p>
                      
                       ${info.isActive !== "0" ? ` <button onclick="openModCalendarTime();getCalendarTime(&quot;${info.registId}&quot;);" class="btn btn-primary1 edit-button" title="HORAS DISPONIBLES"><i class="fas fa-clock"></i></button>` : ''}
@@ -109,6 +113,7 @@ async function getCalendarDaysAssign(param) {
 
 async function getCalendarTime(param) {
   document.getElementById("loading-container").style.display = "flex";
+  sessionStorage.setItem('registNow',param);
   fetch(epGetCalendarTime + param)
       .then(response => response.json())
       .then(data => {
@@ -117,13 +122,15 @@ async function getCalendarTime(param) {
           data.calendarTime.forEach(info => {
               const card11 = document.createElement("div");
               card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : info.counterId === "0" ? "  #008f39" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                       <h5 class="card-title"><i class="fas fa-clock"></i>${info.calendarTime}</h5>
+                      <p class="card-text">Salas disponibles: ${info.counterId}</p>
+
                       <p class="card-text">${info.notApply == "free" ? `${info.isActive !== "0" ? `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;0&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR"><i class="fas fa-ban"></i></button>` : `<button onclick="editClientCalendar(this,&quot;${info.timeId}&quot;,&quot;isActive&quot;,&quot;calendarTime&quot;,&quot;1&quot;,&quot;${info.registId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button>`}` : ''}${activo1}</p>
-                      <p class="card-text">${info.isActive == "1" ? ` ${info.notApply == "free" ? `<i class="fas fa-check-circle"></i> <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>` : `<i class="fas fa-times-circle"></i><button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button"><i class="fas fa-unlink"></i></button>`}` :''}</p>
+                      <p class="card-text">${info.isActive == "1" ? ` ${info.counterId > 0 ? `<i class="fas fa-check-circle"></i> <button onclick="openModUserTime();getInternalUserList(&quot;all&quot;);getClientRoomsList(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button><button onclick="openModUserTimedes();getCalendarTimedes(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button" title="DESASIGNAR USUARIO"><i class="fas fa-unlink"></i></button>` : `<i class="fas fa-times-circle"></i><button onclick="openModUserTimedes();getCalendarTimedes(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button" title="DESASIGNAR USUARIO"><i class="fas fa-unlink"></i></button>`}` :''}</p>
                       <p class="card-text">Usuario: ${info.userApply}</p>
                       ${info.notApply !== "free" ? ` <button onclick="openModCalendarDaysAssign();getCalendarDaysAssign(&quot;${info.timeId}&quot;);" class="btn btn-primary1 edit-button"><i class="fas fa-info-circle"></i></button>` : ''}
                   </div>
@@ -143,7 +150,7 @@ async function getCalendarTime(param) {
 async function getClientRooms() {
   document.getElementById("loading-container").style.display = "flex";
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientRooms + param)
+  fetch(epGetClientRooms + param+"/all")
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientRooms");
@@ -342,6 +349,46 @@ async function getClientStyle(param) {
 
 
 
+
+async function getCalendarTimedes(param) {
+  document.getElementById("loading-container").style.display = "flex";
+
+  sessionStorage.setItem('timeNow',param)
+  fetch(epGetCalendarTimedes + param)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-usertimedes");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.assignRoom.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                      <h5 class="card-title"><i class="fas fa-clock"></i>${info.comments}</h5>
+                      <p class="card-text">Usuario: ${info.userName}</p>
+                      <p class="card-text">
+                      <div class="edit-container">
+          
+          <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+                      </p>
+                      
+                        </div>
+              `;
+
+              cardContainer11.appendChild(card11);
+          });
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
 
 
 

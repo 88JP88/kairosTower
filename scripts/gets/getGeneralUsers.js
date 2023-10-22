@@ -1,9 +1,9 @@
 
- async function getGeneralUsers(param) {
+ async function getGeneralUsers(param,filter) {
   if(param=="unlock"){
 
     document.getElementById("loading-container").style.display = "flex";
-    fetch(epGetGeneralUsers+param)
+    fetch(epGetGeneralUsers+param+"/"+filter)
    
   .then(response => response.json())
   .then(data => {
@@ -159,3 +159,7 @@ showNotify('¡No puedes Bloquear tu propio usuario!','error');
     });
   }
 }
+
+
+
+
