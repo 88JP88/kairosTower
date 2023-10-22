@@ -27,8 +27,9 @@
         /* Estilos adicionales para el formulario y sus elementos */
         #loginForm {
             text-align: center; /* Alinea el contenido del formulario al centro */
+            background-color: #001219;
         }
-
+   
         .form-control {
             width: 100%;
         }
@@ -44,6 +45,40 @@
 
 
 <body>
+
+<div class="container-fluid">
+        <div class="row">
+           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+         
+              <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 mt-4  rounded-2 shadow" id="loginForm">
+                    <form id="loginForm" action="controller/controllerValidateLogIn.php" method="post">
+                      <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2"><img class="mt-3" src="public/KAIROS.gif" alt="" width="72" height="57"></div>
+                        <div class="col-8"><h3 class="m-4 text-light">KAIROS</h3></div>
+                      </div>
+                      <h4 class="m-4 fw-normal text-white">INGRESE SUS DATOS POR FAVOR</h4>
+                      <div class="form-floating">
+                        <input type="email" class="form-control mb-3" name="mail" id="mail" placeholder="name@example.com">
+                        <label for="floatingInput">Correo electronico</label>
+                      </div>
+                      <div class="form-floating">
+                        <input type="password" class="form-control mb-3" name="pass" id="pass" placeholder="Password">
+                        <label for="floatingPassword">Contraseña</label>
+                      </div>
+                      <button class="w-100 btn btn-lg btn-primary1" type="submit">Confirmar</button>
+                     
+                    </form>
+                    <button class="btn btn-primary1 w-100 mb-1" onclick="openModCloseSessions();">Cerrar sesion en otros dispositivos</button>
+                    <p class="mt-1 m-3 text-white">&copy; Lugma.tech 2023</p>
+                  </div>
+              <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4">
+              </div>   
+            </div>
+           
+      </div>
+
+<!-- CODIGO ORIGINAL
 <div class="center-image">
     <img src="public/KAIROS.gif" alt="Descripción de la imagen" style="width: 150px; height: auto;">
 </div><br>
@@ -69,7 +104,7 @@
 
         <button type="submit" class="btn btn-primary1">Iniciar</button>
     </form>
-</div>
+</div> -->
 </body>
 </html>
 
@@ -92,7 +127,7 @@ if($sub_domain==2){
   }
   if($sub_domain==3){
   
-    echo "<B>ESTE ES UN AMBIENTE DE PRUEBAS</B>";
+    echo "<br> <br>  <B>ESTE ES UN AMBIENTE DE PRUEBAS</B>";
     
     }
    
