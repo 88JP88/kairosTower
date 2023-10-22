@@ -7,6 +7,7 @@ document.getElementById("postElement").addEventListener("click", function() {
   var brand = document.getElementById("eBrand").value;
   var type = document.getElementById("eType").value;
   var img = document.getElementById("eImg").value;
+  var valu = document.getElementById("eValue").value;
   
 var clientIdNow=sessionStorage.getItem('clientNow');
 
@@ -18,7 +19,8 @@ var clientIdNow=sessionStorage.getItem('clientNow');
             "&comments=" + encodeURIComponent(comments)+
             "&brand=" + encodeURIComponent(brand)+
             "&type=" + encodeURIComponent(type)+
-            "&img=" + encodeURIComponent(img);
+            "&img=" + encodeURIComponent(img)+
+            "&value=" + encodeURIComponent(valu);
 
   // Realizar la solicitud GET utilizando fetch
   fetch(url)

@@ -7,6 +7,7 @@ $roomId = $_GET['roomId'];
 $userId = $_GET['userId'];
 $timeId = $_GET['timeId'];
 $param = $_GET['param'];
+$assignments = $_GET['assignments'];
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
@@ -19,7 +20,8 @@ $data = array(
     'roomId' => $roomId,
     'userId' => $userId,
     'timeId' => $timeId,
-    'param' => $param
+    'param' => $param,
+    'assignments' => $assignments
     
 );
 

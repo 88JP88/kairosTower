@@ -8,13 +8,17 @@ var clientIdNow=sessionStorage.getItem('clientNow');
 var timeId=sessionStorage.getItem('timeNow');
 var rId=sessionStorage.getItem('registNow');
 var cId=sessionStorage.getItem('calendarNow');
+
+var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el array en una cadena con valores separados por "|"
+
   // Construye la URL para la solicitud GET
   var url = "controller/postAssignRoom.php?" +
             "clientId=" + encodeURIComponent(clientIdNow) +
             "&roomId=" + encodeURIComponent(room) +
             "&userId=" + encodeURIComponent(user)+
             "&timeId=" + encodeURIComponent(timeId)+
-            "&param=" + encodeURIComponent('assign');
+            "&param=" + encodeURIComponent('assign')+
+            "&assignments=" + encodeURIComponent(selectedAssignmentsString); // Agrega los assignments a la URL
 
   // Realizar la solicitud GET utilizando fetch
   fetch(url)

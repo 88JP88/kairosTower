@@ -21,10 +21,12 @@
 </div>
 <div class="mb-3">
  <label for="currency">Room</label>
-<select id="list-clientroom" class="form-control" name="currency" required></select>
+<select id="list-clientroom" class="form-control" name="currency" required onchange="onClientRoomSelect()"></select>
 <option selected>Selecciona room</option>
 </div>
-
+<div id="checkbox-container" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
 <button type="button" class="btn btn-primary1 edit-button" id="postAssignRoom" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>
 
 </form>

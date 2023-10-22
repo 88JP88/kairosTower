@@ -185,7 +185,7 @@ async function getClientRooms() {
 async function getClientElements() {
   document.getElementById("loading-container").style.display = "flex";
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param)
+  fetch(epGetClientElements + param+"/all/na")
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientElements");
@@ -273,6 +273,16 @@ async function getClientElements() {
 </div>
               </p>
 
+
+
+              <p class="card-text">Valor por hora:
+              <div class="edit-container">
+  <input type="text" class="form-control" id="${info.elementId}" value="${info.amount}" title="${info.amount}">
+  <button onclick="editClientElement(this,&quot;${info.elementId}&quot;,&quot;amount&quot;,&quot;data&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
               <p class="card-text">
               <div class="edit-container">
   
@@ -507,3 +517,72 @@ function editClientElement(button, id,filter,reason,value,recharge) {
 }
 
 
+function createCheckbox(info) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "assignCheckbox"; // Asigna un nombre a los checkboxes
+  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
+  checkbox.addEventListener("change", handleCheckboxChange); // Agrega un manejador de eventos para el cambio
+
+  const label = document.createElement("label");
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
+
+  return label;
+}
+
+async function getClientElemntCheck(filter) {
+  document.getElementById("loading-container").style.display = "flex";
+
+  var param=sessionStorage.getItem('clientNow');
+  fetch(epGetClientElements + param+"/free/"+filter)
+      .then(response => response.json())
+      .then(data => {
+          const checkboxContainer = document.getElementById("checkbox-container");
+          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
+
+          data.clientElement.forEach(info => {
+              const checkbox = createCheckbox(info);
+              checkboxContainer.appendChild(checkbox);
+          });
+
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+const selectedAssignments = []; // Array para almacenar los elementos seleccionados
+
+function handleCheckboxChange(event) {
+    const assignId = event.target.value;
+
+    if (event.target.checked) {
+        // Checkbox seleccionado, agrega el assignId al array
+        selectedAssignments.push(assignId);
+       
+    } else {
+        // Checkbox deseleccionado, elimina el assignId del array
+        const index = selectedAssignments.indexOf(assignId);
+        if (index !== -1) {
+            selectedAssignments.splice(index, 1);
+            
+        }
+    }
+
+    // Muestra el contenido del array
+    console.log(selectedAssignments);
+}
+
+// Función para ejecutar al cambiar la selección en el select
+function onClientRoomSelect() {
+  const selectElement = document.getElementById("list-clientroom");
+  const selectedValue = selectElement.value;
+
+  // Verifica si se ha seleccionado un valor
+  if (selectedValue) {
+    // Ejecuta la función getClientElemntCheck con el valor seleccionado
+    getClientElemntCheck(selectedValue);
+  }
+}

@@ -9,6 +9,7 @@ $caract = $_GET['caract'];
 $brand = $_GET['brand'];
 $type = $_GET['type'];
 $img = $_GET['img'];
+$val = $_GET['value'];
 
 
 require_once '../env/domain.php';
@@ -25,7 +26,8 @@ $data = array(
     'brand' => $brand,
     'type' => $type,
     'img' => $img,
-    'comments' => $comments
+    'comments' => $comments,
+    'value' => $val
     
 );
 
