@@ -647,7 +647,7 @@ function onClientRoomSelect(param) {
   // Verifica si se ha seleccionado un valor
   if (selectedValue) {
     // Ejecuta la función getClientElemntCheck con el valor seleccionado
-    getClientElemntCheck(selectedValue,param);
+    getClientElemntCheck(selectedValue,param,"1","1");
 
   }
 }
