@@ -379,8 +379,37 @@ async function getCalendarTimedes(param) {
                       <h5 class="card-title"><i class="fas fa-clock"></i>${info.comments}</h5>
                       <p class="card-text">Usuario: ${info.userName}</p>
                       <p class="card-text">
+<h3>Elementos actuales</h3>
+                     
+<div id="checkbox-des${info.assignId}" class="card-container">
+<!-- Contenido de la sección expandible -->
+</div>
+
+
+<div class="edit-container">
+<button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
+<i class="fas fa-trash"></i>
+</button>
+</div>
+</p>
+<p class="card-text">
+<h3>Asignar elemento</h3>
+                     
+<div id="checkbox-desa${info.roomId}" class="card-container">
+<!-- Contenido de la sección expandible -->
+</div>
+<div class="edit-container">
+<button onclick="openModAssigndesElement();getClientElemntCheckdes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
+<i class="fas fa-guitar"></i>
+</button>
+
+</div>
+</p>
+<p class="card-text">
                       <div class="edit-container">
-          
+                      <button onclick="openModAssigndesElement();getClientElemntCheckdes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
+                      <i class="fas fa-guitar"></i>
+          </button>
           <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
             <i class="fas fa-trash"></i>
           </button>
@@ -389,7 +418,8 @@ async function getCalendarTimedes(param) {
                       
                         </div>
               `;
-
+              getClientElemntCheckdes(info.assignId,info.roomId);
+              getClientElemntCheck(info.roomId,'notassign',info.userId,info.assignId);
               cardContainer11.appendChild(card11);
           });
           document.getElementById("loading-container").style.display = "none";
@@ -531,14 +561,18 @@ function createCheckbox(info) {
   return label;
 }
 
-async function getClientElemntCheck(filter) {
+async function getClientElemntCheck(filter,param,ids,ids1) {
+  
   document.getElementById("loading-container").style.display = "flex";
+if(param=="assign"){
 
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/free/"+filter)
+  fetch(epGetClientElements + param+"/free/"+filter+"/"+ids+"/"+ids1)
       .then(response => response.json())
       .then(data => {
+        
           const checkboxContainer = document.getElementById("checkbox-container");
+        
           checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
 
           data.clientElement.forEach(info => {
@@ -552,6 +586,32 @@ async function getClientElemntCheck(filter) {
           console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
       });
+
+}if(param="notassign"){
+  
+
+  var param=sessionStorage.getItem('clientNow');
+  fetch(epGetClientElements + param+"/assign/"+filter+"/"+ids+"/"+ids1)
+      .then(response => response.json())
+      .then(data => {
+        
+          const checkboxContainer = document.getElementById("checkbox-desa"+filter);
+        
+          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
+
+          data.clientElement.forEach(info => {
+              const checkbox = createCheckbox(info);
+              checkboxContainer.appendChild(checkbox);
+          });
+
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+
+    }
 }
 const selectedAssignments = []; // Array para almacenar los elementos seleccionados
 
@@ -576,13 +636,96 @@ function handleCheckboxChange(event) {
 }
 
 // Función para ejecutar al cambiar la selección en el select
-function onClientRoomSelect() {
+
+
+// Función para ejecutar al cambiar la selección en el select
+function onClientRoomSelect(param) {
   const selectElement = document.getElementById("list-clientroom");
   const selectedValue = selectElement.value;
+  selectedAssignments.splice(0, selectedAssignments.length);
 
   // Verifica si se ha seleccionado un valor
   if (selectedValue) {
     // Ejecuta la función getClientElemntCheck con el valor seleccionado
-    getClientElemntCheck(selectedValue);
+    getClientElemntCheck(selectedValue,param);
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function createCheckboxdes(info) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "assignCheckbox"; // Asigna un nombre a los checkboxes
+  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
+  checkbox.addEventListener("change", handleCheckboxChangedes); // Agrega un manejador de eventos para el cambio
+
+  const label = document.createElement("label");
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
+
+  return label;
+}
+
+async function getClientElemntCheckdes(filter,param) {
+  document.getElementById("loading-container").style.display = "flex";
+
+  var param=sessionStorage.getItem('clientNow');
+  fetch(epGetClientElements + param+"/hold/"+filter)
+      .then(response => response.json())
+      .then(data => {
+          const checkboxContainer = document.getElementById("checkbox-des"+filter);
+          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
+
+          data.clientElement.forEach(info => {
+              const checkbox = createCheckboxdes(info);
+              checkboxContainer.appendChild(checkbox);
+          });
+
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+const selectedAssignmentsdes = []; // Array para almacenar los elementos seleccionados
+
+function handleCheckboxChangedes(event) {
+    const assignId = event.target.value;
+
+    if (event.target.checked) {
+        // Checkbox seleccionado, agrega el assignId al array
+        selectedAssignmentsdes.push(assignId);
+       
+    } else {
+        // Checkbox deseleccionado, elimina el assignId del array
+        const index = selectedAssignmentsdes.indexOf(assignId);
+        if (index !== -1) {
+          selectedAssignmentsdes.splice(index, 1);
+            
+        }
+    }
+
+    // Muestra el contenido del array
+    console.log(selectedAssignmentsdes);
+}
+
+// Función para ejecutar al cambiar la selección en el select
+

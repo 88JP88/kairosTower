@@ -19,4 +19,5 @@ require_once 'modal/modalClientElements.php';
 require_once 'modal/modalClientElementsCreate.php';
 require_once 'modal/modalAssignUserTime.php';
 require_once 'modal/modaldesAssignUserTime.php';
+require_once 'modal/modalAssigndesElement.php';
 ?>

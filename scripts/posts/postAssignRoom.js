@@ -25,8 +25,11 @@ var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el a
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
-      
+      selectedAssignments.splice(0, selectedAssignments.length);
+
+     
+      const checkboxContainer = document.getElementById("checkbox-container");
+      checkboxContainer.innerHTML = ""; 
       getMessage();
       getCalendarTime(rId);
       getCalendarDaysAssign(cId);
