@@ -39,7 +39,7 @@
 
 <script  src="scripts/gets/getClientConfig.js"></script>
 
-    
-
+<script  src="scripts/posts/postAssignElementsbyuserroom.js"></script>
+<script  src="scripts/posts/postAssignElementsbyuserroomdes.js"></script>
 
    

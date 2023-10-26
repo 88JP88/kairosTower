@@ -15,7 +15,7 @@
 <form>
 
 
-<button type="button" class="btn btn-primary1 edit-button" id="postAssignRoom" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postAssignRoomdes1" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>
 
 </form>
 <script  src="scripts/posts/postAssignRoom.js"></script>

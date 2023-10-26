@@ -167,10 +167,39 @@ async function getClientRooms() {
 
                       <p class="card-text">${info.isActive !== "0" ? `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="DESACTIVAR"><i class="fas fa-ban"></i></button><i class="fas fa-check-circle"></i>` : `<button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;isActive&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 edit-button" title="ACTIVAR"><i class="fas fa-check"></i></button><i class="fas fa-times-circle"></i>`}</p>
                      
+
+                      <p class="card-text">
+                      <h3>Elementos actuales</h3>
+                                           
+                      <div id="checkbox-roomid${info.roomId}" class="card-container">
+                      <!-- Contenido de la sección expandible -->
+                      </div>
+                      
+                      
+                      <div class="edit-container">
+                      <button onclick="assignelementbyuserroomdes(&quot;${info.roomId}&quot;,&quot;${info.roomId}&quot;,&quot;${info.roomId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
+                      <i class="fas fa-ban"></i>
+                      </button>
+                      </div>
+                      </p>
+                      <p class="card-text">
+                      <h3>Asignar elemento</h3>
+                                           
+                      <div id="checkbox-roomid1${info.roomId}" class="card-container">
+                      <!-- Contenido de la sección expandible -->
+                      </div>
+                      <div class="edit-container">
+                      <button onclick="assignelementbyuserroom(&quot;${info.roomId}&quot;,&quot;${info.roomId}&quot;,&quot;${info.roomId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
+                      <i class="fas fa-plus"></i>
+                      </button>
+                      
+                      </div>
+                      </p>
                       <p class="card-text"><button onclick="editClientRoom(this,&quot;${info.roomId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;0&quot;,&quot;${info.clientId}&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR"><i class="fas fa-trash"></i></button></p>
                   </div>
               `;
-
+              getClientElemntCheck(info.roomId,'usedbyclient',info.roomId,info.roomId);
+              getClientElemntCheck(info.roomId,'notusedbyclient',info.roomId,info.roomId);
               cardContainer11.appendChild(card11);
           });
           document.getElementById("loading-container").style.display = "none";
@@ -185,7 +214,7 @@ async function getClientRooms() {
 async function getClientElements() {
   document.getElementById("loading-container").style.display = "flex";
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/all/na")
+  fetch(epGetClientElements + param+"/all/na/na/na")
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientElements");
@@ -195,7 +224,7 @@ async function getClientElements() {
               card11.classList.add("card");
               const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-              const assign1 = info.isApply === "0" ? assig="NO ASIGNADO" : assig="ASIGNADO";
+              const assign1 = info.isApply === "0" ? assig="NO ASIGNADO" : assig=info.roomId;
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                   <h5 class="card-title">
@@ -387,8 +416,8 @@ async function getCalendarTimedes(param) {
 
 
 <div class="edit-container">
-<button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
-<i class="fas fa-trash"></i>
+<button onclick="assignDeselement(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
+<i class="fas fa-ban"></i>
 </button>
 </div>
 </p>
@@ -399,18 +428,16 @@ async function getCalendarTimedes(param) {
 <!-- Contenido de la sección expandible -->
 </div>
 <div class="edit-container">
-<button onclick="openModAssigndesElement();getClientElemntCheckdes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
-<i class="fas fa-guitar"></i>
+<button onclick="assignelementbyuser(&quot;${info.roomId}&quot;,&quot;${info.userId}&quot;,&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
+<i class="fas fa-plus"></i>
 </button>
 
 </div>
 </p>
 <p class="card-text">
                       <div class="edit-container">
-                      <button onclick="openModAssigndesElement();getClientElemntCheckdes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
-                      <i class="fas fa-guitar"></i>
-          </button>
-          <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
+                    
+          <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR ROOM">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -561,6 +588,48 @@ function createCheckbox(info) {
   return label;
 }
 
+function createCheckbox1(info) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "assignCheckboxelement"; // Asigna un nombre a los checkboxes
+  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
+  checkbox.addEventListener("change", handleCheckboxChangeAssignElement); // Agrega un manejador de eventos para el cambio
+
+  const label = document.createElement("label");
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
+
+  return label;
+}
+
+function createCheckbox3(info) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "assignCheckboxelementbyadmin"; // Asigna un nombre a los checkboxes
+  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
+  checkbox.addEventListener("change", handleCheckboxChangeAssignElementbyuser); // Agrega un manejador de eventos para el cambio
+
+  const label = document.createElement("label");
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(info.elementName+" / "+info.comments));
+
+  return label;
+}
+
+function createCheckbox4(info) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.name = "assignCheckboxelementbyadminnot"; // Asigna un nombre a los checkboxes
+  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
+  checkbox.addEventListener("change", handleCheckboxChangeAssignElementbyusernot); // Agrega un manejador de eventos para el cambio
+
+  const label = document.createElement("label");
+  label.appendChild(checkbox);
+  label.appendChild(document.createTextNode(info.elementName+" / "+info.comments));
+
+  return label;
+}
+
 async function getClientElemntCheck(filter,param,ids,ids1) {
   
   document.getElementById("loading-container").style.display = "flex";
@@ -600,7 +669,7 @@ if(param=="assign"){
           checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
 
           data.clientElement.forEach(info => {
-              const checkbox = createCheckbox(info);
+              const checkbox = createCheckbox1(info);
               checkboxContainer.appendChild(checkbox);
           });
 
@@ -612,6 +681,57 @@ if(param=="assign"){
       });
 
     }
+    if(param="usedbyclient"){
+  
+
+      var param=sessionStorage.getItem('clientNow');
+      fetch(epGetClientElements + param+"/usedbyclient/"+filter+"/"+ids+"/"+ids1)
+          .then(response => response.json())
+          .then(data => {
+            
+              const checkboxContainer = document.getElementById("checkbox-roomid"+filter);
+            
+              checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
+    
+              data.clientElement.forEach(info => {
+                  const checkbox = createCheckbox3(info);
+                  checkboxContainer.appendChild(checkbox);
+              });
+    
+              document.getElementById("loading-container").style.display = "none";
+          })
+          .catch(error => {
+              console.error("Error:", error);
+              document.getElementById("loading-container").style.display = "none";
+          });
+    
+        }
+
+        if(param="notusedbyclient"){
+  
+
+          var param=sessionStorage.getItem('clientNow');
+          fetch(epGetClientElements + param+"/notusedbyclient/"+filter+"/"+ids+"/"+ids1)
+              .then(response => response.json())
+              .then(data => {
+                
+                  const checkboxContainer = document.getElementById("checkbox-roomid1"+filter);
+                
+                  checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
+        
+                  data.clientElement.forEach(info => {
+                      const checkbox = createCheckbox4(info);
+                      checkboxContainer.appendChild(checkbox);
+                  });
+        
+                  document.getElementById("loading-container").style.display = "none";
+              })
+              .catch(error => {
+                  console.error("Error:", error);
+                  document.getElementById("loading-container").style.display = "none";
+              });
+        
+            }
 }
 const selectedAssignments = []; // Array para almacenar los elementos seleccionados
 
@@ -667,7 +787,7 @@ function onClientRoomSelect(param) {
 
 
 
-
+ 
 
 function createCheckboxdes(info) {
   const checkbox = document.createElement("input");
@@ -687,7 +807,7 @@ async function getClientElemntCheckdes(filter,param) {
   document.getElementById("loading-container").style.display = "flex";
 
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/hold/"+filter)
+  fetch(epGetClientElements + param+"/hold/"+filter+"/1/1")
       .then(response => response.json())
       .then(data => {
           const checkboxContainer = document.getElementById("checkbox-des"+filter);
@@ -729,3 +849,76 @@ function handleCheckboxChangedes(event) {
 
 // Función para ejecutar al cambiar la selección en el select
 
+
+
+const selectedAssignmentselement = [];
+
+function handleCheckboxChangeAssignElement(event) {
+  const assignId = event.target.value;
+
+  if (event.target.checked) {
+      // Checkbox seleccionado, agrega el assignId al array
+      selectedAssignmentselement.push(assignId);
+     
+  } else {
+      // Checkbox deseleccionado, elimina el assignId del array
+      const index = selectedAssignmentselement.indexOf(assignId);
+      if (index !== -1) {
+        selectedAssignmentselement.splice(index, 1);
+          
+      }
+  }
+
+  // Muestra el contenido del array
+  console.log(selectedAssignmentselement);
+}
+
+// Función para ejecutar al cambiar la selección en el select
+
+
+
+const selectedAssignmentselementbyuser = [];
+
+function handleCheckboxChangeAssignElementbyuser(event) {
+  const assignId = event.target.value;
+
+  if (event.target.checked) {
+      // Checkbox seleccionado, agrega el assignId al array
+      selectedAssignmentselementbyuser.push(assignId);
+     
+  } else {
+      // Checkbox deseleccionado, elimina el assignId del array
+      const index = selectedAssignmentselementbyuser.indexOf(assignId);
+      if (index !== -1) {
+        selectedAssignmentselementbyuser.splice(index, 1);
+          
+      }
+  }
+
+  // Muestra el contenido del array
+  console.log(selectedAssignmentselementbyuser);
+}
+
+
+
+const selectedAssignmentselementbyusernot = [];
+
+function handleCheckboxChangeAssignElementbyusernot(event) {
+  const assignId = event.target.value;
+
+  if (event.target.checked) {
+      // Checkbox seleccionado, agrega el assignId al array
+      selectedAssignmentselementbyusernot.push(assignId);
+     
+  } else {
+      // Checkbox deseleccionado, elimina el assignId del array
+      const index = selectedAssignmentselementbyusernot.indexOf(assignId);
+      if (index !== -1) {
+        selectedAssignmentselementbyusernot.splice(index, 1);
+          
+      }
+  }
+
+  // Muestra el contenido del array
+  console.log(selectedAssignmentselementbyusernot);
+}

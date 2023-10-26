@@ -8,3 +8,5 @@
     </div>
 
     <script  src="scripts/posts/postAssignRoomdes.js"></script>
+    <script  src="scripts/posts/postAssignElementsbyuser.js"></script>
+    <script  src="scripts/posts/postDesassignElementbyuser.js"></script>

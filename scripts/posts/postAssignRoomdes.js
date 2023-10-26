@@ -21,7 +21,11 @@ var cId=sessionStorage.getItem('calendarNow');
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      
+      selectedAssignments.splice(0, selectedAssignments.length);
+      selectedAssignmentsdes.splice(0, selectedAssignmentsdes.length);
+      selectedAssignmentselement.splice(0, selectedAssignmentselement.length);
+      selectedAssignmentselementbyuser.splice(0, selectedAssignmentselementbyuser.length);
+      selectedAssignmentselementbyusernot.splice(0, selectedAssignmentselementbyusernot.length);
       getMessage();
       getCalendarTime(rId);
       getCalendarTimedes(timeId);
