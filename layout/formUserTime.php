@@ -27,6 +27,7 @@
 <div id="checkbox-container" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
+        
 <button type="button" class="btn btn-primary1 edit-button" id="postAssignRoom" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>
 
 </form>

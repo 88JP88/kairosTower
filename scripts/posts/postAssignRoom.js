@@ -48,3 +48,4 @@ var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el a
 });
 
 
+

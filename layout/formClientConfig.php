@@ -1,36 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        /* Estilos para el botón de expansión */
-        .expand-button {
-            cursor: pointer;
-        }
-
-        /* Estilos para la sección expandible */
-        .expandable-section {
-            display: none;
-            padding: 10px;
-            background-color: #FFF;
-            color: white;
-        }
-
-        /* Estilos para el botón de expansión */
-        .expand-button1 {
-            cursor: pointer;
-        }
-
-        /* Estilos para la sección expandible */
-        .expandable-section1 {
-            display: none;
-            padding: 10px;
-            background-color: #FFF;
-            color: white;
-        }
-    </style>
+    
 </head>
 <body>
-    <p class="expand-button" onclick="toggleExpandableSection()">CALENDARIO-></p>
+    <p class="expand-button" onclick="toggleExpandableSection()"><i class="fas fa-calendar"></i> CALENDARIO</p>
     <div class="expandable-section" id="expandable-section">
         <div id="card-container" class="card-container">
             <!-- Contenido de la sección expandible -->
@@ -51,7 +25,7 @@
 
 
 
-    <p class="expand-button1" onclick="toggleExpandableSection1()">RECURSOS-></p>
+    <p class="expand-button1" onclick="toggleExpandableSection1()"><i class="fas fa-guitar"></i> RECURSOS</p>
     <div class="expandable-section1" id="expandable-section1">
         <div id="card-clientresources" class="card-container">
             <!-- Contenido de la sección expandible -->
@@ -101,7 +75,69 @@
 
 
 
-<p class="expand-button1" onclick="toggleExpandableSection2()">ESTILO-></p>
+
+
+<p class="expand-button1" onclick="toggleExpandableSection3()"><i class="fas fa-store"></i> COMERCIO</p>
+    <div class="expandable-section1" id="expandable-section3">
+        <div id="card-clientresources" class="card-container">
+            <!-- Contenido de la sección expandible -->
+            <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> INVENTARIOS</h5>
+                      <p class="card-text"><button onclick="openModClientProducts();getClientProducts('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-box"></i> CATÁLOGO</h5>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-filter"></i> CATEGORÍAS</h5>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-store"></i> TIENDAS</h5>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+       
+
+        
+        <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-phone"></i> CLIENTES</h5>
+                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+        </div>
+    </div>
+    <script>
+        function toggleExpandableSection3() {
+            const expandableSection1 = document.getElementById("expandable-section3");
+            if (expandableSection1.style.display === "block") {
+                expandableSection1.style.display = "none";
+            } else {
+                expandableSection1.style.display = "block";
+            }
+        }
+    </script>
+
+
+
+
+
+<p class="expand-button1" onclick="toggleExpandableSection2()"><i class="fas fa-brush"></i> ESTILO</p>
     <div class="expandable-section1" id="expandable-section2">
         <div id="card-clientStyle" class="card-container">
             <!-- Contenido de la sección expandible -->
@@ -117,6 +153,12 @@
             }
         }
     </script>
+
+
+
+
+
+
 </body>
 </html>
 

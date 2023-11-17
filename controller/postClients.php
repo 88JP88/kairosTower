@@ -63,6 +63,121 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
+
+
+    
+$nombreCarpeta = "../client/k_".$cname;
+
+// Verifica si la carpeta ya existe
+if (!is_dir($nombreCarpeta)) {
+    // Intenta crear la carpeta
+    if (mkdir($nombreCarpeta)) {
+        echo "La carpeta $nombreCarpeta se ha creado con éxito.";
+
+
+
+        
+       
+        $nombreArchivo = "index.php";
+        
+        // Ruta completa del archivo, incluyendo la carpeta
+        $rutaArchivo = $nombreCarpeta . '/' . $nombreArchivo;
+        
+        if (!file_exists($rutaArchivo)) {
+            // Abre el archivo en modo escritura
+            $archivo = fopen($rutaArchivo, "w");
+        
+            if ($archivo) {
+                // Escribe contenido en el archivo (puedes agregar el código PHP necesario aquí)
+                $contenido = '<?php 
+                session_start();
+                include("clientParams.php");
+                $_SESSION["clientNames"]=$clientName;
+                require ("../view/viewIndex.php"); ?>';
+                fwrite($archivo, $contenido);
+        
+                // Cierra el archivo
+                fclose($archivo);
+        
+               // echo "El archivo $nombreArchivo se ha creado en la carpeta $nombreCarpeta.";
+               
+        $nombreArchivo = "session.php";
+        
+        // Ruta completa del archivo, incluyendo la carpeta
+        $rutaArchivo = $nombreCarpeta . '/' . $nombreArchivo;
+        
+        if (!file_exists($rutaArchivo)) {
+            // Abre el archivo en modo escritura
+            $archivo = fopen($rutaArchivo, "w");
+        
+            if ($archivo) {
+                // Escribe contenido en el archivo (puedes agregar el código PHP necesario aquí)
+                $contenido = '<?php require ("../view/viewSession.php"); ?>';
+                fwrite($archivo, $contenido);
+        
+                // Cierra el archivo
+                fclose($archivo);
+        
+               // echo "El archivo $nombreArchivo se ha creado en la carpeta $nombreCarpeta.";
+            
+               $nombreArchivo = "clientParams.php";
+        
+               // Ruta completa del archivo, incluyendo la carpeta
+               $rutaArchivo = $nombreCarpeta . '/' . $nombreArchivo;
+               
+               if (!file_exists($rutaArchivo)) {
+                   // Abre el archivo en modo escritura
+                   $archivo = fopen($rutaArchivo, "w");
+               
+                   if ($archivo) {
+                       // Escribe contenido en el archivo (puedes agregar el código PHP necesario aquí)
+                       $contenido = '<?php $clientName="'.$cname.'"; ?>';
+                       fwrite($archivo, $contenido);
+               
+                       // Cierra el archivo
+                       fclose($archivo);
+               
+                      // echo "El archivo $nombreArchivo se ha creado en la carpeta $nombreCarpeta.";
+                   
+                   
+                   
+                   
+                   
+                   
+                   } else {
+                       echo "No se pudo crear el archivo $nombreArchivo.";
+                   }
+               } else {
+                   echo "El archivo $nombreArchivo ya existe en la carpeta $nombreCarpeta.";
+               }
+            
+            
+            
+            
+            } else {
+                echo "No se pudo crear el archivo $nombreArchivo.";
+            }
+        } else {
+            echo "El archivo $nombreArchivo ya existe en la carpeta $nombreCarpeta.";
+        }
+        
+            } else {
+                echo "No se pudo crear el archivo $nombreArchivo.";
+            }
+        } else {
+            echo "El archivo $nombreArchivo ya existe en la carpeta $nombreCarpeta.";
+        }
+        
+        
+
+    } else {
+        echo "No se pudo crear la carpeta $nombreCarpeta.";
+    }
+} else {
+    echo "La carpeta $nombreCarpeta ya existe.";
+}
+
+
     
    // header ('Location: ../room.php?roomId='.$roomId);
 }

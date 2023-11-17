@@ -13,14 +13,14 @@
 </html>
 
 
-<div class="mb-3">
+<div class="row g-3 align-items-center">
   <label for="exampleFormControlInput1" class="form-label">Nombre de cliente</label>
-  <input type="text" class="form-control" id="clientnames" placeholder="Ingresa tus nombres">
+  <input type="text" required class="form-control" id="clientnames" placeholder="Ingresa empresa / cliente / local">
 </div>
 
-<div class="mb-3">
+<div class="row g-3 align-items-center">
   <label for="exampleFormControlInput1" class="form-label">Comentarios</label>
-  <input type="tect" class="form-control" id="clientcomments" placeholder="Ingresa tus nombres">
+  <input type="text" required class="form-control" id="clientcomments" placeholder="Ingresa comentarios">
 </div>
 
 
@@ -29,14 +29,14 @@
   
 
 
-  <div class="mb-3">
+<div class="row g-3 align-items-center">
   <label for="exampleFormControlInput1" class="form-label">Nombre del responsable</label>
-  <input type="tect" class="form-control" id="names1" placeholder="Ingresa tus nombres">
+  <input type="text" required class="form-control" id="names1" placeholder="Ingresa nombres del responsable / encargado">
 </div>
 
-<div class="mb-3">
+<div class="row g-3 align-items-center">
   <label for="exampleFormControlInput1" class="form-label">apellido del responsable</label>
-  <input type="tect" class="form-control" id="lastnames156" placeholder="Ingresa tus nombres">
+  <input type="text" required class="form-control" id="lastnames156" placeholder="Ingresa apellidos del responsable / encargado">
 </div>
 
 <div class="row g-3 align-items-center">
@@ -44,18 +44,13 @@
     <label for="inputPassword6" class="col-form-label">Correo del responsable</label>
   </div>
   <div class="col-auto">
-    <input type="email" id="pmail134" class="form-control" aria-describedby="passwordHelpInline" placeholder="name@example.com">
+    <input type="email" required id="pmail134" class="form-control" aria-describedby="passwordHelpInline" placeholder="name@example.com">
   </div>
-  <div class="col-auto">
-    <span id="passwordHelpInline" class="form-text">
-    Escribe el correo de la cuenta LUGMA.  Si aún no tiene cuenta <p><a class="link-opacity-75" href="https://localhost/lugma/#">Click aquí</a></p>.
-    </span>
-  </div>
-</div>
+  
 
-  <div class="mb-3">
+  <div class="row g-3 align-items-center">
   <label for="exampleFormControlInput1" class="form-label">Contacto</label>
-  <input type="tect" class="form-control" id="lastnames123" placeholder="Ingresa contacto">
+  <input type="text" required class="form-control" id="lastnames123" placeholder="Ingresa contacto del responsable / encargado">
 </div>
   
 
@@ -66,10 +61,9 @@
 <div class="row g-3 align-items-center">
 <select class="form-select" aria-label="Default select example" id="rol1">
   <option selected>Tipo de cliente</option>
-  <option value="hadmin">Administrador (root)</option>
-  <option value="admin">Administrador (restircciones)</option>
-  <option value="invite">Invitado</option>
-  <option value="client">Cliente</option>
+  <option value="music">Musical</option>
+  <option value="production">Producción</option>
+  <option value="rent">Alquiler</option>
 </select>
 
 </div>
@@ -80,7 +74,7 @@
     <label for="inputPassword6" class="col-form-label">Contraseña del responsable</label>
   </div>
   <div class="col-auto">
-    <input type="password" id="pass11" class="form-control" aria-describedby="passwordHelpInline" placeholder="Escribe tu contraseña">
+    <input type="password" required id="pass11" class="form-control" aria-describedby="passwordHelpInline" placeholder="Escribe contraseña del responsable / encargado">
   </div>
   <div class="col-auto">
     <span id="passwordHelpInline" class="form-text">
@@ -94,21 +88,14 @@
     <label for="inputPassword6" class="col-form-label">Confirma contraseña</label>
   </div>
   <div class="col-auto">
-    <input type="password" id="pass22" class="form-control" aria-describedby="passwordHelpInline" placeholder="Confirma tu contraseña">
+    <input type="password" required id="pass22" class="form-control" aria-describedby="passwordHelpInline" placeholder="Confirma contraseña del responsable / encargado">
   </div>
-  <div class="col-auto">
-    <span id="passwordHelpInline22" class="form-text">
-      -
-    </span>
-  </div>
-  <div class="col-auto">
-    <span id="passwordHelpInline33" class="form-text">
-      -
-    </span>
-  </div>
-</div>
+ 
 
-<button type="button" class="btn btn-primary1" id="postClient">Crear cliente</button>
+
+
+
+<button type="button" class="btn btn-primary1 edit-button" id="postClient" title="CREAR CLIENTE"><i class="fas fa-folder-plus"></i></button>
 
 <script  src="scripts/posts/postExtClient.js"></script>
 

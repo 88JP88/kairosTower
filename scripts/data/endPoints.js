@@ -20,3 +20,7 @@ const epGetClientRooms= `${subDomain}/kairosGateway/apiCompanies/v1/getClientRoo
 const epGetClientElements= `${subDomain}/kairosGateway/apiCompanies/v1/getClientElements/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 const epGetCalendarTimedes= `${subDomain}/kairosGateway/apiCompanies/v1/getCalendarTimedes/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+
+
+const epGetClientProducts= `${subDomain}/kairosGateway/apiCom/v1/getProducts/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

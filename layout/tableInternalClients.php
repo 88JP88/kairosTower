@@ -12,7 +12,6 @@
       <th scope="col"><i>Responsable</i></th>
       <th scope="col"><i>Contacto</i></th>
       <th scope="col"><i>Activo</i></th>
-      <th scope="col"><i>Key</i></th>
     </tr>
   </thead>
   <tbody>

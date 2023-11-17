@@ -58,7 +58,7 @@ document.getElementById("postClientUser").addEventListener("click", function() {
   var correo = document.getElementById("pmailCLIENT").value;
   var rol = document.getElementById("rolCLIENT").value;
   var contrasena = document.getElementById("pass1CLIENT").value;
-  var clientId = document.getElementById("repos-select234").value;
+  var clientId = document.getElementById("repos-select234666").value;
   
 
 
@@ -91,7 +91,7 @@ if(nombres=="" || apellidos=="" || contact=="" || correo=="" || rol=="" || contr
       document.getElementById("lastnames1CLIENT").value = "";
       document.getElementById("pmailCLIENT").value = "";
       document.getElementById("rolCLIENT").value = "Selecciona rol";
-      document.getElementById("repos-select234").value = "Selecciona cliente";
+      document.getElementById("repos-select234666").value = "Selecciona cliente";
       document.getElementById("pass1CLIENT").value = "";
       document.getElementById("pass2CLIENT").value = "";
       getMessage();

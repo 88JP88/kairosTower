@@ -33,10 +33,10 @@
 
     <label for="staticSubscriptionDays" class="col-sm-2 col-form-label"><i>Sesiones activas</i></label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticSubscriptionDaysac" value="">
-      <button type="button" class="btn btn-primary1" id="" onclick="changeSection('sessions');getMySessions();">Verificar</button>
+    <div class="edit-container"> <input type="text" readonly class="form-control-plaintext" id="staticSubscriptionDaysac" value="">
+      <button type="button" class="btn btn-primary1" id="" onclick="changeSection('sessions');getMySessions();"><i class="fas fa-eye"></i></button>
     </div>
-
+    </div>
 
     <label for="staticEmail" class="col-sm-2 col-form-label"><i>Tipo de perfil</i></i></label>
     <div class="col-sm-10">
@@ -53,8 +53,9 @@
 <div class="mb-3 row">
     <label for="inputPassword" class="col-sm-2 col-form-label"><i>Nombres</i></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="myName">
-      <button onclick="editIntUserMy(this,'name')" class="btn btn-primary1">Editar</button>
+    <div class="edit-container">  <input type="text" class="form-control label-input" id="myName">
+      <button onclick="editIntUserMy(this,'name')" class="btn btn-primary1 delete-button"><i class="fas fa-edit"></i></button>
+    </div>
     </div>
 </div>
 
@@ -62,8 +63,9 @@
 <div class="mb-3 row">
     <label for="inputPassword2" class="col-sm-2 col-form-label"><i>Apellidos</i></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="myLastname">
-      <button onclick="editIntUserMy(this,'lastName')" class="btn btn-primary1">Editar</button>
+    <div class="edit-container">  <input type="text" class="form-control label-input" id="myLastname">
+      <button onclick="editIntUserMy(this,'lastName')" class="btn btn-primary1 delete-button"><i class="fas fa-edit"></i></button>
+    </div>
     </div>
 </div>
 

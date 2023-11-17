@@ -63,7 +63,7 @@
 </div>
 
 
-<button type="button" class="btn btn-primary1 edit-button" id="postCalendar"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postCalendar" title="CREAR CALENDARIO"><i class="fas fa-plus"></i></button>
 
 <script  src="scripts/posts/postCalendar.js"></script>
 

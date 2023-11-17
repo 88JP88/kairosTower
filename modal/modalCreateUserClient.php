@@ -12,7 +12,7 @@
       </div>
       <div class="modal-body">
      <?php 
-     require_once 'layout/formCreateUserClient.php';
+    require_once 'layout/formCreateUserClient.php';
      ?>
 </div>
 
@@ -31,6 +31,7 @@
 function openModCreateUserClient() {
   var myModal = new bootstrap.Modal(document.getElementById('createUserClient'));
   myModal.show();
+ 
 }
 
 

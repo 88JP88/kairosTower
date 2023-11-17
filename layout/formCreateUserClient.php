@@ -16,7 +16,7 @@
 
 <div class="mb-3">
  <label for="currency">Cliente</label>
-<select id="repos-select234" class="form-control" name="currency" required></select>
+<select id="repos-select234666" class="form-control" name="currency" required></select>
 <option selected>Selecciona cliente</option>
 </div>
 
@@ -49,7 +49,7 @@
 
   <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Contacto</label>
-  <input type="tect" class="form-control" id="lastnames1CLIENT" placeholder="Ingresa contacto" required>
+  <input type="text" class="form-control" id="lastnames1CLIENT" placeholder="Ingresa contacto" required>
 </div>
   
 

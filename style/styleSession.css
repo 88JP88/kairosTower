@@ -193,6 +193,20 @@
         .edit-button i {
           margin-right: 0px; /* Espacio entre el ícono y el texto */
         }
+
+        
+        .delete-button {
+          background-color: #001219;
+          color: #C70039;
+          border: 0.1px solid #C70039;
+          padding: 4px 4px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        
+        .delete-button i {
+          margin-right: 0px; /* Espacio entre el ícono y el texto */
+        }
         
         .edit-container {
           display: flex; /* Establece el contenedor como flexible */
@@ -221,3 +235,168 @@
         .edit-button1 i {
           margin-right: 0px; /* Espacio entre el ícono y el texto */
         }
+
+
+
+
+/* Estilo para el contenedor de la casilla de verificación personalizada */
+.custom-checkbox {
+  position: relative;
+  padding-left: 30px; /* Ajusta el espacio a la izquierda para dar lugar al check personalizado */
+  cursor: pointer;
+}
+
+/* Oculta el check nativo */
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Estilo para el check personalizado */
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px; /* Ajusta el tamaño del check personalizado */
+  width: 20px; /* Ajusta el tamaño del check personalizado */
+  background-color: #C70039; /* Cambia el color de fondo a tu preferencia */
+  border: 1px solid #000; /* Añade un borde personalizado */
+}
+
+/* Cambia el estilo del check cuando está marcado */
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #4CAF50; /* Cambia el color del check cuando está marcado */
+}
+
+/* Estilo para el label de la casilla de verificación */
+.custom-checkbox-label {
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  font-size: 16px;
+  padding-left: 30px; /* Ajusta el espacio a la izquierda para que coincida con el check personalizado */
+  position: relative;
+}
+
+/* Estilo para el label cuando se coloca el cursor encima (hover) */
+.custom-checkbox-label:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+/* Estilo específico para el párrafo clickeable */
+.expand-button {
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  color: #C70039; /* Cambia el color del texto a tu preferencia */
+  font-weight: bold; /* Cambia el grosor de la fuente a tu preferencia */
+  text-decoration: none; /* Agrega un subrayado al texto */
+  padding: 5px; /* Añade un poco de espacio alrededor del texto */
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  border: 1px solid #ccc; /* Agrega un borde alrededor del párrafo */
+  border-radius: 5px; /* Agrega esquinas redondeadas al borde */
+  transition: background-color 0.3s; /* Agrega una transición suave al cambio de color de fondo al pasar el mouse */
+text-align: center;
+  /* Estilo para el ícono de flecha a la derecha (->) */
+  margin-left: 5px; /* Ajusta el espacio entre el texto y la flecha */
+}
+
+/* Cambia el estilo del párrafo al pasar el mouse sobre él */
+.expand-button:hover {
+  background-color: #C70039; /* Cambia el color de fondo al pasar el mouse */
+  color: #fff; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilo para la sección expandible */
+.expandable-section {
+  display: none; /* Oculta la sección por defecto */
+  background-color: #f0f0f0; /* Cambia el color de fondo a tu preferencia */
+  padding: 10px; /* Agrega relleno interno a tu preferencia */
+  border: 1px solid #ccc; /* Agrega un borde a tu preferencia */
+  border-radius: 5px; /* Agrega esquinas redondeadas a tu preferencia */
+  
+           
+           
+}
+/* Estilo específico para el párrafo clickeable */
+.expand-button1 {
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  color: #C70039; /* Cambia el color del texto a tu preferencia */
+  font-weight: bold; /* Cambia el grosor de la fuente a tu preferencia */
+  text-decoration: none; /* Agrega un subrayado al texto */
+  padding: 5px; /* Añade un poco de espacio alrededor del texto */
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  border: 1px solid #ccc; /* Agrega un borde alrededor del párrafo */
+  border-radius: 5px; /* Agrega esquinas redondeadas al borde */
+  transition: background-color 0.3s; /* Agrega una transición suave al cambio de color de fondo al pasar el mouse */
+  text-align: center;
+  /* Estilo para el ícono de flecha a la derecha (->) */
+  margin-left: 5px; /* Ajusta el espacio entre el texto y la flecha */
+}
+
+/* Cambia el estilo del párrafo al pasar el mouse sobre él */
+.expand-button1:hover {
+  background-color: #C70039; /* Cambia el color de fondo al pasar el mouse */
+  color: #fff; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilo para la sección expandible */
+.expandable-section1 {
+  display: none; /* Oculta la sección por defecto */
+  background-color: #f0f0f0; /* Cambia el color de fondo a tu preferencia */
+  padding: 10px; /* Agrega relleno interno a tu preferencia */
+  border: 1px solid #ccc; /* Agrega un borde a tu preferencia */
+  border-radius: 5px; /* Agrega esquinas redondeadas a tu preferencia */
+  
+           
+           
+}
+
+/* Estilo para el contenedor de tarjetas (si lo necesitas) */
+.card-container {
+  /* Estilos para el contenido de las tarjetas */
+}
+
+/* Estilos para el input como label */
+.label-input {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  outline: none;
+}
+
+
+.confirm-modal-content-near-button {
+  position: absolute;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+  z-index: 99999;
+  display: inline-block;
+}
+
+.confirm-button {
+  background-color: #C70039;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cancel-button {
+  background-color: #ccc;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
