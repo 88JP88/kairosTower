@@ -24,3 +24,13 @@ const epGetCalendarTimedes= `${subDomain}/kairosGateway/apiCompanies/v1/getCalen
 
 
 const epGetClientProducts= `${subDomain}/kairosGateway/apiCom/v1/getProducts/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+
+const epGetClientCatalogs= `${subDomain}/kairosGateway/apiCom/v1/getCatalogs/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+
+
+const epGetClientCategories= `${subDomain}/kairosGateway/apiCom/v1/getCategories/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+
+const epGetClientStores= `${subDomain}/kairosGateway/apiCom/v1/getStores/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

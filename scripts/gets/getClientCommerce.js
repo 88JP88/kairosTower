@@ -160,6 +160,812 @@ async function getClientProducts(filter,param,value) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById("filterproducts").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("repos-productClient").value;
+  var value = document.getElementById("keywordsearch").value;
+  
+  getClientProducts('filter',param,value);
+});
+
+
+document.getElementById("searchproducts").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("repos-productClient").value;
+  var value = document.getElementById("keywordsearch").value;
+  
+  getClientProducts('browser','param',value);
+});
+
+
+
+
+
+
+
+
+document.getElementById("filtercatalogs").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("repos-catalogClient").value;
+  var value = document.getElementById("keywordsearchcatalog").value;
+  
+  getClientCatalogs(param+'|param','param',value);
+});
+
+
+document.getElementById("searchcatalogs").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("repos-catalogClient").value;
+  var value = document.getElementById("keywordsearchcatalog").value;
+  
+  getClientCatalogs('browser|param','param',value);
+});
+
+
+
+document.getElementById("filtercatalogsbystore").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("list-storesListstoreq").value;
+  var value = document.getElementById("keywordsearchcatalog").value;
+  
+  getClientCatalogs('filter|'+param,'param',value);
+});
+
+
+
+document.getElementById("filtercatalogsbystoresimple").addEventListener("click", function() {
+  // Obtén los valores de los campos
+  var param = document.getElementById("list-storesListstoreq").value;
+  var value = document.getElementById("keywordsearchcatalog").value;
+  
+  getClientCatalogs('store|'+param,'param','param');
+});
+
+
+
+
+async function getClientCatalogs(filter,param,value) {
+  document.getElementById("loading-container").style.display = "flex";
+  var clientId=sessionStorage.getItem('clientNow');
+  var idin=1;
+  fetch(epGetClientCatalogs + clientId+"/"+filter+"/"+param+"/"+value)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientCatalogs");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.catalogs.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                  <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
+
+                
+
+              </h5>
+              <p class="card-text">
+              <div class="edit-container">
+              ${info.productName}
+</div>
+              </p>
+              
+              
+              
+              
+             <p class="card-text">
+              <div class="edit-container">
+              ${info.isActive !== "0" ? `<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+  <i class="fas fa-ban"></i>
+  </button>` 
+  : `<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+  <i class="fas fa-check"></i>
+  </button>`}${activo1} 
+    
+</div>
+                     
+                      <p class="card-text">
+              <div class="edit-container">
+              ${info.description}
+</div>
+              </p>
+
+            
+
+             
+                        
+            
+                     
+
+
+           
+
+
+
+              <p class="card-text">Tienda:
+              <div class="edit-container">
+              ${info.storeName}
+              </div>
+              <div class="mb-3">
+
+<select id="list-storesListstore${idin}" class="form-control" name="lista1" required></select>
+
+<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;storeId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+
+
+
+
+              <p class="card-text">Categoría:
+              <div class="edit-container">
+              ${info.categoryName}
+
+           
+</div>
+<div class="mb-3">
+
+<select id="list-categoriesList${idin}" class="form-control" name="lista" required></select>
+
+<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;categoryId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+             
+
+            
+
+
+              <p class="card-text">Stock:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.stock}" title="${info.stock}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;stock&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Stock de seguridad:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.secStock}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;secStock&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Min qty:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.minQty}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;minQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+
+              <p class="card-text">Max qty:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.maxQty}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;maxQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+             
+
+
+
+              <p class="card-text">Precio de venta:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.outPrice}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;outPrice&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+            
+              <p class="card-text">
+              Promoción:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isPromo}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isPpromo&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+  <p class="card-text">
+  Promoción id:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.promoId}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;promoId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+  <p class="card-text">
+  Descuento:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isDiscount}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isDiscount&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+</p>
+
+<p class="card-text">
+  Valor de descuento:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.discount}%" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;discount&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+<p class="card-text">
+  POS:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isPos}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isPos&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+  <p class="card-text">
+  E-Commerce:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isEcommerce}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isEcommerce&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+</p>
+<p class="card-text">
+  Reserva interna:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isInternal}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isInternal&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+</p>
+
+<p class="card-text">
+  Bodega:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isStocked}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isStocked&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+
+  <p class="card-text">
+  Unidad:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unit}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+
+  <p class="card-text">
+  Unidad de lectura y calculo:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.readUnit}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;readUnit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+  <p class="card-text">
+  Cantidad por unidad:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unitQty}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unitQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+
+  <p class="card-text">
+  Unidades en unidad:
+  <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unitUnit}" title="${info.spcProduct}">
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unitUnit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+  </div>
+  </p>
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
+              </p>
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+              getClientCategoriesList('all','all','all',idin);
+              getClientStoresList1('all','all','all',idin);
+
+              idin++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+
+
+async function getClientCategories(filter,param,value) {
+  document.getElementById("loading-container").style.display = "flex";
+  var clientId=sessionStorage.getItem('clientNow');
+  var idin1=1;
+  fetch(epGetClientCategories + clientId+"/"+filter+"/"+param+"/"+value)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientCategories");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.categories.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                
+
+              </h5>
+              <p class="card-text">Categoría:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.categoryName}" title="${info.categoryName}">
+  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;catName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              
+              
+              
+             <p class="card-text">
+              <div class="edit-container">
+              ${info.isActive !== "0" ? `<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+  <i class="fas fa-ban"></i>
+  </button>` 
+  : `<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+  <i class="fas fa-check"></i>
+  </button>`}${activo1} 
+    
+</div>
+                     
+                  
+
+
+            
+
+
+
+
+
+
+            
+
+
+              <p class="card-text">Comentarios:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.comments}" title="${info.comments}">
+  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+
+              <p class="card-text">Categoria madre:
+              ${info.parentName}
+<div class="mb-3">
+
+<select id="list-categoriesList1${idin1}" class="form-control" name="lista" required>
+
+</select>
+
+<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;parentId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Categoria madre:
+              ${info.categoryType}
+              </p>
+                            <p class="card-text">Palabras clave:
+                            <div class="edit-container">
+                <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.keyWords}" title="${info.keyWords}">
+                <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+                            </p>
+              
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
+              </p>
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+              getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+
+              idin1++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+
+
+async function getClientStores(filter,param,value) {
+  document.getElementById("loading-container").style.display = "flex";
+  var clientId=sessionStorage.getItem('clientNow');
+  var idin1=1;
+  fetch(epGetClientStores + clientId+"/"+filter+"/"+param+"/"+value)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientStores");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.stores.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                
+
+              </h5>
+              <p class="card-text">Tienda:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.storeName}" title="${info.storeName}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              
+              
+              
+             <p class="card-text">
+              <div class="edit-container">
+              ${info.isActive !== "0" ? `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+  <i class="fas fa-ban"></i>
+  </button>` 
+  : `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+  <i class="fas fa-check"></i>
+  </button>`}${activo1} 
+    
+</div>
+                     
+                  
+
+
+            
+
+
+
+
+
+
+            
+
+
+              <p class="card-text">Comentarios:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.comments}" title="${info.comments}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+
+             
+              <p class="card-text">Tipo de tienda:
+              ${info.storeType}
+              <div class="edit-container">
+              <select id="list-storesListstoreq2" class="form-control" name="lista1" required>
+              <option value="ecm">E-commerce</option>
+              <option value="pos">E-Punto de venta</option>
+              <option value="pos_ecm">E-commerce y punto de venta</option>
+              </select>
+                <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;storeType&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+              <p class="card-text">Palabras clave:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.keyWords}" title="${info.keyWords}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+             
+              
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
+              </p>
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+           //   getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+
+              idin1++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+
+
+
+async function getClientCategoriesList(filter,param,value,catId) {
+
+  var reposSelect = document.getElementById("list-categoriesList"+catId);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.categories.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.categoryId+"|"+info.parentId;
+      option.text = info.categoryName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+ 
+async function getClientCategoriesList3(filter,param,value,catId) {
+
+  var reposSelect = document.getElementById("list-categoriesList1"+catId);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.categories.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.categoryId;
+      option.text = info.categoryName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ async function getClientCategoriesListadd(filter,param,value) {
+
+  var reposSelect = document.getElementById("list-categoryListstadd");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.categories.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.categoryId+"|"+info.parentId;
+      option.text = info.categoryName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ 
+ async function getClientCategoriesListadd96(filter,param,value) {
+
+  var reposSelect = document.getElementById("list-categoryListstadd96");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.categories.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.categoryId;
+      option.text = info.categoryName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+
+ async function getClientStoresList1(filter,param,value,catid) {
+
+  var reposSelect = document.getElementById("list-storesListstore"+catid);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.stores.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.storeId;
+      option.text = info.storeName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+ 
+ async function getClientStoresList12(filter,param,value) {
+
+  var reposSelect = document.getElementById("list-storesListstoreq");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.stores.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.storeId;
+      option.text = info.storeName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+
+ async function getClientStoresList1add(filter,param,value) {
+
+  var reposSelect = document.getElementById("list-storeListstadd");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.stores.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.storeId;
+      option.text = info.storeName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+
+ async function getClientProductList1add(filter,param,value) {
+
+  var reposSelect = document.getElementById("list-productListstadd");
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetClientProducts+uid+"/"+filter+"/"+param+"/"+value)
+  .then(response => response.json())
+  .then(data => {
+    data.products.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.productId;
+      option.text = info.productName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+
+
 async function getClientStyle(param) {
   document.getElementById("loading-container").style.display = "flex";
   fetch(epGetClientStyle + param)
@@ -524,6 +1330,256 @@ function editClientProduct(button, clientId,productId,param,value,reason) {
 
 }
 
+function editClientStore(button, clientId,productId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientStores('filter',param,value);
+
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="isActive"){
+
+    
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientProducts('filter',param,value);
+
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="del"){
+    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
+    showConfirmationModalNearButton(confirmMessage, () => {
+
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientProducts('filter',param,value);
+       
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  },button);
+  }
+ 
+
+}
+
+
+
+function editClientCatalog(button, clientId,catalogId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientCatalogs('basic|'+catalogId,'catalogId',catalogId);
+
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="isActive"){
+
+    
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      getClientCatalogs('basic|'+catalogId,'catalogId',catalogId);
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="del"){
+    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
+    showConfirmationModalNearButton(confirmMessage, () => {
+
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientProducts('filter',param,value);
+       
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  },button);
+  }
+ 
+
+}
+
+
+function editClientCategorie(button, clientId,catalogId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      console.log(catalogId+" "+value);
+      getClientCategories('filter','catId',catalogId);
+
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="isActive"){
+
+    
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      getClientCategories('filter','catId',catalogId);
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="del"){
+    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
+    showConfirmationModalNearButton(confirmMessage, () => {
+
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientCategories('filter',param,value);
+       
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  },button);
+  }
+ 
+
+}
 
 function createCheckbox(info) {
   const checkbox = document.createElement("input");

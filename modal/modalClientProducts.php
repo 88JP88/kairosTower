@@ -15,15 +15,21 @@
 
       <div class="mb-3">
  <label for="currency">Busqueda por parámetro</label>
-<select id="repos-select234666" class="form-control" name="currency" required>
+<select id="repos-productClient" class="form-control" name="currency" required>
 <option selected>Selecciona parámetro</option>
-<option value="">Nombre de producto</option>
-<option value="">Estado de producto</option>
-<option value="">Descripción de producto</option>
+<option value="productName">Nombre de producto</option>
+<option value="isActive">Estado de producto</option>
+<option value="description">Descripción de producto</option>
 </select>
 
 </div>
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalUsers('lock');" style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-eye-slash"></i></button>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Parámetro en especifico</label>
+  <input type="text" class="form-control" id="keywordsearch" placeholder="Ingresa palabra a buscar">
+</div>
+    <button type="button" class="btn btn-primary1 edit-button1"  style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-sort" id="filterproducts"></i></button>
+    
+    <button type="button" class="btn btn-primary1 edit-button1"  style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-filter" id="searchproducts"></i></button>
 
      <?php 
      require_once 'layout/formClientProducts.php';

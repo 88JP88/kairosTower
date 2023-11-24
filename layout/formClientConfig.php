@@ -4,7 +4,7 @@
     
 </head>
 <body>
-    <p class="expand-button" onclick="toggleExpandableSection()"><i class="fas fa-calendar"></i> CALENDARIO</p>
+    <p class="expand-button" onclick="toggleExpandableSection();"><i class="fas fa-calendar"></i> CALENDARIO</p>
     <div class="expandable-section" id="expandable-section">
         <div id="card-container" class="card-container">
             <!-- Contenido de la sección expandible -->
@@ -84,29 +84,29 @@
             <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-cube"></i> INVENTARIOS</h5>
                       <p class="card-text"><button onclick="openModClientProducts();getClientProducts('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientProductsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
 
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-box"></i> CATÁLOGO</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientCatalogs();getClientCategories('all','all','all');getClientStoresList12('all','all','all');getClientCategoriesList('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCatalogCreate();getClientCategoriesListadd('all','all','all');getClientStoresList1add('all','all','all');getClientProductList1add('all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-filter"></i> CATEGORÍAS</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientCategories();getClientCategories('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCategorieCreate();getClientCategoriesListadd96('all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-store"></i> TIENDAS</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientStores();getClientStores('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientStoreCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
