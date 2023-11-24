@@ -32,6 +32,9 @@ if(param=="unlock"){
       <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;,&quot;client&quot;)" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
       <i class="fas fa-ban"></i>
     </button>
+
+    
+    
     </div>
 
 

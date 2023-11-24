@@ -1,524 +1,118 @@
 
 
-async function getClientProducts(filter,param,value) {
+
+
+
+
+
+async function getClientCatalogsAdmin(filter,param,value) {
+
+  const url = window.location.href;
+
+// Crear un objeto URL a partir de la URL actual
+const urlObj = new URL(url);
+
+// Obtener el valor del parámetro "parametro1"
+var clientId = urlObj.searchParams.get("clientId");
+
+const url1 = window.location.href;
+
+// Crear un objeto URL a partir de la URL actual
+const urlObj1 = new URL(url);
+
+// Obtener el valor del parámetro "parametro1"
+var storeId = urlObj.searchParams.get("storeId");
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
-  fetch(epGetClientProducts + clientId+"/"+filter+"/"+param+"/"+value)
+  //var clientId=sessionStorage.getItem('clientNow');
+  var idin1=1;
+  console.log(epGetClientCatalogsAdmin);
+  fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value)
       .then(response => response.json())
       .then(data => {
-          const cardContainer11 = document.getElementById("card-clientProducts");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.products.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-             
-              card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                  <h5 class="card-title">
-                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
-                  <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
-
-                  <div class="edit-container">
-                  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.imgProduct}" title="${info.imgProduct}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;imgProduct&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-
-              </h5>
-              <p class="card-text">Nombre de producto:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.productName}" title="${info.productName}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;productName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-              
-              
-              
-              
-             <p class="card-text">
-              <div class="edit-container">
-              ${info.isActive !== "0" ? `<button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-  <i class="fas fa-ban"></i>
-  </button>` 
-  : `<button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-  <i class="fas fa-check"></i>
-  </button>`}${activo1} 
-    
-</div>
-                     
-                      <p class="card-text">Descripción de producto:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.description}" title="${info.description}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;description&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-            
-
-              <p class="card-text">Tipo de producto:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.productType}" title="${info.productType}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;productType&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-                        
-            
-                     
-
-
-           
-
-
-
-              <p class="card-text">Valor de compra:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.inPrice}" title="${info.productId}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;inPrice&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-
-
-              <p class="card-text">SKU:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.sku}" title="${info.sku}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;sku&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">EAN1:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.ean1}" title="${info.ean1}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;ean1&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-
-              <p class="card-text">EAN2:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.ean2}" title="${info.ean2}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;ean2&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Caracteriscticas técnicas de producto:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.spcProduct}" title="${info.spcProduct}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;spcProduct&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Palabras de busqueda:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.keyWords}" title="${info.keyWords}">
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-              <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="editClientProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;del&quot;,&quot;del&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-    <i class="fas fa-trash"></i>
-  </button>
-</div>
-              </p>
-                      
-                  </div>
-              `;
-
-              cardContainer11.appendChild(card11);
-          });
-          
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById("filterproducts").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("repos-productClient").value;
-  var value = document.getElementById("keywordsearch").value;
-  
-  getClientProducts('filter',param,value);
-});
-
-
-document.getElementById("searchproducts").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("repos-productClient").value;
-  var value = document.getElementById("keywordsearch").value;
-  
-  getClientProducts('browser','param',value);
-});
-
-
-
-
-
-
-
-
-document.getElementById("filtercatalogs").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("repos-catalogClient").value;
-  var value = document.getElementById("keywordsearchcatalog").value;
-  
-  getClientCatalogs(param+'|param','param',value);
-});
-
-
-document.getElementById("searchcatalogs").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("repos-catalogClient").value;
-  var value = document.getElementById("keywordsearchcatalog").value;
-  
-  getClientCatalogs('browser|param','param',value);
-});
-
-
-
-document.getElementById("filtercatalogsbystore").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("list-storesListstoreq").value;
-  var value = document.getElementById("keywordsearchcatalog").value;
-  
-  getClientCatalogs('filter|'+param,'param',value);
-});
-
-
-
-document.getElementById("filtercatalogsbystoresimple").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var param = document.getElementById("list-storesListstoreq").value;
-  var value = document.getElementById("keywordsearchcatalog").value;
-  
-  getClientCatalogs('store|'+param,'param','param');
-});
-
-
-
-
-async function getClientCatalogs(filter,param,value) {
-  document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
-  var idin=1;
-  fetch(epGetClientCatalogs + clientId+"/"+filter+"/"+param+"/"+value)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-clientCatalogs");
+          const cardContainer11 = document.getElementById("card-container1");
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
           data.catalogs.forEach(info => {
               const card11 = document.createElement("div");
               card11.classList.add("card");
               const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-             
+              if (info.isDiscount !== "0") {
+                var result = info.discount *info.outPrice;
+                var mult= result/100;
+                var rest=info.outPrice-mult;
+                priceToShow = `${rest}`;
+
+                originPrice=info.outPrice;
+                saver=mult;
+                dicounter=info.discount;
+              } else {
+                priceToShow = `${info.outPrice}`;
+                dicounter=0;
+              }
               card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                  <h5 class="card-title">
-                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
-                  <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
+                 
+                 
+             
+              <div class="edit-container">
 
-                
 
-              </h5>
+
+              <div class="card">
+              <div class="card-header">
+              <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
+              <h2>${info.productName}</h2>
+              <p class="item-price">${info.categoryName}</p>
+            </div>
+            <div class="card-body">
+              <p class="item-name">${info.description}</p>
+
+
               <p class="card-text">
               <div class="edit-container">
-              ${info.productName}
-</div>
-              </p>
-              
-              
-              
-              
-             <p class="card-text">
-              <div class="edit-container">
-              ${info.isActive !== "0" ? `<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-  <i class="fas fa-ban"></i>
-  </button>` 
-  : `<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-  <i class="fas fa-check"></i>
-  </button>`}${activo1} 
+          
     
 </div>
-                     
-                      <p class="card-text">
-              <div class="edit-container">
-              ${info.description}
-</div>
-              </p>
 
+${info.isDiscount !== "0" ? `<p class="item-price" style="color: green;">Valor con descuento: $${priceToShow}</p><p class="item-price">Valor original: <del style="color: red;">$${originPrice}</del></p><p class="item-price" style="color: blue;">Ahorro: $${saver}</p>` 
+: `<p class="item-price" style="color: green;">$${priceToShow}</p>`}
             
-
+${info.isPromo !== "0" ? ` <p class="card-text">Promoción: </p>` 
+: ``}
+${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descuento: ${dicounter}%</p>` 
+: ``}
              
-                        
-            
-                     
-
-
-           
-
-
-
-              <p class="card-text">Tienda:
-              <div class="edit-container">
-              ${info.storeName}
+            </div>
+            <div class="card-footer">
+              <div>
+              <p class="card-text">Cantidad:</p>
+                <input type="number" id="quantityInput${idin1}" value="${info.minQty}">
               </div>
-              <div class="mb-3">
-
-<select id="list-storesListstore${idin}" class="form-control" name="lista1" required></select>
-
-<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;storeId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
+              <button class="btn btn-primary" onClick="addToCart('${info.productName}',${priceToShow},'quantityInput${idin1}');">Agregar</button>
+              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}');">Agregar</button>
+          
+            </div>
+            
+            
+            
 </div>
-              </p>
 
-
-
-
-
-              <p class="card-text">Categoría:
-              <div class="edit-container">
-              ${info.categoryName}
-
+             
+</div>
+              
+              
+              
+              
            
-</div>
-<div class="mb-3">
-
-<select id="list-categoriesList${idin}" class="form-control" name="lista" required></select>
-
-<button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;categoryId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-             
-
-            
-
-
-              <p class="card-text">Stock:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.stock}" title="${info.stock}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;stock&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Stock de seguridad:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.secStock}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;secStock&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Min qty:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.minQty}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;minQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-
-              <p class="card-text">Max qty:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.maxQty}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;maxQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-             
-
-
-
-              <p class="card-text">Precio de venta:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.outPrice}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;outPrice&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-            
-              <p class="card-text">
-              Promoción:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isPromo}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isPpromo&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-  <p class="card-text">
-  Promoción id:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.promoId}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;promoId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-  <p class="card-text">
-  Descuento:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isDiscount}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isDiscount&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-</p>
-
-<p class="card-text">
-  Valor de descuento:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.discount}%" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;discount&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-<p class="card-text">
-  POS:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isPos}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isPos&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-  <p class="card-text">
-  E-Commerce:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isEcommerce}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isEcommerce&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-</p>
-<p class="card-text">
-  Reserva interna:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isInternal}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isInternal&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-</p>
-
-<p class="card-text">
-  Bodega:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.isStocked}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;isStocked&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-
-  <p class="card-text">
-  Unidad:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unit}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-
-  <p class="card-text">
-  Unidad de lectura y calculo:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.readUnit}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;readUnit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-  <p class="card-text">
-  Cantidad por unidad:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unitQty}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unitQty&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-
-  <p class="card-text">
-  Unidades en unidad:
-  <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.unitUnit}" title="${info.spcProduct}">
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;unitUnit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-  </div>
-  </p>
-              <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-    <i class="fas fa-trash"></i>
-  </button>
-</div>
-              </p>
                       
-                  </div>
+               
                   
               `;
 
               cardContainer11.appendChild(card11);
-              getClientCategoriesList('all','all','all',idin);
-              getClientStoresList1('all','all','all',idin);
+              //getClientCategoriesList('all','all','all',idin);
+              //getClientStoresList1('all','all','all',idin);
 
-              idin++;
+              idin1++;
           });
           
           document.getElementById("loading-container").style.display = "none";
@@ -528,7 +122,80 @@ async function getClientCatalogs(filter,param,value) {
           document.getElementById("loading-container").style.display = "none";
       });
 }
+// Variable que almacenará el carrito de compras
 
+
+// Ejemplo de uso de la función addToCart
+
+
+// Mostrar el carrito de compras actual
+var totality=0;
+let shoppingCart = [];
+// Función para agregar un elemento al carrito de compras
+function addToCart(productName, price, quantity) {
+
+  var qtyvalue = document.getElementById(quantity).value;
+  var total1=price*qtyvalue;
+  const item = {
+    productName: productName,
+    price: price,
+    quantity: qtyvalue,
+    total: total1
+  };
+
+  // Agregar el elemento al carrito de compras
+  shoppingCart.push(item);
+  //console.log(shoppingCart);
+  // Devolver el carrito de compras actualizado (esto es opcional)
+  //return shoppingCart;
+  //addToCart('Producto 1', 25.99, 2);
+  totality=totality+total1;
+      
+  updateCartView();
+}
+
+function removeFromCart(productName,price, quantity) {
+  const indexToRemove = shoppingCart.findIndex(item => item.productName === productName);
+  var qtyvalue1 = document.getElementById(quantity).value;
+  var total1=price*qtyvalue1;
+
+  if (indexToRemove !== -1) {
+    const removedItem = shoppingCart.splice(indexToRemove, 1);
+    totality=totality-total1;
+    updateCartView();
+  } else {
+    console.log("El producto no se encontró en el carrito.");
+  }
+}
+var totality=0;
+function updateCartView() {
+  const cartItemsDiv = document.getElementById('cartItems');
+  const cartItemsDiv1 = document.getElementById('cartItems1');
+  cartItemsDiv.innerHTML = ''; // Limpiar el contenido anterior del carrito
+  cartItemsDiv1.innerHTML = '';
+  if (shoppingCart.length === 0) {
+    cartItemsDiv.textContent = 'El carrito está vacío';
+  } else {
+    const ul = document.createElement('ul');
+    shoppingCart.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = ` ${item.quantity} ${item.productName} = $${item.price} - Total: ${item.total}`;
+      
+      ul.appendChild(li);
+     
+    });
+    cartItemsDiv.appendChild(ul);
+
+
+    const ul1 = document.createElement('ul');
+   
+      const li1 = document.createElement('li');
+      li1.textContent = ` ${totality} `;
+      
+      ul1.appendChild(li1);
+      cartItemsDiv1.appendChild(ul1);
+  }
+}
 
 async function getClientCategories(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
@@ -673,9 +340,7 @@ async function getClientStores(filter,param,value) {
                   <h5 class="card-title">
                   <p class="card-text"> <i class="fas fa-guitar"></i></p>
                 
-                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.storeId}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
-                  <i class="fas fa-store"></i>
-                </a>
+                
 
               </h5>
               <p class="card-text">Tienda:
