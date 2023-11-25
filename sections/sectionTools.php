@@ -49,6 +49,13 @@
                               <label for="" class="form-label text-light">Nombre del evento</label>
                               <input type="text" class="form-control" id="eventName">
 
+                              <label for="" class="form-label text-light">Descripcion</label>
+                              <input type="text" class="form-control" id="eventDescription">
+
+                              <label for="" class="form-label text-light">Nombre del cliente</label>
+                              <input type="text" class="form-control" id="eventClientName">
+
+                              
                               <label for="" class="text-light">fecha inicio</label>
                               <input type="datetime-local" class="form-control"  id="dateStart">
 
@@ -353,7 +360,7 @@ if(nuevoMensaje==""){
 }
 </style>
 <script> obtenerVariablesPHPSession();</script>
-
+<script src="scripts/posts/postFullCalendar.js"></script>
 
 
     </p>
