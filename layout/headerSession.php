@@ -50,7 +50,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
         <li> <a class="dropdown-item" onclick="changeSection('internalClients');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-building"></i> Clientes externos</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-warehouse"></i> Clientes internos</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('gtask');getIndentFullCalendar();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-warehouse"></i> Clientes internos</a></li>
        
       </ul>
     </div> 
@@ -117,6 +117,7 @@
 <script  src="scripts/gets/sessionStatus.js"></script>
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
+<script  src="scripts/posts/postFullCalendar.js"></script>
 
 
 <div id="loading-container" class="loading-container">

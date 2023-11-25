@@ -36,3 +36,5 @@ const epGetClientCategories= `${subDomain}/kairosGateway/apiCom/v1/getCategories
 
 
 const epGetClientStores= `${subDomain}/kairosGateway/apiCom/v1/getStores/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetFullCalendar= `${subDomain}/kairosGateway/apiCompanies/v1/getFullCalendar/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

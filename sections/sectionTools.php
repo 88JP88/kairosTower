@@ -73,8 +73,11 @@
                                 </select>
 
                               <label for="floatingInput" class="text-light">Seleccione el sala</label>  
-                                <select id="list-clientroom" class="form-control" name="currency" required onclick="onClientRoomSelect('assign')"></select>
-                                <option value="0"></option>
+                                <select id="list-clientroom1" class="form-control" name="currency">
+                                <option value="0">a</option>
+                                <option value="0">b</option>
+                              </select>
+                                
                             </div>
                         </form>
                       </div>
@@ -97,7 +100,7 @@
 
   
 <script>
- 
+ /*
   
   document.getElementById("lectorEvento").addEventListener("click", function() {
   var eventName = document.getElementById("eventName").value;
@@ -107,7 +110,7 @@
   
   addNewEvent(eventName, dateStart, dateEnd, url);
 });
-
+*/
 var calendar; // Declarar calendar fuera de la función
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -126,8 +129,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function addNewEvent(eventName, dateStart, dateEnd, url) {
+function addNewEvent(eventId,eventName, dateStart, dateEnd, url) {
   calendar.addEvent({
+  id:eventId,
 	title: eventName,
 	start: dateStart,
 	end: dateEnd,

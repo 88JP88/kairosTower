@@ -7,7 +7,6 @@ $description = $_GET['eventDescription'];
 $clientId = $_GET['eventClientId'];
 $dateStart = $_GET['dateStart'];
 $dateEnd = $_GET['dateEnd'];
-$urlEvent = $_GET['urlEvent'];
 $roomEvent = $_GET['roomEvent'];
 
 
@@ -28,7 +27,7 @@ $data = array(
     'roomId' => $roomEvent,
     'description' => $description,
     'urlImage' => 'qweqweq',
-    'urlEvent' => $urlEvent
+    'urlEvent' => 'qweqweqweq'
     
 );
 
