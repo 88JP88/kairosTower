@@ -17,46 +17,57 @@
 
 <!-- CONTENEDOR DEL CALENDARIO-->
 <div class="container">
-    <div class="col md-8 m-2">
-         <div id='calendar'></div>
-
-            
-
-    </div>
-</div>
+  
+<div class="row mb-0 subMenu" style="background-color:#E4E4E4"> 
 
   <!-- CONTENEDOR DEL MODAL-->
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList56();">
-                Evento
+              <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList();">
+                Crear evento
               </button>
+              
 
               <!-- Modal -->
               <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content" id="modalBackglound">
                       <div class="modal-header">
-                          <h5 class="modal-title" id="modalTitleId">Ingrese datos de agendamiento</h5>
+                      <div class="row">
+                     <div class="col-2"></div>
+                     <div class="col-2"><img class="mt-3" src="../public/KAIROS2.png" alt="" width="72" height="57"></div>
+                     <div class="col-8"><h1 class="m-4 text-light">KAIROS</h1></div></div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     <div class="modal-body">
                       <div class="container-fluid">
                         
-                        <form action="">
+                        <form action="../controller/controllerCreateEvent.php" method="post">
                             <div class="mb-3">
-                              <label for="" class="form-label" >Nombre del evento</label>
-                              <input type="text"
-                                class="form-control" name="" id="eventName" aria-describedby="helpId" placeholder="">
-                              <label for="">fecha inicio</label>
-                                <input type="datetime-local" id="dateStart">
-                              <label for="">fecha final</label>  
-                              <input type="datetime-local" id="dateEnd">
-                              <label for="">url</label>
-                              <input type="text" id="url">
+                           
+                              <input type="hidden" id="idEvent">
 
-                              <small id="helpId" class="form-text text-muted">Help text</small>
-                              <select id="list-clientroom4589" class="form-control" name="currency" required onclick="onClientRoomSelect('assign')"></select>
-                              <option value="0">Selecciona room</option>
+                              <label for="" class="form-label text-light">Nombre del evento</label>
+                              <input type="text" class="form-control" id="eventName">
+
+                              <label for="" class="text-light">fecha inicio</label>
+                              <input type="datetime-local" class="form-control"  id="dateStart">
+
+                              <label for="" class="text-light">fecha final</label>  
+                              <input type="datetime-local" class="form-control" id="dateEnd">
+                             
+                              <input type="hidden" id="url" >
+
+                              <label for="floatingInput" class="text-light">Seleccione el estado</label> 
+                                <select class="form-select form-select-sm" aria-label="form-select-sm example" id="state">
+                                  <option selected>Estado</option>
+                                  <option value="Agendado">Agendado</option>
+                                  <option value="Pendiente">Pendiente</option>
+                                  <option value="Disponible">Disponible</option>
+                                </select>
+
+                              <label for="floatingInput" class="text-light">Seleccione el sala</label>  
+                                <select id="list-clientroom" class="form-control" name="currency" required onclick="onClientRoomSelect('assign')"></select>
+                                <option value="0"></option>
                             </div>
                         </form>
                       </div>
@@ -68,6 +79,16 @@
                   </div>
                 </div>
               </div>
+
+</div> 
+    <div class="col md-8 m-2">
+
+         <div id='calendar'></div>
+
+    </div>
+</div>
+
+  
 <script>
  
   
