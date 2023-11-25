@@ -45,6 +45,7 @@ var storeId = urlObj.searchParams.get("storeId");
                 originPrice=info.outPrice;
                 saver=mult;
                 dicounter=info.discount;
+                
               } else {
                 priceToShow = `${info.outPrice}`;
                 dicounter=0;
@@ -55,10 +56,11 @@ var storeId = urlObj.searchParams.get("storeId");
              
               <div class="edit-container">
 
-
+             
 
               <div class="card">
               <div class="card-header">
+              <div id="cartItems1${idin1}" class="cart-items1"></div>
               <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
               <h2>${info.productName}</h2>
               <p class="item-price">${info.categoryName}</p>
@@ -87,8 +89,8 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
               <p class="card-text">Cantidad:</p>
                 <input type="number" id="quantityInput${idin1}" value="${info.minQty}">
               </div>
-              <button class="btn btn-primary" onClick="addToCart('${info.productName}',${priceToShow},'quantityInput${idin1}');">Agregar</button>
-              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}');">Agregar</button>
+              <button class="btn btn-primary" onClick="addToCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1},'${info.catalogId}');">Agregar</button>
+              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Agregar</button>
           
             </div>
             
@@ -130,13 +132,16 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
 
 // Mostrar el carrito de compras actual
 var totality=0;
+var subtotality=0;
 let shoppingCart = [];
 // Función para agregar un elemento al carrito de compras
-function addToCart(productName, price, quantity) {
+function addToCart(productName, price, quantity,outPrice,id,catalogId) {
 
   var qtyvalue = document.getElementById(quantity).value;
   var total1=price*qtyvalue;
+  var subtotal1=outPrice*qtyvalue;
   const item = {
+    catalogId: catalogId,
     productName: productName,
     price: price,
     quantity: qtyvalue,
@@ -150,36 +155,41 @@ function addToCart(productName, price, quantity) {
   //return shoppingCart;
   //addToCart('Producto 1', 25.99, 2);
   totality=totality+total1;
+  subtotality=subtotality+subtotal1;
       
-  updateCartView();
+  updateCartView(id);
 }
 
-function removeFromCart(productName,price, quantity) {
+function removeFromCart(productName,price, quantity,outPrice,id) {
   const indexToRemove = shoppingCart.findIndex(item => item.productName === productName);
   var qtyvalue1 = document.getElementById(quantity).value;
   var total1=price*qtyvalue1;
+  var subtotal1=outPrice*qtyvalue1;
 
   if (indexToRemove !== -1) {
     const removedItem = shoppingCart.splice(indexToRemove, 1);
     totality=totality-total1;
-    updateCartView();
+    subtotality=subtotality-subtotal1;
+    updateCartView(id);
   } else {
     console.log("El producto no se encontró en el carrito.");
   }
 }
 var totality=0;
-function updateCartView() {
+function updateCartView(id) {
   const cartItemsDiv = document.getElementById('cartItems');
   const cartItemsDiv1 = document.getElementById('cartItems1');
+  const cartItemsDiv12 = document.getElementById('cartItems1'+id);
   cartItemsDiv.innerHTML = ''; // Limpiar el contenido anterior del carrito
   cartItemsDiv1.innerHTML = '';
+  cartItemsDiv12.innerHTML = '';
   if (shoppingCart.length === 0) {
     cartItemsDiv.textContent = 'El carrito está vacío';
   } else {
     const ul = document.createElement('ul');
     shoppingCart.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = ` ${item.quantity} ${item.productName} = $${item.price} - Total: ${item.total}`;
+      li.textContent = `${item.catalogId} ${item.quantity} ${item.productName} = $${item.price} - Total: ${item.total}`;
       
       ul.appendChild(li);
      
@@ -188,12 +198,30 @@ function updateCartView() {
 
 
     const ul1 = document.createElement('ul');
+    
+  
    
       const li1 = document.createElement('li');
-      li1.textContent = ` ${totality} `;
-      
+      const li2 = document.createElement('li');
+      const li3 = document.createElement('li');
+      const li4 = document.createElement('li');
+
+      var saver1=subtotality-totality;
+      li1.textContent = `Total: $${totality} `;
+      li2.textContent = `Sub-Total: $${subtotality} `;
+      li3.textContent = `Ahorro: $${saver1} `;
+     
+
       ul1.appendChild(li1);
-      cartItemsDiv1.appendChild(ul1);
+      ul1.appendChild(li2);
+      ul1.appendChild(li3);
+     cartItemsDiv1.appendChild(ul1);
+/* 
+      const ul2 = document.createElement('ul');
+      li4.textContent = `${saver1} `;
+      ul2.appendChild(li4);
+      
+      cartItemsDiv12.appendChild(ul2);*/
   }
 }
 
