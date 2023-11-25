@@ -30,17 +30,6 @@
 
 
  
-<?php 
-session_start(); // Iniciar la sesión si no se ha hecho aún
-echo $_SESSION["key"] ;
-echo '<script>
-    // Imprimir la variable de sesión en sessionStorage
-    var miVariable = "' . $_SESSION["ranCode"] . '"; // Añadir la variable de sesión
-    sessionStorage.setItem("ranCode", miVariable);
-</script>';
-?>
-
-
   <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="fas fa-headset"></i> Soporte
@@ -83,13 +72,28 @@ echo '<script>
   
   </div>
   <div id="cartItems1" class="cart-items1"></div>
+
+  <p class="card-text">Filtro por categoría:
+  
+
+           
+
+<div class="mb-3">
+
+<select id="list-categoriesListPos" class="form-control" name="lista" required></select>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value');">Filtrar</button>
+          
+    <i class="fas fa-edit"></i>
+  
+</div>
+              </p>
 </div>
     <div id="card-container1" class="card-container">
             <!-- Contenido de la sección expandible -->
             
         </div>
 
-        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value');">Soporte externo</a>
+        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
   </div>
   <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
   <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
@@ -213,3 +217,5 @@ echo '<script>
         cursor: pointer;
     }
 </style>
+<script>getClientCategoriesListaddPost('all','all','all');
+profileInfoLog();getClientCatalogsAdmin('store|','param','value');</script>

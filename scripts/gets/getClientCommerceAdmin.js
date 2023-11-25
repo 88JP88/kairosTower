@@ -15,18 +15,32 @@ const urlObj = new URL(url);
 // Obtener el valor del parámetro "parametro1"
 var clientId = urlObj.searchParams.get("clientId");
 
-const url1 = window.location.href;
+
 
 // Crear un objeto URL a partir de la URL actual
-const urlObj1 = new URL(url);
+
 
 // Obtener el valor del parámetro "parametro1"
 var storeId = urlObj.searchParams.get("storeId");
+
+
+
+// Crear un objeto URL a partir de la URL actual
+
+
+// Obtener el valor del parámetro "parametro1"
+var st = urlObj.searchParams.get("st");
+
+
   document.getElementById("loading-container").style.display = "flex";
+  var catid= document.getElementById("list-categoriesListPos").value;
+  if(param=="categoryId"){
+value=catid;
+  }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
   console.log(epGetClientCatalogsAdmin);
-  fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value)
+  fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value+"/"+st)
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-container1");
@@ -90,7 +104,7 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
                 <input type="number" id="quantityInput${idin1}" value="${info.minQty}">
               </div>
               <button class="btn btn-primary" onClick="addToCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1},'${info.catalogId}');">Agregar</button>
-              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Agregar</button>
+              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Remover</button>
           
             </div>
             
@@ -471,21 +485,31 @@ async function getClientStores(filter,param,value) {
 
 
 
-async function getClientCategoriesList(filter,param,value,catId) {
+async function getClientCategoriesListaddPost(filter,param,value) {
 
-  var reposSelect = document.getElementById("list-categoriesList"+catId);
+  var reposSelect = document.getElementById("list-categoriesListPos");
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
+
+
+  const url = window.location.href;
+
+  // Crear un objeto URL a partir de la URL actual
+  const urlObj = new URL(url);
+  
+  // Obtener el valor del parámetro "parametro1"
+  var uid = urlObj.searchParams.get("clientId");
+//var uid=sessionStorage.getItem('clientNow');
 	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
   .then(response => response.json())
   .then(data => {
     data.categories.forEach(info => {
       const option = document.createElement("option");
-      option.value = info.categoryId+"|"+info.parentId;
+      option.value = info.categoryId;
       option.text = info.categoryName;
       reposSelect.add(option);
+      console.log("hola");
     });
   })
   .catch(error => {
@@ -493,6 +517,7 @@ var uid=sessionStorage.getItem('clientNow');
   });
 
  }
+
  
 async function getClientCategoriesList3(filter,param,value,catId) {
 

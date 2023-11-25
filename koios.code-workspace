@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": "../koios"
+		},
+		{
+			"path": "../koiosCore"
+		},
+		{
+			"path": "../koiosGateway"
+		},
+		{
+			"path": "../koiosIntegrations"
+		},
+		{
+			"path": "../kairos"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../kairosCore"
+		},
+		{
+			"path": "../lugmacore"
+		},
+		{
+			"path": "../kairosGateway"
+		},
+		{
+			"path": "../crystal"
+		},
+		{
+			"path": "../crystalGateway"
+		},
+		{
+			"path": "../crystalIntegrations"
+		},
+		{
+			"path": "../crystalCore"
+		},
+		{
+			"path": "../support-getback"
+		},
+		{
+			"path": "../godins"
+		},
+		{
+			"path": "../godinsCore"
+		},
+		{
+			"path": "../godinsMiddle"
+		},
+		{
+			"path": "../kairosCom"
+		}
+	],
+	"settings": {}
+}

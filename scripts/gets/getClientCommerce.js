@@ -673,7 +673,7 @@ async function getClientStores(filter,param,value) {
                   <h5 class="card-title">
                   <p class="card-text"> <i class="fas fa-guitar"></i></p>
                 
-                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.storeId}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
+                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.storeId}&st=${info.storeType}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
                   <i class="fas fa-store"></i>
                 </a>
 
@@ -847,6 +847,7 @@ var uid=sessionStorage.getItem('clientNow');
 
  }
 
+ 
  
  async function getClientCategoriesListadd96(filter,param,value) {
 
