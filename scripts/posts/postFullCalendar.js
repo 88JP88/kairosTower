@@ -7,7 +7,7 @@ document.getElementById("lectorEvento").addEventListener("click", function() {
            
             "eventName=" + encodeURIComponent(document.getElementById("eventName").value) +
             "&eventDescription=" + encodeURIComponent(document.getElementById("eventDescription").value) +
-            "&eventClientId=" + encodeURIComponent(document.getElementById("eventClientName").value) +
+            "&eventClientId=" + encodeURIComponent(document.getElementById("random").value) +
             "&dateStart=" + encodeURIComponent(document.getElementById("dateStart").value)+
             "&dateEnd=" + encodeURIComponent(document.getElementById("dateEnd").value)+
            
@@ -23,7 +23,7 @@ document.getElementById("lectorEvento").addEventListener("click", function() {
     
       getMessage();
 
-      fetch(epGetFullCalendar+"1234")
+      fetch(epGetFullCalendar+"2e44d504")
   
       .then(response => response.json())
       .then(data => {
@@ -99,7 +99,7 @@ async function getClientRoomsList() {
     
       getMessage();
 
-      fetch(epGetFullCalendar+"1234")
+      fetch(epGetFullCalendar+"2e44d504")
   
       .then(response => response.json())
       .then(data => {
@@ -136,4 +136,68 @@ if (eventToRemove) {
 } else {
   console.log('El evento no se encontró en el calendario.');
 }
+}
+
+
+async function getClientCalendarList(randomId) {
+
+  const reposSelect = document.getElementById(randomId);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+//var uid=sessionStorage.getItem('clientNow');
+	fetch(epGetInternalClients+"unlock")
+  .then(response => response.json())
+  .then(data => {
+    data.clients.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.clientId;
+      option.text = info.clientName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ //LLAMAR LISTA ROOMS  DISPONIBLES POR CLIENTE
+async function getRoomsByClient(selectId,clientId) {
+
+
+  var reposSelect = document.getElementById(selectId);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+
+
+	fetch('https://dev-kairosGateway.lugma.tech/kairosGateway/apiCompanies/v1/getClientRooms/UfbHdZaJ 6WclAmsaP9H7SR2WmpDbl1OL9/'+clientId+'/all')
+  .then(response => response.json())
+  .then(data => {
+    data.clientRoom.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.roomId;
+      option.text = info.comments;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+ function miFuncion(selectId1,selectId2,clientId) {
+
+  
+  var select = document.getElementById(selectId1);
+  var opcionSeleccionada = select.value;
+  
+
+  getRoomsByClient(selectId2,opcionSeleccionada);
+
+  // Aquí puedes llamar a cualquier función que desees ejecutar cuando se seleccione una opción
+  // Por ejemplo:
+  // tuOtraFuncion(opcionSeleccionada);
 }

@@ -22,7 +22,7 @@
 
   <!-- CONTENEDOR DEL MODAL-->
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList();">
+              <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList();getClientCalendarList('random');">
                 Crear evento
               </button>
               
@@ -72,12 +72,14 @@
                                   <option value="Disponible">Disponible</option>
                                 </select>
 
-                              <label for="floatingInput" class="text-light">Seleccione el sala</label>  
-                                <select id="list-clientroom1" class="form-control" name="currency">
-                                <option value="0">a</option>
-                                <option value="0">b</option>
-                              </select>
+                          
                                 
+                              <select name="" id="random"></select>
+                              <button type="button" class="btn btn-dark" style="height: 100%;"  onclick="miFuncion('random','selectClient');"> validar</button>
+
+                               <label for="floatingInput" class="text-light">Seleccione el sala</label>  
+                              <select id="selectClient" class="form-control" name="currency"> </select>
+
                             </div>
                         </form>
                       </div>
