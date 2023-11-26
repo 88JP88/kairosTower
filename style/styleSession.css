@@ -1,4 +1,6 @@
-
+.navbarBootstrap {
+  background-color: #001219;
+}
 
 .navbar-nav a.nav-link {
   color: #001219; /* Cambia este valor al color deseado */
@@ -13,9 +15,13 @@
 
 /* Cambiar color del botón */
 .btn-primary1 {
-  color: #C70039;            /* Color del texto en el botón */
+  color: #ffffff;            /* Color del texto en el botón */
   background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
-  border-color: #C70039;      /* Cambia este valor al color deseado para el borde del botón */
+  border-color: #001219;  
+  border-radius: 0%;    /* Cambia este valor al color deseado para el borde del botón */
+}
+.menuFrame {
+  border-radius: 0%;
 }
 
 /* Cambiar color del botón */
@@ -48,13 +54,13 @@
   color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
   background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
   border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
-  border-radius: 25px;
+  border-radius: 5px;
 }
 .dropdown-item:hover {
   color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
   background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
   border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
-  border-radius: 25px;
+  border-radius: 5px;
 }
 
 .dropdown:active {
@@ -62,10 +68,10 @@
   background-color: #001219;   /* Cambia este valor al color deseado para el borde en el clic */
 }
 .dropdown-menu {       /* Cambia este valor al color deseado para el borde en hover */
-  border-radius: 25px;
+  border-radius: 5px;
 }
 .offcanvas-body:hover {       /* Cambia este valor al color deseado para el borde en hover */
-  border-radius: 50px;
+  border-radius: 5px;
 }
 
 
@@ -217,10 +223,10 @@
           flex: 1; /* El textbox toma el espacio disponible restante */
           margin-right: 10px; /* Espaciado entre el textbox y el botón */
         }
-        
+          /* 
         .edit-button {
-          /* Estilos adicionales para el botón */
-        }
+        Estilos adicionales para el botón 
+        }*/
         
 
         .edit-button1 {
@@ -351,11 +357,12 @@ text-align: center;
            
            
 }
-
-/* Estilo para el contenedor de tarjetas (si lo necesitas) */
-.card-container {
-  /* Estilos para el contenido de las tarjetas */
+/*
+ Estilo para el contenedor de tarjetas (si lo necesitas) 
+.card-container {*/
+  /* Estilos para el contenido de las tarjetas 
 }
+*/
 
 /* Estilos para el input como label */
 .label-input {

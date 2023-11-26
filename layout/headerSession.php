@@ -1,6 +1,6 @@
 <! DOCTYPE html>
 
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,7 @@
      <!--<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>-->
    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/locales-all.js"></script>
+    <link rel="stylesheet" href="style/styleSession.php">
   </head>
   <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -25,80 +26,170 @@
 <div class="notification" id="notification">
         <p id="notificationText"></p>
     </div>
-<ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #001219; color: #C70039;">
 
-<li class="nav-item" role="presentation" >
-    <button class="nav-link active" onclick="changeSection('inbox');" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true" style="color: #C70039;"><a class="navbar-brand" href="#"><img src="public/KAIROS.png" alt="LUGMA" width="50" height="50"></a></button>
-  </li>
+
+
+       <!--BARRA DE NAVEGACION DE PRUEBA-->
+<nav class="navbar navbar-expand-lg  navbarBootstrap">
+  <div class="container-fluid">
+    
+    <button class="nav-link active" onclick="changeSection('inbox');" id="home-tab" 
+    data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" 
+    aria-controls="home-tab-pane" aria-selected="true" style="color: #C70039;">
+      <a class="navbar-brand btn-primary1 text-light mt-4 fs-3 " href="#">
+        <img src="public/KAIROS2.png" alt="LUGMA" class="me-1" width="45" height="45">
+        Kairos Tower
+      </a>
+    </button>
+   
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+     aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-users"></i> Usuarios
+          </a>
+          <ul class="dropdown-menu br-0">
+            <li>
+              <a class="dropdown-item" onclick="changeSection('generalUsers');
+                getGeneralUsers('unlock','free');" id="schedule-tab" data-bs-toggle="tab" 
+                data-bs-target="#schedule-tab-pane" type="button" role="tab" 
+                aria-controls="schedule-tab-pane" aria-selected="true" 
+                style="color: #3c3c3b;">
+                <i class="fas fa-users"></i> 
+                Usuarios generales
+              </a>
+            </li>
+            
+            <li>
+              <a class="dropdown-item" onclick="changeSection('internalUsers');
+              getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab"
+               data-bs-target="#schedule-tab-pane" type="button" role="tab"
+                aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+                <i class="fas fa-toolbox"></i> 
+                Usuarios internos
+              </a>
+            </li>
+
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-users"></i> 
+            Clientes
+          </a>
+          <ul class="dropdown-menu br-0">
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('internalClients');
+                getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" 
+                data-bs-target="#schedule-tab-pane" type="button" role="tab" 
+                aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+                <i class="fas fa-building"></i> 
+                Clientes externos
+              </a>
+            </li>
+
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('gtask');getIndentFullCalendar();"
+               id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
+               role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+               <i class="fas fa-warehouse"></i> 
+               Clientes internos
+              </a>
+            </li>
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-headset"></i> 
+             Soporte
+          </a>
+          <ul class="dropdown-menu br-0">
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" 
+                id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
+                role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+                Soporte externo
+              </a>
+            </li>
+         
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" 
+                id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
+                role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+                Soporte interno
+              </a>
+            </li>
+       
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-info"></i> Informes
+          </a>
+          <ul class="dropdown-menu br-0">
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" 
+                data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane"
+                 aria-selected="true" style="color: #3c3c3b;">
+                 Generar informe
+              </a>
+            </li>
+      
+         
+            <li> 
+              <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab"
+               data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" 
+               aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+               Verificar informes
+              </a>
+            </li>
+       
+          </ul>
+      </li>
+    
   
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" onclick="openModMyProfile('importantes');profileInfoLog();"
+           href="#" role="button" type="button" id="actualizarButton"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-user-check"></i> 
+            Perfil
+          </a>
+      </li>
 
-
-  <div class="btn-group">
-      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-users"></i> Gestión de usuarios
-      </button>
-      <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li><a class="dropdown-item" onclick="changeSection('generalUsers');getGeneralUsers('unlock','free');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-users"></i> Usuarios generales</a></li>
-        <li><a class="dropdown-item" onclick="changeSection('internalUsers');getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-toolbox"></i> Usuarios internos</a></li>
-       
-      </ul>
-    </div> 
-
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-building"></i> Gestión de clientes
-      </button>
-      <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('internalClients');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-building"></i> Clientes externos</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getIndentFullCalendar();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;"><i class="fas fa-warehouse"></i> Clientes internos</a></li>
-       
-      </ul>
-    </div> 
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-exclamation"></i>
+            <span class="visually-hidden nav-link" >Toggle Dropstart</span>
+          </a>
+      </li>
+      
+   
+      </div>
+  </div> 
+</nav>
 
 
     
-  <div class="btn-group">
-      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-headset"></i> Soporte
-      </button>
-      <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Soporte externo</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Soporte interno</a></li>
-       
-      </ul>
-    </div> 
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-info"></i> Informes
-      </button>
-      <ul class="dropdown-menu dropdown-menu-lg-end">
-        <li> <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Generar informe</a></li>
-        <li> <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">Verificar informes</a></li>
-       
-      </ul>
-    </div> 
 
 
-
-  
-  <ul class="dropdown-menu">
-    <!-- Dropdown menu links -->
-    <li><button class="dropdown-item nav-item" onclick="openModCloseSession();" type="button" role="tab" style="color: #C70039;">Salir</button></li>
-    <li><a class="dropdown-item" onclick="changeSection('sessions');getMySessions();" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #C70039;">Sesiones activas</a></li>
-        <li><a class="dropdown-item nav-item" href="#" style="color: #C70039;">Informe de errores</a></li>
-  </ul>
-  <button class="nav-link" id="actualizarButton" onclick="openModMyProfile('importantes');profileInfoLog();" type="button" role="tab" style="color: #C70039;"><i class="fas fa-user-check"></i> Perfil</button>
-  <button type="button" class="btn nav-link dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" style="color: #C70039;">
-  <i class="fas fa-exclamation"></i><span class="visually-hidden nav-link" >Toggle Dropstart</span>
-  </button>
-</div>
-    </div> 
-
-
-   
-  </li>
-  
-</ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">rtyu</div>
   <div class="tab-pane fade" id="api-tab-pane" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>

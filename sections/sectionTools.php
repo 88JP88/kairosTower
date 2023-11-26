@@ -2,7 +2,7 @@
 <div class="container">
 
 <div id="gtask" class="email-section" style="text-align: center;">
-<p><H2><I>USUARIOS INTERNOS</I></H2>
+<p><H2><I>USUARIOS INTERNOS</I></H2></p>
     <h2>
   
   
@@ -13,13 +13,6 @@
   </h2>
 
  
-
-
-<!-- CONTENEDOR DEL CALENDARIO-->
-<div class="container">
-  
-<div class="row mb-0 subMenu" style="background-color:#E4E4E4"> 
-
   <!-- CONTENEDOR DEL MODAL-->
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList();getClientCalendarList('random');">
@@ -30,11 +23,11 @@
               <!-- Modal -->
               <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content" id="modalBackglound">
+                  <div class="modal-content" id="modalBackglound" style="background-color: #001219;">
                       <div class="modal-header">
                       <div class="row">
                      <div class="col-2"></div>
-                     <div class="col-2"><img class="mt-3" src="../public/KAIROS2.png" alt="" width="72" height="57"></div>
+                     <div class="col-2"><img class="mt-3" src="public/KAIROS2.png" alt="" width="72" height="57"></div>
                      <div class="col-8"><h1 class="m-4 text-light">KAIROS</h1></div></div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -42,7 +35,7 @@
                       <div class="container-fluid">
                         
                         <form action="../controller/controllerCreateEvent.php" method="post">
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                            
                               <input type="hidden" id="idEvent">
 
@@ -75,7 +68,7 @@
                           
                                 
                               <select name="" id="random"></select>
-                              <button type="button" class="btn btn-dark" style="height: 100%;"  onclick="miFuncion('random','selectClient');"> validar</button>
+                              <button type="button" class="btn btn-dark" style="width: 100%;"  onclick="miFuncion('random','selectClient');"> validar</button>
 
                                <label for="floatingInput" class="text-light">Seleccione el sala</label>  
                               <select id="selectClient" class="form-control" name="currency"> </select>
@@ -92,13 +85,20 @@
                 </div>
               </div>
 
-</div> 
-    <div class="col md-8 m-2">
 
-         <div id='calendar'></div>
+<!-- CONTENEDOR DEL CALENDARIO-->
+
+  
+    <div class="col-12">
+
+         <div class="mt-2" style="width: 100%;" id='calendar'></div>
 
     </div>
-</div>
+
+
+
+
+
 
   
 <script>
@@ -197,57 +197,6 @@ async function getClientRoomsList56() {
   const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 
 </script>                               
-
-<!-- Barra de navegacion original -->
-<!--
-<nav class="navbar bg-dark m-0 p-0 fixed-top" style="background-color: #001219;">
-  <div class="container-fluid m-0" style="background-color: #001219;">
-    <a class="navbar-brand" href="#"><img src="public/KAIROS.png" alt="KAIROS" width="60" height="60"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header" style="background-color: #001219;">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="public/KAIROS2.png" alt="KAIROS" width="60" height="60"></h5>
-        <button type="button" class="btn-close" style="border-radius: 5px;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body" >
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item" style="border-radius: 5px; padding-left: 10px;">
-            <a class="nav-link active" aria-current="page" href="#" style="color: #C70039;border-radius: 5px;">Home</a>
-          </li>
-          <li class="nav-item" style="border-radius: 5px; padding-left: 10px;">
-          <button class="nav-link" onclick="changeSection('spam1');" id="alerts-tab1" data-bs-toggle="tab" data-bs-target="#alerts-tab-pane1" type="button" role="tab" aria-controls="alerts-tab-pane1" aria-selected="false" style="color: #C70039;">Repositorios</button>
-          </li>
-          <li class="nav-item" style="border-radius: 5px; padding-left: 10px;">
-            <a class="nav-link" href="#" style="color: #C70039; border-radius: 5px;">Foros</a>
-          </li>
-          <li class="nav-item dropdown" style="border-radius: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px;">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #C70039; border-radius: 5px;">
-              Más
-            </a>
-            <ul class="dropdown-menu">
-            <li><button type="button" style="border-radius: 0px;" class="dropdown-item" onclick="openModLogIn()" data-bs-toggle="tooltip" title="Tooltip">Iniciar Sesión</button></li>
-              
-              
-              <li><button type="button" style="border-radius: 0px;" class="dropdown-item" onclick="openModCreateUser()" data-bs-toggle="tooltip" title="Tooltip">Crear cuenta</button></li>
-              <li><button type="button" style="border-radius: 0px;" class="dropdown-item" onclick="openModValCode()" data-bs-toggle="tooltip" title="Tooltip">Código de validación</button></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item m-0" style="border-radius: 0px;" href="#">Acerca de nosotros</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</nav>
--->
 
 
 <div class="tab-content" id="myTabContent">
