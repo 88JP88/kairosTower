@@ -173,6 +173,23 @@
           </a>
       </li>
 
+
+
+     
+      <li class="nav-item dropdown br-0 btn-primary1" >
+          <a class="btn btn-primary1 dropdown-toggle" onclick="openModCloseSession();"
+           href="#" role="button" type="button" id="actualizarButton"
+            data-bs-toggle="dropdown" aria-expanded="false"  >
+            <i class="fas fa-user-check"></i> 
+            Cerrar sesión
+          </a>
+      </li>
+
+  
+  
+
+
+
       <li class="nav-item dropdown br-0 btn-primary1" >
           <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
            data-bs-toggle="dropdown" aria-expanded="false">
