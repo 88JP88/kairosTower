@@ -1,6 +1,11 @@
 
 
-
+function generarID() {
+  // Generar un número aleatorio y convertirlo a cadena
+  let numeroAleatorio = Math.floor(Math.random() * 100000000); // Genera un número aleatorio entre 0 y 99999999
+  let idAleatorio = numeroAleatorio.toString().padStart(8, '0'); // Asegura que tenga 8 dígitos completando con ceros a la izquierda si es necesario
+  return idAleatorio;
+}
 
 
 
@@ -34,9 +39,13 @@ var st = urlObj.searchParams.get("st");
 
   document.getElementById("loading-container").style.display = "flex";
   var catid= document.getElementById("list-categoriesListPos").value;
+  var catid= document.getElementById("simil").value;
   if(param=="categoryId"){
 value=catid;
   }
+  if(param=="simil"){
+    value=catid;
+      }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
   console.log(epGetClientCatalogsAdmin);
@@ -64,6 +73,8 @@ value=catid;
                 priceToShow = `${info.outPrice}`;
                 dicounter=0;
               }
+//id unico de agregado al carrito
+              let idGenerado = generarID();
               card11.innerHTML = `
                  
                  
@@ -103,8 +114,8 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
               <p class="card-text">Cantidad:</p>
                 <input type="number" id="quantityInput${idin1}" value="${info.minQty}">
               </div>
-              <button class="btn btn-primary" onClick="addToCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1},'${info.catalogId}');">Agregar</button>
-              <button class="btn btn-primary" onClick="removeFromCart('${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Remover</button>
+              <button class="btn btn-primary" onClick="addToCart('${idGenerado}','${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1},'${info.catalogId}','${info.productId}','${info.sku}','${info.categoryId}','${info.categoryName}','${info.storeId}','${info.storeName}','${info.description}','${info.discount}','${info.isDiscount}','${info.promoId}','${info.isPromo}','${info.unit}','${info.readUnit}','${info.unitQty}','${info.unitUnit}','${info.imgProduct}','${info.spcProduct}');">Agregar</button>
+              <button class="btn btn-primary" onClick="removeFromCart('${idGenerado}','${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Remover</button>
           
             </div>
             
@@ -149,17 +160,37 @@ var totality=0;
 var subtotality=0;
 let shoppingCart = [];
 // Función para agregar un elemento al carrito de compras
-function addToCart(productName, price, quantity,outPrice,id,catalogId) {
+function addToCart(uniqueId,productName, price, quantity,outPrice,id,catalogId,productId,sku,categoryId,categoryName,storeId,storeName,description,discount,isDiscount,promoId,isPromo,unit,readUnit,unitQty,unitUnit,imgProduct,spcProduct) {
 
   var qtyvalue = document.getElementById(quantity).value;
   var total1=price*qtyvalue;
   var subtotal1=outPrice*qtyvalue;
   const item = {
+    uniqueId: uniqueId,
     catalogId: catalogId,
+    productId: productId,
     productName: productName,
-    price: price,
-    quantity: qtyvalue,
-    total: total1
+    productDescription: description,
+    productSku: sku,
+    imgProduct: imgProduct,
+    spcProduct: spcProduct,
+    productPrice: price,
+    outPrice: outPrice,
+    productQty: qtyvalue,
+    categoryId: categoryId,
+    categoryName: categoryName,
+    storeId: storeId,
+    storeName: storeName,
+    isDiscount: isDiscount,
+    discount: discount,
+    promoId: promoId,
+    isPromo: isPromo,
+    unit: unit,
+    readUnit: readUnit,
+    unitQty: unitQty,
+    unitUnit: unitUnit,
+    totalShopping: total1,
+    subTotalShopping: subtotal1,
   };
 
   // Agregar el elemento al carrito de compras
@@ -174,26 +205,31 @@ function addToCart(productName, price, quantity,outPrice,id,catalogId) {
   updateCartView(id);
 }
 
-function removeFromCart(productName,price, quantity,outPrice,id) {
-  const indexToRemove = shoppingCart.findIndex(item => item.productName === productName);
-  var qtyvalue1 = document.getElementById(quantity).value;
-  var total1=price*qtyvalue1;
-  var subtotal1=outPrice*qtyvalue1;
-
+function removeFromCart(uniqueId,productName,price,quantity,outPrice,id) {
+  const indexToRemove = shoppingCart.findIndex(item => item.uniqueId === uniqueId);
+  //var qtyvalue1 = document.getElementById(quantity).value;
+  var total1=price*quantity;
+  var subtotal1=outPrice*quantity;
+ 
   if (indexToRemove !== -1) {
     const removedItem = shoppingCart.splice(indexToRemove, 1);
     totality=totality-total1;
     subtotality=subtotality-subtotal1;
     updateCartView(id);
+   
   } else {
     console.log("El producto no se encontró en el carrito.");
   }
 }
 var totality=0;
+
+
+
+
 function updateCartView(id) {
   const cartItemsDiv = document.getElementById('cartItems');
   const cartItemsDiv1 = document.getElementById('cartItems1');
-  const cartItemsDiv12 = document.getElementById('cartItems1'+id);
+  const cartItemsDiv12 = document.getElementById('cartItems1' + id);
   cartItemsDiv.innerHTML = ''; // Limpiar el contenido anterior del carrito
   cartItemsDiv1.innerHTML = '';
   cartItemsDiv12.innerHTML = '';
@@ -203,14 +239,21 @@ function updateCartView(id) {
     const ul = document.createElement('ul');
     shoppingCart.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = `${item.catalogId} ${item.quantity} ${item.productName} = $${item.price} - Total: ${item.total}`;
-      
+      const deleteButton = document.createElement('button'); // Crear botón eliminar
+      deleteButton.textContent = 'Eliminar'; // Texto del botón
+      deleteButton.addEventListener('click', function() {
+        // Función para eliminar el elemento del carrito al hacer click en el botón
+        removeFromCart(item.uniqueId,item.productName,item.productPrice,item.productQty,item.outPrice,id);
+        
+      });
+      li.textContent = `${item.catalogId} ${item.productQty} ${item.productName} = $${item.productPrice} - Total: ${item.totalShopping}`;
+      li.appendChild(deleteButton); // Agregar el botón eliminar al elemento li
       ul.appendChild(li);
-     
     });
     cartItemsDiv.appendChild(ul);
 
-
+    // Resto del código para mostrar el total, sub-total, ahorro, etc.
+    
     const ul1 = document.createElement('ul');
     
   

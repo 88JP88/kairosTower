@@ -87,6 +87,50 @@
   
 </div>
               </p>
+
+
+              <p class="card-text">Filtro por similitud:
+  
+
+           
+
+<div class="mb-3">
+
+<input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
+ 
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value');">Filtrar</button>
+          
+    <i class="fas fa-edit"></i>
+  
+</div>
+              </p>
+
+
+              <p class="card-text">Filtro por caracter en específico:
+  
+
+           
+
+  <div class="mb-3">
+  
+  <select id="list-caracterspecific" class="form-control" name="lista" required>
+
+  <option value="productName">Nombre de producto</option>
+  <option value="productCaracts">Caracteristicas de producto</option>
+  <option value="productType">Tipo de producto</option>
+  <option value="catalogStock">Stock de catálogo</option>
+  <option value="catalogValue">Precio de venta</option>
+  <option value="catalogDiscount">Descuento</option>
+  </select>
+  <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
+ 
+  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','specific','value');">Filtrar</button>
+            
+      <i class="fas fa-edit"></i>
+    
+  </div>
+                </p>
+
 </div>
     <div id="card-container1" class="card-container">
             <!-- Contenido de la sección expandible -->

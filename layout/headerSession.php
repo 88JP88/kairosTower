@@ -190,13 +190,6 @@
 
 
 
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
-           data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-exclamation"></i>
-            <span class="visually-hidden nav-link" >Toggle Dropstart</span>
-          </a>
-      </li>
       
    
       </div>
