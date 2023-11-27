@@ -39,12 +39,12 @@ var st = urlObj.searchParams.get("st");
 
   document.getElementById("loading-container").style.display = "flex";
   var catid= document.getElementById("list-categoriesListPos").value;
-  var catid= document.getElementById("simil").value;
+  var catid1= document.getElementById("simil").value;
   if(param=="categoryId"){
 value=catid;
   }
   if(param=="simil"){
-    value=catid;
+    value=catid1;
       }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
