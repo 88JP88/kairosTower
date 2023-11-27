@@ -1,7 +1,7 @@
 
 
 
-<table class="table" id ="tableInternalUsers">
+<table class="table table-hover table-striped" id ="tableInternalUsers">
   <thead>
     <tr>
     <th scope="col"><i>Acciones</i></th>

@@ -1,7 +1,7 @@
 
 
 
-<table class="table" id ="tableGeneralUsers">
+<table class="table table-striped table-hover" id ="tableGeneralUsers">
   <thead>
     <tr>
     <th scope="col"><i>Acciones</i></th>

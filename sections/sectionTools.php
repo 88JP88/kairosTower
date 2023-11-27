@@ -1,24 +1,42 @@
 
-<div class="container">
+<div class="container-fluid email-section" style="text-align: left;" id="gtask">
 
-<div id="gtask" class="email-section" style="text-align: center;">
-<p><H2><I>USUARIOS INTERNOS</I></H2></p>
-    <h2>
-  
-  
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="openModCreateUser();<?php echo $_SESSION['tipoUsuario'] = 1; ?>" style="color: #C70039;" title="CREAR USUARIO INTERNO"><i class="fas fa-user-plus"></i></button>
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalUsers('unlock');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-eye"></i></button>
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalUsers('lock');" style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-eye-slash"></i></button>
 
-  </h2>
+<div class="subMenu" >
+  <h1 class="fs-3">Clientes Internos</h1>
+    
+  
+   <button type="button" class="btn btn-dark btn-lg" onclick="openModCreateUser();
+      <?php echo $_SESSION['tipoUsuario'] = 1; ?>" title="CREAR USUARIO INTERNO"><i 
+      class="fas fa-user-plus"></i>
+   </button>
+   <button type="button" class="btn btn-dark btn-lg" onclick="getInternalUsers('unlock');"
+     style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-eye"></i>
+   </button>
+   <button type="button" class="btn btn-dark btn-lg" onclick="getInternalUsers('lock');"
+    style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-eye-slash"></i>
+  </button>
+      <!-- Button trigger modal -->
+   <button type="button" class="btn btn-dark btn-lg m-2" style="width: 100%;" data-bs-toggle="modal" 
+   data-bs-target="#modalEvent" data-target="#modalEvent" 
+   onclick="getClientRoomsList();getClientCalendarList('random');">
+            Crear evento
+   </button>
+              
+
+  </div>
+
+
+
+<!-- CONTENEDOR DEL CALENDARIO-->
+
+        <div id="calendar" class="mt-2" style="width: 100%; height: 100%;"></div>
+    
+
 
  
   <!-- CONTENEDOR DEL MODAL-->
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-dark btn-lg" style="height: 100%;" data-bs-toggle="modal" data-bs-target="#modalEvent" data-target="#modalEvent" onclick="getClientRoomsList();getClientCalendarList('random');">
-                Crear evento
-              </button>
-              
+           
 
               <!-- Modal -->
               <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -27,8 +45,8 @@
                       <div class="modal-header">
                       <div class="row">
                      <div class="col-2"></div>
-                     <div class="col-2"><img class="mt-3" src="public/KAIROS2.png" alt="" width="72" height="57"></div>
-                     <div class="col-8"><h1 class="m-4 text-light">KAIROS</h1></div></div>
+                     <div class="col-2"><img class="" src="public/KAIROS2.png" style="height: 45px; width: 45px;" ></div>
+                     <div class="col-8"><h1 class="ms-4 fs-3 text-light">Crear evento</h1></div></div>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     <div class="modal-body">
@@ -66,9 +84,9 @@
                                 </select>
 
                           
-                                
-                              <select name="" id="random"></select>
-                              <button type="button" class="btn btn-dark" style="width: 100%;"  onclick="miFuncion('random','selectClient');"> validar</button>
+                              <label for="floatingInput" class="text-light">Seleccione el cliente</label>  
+                              <select class="form-select form-select-sm" name="" id="random"></select>
+                              <button type="button" class="btn btn-dark mt-1" style="width: 100%;"  onclick="miFuncion('random','selectClient');"> validar</button>
 
                                <label for="floatingInput" class="text-light">Seleccione el sala</label>  
                               <select id="selectClient" class="form-control" name="currency"> </select>
@@ -86,96 +104,16 @@
               </div>
 
 
-<!-- CONTENEDOR DEL CALENDARIO-->
-
-  
-    <div class="col-12">
-
-         <div class="mt-2" style="width: 100%;" id='calendar'></div>
-
+              <!-- MODAL DE PRUEBA DATECLICK  -->
+              <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modalContent"></div>
     </div>
+  </div>
+<script src="script/calendar.js"></script>
 
 
-
-
-
-
-  
-<script>
- /*
-  
-  document.getElementById("lectorEvento").addEventListener("click", function() {
-  var eventName = document.getElementById("eventName").value;
-  var dateStart = document.getElementById("dateStart").value;
-  var dateEnd = document.getElementById("dateEnd").value;
-  var url = document.getElementById("url").value;
-  
-  addNewEvent(eventName, dateStart, dateEnd, url);
-});
-*/
-var calendar; // Declarar calendar fuera de la función
-
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-  calendar = new FullCalendar.Calendar(calendarEl, {
-	initialView: 'dayGridMonth',
-	locale: "es",
-	headerToolbar: {
-  	left: 'prev,next today',
-  	center: 'title',
-  	right: 'dayGridMonth,timeGridWeek,listWeek'
-	}
-  });
-  calendar.render();
-});
-
-
-
-function addNewEvent(eventId,eventName, dateStart, dateEnd, url) {
-  calendar.addEvent({
-  id:eventId,
-	title: eventName,
-	start: dateStart,
-	end: dateEnd,
-	url: url
-  });
-}
-
-function getCalendarEvents() {
-  var events = calendar.getEvents();
-  console.log(events);
-}
-
-//LLAMAR LISTA ROOMS  DISPONIBLES
-async function getClientRoomsList56() {
-
-  var reposSelect = document.getElementById("list-clientroom4589");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-
-
-
-
-	fetch('https://dev-kairosGateway.lugma.tech/kairosGateway/apiCompanies/v1/getClientRooms/UfbHdZaJ 6WclAmsaP9H7SR2WmpDbl1OL9/4e6baba0/all')
-  .then(response => response.json())
-  .then(data => {
-    data.clientRoom.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.roomId;
-      option.text = info.comments;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
-
-
-</script> 
 <script>
   var modalId = document.getElementById('modalId');
 
@@ -212,65 +150,8 @@ async function getClientRoomsList56() {
     </div>
 
     
-<script>
-// Función para mostrar la notificación
-function mostrarNotificacion(mensaje, tipo) {
-    const notificacion = document.getElementById('notification');
-    const notificacionText = document.getElementById('notificationText');
+<script src="script/notification.js">
 
-    notificacionText.textContent = mensaje;
-    notificacion.classList.remove('error'); // Remover clase de error (en caso de que esté presente)
-
-    if (tipo === 'error') {
-        notificacion.classList.add('error');
-    }
-   
-    notificacion.style.display = 'block';
-
-    // Desaparecer la notificación después de 3 segundos
-    setTimeout(() => {
-        notificacion.style.display = 'none';
-    }, 3000);
-}
-
-
-
-function obtenerVariablesPHPSession() {
-  fetch('layout/getPHPVariablesIndex.php')
-    .then(response => response.json())
-    .then(data => {
-      // Aquí obtienes los nuevos valores de las variables PHP en el objeto "data"
-      // Puedes acceder a los valores como data.mensaje y data.error
-      // Por ejemplo:
-      var nuevoMensaje = data.mensaje;
-      var nuevoError = data.error;
-
-    
-
-      if(nuevoError==="true"){
-        
-        var re="success";
-        
-      }
-      if(nuevoError==="false"){
-      
-        var re="error";
-        
-      }
-      
-if(nuevoMensaje==""){
-
-}else{
-  mostrarNotificacion(nuevoMensaje, re);
-}
-      
-     
-
-    })
-    .catch(error => {
-      console.error('Error al obtener las variables PHP:', error);
-    });
-}
 </script>
 <style>
 .notification {
@@ -320,6 +201,6 @@ if(nuevoMensaje==""){
 
     </p>
     
-  </div>
+  
   
 </div>

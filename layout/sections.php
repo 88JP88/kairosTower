@@ -1,7 +1,6 @@
 
 
-<main style="display: flex; justify-content: center; align-items: center;">
-  
+
 
 <?php
 require_once 'sections/sectionHome.php';
@@ -38,7 +37,6 @@ require_once 'sections/sectionRepos.php';
    
     <p>Contenido de los correos eliminados...</p>
   </div>
-</main>
 
 
   <script>

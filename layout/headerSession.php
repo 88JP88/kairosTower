@@ -13,16 +13,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
  
    <!--links fullcalendar-->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.css">
      <!--<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>-->
-   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/locales-all.js"></script>
     <link rel="stylesheet" href="style/styleSession.php">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
   </head>
-  <body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script></script>
-    
+  <body class="container-flex " style="width: 100%; height:100%;">
+
 <div class="notification" id="notification">
         <p id="notificationText"></p>
     </div>
@@ -36,7 +36,7 @@
     <button class="nav-link active" onclick="changeSection('inbox');" id="home-tab" 
     data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" 
     aria-controls="home-tab-pane" aria-selected="true" style="color: #C70039;">
-      <a class="navbar-brand btn-primary1 text-light mt-4 fs-3 " href="#">
+      <a class="navbar-brand btn-primary1 text-light mt-4 fs-4 " href="#">
         <img src="public/KAIROS2.png" alt="LUGMA" class="me-1" width="45" height="45">
         Kairos Tower
       </a>
@@ -198,18 +198,21 @@
 
 
     
-
-
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">rtyu</div>
-  <div class="tab-pane fade" id="api-tab-pane" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
-  <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
-  <div class="tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
-  <div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">..eeee.</div>
-  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">.ddf..</div>
+<!-- 
+<div class="container tab-content" id="myTabContent">
+  <div class="container tab-pane fade show active" id="home-tab-pane" style="background-color: green;" role="tabpanel" aria-labelledby="home-tab" tabindex="0">rtyu</div>
+  <div class="container tab-pane fade" id="api-tab-pane" role="tabpanel" aria-labelledby="api-tab"  tabindex="0">..www.</div>
+  <div class="container tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
+  <div class="container tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
+  <div class="container tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">..eeee.</div>
+  <div class="container tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">.ddf..</div>
 </div>
+
+-->
+
 </body>
 </html>
+
 <script  src="scripts/data/credentials.js"></script>
 <script  src="scripts/data/endPoints.js"></script>
 <script  src="scripts/data/showNotify.js"></script>

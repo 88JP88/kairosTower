@@ -1,6 +1,6 @@
 
 
-<table class="table" id ="tableMySession">
+<table class="table table-hover table-striped" id ="tableMySession">
   <thead>
     <tr>
     <th scope="col"><i>Acciones</i></th>
