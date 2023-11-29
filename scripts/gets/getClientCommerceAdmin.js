@@ -40,12 +40,23 @@ var st = urlObj.searchParams.get("st");
   document.getElementById("loading-container").style.display = "flex";
   var catid= document.getElementById("list-categoriesListPos").value;
   var catid1= document.getElementById("simil").value;
+  var catid2= document.getElementById("scaracter").value;
+  var catid3= document.getElementById("list-caracterspecific").value;
+  var catid4= document.getElementById("list-caracterCatalog").value;
   if(param=="categoryId"){
 value=catid;
   }
   if(param=="simil"){
     value=catid1;
       }
+      if(param=="specific"){
+        value=catid2;
+        param=catid3;
+          }
+          if(param=="specificCatalog"){
+            param=catid4;
+           // param=catid3;
+              }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
   console.log(epGetClientCatalogsAdmin);

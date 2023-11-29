@@ -16,7 +16,7 @@
                 if ($_SESSION['tipoUsuario'] == 1) {
                     require_once 'layout/formCreateUser.php';
                 } else {
-                    require_once 'layout/formCreateUserClient.php';
+                    require_once 'layout/formCreateUser.php';
                 }
                 ?>
             </div>

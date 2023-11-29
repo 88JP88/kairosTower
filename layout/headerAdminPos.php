@@ -71,8 +71,10 @@
   <div id="cartItems" class="cart-items">
   
   </div>
+  
   <div id="cartItems1" class="cart-items1"></div>
 
+  <button class="btn btn-primary" onClick="createPosOrder();">Finalizar compra</button>
   <p class="card-text">Filtro por categoría:
   
 
@@ -116,11 +118,10 @@
   <select id="list-caracterspecific" class="form-control" name="lista" required>
 
   <option value="productName">Nombre de producto</option>
-  <option value="productCaracts">Caracteristicas de producto</option>
-  <option value="productType">Tipo de producto</option>
-  <option value="catalogStock">Stock de catálogo</option>
-  <option value="catalogValue">Precio de venta</option>
-  <option value="catalogDiscount">Descuento</option>
+  <option value="description">Caracteristicas de producto</option>
+  <option value="stock">Stock de catálogo</option>
+  <option value="outPrice">Precio de venta</option>
+  <option value="discount">Descuento</option>
   </select>
   <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
@@ -131,7 +132,35 @@
   </div>
                 </p>
 
+
+                <p class="card-text">Filtro por caracteristica de catalogo:
+  
+
+           
+
+  <div class="mb-3">
+  
+  <select id="list-caracterCatalog" class="form-control" name="lista" required>
+
+  <option value="isStocked">Bodega</option>
+  <option value="isInternal">Reserva interna</option>
+  <option value="secStock">Bajo stock</option>
+  <option value="isPromo">Promociones</option>
+  <option value="isDiscount">Descuentos</option>
+  <option value="isActive">Activos</option>
+  <option value="isActiveNot">Inactivos</option>
+  <option value="stock">Sin stock</option>
+  </select>
+ 
+  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('specificCatalog|','specificCatalog','value');">Filtrar</button>
+            
+      <i class="fas fa-edit"></i>
+    
+  </div>
+                </p>
+
 </div>
+
     <div id="card-container1" class="card-container">
             <!-- Contenido de la sección expandible -->
             
@@ -139,6 +168,8 @@
 
         <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
   </div>
+
+      
   <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
   <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
   <div class="tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
@@ -156,6 +187,7 @@
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
 <script  src="scripts/gets/getClientCommerceAdmin.js"></script>
+<script  src="scripts/posts/postCreatePosOrder.js"></script>
 
 
 <div id="loading-container" class="loading-container">
