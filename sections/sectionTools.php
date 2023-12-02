@@ -2,7 +2,16 @@
 <div class="container-fluid email-section" style="text-align: left;" id="gtask">
 
 
-<div class="subMenu" >
+<!-- CONTENEDOR DEL CALENDARIO-->
+
+<div id="calendar" class="mt-2" style="width: 100%; height: 100%;"></div>
+    
+
+
+  </div>
+
+
+  <div class="subMenu" >
   <h1 class="fs-3">Clientes Internos</h1>
     
   
@@ -23,15 +32,6 @@
             Crear evento
    </button>
               
-
-  </div>
-
-
-
-<!-- CONTENEDOR DEL CALENDARIO-->
-
-        <div id="calendar" class="mt-2" style="width: 100%; height: 100%;"></div>
-    
 
 
  
@@ -73,7 +73,7 @@
                               <label for="" class="text-light">fecha final</label>  
                               <input type="datetime-local" class="form-control" id="dateEnd">
                              
-                              <input type="hidden" id="url" >
+                              <input type="hidden" id="url" value="localhost/kairosTower/index.php">
 
                               <label for="floatingInput" class="text-light">Seleccione el estado</label> 
                                 <select class="form-select form-select-sm" aria-label="form-select-sm example" id="state">

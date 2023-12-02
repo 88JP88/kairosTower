@@ -23,7 +23,7 @@ document.getElementById("lectorEvento").addEventListener("click", function() {
     
       getMessage();
 
-      fetch(epGetFullCalendar+"2e44d504")
+      fetch(epGetFullCalendar+"4e6baba0")
   
       .then(response => response.json())
       .then(data => {
@@ -99,7 +99,7 @@ async function getClientRoomsList() {
     
       getMessage();
 
-      fetch(epGetFullCalendar+"2e44d504")
+      fetch(epGetFullCalendar+"4e6baba0")
   
       .then(response => response.json())
       .then(data => {

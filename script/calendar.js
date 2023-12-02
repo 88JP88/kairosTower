@@ -105,4 +105,3 @@ async function getClientRoomsList56() {
         // Puedes reemplazar esto con tu lógica para cargar datos dinámicamente
         modalContent.innerHTML += '<p>Nuevos datos para la fecha: ' + date + '</p>';
       }
- 
