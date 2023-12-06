@@ -59,7 +59,7 @@ value=catid;
               }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
-  console.log(epGetClientCatalogsAdmin);
+  //console.log(epGetClientCatalogsAdmin);
   fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value+"/"+st)
       .then(response => response.json())
       .then(data => {
@@ -96,7 +96,7 @@ value=catid;
 
               <div class="card">
               <div class="card-header">
-              <div id="cartItems1${idin1}" class="cart-items1"></div>
+              <div id="cartItems1${idGenerado}" class="cart-items1"></div>
               <img src="${info.imgProduct}" alt="Icono" style="max-width: 120px; max-height: 120px;">
               <h2>${info.productName}</h2>
               <p class="item-price">${info.categoryName}</p>
@@ -123,11 +123,10 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
             <div class="card-footer">
               <div>
               <p class="card-text">Cantidad:</p>
-                <input type="number" id="quantityInput${idin1}" value="${info.minQty}">
+                <input type="text" id="quantityInput${idin1}" value="${info.minQty}">
               </div>
-              <button class="btn btn-primary" onClick="addToCart('${idGenerado}','${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1},'${info.catalogId}','${info.productId}','${info.sku}','${info.categoryId}','${info.categoryName}','${info.storeId}','${info.storeName}','${info.description}','${info.discount}','${info.isDiscount}','${info.promoId}','${info.isPromo}','${info.unit}','${info.readUnit}','${info.unitQty}','${info.unitUnit}','${info.imgProduct}','${info.spcProduct}');">Agregar</button>
-              <button class="btn btn-primary" onClick="removeFromCart('${idGenerado}','${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idin1});">Remover</button>
-          
+              <button class="btn btn-primary" onClick="addToCart('${idGenerado}','${info.productName}',${priceToShow},'quantityInput${idin1}',${info.outPrice},${idGenerado},'${info.catalogId}','${info.productId}','${info.sku}','${info.categoryId}','${info.categoryName}','${info.storeId}','${info.storeName}','${info.description}','${info.discount}','${info.isDiscount}','${info.promoId}','${info.isPromo}','${info.unit}','${info.readUnit}','${info.unitQty}','${info.unitUnit}','${info.imgProduct}','${info.spcProduct}','${info.minQty}','${info.maxQty}','${info.stock}');">Agregar</button>
+             
             </div>
             
             
@@ -170,68 +169,95 @@ ${info.isDiscount !== "0" ? `  <p class="card-text" style="color: green;">Descue
 var totality=0;
 var subtotality=0;
 let shoppingCart = [];
+let shoppingCartPayment = [];
+let shoppingProducts = [];
+let products=[];
 // Función para agregar un elemento al carrito de compras
-function addToCart(uniqueId,productName, price, quantity,outPrice,id,catalogId,productId,sku,categoryId,categoryName,storeId,storeName,description,discount,isDiscount,promoId,isPromo,unit,readUnit,unitQty,unitUnit,imgProduct,spcProduct) {
+function addToCart(uniqueId,productName, price, quantity,outPrice,id,catalogId,productId,sku,categoryId,categoryName,storeId,storeName,description,discount,isDiscount,promoId,isPromo,unit,readUnit,unitQty,unitUnit,imgProduct,spcProduct,minQty,maxQty,stock) {
 
   var qtyvalue = document.getElementById(quantity).value;
   var total1=price*qtyvalue;
   var subtotal1=outPrice*qtyvalue;
-  const item = {
-    uniqueId: uniqueId,
-    catalogId: catalogId,
-    productId: productId,
-    productName: productName,
-    productDescription: description,
-    productSku: sku,
-    imgProduct: imgProduct,
-    spcProduct: spcProduct,
-    productPrice: price,
-    outPrice: outPrice,
-    productQty: qtyvalue,
-    categoryId: categoryId,
-    categoryName: categoryName,
-    storeId: storeId,
-    storeName: storeName,
-    isDiscount: isDiscount,
-    discount: discount,
-    promoId: promoId,
-    isPromo: isPromo,
-    unit: unit,
-    readUnit: readUnit,
-    unitQty: unitQty,
-    unitUnit: unitUnit,
-    totalShopping: total1,
-    subTotalShopping: subtotal1,
-  };
+  if(+qtyvalue>+stock){
+    alert("Cantidad supera el stock actual "+stock+" "+qtyvalue);
+  }if(+qtyvalue<=+stock){
 
-  // Agregar el elemento al carrito de compras
-  shoppingCart.push(item);
-  //console.log(shoppingCart);
-  // Devolver el carrito de compras actualizado (esto es opcional)
-  //return shoppingCart;
-  //addToCart('Producto 1', 25.99, 2);
-  totality=totality+total1;
-  subtotality=subtotality+subtotal1;
-      
-  updateCartView(id);
+           var resultado=    paramsValidation(maxQty,minQty,qtyvalue,readUnit);
+           if(resultado=="true"){
+
+           
+                const item = {
+                  
+                  uniqueId: uniqueId,
+                  catalogId: catalogId,
+                  productId: productId,
+                  productName: productName,
+                  productDescription: description,
+                  productSku: sku,
+                  imgProduct: imgProduct,
+                  spcProduct: spcProduct,
+                  productPrice: price,
+                  outPrice: outPrice,
+                  productQty: qtyvalue,
+                  categoryId: categoryId,
+                  categoryName: categoryName,
+                  storeId: storeId,
+                  storeName: storeName,
+                  isDiscount: isDiscount,
+                  discount: discount,
+                  promoId: promoId,
+                  isPromo: isPromo,
+                  unit: unit,
+                  readUnit: readUnit,
+                  unitQty: unitQty,
+                  unitUnit: unitUnit,
+                  totalShopping: total1,
+                  subTotalShopping: subtotal1
+                  
+                };
+
+                // Agregar el elemento al carrito de compras
+
+                
+                shoppingCart.push({item});
+
+                //console.log(JSON.stringify(shoppingCart));
+                //products=[];
+                // Devolver el carrito de compras actualizado (esto es opcional)
+                //return shoppingCart;
+                //addToCart('Producto 1', 25.99, 2);
+                totality=totality+total1;
+                subtotality=subtotality+subtotal1;
+                    
+                updateCartView(uniqueId);
+           }else{
+            alert(resultado);
+           }
+              }
 }
 
-function removeFromCart(uniqueId,productName,price,quantity,outPrice,id) {
-  const indexToRemove = shoppingCart.findIndex(item => item.uniqueId === uniqueId);
-  //var qtyvalue1 = document.getElementById(quantity).value;
-  var total1=price*quantity;
-  var subtotal1=outPrice*quantity;
- 
+function removeFromCart(uniqueId, productName, price, quantity, outPrice, id) {
+  //console.log("Shopping Cart:", shoppingCart);
+
+  const indexToRemove = shoppingCart.findIndex(item => item.item.uniqueId === uniqueId);
+
+
+  var total1 = price * quantity;
+  var subtotal1 = outPrice * quantity;
+
   if (indexToRemove !== -1) {
     const removedItem = shoppingCart.splice(indexToRemove, 1);
-    totality=totality-total1;
-    subtotality=subtotality-subtotal1;
-    updateCartView(id);
    
+
+    totality = totality - total1;
+    subtotality = subtotality - subtotal1;
+
+    updateCartView(uniqueId);
   } else {
     console.log("El producto no se encontró en el carrito.");
   }
 }
+
 var totality=0;
 
 
@@ -254,10 +280,10 @@ function updateCartView(id) {
       deleteButton.textContent = 'Eliminar'; // Texto del botón
       deleteButton.addEventListener('click', function() {
         // Función para eliminar el elemento del carrito al hacer click en el botón
-        removeFromCart(item.uniqueId,item.productName,item.productPrice,item.productQty,item.outPrice,id);
+        removeFromCart(item.item.uniqueId,item.item.productName,item.item.productPrice,item.item.productQty,item.item.outPrice,id);
         
       });
-      li.textContent = `${item.catalogId} ${item.productQty} ${item.productName} = $${item.productPrice} - Total: ${item.totalShopping}`;
+      li.textContent = `${item.item.catalogId} ${item.item.productQty} ${item.item.productName} = $${item.item.productPrice} - Total: ${item.item.totalShopping}`;
       li.appendChild(deleteButton); // Agregar el botón eliminar al elemento li
       ul.appendChild(li);
     });
@@ -563,7 +589,7 @@ async function getClientCategoriesListaddPost(filter,param,value) {
       option.value = info.categoryId;
       option.text = info.categoryName;
       reposSelect.add(option);
-      console.log("hola");
+      //console.log("hola");
     });
   })
   .catch(error => {
@@ -1537,7 +1563,7 @@ function handleCheckboxChange(event) {
     }
 
     // Muestra el contenido del array
-    console.log(selectedAssignments);
+   // console.log(selectedAssignments);
 }
 
 // Función para ejecutar al cambiar la selección en el select
@@ -1629,7 +1655,7 @@ function handleCheckboxChangedes(event) {
     }
 
     // Muestra el contenido del array
-    console.log(selectedAssignmentsdes);
+    //console.log(selectedAssignmentsdes);
 }
 
 // Función para ejecutar al cambiar la selección en el select
@@ -1655,7 +1681,7 @@ function handleCheckboxChangeAssignElement(event) {
   }
 
   // Muestra el contenido del array
-  console.log(selectedAssignmentselement);
+  //console.log(selectedAssignmentselement);
 }
 
 // Función para ejecutar al cambiar la selección en el select
@@ -1681,7 +1707,7 @@ function handleCheckboxChangeAssignElementbyuser(event) {
   }
 
   // Muestra el contenido del array
-  console.log(selectedAssignmentselementbyuser);
+ // console.log(selectedAssignmentselementbyuser);
 }
 
 
@@ -1705,5 +1731,121 @@ function handleCheckboxChangeAssignElementbyusernot(event) {
   }
 
   // Muestra el contenido del array
-  console.log(selectedAssignmentselementbyusernot);
+  //console.log(selectedAssignmentselementbyusernot);
+}
+
+
+
+
+
+
+
+
+
+
+function arrayToHTMLCards() {
+  const cardsContainer = document.getElementById('card-validatePosShop');
+  cardsContainer.innerHTML = ""; // Borra las tarjetas antiguas
+  shoppingCart.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const cardContent = `
+      <h4>${item.item.productName}</h4>
+      <p>X ${item.item.productQty}</p>
+      <p>Valor original $${item.item.outPrice}</p>
+      <p>Valor con descuento $${item.item.productPrice}</p>
+      <p>Total: $${item.item.totalShopping}</p>
+      <p>Sub-Total: $${item.item.subTotalShopping}</p>
+      <p>Ahorro: $${item.item.subTotalShopping-item.item.totalShopping}</p>
+      <button class="btn btn-primary" onClick=" removeFromCart('${item.item.uniqueId}','${item.item.productName}',${item.item.productPrice},${item.item.productQty},${item.item.outPrice},${item.item.uniqueId});arrayToHTMLCards();arrayToHTMLCardsPayload();">Remover</button>
+          
+      `;
+
+    card.innerHTML = cardContent;
+    cardsContainer.appendChild(card);
+  });
+}
+
+
+
+function arrayToHTMLCardsPayload() {
+  const cardsContainer = document.getElementById('card-validatePosShopPayload');
+  var pType= document.getElementById('list-paymentType').value;
+  var pMethod= document.getElementById('list-paymentMethod').value;
+  var pBank= document.getElementById('list-bankMethod').value;
+  var pWith= document.getElementById('paymentcash').value;
+  var pExc=+pWith-totality;
+  cardsContainer.innerHTML = ""; // Borra las tarjetas antiguas
+var subto=subtotality-totality;
+ 
+
+if(pType!="cash"){
+pWith=pType+"/"+pMethod+"/"+pBank;
+pExc=0;
+}
+  const payment = {
+    total: totality,
+    subTotal: subtotality,
+    saver: subto,
+    paymentType: pType,
+    paymentMethod: pMethod,
+    bankMethod: pBank,
+    payWith: pWith,
+    exchangeCash: pExc
+    
+  };
+  shoppingCartPayment = [];
+  // Agregar el elemento al carrito de compras
+  shoppingCartPayment.push({payment});
+  shoppingCart.push({payment});
+  //console.log(JSON.stringify(shoppingCart));
+  shoppingCartPayment.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const cardContent = `
+      <h4>Resumen</h4>
+      
+      <p>Total: $${item.payment.total}</p>
+      <p>Sub-Total: $${item.payment.subTotal}</p>
+      <p>Ahorro: $${item.payment.saver}</p>
+          
+      `;
+
+    card.innerHTML = cardContent;
+    cardsContainer.appendChild(card);
+  });
+}
+
+
+function paramsValidation(maxqty,minqty,value,readUnit){
+
+if(+value<+minqty){
+return "La cantidad mínima debe ser: "+minqty;
+}
+if(+value>+maxqty){
+  return "La cantidad máxima debe ser: "+maxqty;
+  }
+  if(+value<=+maxqty && +value >=+minqty){
+
+    if(readUnit=="un" || readUnit=="UN" || readUnit=="box" || readUnit=="pkg" || readUnit=="bag"){
+  var isInt= esEntero(+value);
+  if(esEntero(+value)){
+    return "true";
+  }if(isInt!="true"){
+    return "Cantidad incorrecta, no se admiten (puntos '.', comas ','), el producto se mide en: "+readUnit;
+  }
+    }  else{
+      return "true";
+    }
+    
+    }
+
+
+
+}
+
+function esEntero(numero) {
+  return Number.isInteger(numero);
 }

@@ -15,8 +15,10 @@
                 // PHP - Lógica para determinar qué formulario de usuario requerir
                 if ($_SESSION['tipoUsuario'] == 1) {
                     require_once 'layout/formCreateUser.php';
+                    echo $_SESSION['tipoUsuario'];
                 } else {
-                    require_once 'layout/formCreateUser.php';
+                    require_once 'layout/formCreateUserClient.php';
+                    echo $_SESSION['tipoUsuario'];
                 }
                 ?>
             </div>

@@ -74,7 +74,18 @@
   
   <div id="cartItems1" class="cart-items1"></div>
 
-  <button class="btn btn-primary" onClick="createPosOrder();">Finalizar compra</button>
+  <button class="btn btn-primary" onClick="openModValPosShop();arrayToHTMLCards();">Validar compra</button>
+
+
+
+
+
+
+
+
+
+
+
   <p class="card-text">Filtro por categoría:
   
 

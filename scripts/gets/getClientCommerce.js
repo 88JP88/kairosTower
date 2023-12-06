@@ -474,9 +474,33 @@ async function getClientCatalogs(filter,param,value) {
   </p>
 
   <p class="card-text">
-  Unidad de lectura y calculo:
+  Unidad de lectura y calculo: <b>${info.readUnit}</b>
   <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.catalogId}" value="${info.readUnit}" title="${info.spcProduct}">
+
+<select id="list-unidadpos" class="form-control" name="lista1" required>
+<option value="un">Unidad (un)</option>
+<option value="cm">Centímetros (cm)</option>
+<option value="m">Metros (m)</option>
+<option value="km">Kilómetros (km)</option>
+<option value="in">Pulgadas (in)</option>
+<option value="ft">Pies (ft)</option>
+<option value="mi">Millas (mi)</option>
+<option value="g">Gramos (g)</option>
+<option value="kg">Kilogramos (kg)</option>
+<option value="oz">Onzas (oz)</option>
+<option value="lb">Libras (lb)</option>
+<option value="l">Litros (l)</option>
+<option value="ml">Mililitros (ml)</option>
+<option value="gal">Galones (gal)</option>
+<option value="s">Segundos (s)</option>
+<option value="min">Minutos (min)</option>
+<option value="h">Horas (h)</option>
+<option value="box">Caja (box)</option>
+<option value="pkg">Paquete (pkg)</option>
+<option value="bag">Bolsa (bag)</option>
+</select>
+
+
   <button onclick="editClientCatalog(this,&quot;${info.clientId}&quot;,&quot;${info.catalogId}&quot;,&quot;readUnit&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
