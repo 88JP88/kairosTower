@@ -2,27 +2,20 @@
 
 session_start();
 
+$bulk = $_GET['bulk'];
 $clientId = $_GET['clientId'];
-$cart = $_GET['cart'];
-$userId = $_GET['userId'];
 
 
-$json_data1 = urldecode($cart);
-//$json_data1 = json_encode($cart);
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiClient/v1/postClientOrder/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+$url = $sub_domain . "/kairosGateway/apiClient/v1/postCatalogBulk/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
-    'clientId' => $clientId, 
-    'cart' => $cart,
-    'userId'=>$userId,
-    'fromIp'=>$_SERVER['REMOTE_ADDR'],
-    'fromBrowser'=>$_SERVER['HTTP_USER_AGENT']
-    
+    'bulk' => $bulk,
+    'clientId' => $clientId
 );
 
 // Convertir los datos a formato JSON
@@ -47,11 +40,6 @@ curl_close($curl);
 $array = explode("|", $response1);
 $response12=$array[0];
 $message=$array[1];
-$ordernumber=$array[2];
-$orderid=$array[3];
-$ftotal=$array[4];
-$fstotal=$array[5];
-$fsaver=$array[6];
 //echo $_SESSION['key'];
 
 $response1 = trim($response12); // Eliminar espacios en blanco alrededor de la respuesta
@@ -61,11 +49,6 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
-    $_SESSION["orderNumber"] = $ordernumber;
-    $_SESSION["orderId"] = $orderid;
-    $_SESSION["ftotal"] = $ftotal;
-    $_SESSION["fstotal"] = $fstotal;
-    $_SESSION["fsaver"] = $fsaver;
     
    // header ('Location: ../room.php?roomId='.$roomId);
 }

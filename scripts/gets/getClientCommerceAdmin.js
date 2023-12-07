@@ -64,6 +64,7 @@ value=catid;
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-container1");
+          
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
           data.catalogs.forEach(info => {
               const card11 = document.createElement("div");

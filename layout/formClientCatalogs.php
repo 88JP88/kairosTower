@@ -30,6 +30,38 @@
     </style>
 </head>
 <body>
+    
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargar archivo CSV y convertirlo en JSON</title>
+</head>
+<body>
+  <h3>CARGA MASIVA</h3>
+    <input type="file" id="fileInput1">
+    <div id="result1"></div>
+
+    <script>
+        document.getElementById('fileInput1').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const csvData = event.target.result;
+                const json = csvToJsonPutCatalog(csvData);
+                document.getElementById('result1').innerText = JSON.stringify(json, null, 2);
+            };
+
+            reader.readAsText(file);
+        });
+
+        
+    </script>
+</body>
+</html>
+
 <div id="card-clientCatalogs" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>

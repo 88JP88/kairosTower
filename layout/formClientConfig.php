@@ -5,6 +5,12 @@
 </head>
 <body>
     <p class="expand-button" onclick="toggleExpandableSection();"><i class="fas fa-calendar"></i> CALENDARIO</p>
+    <a onclick="changeSection('gtask');getIndentFullCalendar();"
+               id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
+               role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
+               <i class="fas fa-warehouse"></i> 
+              
+              </a>
     <div class="expandable-section" id="expandable-section">
         <div id="card-container" class="card-container">
             <!-- Contenido de la sección expandible -->

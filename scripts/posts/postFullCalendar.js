@@ -98,8 +98,8 @@ async function getClientRoomsList() {
       
     
       getMessage();
-
-      fetch(epGetFullCalendar+"2e44d504")
+      var clientId=sessionStorage.getItem('clientNow');
+      fetch(epGetFullCalendar+clientId)
   
       .then(response => response.json())
       .then(data => {

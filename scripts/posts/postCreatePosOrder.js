@@ -28,7 +28,8 @@ var user= sessionStorage.getItem('userId');
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-     getMessage();
+      
+      getMessageOrder();
       totality=0;
 subtotality=0;
  shoppingCart = [];
@@ -36,8 +37,13 @@ shoppingCartPayment = [];
  shoppingProducts = [];
  products=[];
  updateCartView('9999');
- closeModValPosShop();
-     console.log(encodeURIComponent(cartData));
+ 
+ arrayToHTMLCards();
+ arrayToHTMLCardsPayload();
+ //closeModValPosShop();
+ location.reload();
+ location.href = location.href;
+    // console.log(encodeURIComponent(cartData));
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

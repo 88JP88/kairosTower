@@ -20,15 +20,7 @@ var clientIdNow=sessionStorage.getItem('clientNow');
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      document.getElementById("names1").value = "";
-      document.getElementById("lastnames156").value = "";
-      document.getElementById("lastnames123").value = "";
-      document.getElementById("pmail134").value = "";
-      document.getElementById("rol1").value = "Selecciona rol";
-      document.getElementById("pass11").value = "";
-      document.getElementById("pass22").value = "";
-      document.getElementById("clientcomments").value = "";
-      document.getElementById("clientnames").value = "";
+     
       getMessage();
       
     })

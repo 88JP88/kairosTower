@@ -94,9 +94,9 @@
 <div class="mb-3">
 
 <select id="list-categoriesListPos" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value');">Filtrar</button>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value');"><i class="fas fa-filter"></i></button>
           
-    <i class="fas fa-edit"></i>
+
   
 </div>
               </p>
@@ -111,9 +111,9 @@
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value');">Filtrar</button>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value');"><i class="fas fa-filter"></i></button>
           
-    <i class="fas fa-edit"></i>
+
   
 </div>
               </p>
@@ -136,9 +136,9 @@
   </select>
   <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','specific','value');">Filtrar</button>
+  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','specific','value');"><i class="fas fa-filter"></i></button>
             
-      <i class="fas fa-edit"></i>
+ 
     
   </div>
                 </p>
@@ -163,9 +163,9 @@
   <option value="stock">Sin stock</option>
   </select>
  
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('specificCatalog|','specificCatalog','value');">Filtrar</button>
+  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('specificCatalog|','specificCatalog','value');"><i class="fas fa-filter"></i></button>
             
-      <i class="fas fa-edit"></i>
+    
     
   </div>
                 </p>
@@ -176,6 +176,7 @@
             <!-- Contenido de la sección expandible -->
             
         </div>
+        
 
         <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
   </div>
