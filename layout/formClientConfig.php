@@ -121,8 +121,8 @@
         
         <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-phone"></i> CLIENTES</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientCustomers();getClientCustomers('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCustomerCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>

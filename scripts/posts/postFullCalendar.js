@@ -128,13 +128,18 @@ async function getClientRoomsList() {
 
 function removeCalendarEvents (eventId) {
   const eventToRemove = calendar.getEventById(eventId);
-
+ 
 // Verificar si se encontró el evento
 if (eventToRemove) {
   // Remover el evento del calendario
   eventToRemove.remove();
 } else {
   console.log('El evento no se encontró en el calendario.');
+  let allEvents = calendar.getEvents();
+    
+    allEvents.forEach(event => {
+        event.remove();
+    });
 }
 }
 

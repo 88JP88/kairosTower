@@ -802,6 +802,140 @@ async function getClientStores(filter,param,value) {
 
 
 
+async function getClientCustomers(filter,param,value) {
+  document.getElementById("loading-container").style.display = "flex";
+  var clientId=sessionStorage.getItem('clientNow');
+  var idin1=1;
+  fetch(epGetClientCustomers + clientId+"/"+filter+"/"+param+"/"+value)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-clientCustomer");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.customers.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.customerId}&st=${info.customerType}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
+                  <i class="fas fa-store"></i>
+                </a>
+
+              </h5>
+              <p class="card-text">Nombre del cliente:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerName}" title="${info.customerName}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              <p class="card-text">Apellido del cliente:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerLastName}" title="${info.customerLastName}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              
+              
+              
+             <p class="card-text">
+              <div class="edit-container">
+              ${info.isActive !== "0" ? `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+  <i class="fas fa-ban"></i>
+  </button>` 
+  : `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+  <i class="fas fa-check"></i>
+  </button>`}${activo1} 
+    
+</div>
+                     
+                  
+
+
+            
+
+
+
+
+
+
+            
+
+
+              <p class="card-text">Correo:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerMail}" title="${info.customerMail}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+              <p class="card-text">Teléfono:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerPhone}" title="${info.customerPhone}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+
+             
+              <p class="card-text">Puntos:
+              ${info.customerPoints}
+              
+              </p>
+              <p class="card-text">Estrellas:
+              ${info.customerStars}
+              
+              </p>
+
+              <p class="card-text">Tipo de cliente:
+              <div class="edit-container">
+  <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerType}" title="${info.customerType}">
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+              </p>
+             
+              
+              <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+    <i class="fas fa-trash"></i>
+  </button>
+</div>
+              </p>
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+           //   getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+
+              idin1++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
+
+
 async function getClientCategoriesList(filter,param,value,catId) {
 
   var reposSelect = document.getElementById("list-categoriesList"+catId);
@@ -992,237 +1126,6 @@ var uid=sessionStorage.getItem('clientNow');
  }
 
 
-
-async function getClientStyle(param) {
-  document.getElementById("loading-container").style.display = "flex";
-  fetch(epGetClientStyle + param)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-clientStyle");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.clientStyle.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-
-              card11.innerHTML = `
-                  <div class="card-body">
-                  <div class="edit-container">Fondo:
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.bgColor}" style="background-color: #${info.bgColor}; color: #${info.textColor};" onclick="makeEditable(this)" title="${info.textColor}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;bgColor&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-
-      <div class="edit-container">Texto:
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.textColor}" style="background-color: #${info.textColor}; color: #${info.bgColor};" onclick="makeEditable(this)" title="${info.bgColor}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;textColor&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-      Icono:
-      <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgIcon}" onclick="makeEditable(this)" title="${info.imgIcon}">
-
- <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgIcon&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-      <h5 class="card-title">
-      
-      <img src="${info.imgIcon}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-  </h5>  
-  Logo:
-  <div class="edit-container">
-
-  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgLogo}" onclick="makeEditable(this)" title="${info.imgLogo}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgLogo&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-  <i class="fas fa-edit"></i>
-  </button>
-  </div>  
-
-              <h5 class="card-title">
-            
-              <img src="${info.imgLogo}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-          </h5>
-
-          Gif:
-          <div class="edit-container">
-
-          <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgGif}" onclick="makeEditable(this)" title="${info.imgGif}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgGif&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-          <i class="fas fa-edit"></i>
-          </button>
-          </div>  
-
-          <h5 class="card-title">
-          
-          <img src="${info.imgGif}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-          </h5>
-
-                      
-                      
-                   
-              `;
-
-              cardContainer11.appendChild(card11);
-          });
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-      
-}
-function makeEditable(inputElement) {
-  inputElement.removeAttribute("readonly");
-}
-
-
-
-
-async function getCalendarTimedes(param) {
-  document.getElementById("loading-container").style.display = "flex";
-
-  sessionStorage.setItem('timeNow',param)
-  fetch(epGetCalendarTimedes + param)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-usertimedes");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.assignRoom.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-              card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class="card-title"><i class="fas fa-clock"></i>${info.comments}</h5>
-                      <p class="card-text">Usuario: ${info.userName}</p>
-                      <p class="card-text">
-<h3>Elementos actuales</h3>
-                     
-<div id="checkbox-des${info.assignId}" class="card-container">
-<!-- Contenido de la sección expandible -->
-</div>
-
-
-<div class="edit-container">
-<button onclick="assignDeselement(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
-<i class="fas fa-ban"></i>
-</button>
-</div>
-</p>
-<p class="card-text">
-<h3>Asignar elemento</h3>
-                     
-<div id="checkbox-desa${info.roomId}" class="card-container">
-<!-- Contenido de la sección expandible -->
-</div>
-<div class="edit-container">
-<button onclick="assignelementbyuser(&quot;${info.roomId}&quot;,&quot;${info.userId}&quot;,&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
-<i class="fas fa-plus"></i>
-</button>
-
-</div>
-</p>
-<p class="card-text">
-                      <div class="edit-container">
-                    
-          <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR ROOM">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-                      </p>
-                      
-                        </div>
-              `;
-              getClientElemntCheckdes(info.assignId,info.roomId);
-              getClientElemntCheck(info.roomId,'notassign',info.userId,info.assignId);
-              cardContainer11.appendChild(card11);
-          });
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-
-
-
-function editClientCalendar(button, id,filter,reason,value,recharge) {
-  // Obtener el valor del campo de texto correspondiente al botón
-  var input = button.previousElementSibling;
-  //var nombre = input.value;
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCalendar.php?calendarId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      if(reason=="calendarDays"){
-
-        getCalendarDays(recharge);
-
-       
-      }
-      if(reason=="calendarDaysAssign"){
-
-        getCalendarDaysAssign(recharge);
-
-       
-      }
-      if(reason=="calendarTime"){
-
-        getCalendarTime(recharge);
-
-       
-      }
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-}
-
-function editClientRoom(button, id,filter,reason,value,recharge) {
-  // Obtener el valor del campo de texto correspondiente al botón
-
-  if(reason=="comments"){
-
-    var input = button.previousElementSibling;
-    var value = input.value;
-
-  }
-
- 
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientRoom.php?roomId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-        getClientRooms();
-
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-}
 
 
 // Define una función para mostrar el modal de confirmación cerca del botón
