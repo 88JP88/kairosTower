@@ -39,6 +39,35 @@
 
 <button type="button" class="btn btn-primary1 edit-button" id="postCategoriebtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargar archivo CSV y convertirlo en JSON</title>
+</head>
+<body>
+  <h3>CARGA MASIVA</h3>
+    <input type="file" id="fileInputCategorieb">
+    <div id="resultcategorie"></div>
+
+    <script>
+        document.getElementById('fileInputCategorieb').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const csvData = event.target.result;
+                const json = csvToJsonPostCategorie(csvData);
+                document.getElementById('resultcategorie').innerText = JSON.stringify(json, null, 2);
+            };
+
+            reader.readAsText(file);
+        });
+
+        
+    </script>
+</body>
+</html>
 <script  src="scripts/posts/postCategories.js"></script>
 
     

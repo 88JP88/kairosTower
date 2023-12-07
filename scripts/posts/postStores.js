@@ -38,3 +38,38 @@ var clientIdNow=sessionStorage.getItem('clientNow');
 });
 
 
+
+function csvToJsonPostStore(csvData) {
+  const lines = csvData.split('\n');
+  const result = [];
+
+  const headers = lines[0].split(',');
+  for (let i = 1; i < lines.length; i++) {
+      const obj = {};
+      const currentLine = lines[i].split(',');
+
+      for (let j = 0; j < headers.length; j++) {
+          obj[headers[j]] = currentLine[j];
+      }
+
+      const namedObj = { "item": obj }; // Asignar el nombre "item" al objeto
+      result.push(namedObj);
+  }
+
+  const encodedResult = encodeURIComponent(JSON.stringify(result)); // Convertir a JSON y luego codificar
+  var clientIdNow=sessionStorage.getItem('clientNow');
+  var url = "controller/postStoreBulk.php?"+
+  "bulk=" + encodedResult+
+  "&clientId=" + encodeURIComponent(clientIdNow);
+
+  // Realizar la solicitud GET utilizando fetch
+  fetch(url)
+      .then(response => {
+          getMessage();
+          console.log(encodedResult);
+          return encodedResult;
+      })
+      .catch(error => {
+          console.log('Error en la petición:', error);
+      });
+}

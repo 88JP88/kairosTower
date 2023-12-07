@@ -1998,3 +1998,112 @@ function csvToJsonPutCatalog(csvData) {
       });
 }
 
+
+
+function csvToJsonPutProduct(csvData) {
+  const lines1 = csvData.split('\n');
+  const result1 = [];
+
+  const headers = lines1[0].split(',');
+  for (let i = 1; i < lines1.length; i++) {
+      const obj1 = {};
+      const currentLine = lines1[i].split(',');
+
+      for (let j = 0; j < headers.length; j++) {
+          obj1[headers[j]] = currentLine[j];
+      }
+
+      const namedObj1 = { "item": obj1 }; // Asignar el nombre "item" al objeto
+      result1.push(namedObj1);
+  }
+
+  const encodedResult1 = encodeURIComponent(JSON.stringify(result1)); // Convertir a JSON y luego codificar
+  var clientIdNow=sessionStorage.getItem('clientNow');
+  var url = "controller/putProductBulk.php?"+
+  "bulk=" + encodedResult1+
+  "&clientId=" + encodeURIComponent(clientIdNow);
+
+  // Realizar la solicitud GET utilizando fetch
+  fetch(url)
+      .then(response => {
+          getMessage();
+          console.log(encodedResult1);
+          return encodedResult1;
+      })
+      .catch(error => {
+          console.log('Error en la petición:', error);
+      });
+}
+
+
+function csvToJsonPutStore(csvData) {
+  const lines1 = csvData.split('\n');
+  const result1 = [];
+
+  const headers = lines1[0].split(',');
+  for (let i = 1; i < lines1.length; i++) {
+      const obj1 = {};
+      const currentLine = lines1[i].split(',');
+
+      for (let j = 0; j < headers.length; j++) {
+          obj1[headers[j]] = currentLine[j];
+      }
+
+      const namedObj1 = { "item": obj1 }; // Asignar el nombre "item" al objeto
+      result1.push(namedObj1);
+  }
+
+  const encodedResult1 = encodeURIComponent(JSON.stringify(result1)); // Convertir a JSON y luego codificar
+  var clientIdNow=sessionStorage.getItem('clientNow');
+  var url = "controller/putStoreBulk.php?"+
+  "bulk=" + encodedResult1+
+  "&clientId=" + encodeURIComponent(clientIdNow);
+
+  // Realizar la solicitud GET utilizando fetch
+  fetch(url)
+      .then(response => {
+          getMessage();
+          console.log(encodedResult1);
+          return encodedResult1;
+      })
+      .catch(error => {
+          console.log('Error en la petición:', error);
+      });
+}
+
+
+
+function csvToJsonPutCategorie(csvData) {
+  const lines1 = csvData.split('\n');
+  const result1 = [];
+
+  const headers = lines1[0].split(',');
+  for (let i = 1; i < lines1.length; i++) {
+      const obj1 = {};
+      const currentLine = lines1[i].split(',');
+
+      for (let j = 0; j < headers.length; j++) {
+          obj1[headers[j]] = currentLine[j];
+      }
+
+      const namedObj1 = { "item": obj1 }; // Asignar el nombre "item" al objeto
+      result1.push(namedObj1);
+  }
+
+  const encodedResult1 = encodeURIComponent(JSON.stringify(result1)); // Convertir a JSON y luego codificar
+  var clientIdNow=sessionStorage.getItem('clientNow');
+  var url = "controller/putCategorieBulk.php?"+
+  "bulk=" + encodedResult1+
+  "&clientId=" + encodeURIComponent(clientIdNow);
+
+  // Realizar la solicitud GET utilizando fetch
+  fetch(url)
+      .then(response => {
+          getMessage();
+          console.log(encodedResult1);
+          return encodedResult1;
+      })
+      .catch(error => {
+          console.log('Error en la petición:', error);
+      });
+}
