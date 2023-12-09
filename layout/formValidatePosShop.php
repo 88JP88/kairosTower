@@ -30,6 +30,7 @@
     </style>
 </head>
 <body>
+    
 <div id="card-validatePosShop" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>

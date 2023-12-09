@@ -822,15 +822,13 @@ async function getClientCustomers(filter,param,value) {
                   <h5 class="card-title">
                   <p class="card-text"> <i class="fas fa-guitar"></i></p>
                 
-                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.customerId}&st=${info.customerType}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
-                  <i class="fas fa-store"></i>
-                </a>
+                 
 
               </h5>
               <p class="card-text">Nombre del cliente:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerName}" title="${info.customerName}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;customerName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -838,7 +836,7 @@ async function getClientCustomers(filter,param,value) {
               <p class="card-text">Apellido del cliente:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerLastName}" title="${info.customerLastName}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;customerLastName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -848,10 +846,10 @@ async function getClientCustomers(filter,param,value) {
               
              <p class="card-text">
               <div class="edit-container">
-              ${info.isActive !== "0" ? `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+              ${info.isActive !== "0" ? `<button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
   <i class="fas fa-ban"></i>
   </button>` 
-  : `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+  : `<button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
   <i class="fas fa-check"></i>
   </button>`}${activo1} 
     
@@ -873,7 +871,7 @@ async function getClientCustomers(filter,param,value) {
               <p class="card-text">Correo:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerMail}" title="${info.customerMail}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;customerName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -881,7 +879,7 @@ async function getClientCustomers(filter,param,value) {
               <p class="card-text">Teléfono:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerPhone}" title="${info.customerPhone}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;customerPhone&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -900,7 +898,7 @@ async function getClientCustomers(filter,param,value) {
               <p class="card-text">Tipo de cliente:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.customerType}" title="${info.customerType}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;customerType&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -910,7 +908,7 @@ async function getClientCustomers(filter,param,value) {
               <p class="card-text">
               <div class="edit-container">
   
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+  <button onclick="editClientCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
     <i class="fas fa-trash"></i>
   </button>
 </div>
@@ -1330,6 +1328,91 @@ function editClientStore(button, clientId,productId,param,value,reason) {
       getMessage();
       
       getClientProducts('filter',param,value);
+       
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  },button);
+  }
+ 
+
+}
+
+
+function editClientCustomer(button, clientId,customerId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientCustomers('filter',param,value);
+
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="isActive"){
+
+    
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientCustomers('filter',param,value);
+
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="del"){
+    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
+    showConfirmationModalNearButton(confirmMessage, () => {
+
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientCustomers('filter',param,value);
        
       
  

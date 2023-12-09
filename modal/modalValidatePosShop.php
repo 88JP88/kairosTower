@@ -77,6 +77,22 @@
     
   </div>
                 </p>
+                <p class="card-text">Cliente:
+  
+
+           
+
+  <div class="mb-3">
+  
+  <select id="list-customerget" class="form-control" name="lista" required>
+
+  </select>
+  <button class="btn btn-primary" onClick="getClientCustomersPos('filter','customerId','value');">Validar cliente</button>
+  <div id="card-validateClientPos" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+  </div>
+                </p>
             <button class="btn btn-primary" onClick="arrayToHTMLCardsPayload();createPosOrder();">Validar compra</button>
 
                 <?php

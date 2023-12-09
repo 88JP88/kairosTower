@@ -5,6 +5,11 @@ session_start();
 $clientId = $_GET['clientId'];
 $cart = $_GET['cart'];
 $userId = $_GET['userId'];
+$customerId = $_GET['customerId'];
+$ptype = $_GET['paymentType'];
+$pMeth = $_GET['paymentMethod'];
+$payWith = $_GET['payWith'];
+$bankEntity = $_GET['bankEntity'];
 
 
 $json_data1 = urldecode($cart);
@@ -21,7 +26,12 @@ $data = array(
     'cart' => $cart,
     'userId'=>$userId,
     'fromIp'=>$_SERVER['REMOTE_ADDR'],
-    'fromBrowser'=>$_SERVER['HTTP_USER_AGENT']
+    'fromBrowser'=>$_SERVER['HTTP_USER_AGENT'],
+    'customerId'=>$customerId,
+    'paymentType'=>$ptype,
+    'paymentMethod'=>$pMeth,
+    'payWith'=>$payWith,
+    'bankEntity'=>$bankEntity
     
 );
 

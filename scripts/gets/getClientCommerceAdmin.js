@@ -1850,3 +1850,121 @@ if(+value>+maxqty){
 function esEntero(numero) {
   return Number.isInteger(numero);
 }
+
+
+
+
+
+ function getCustomerList(containerId) {
+
+  var reposSelect = document.getElementById(containerId);
+  while (reposSelect.firstChild) {
+    reposSelect.removeChild(reposSelect.firstChild);
+  }
+
+
+
+
+	fetch('https://dev-kairosgateway.lugma.tech/kairosGateway/apiClient/v1/getCustomers/UfbHdZaJ%206WclAmsaP9H7SR2WmpDbl1OL9/2e44d504/all/all/all')
+  .then(response => response.json())
+  .then(data => {
+    data.customers.forEach(info => {
+      const option = document.createElement("option");
+      option.value = info.customerId;
+      option.text = info.customerName+" "+info.customerLastName;
+      reposSelect.add(option);
+    });
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+ }
+
+
+ 
+async function getClientCustomersPos(filter,param,value) {
+  document.getElementById("loading-container").style.display = "flex";
+  const url = window.location.href;
+value= document.getElementById('list-customerget').value;
+  // Crear un objeto URL a partir de la URL actual
+  const urlObj = new URL(url);
+  
+  // Obtener el valor del parámetro "parametro1"
+  var clientId = urlObj.searchParams.get("clientId");
+  //var clientId=sessionStorage.getItem('clientNow');
+  var idin1=1;
+  fetch(epGetClientCustomers + clientId+"/"+filter+"/"+param+"/"+value)
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("card-validateClientPos");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.customers.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                 
+
+              </h5>
+              <p class="card-text">Nombre: ${info.customerName}
+             
+              </p>
+              <p class="card-text">Apellido: ${info.customerLastName}
+              
+              </p>
+
+              <p class="card-text">Datos: ${info.customerMail} / ${info.customerPhone}
+            
+              </p>
+             
+
+             
+              <p class="card-text">Puntos:
+              ${info.customerPoints}
+              
+              </p>
+              <p class="card-text">Estrellas:
+              ${info.customerStars}
+              
+              </p>
+              <p class="card-text">Cada punto equivale:
+              $${info.pointsValue}
+              
+              </p>
+              <p class="card-text">Con cada $${info.pointsEq} en compras recolectas un punto:
+              
+              
+              </p>
+              <p class="card-text">Total en puntos:
+              $${info.customerPoints*info.pointsValue}
+              
+              </p>
+             
+              
+          
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+           //   getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+
+              idin1++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+}
