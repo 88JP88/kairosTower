@@ -7,6 +7,8 @@ $orderId = $_SESSION['orderId'];
 $ftotal = $_SESSION['ftotal'];
 $fstotal = $_SESSION['fstotal'];
 $fsaver = $_SESSION['fsaver'];
+$pMethod = $_SESSION['pMethod'];
+$pType = $_SESSION['pType'];
 
 $response = [
   'mensaje' => $mensaje,
@@ -15,7 +17,9 @@ $response = [
   'orderId' => $orderId,
   'total' => $ftotal,
   'subTotal' => $fstotal,
-  'saver' => $fsaver
+  'saver' => $fsaver,
+  'paymentMethod' => $pMethod,
+  'paymentType' => $pType
 ];
 
 header('Content-Type: application/json');

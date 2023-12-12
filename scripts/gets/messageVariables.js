@@ -44,6 +44,8 @@ function getMessage() {
         var nuevoTotal = data.total;
         var nuevoSubTotal = data.subTotal;
         var nuevoSaver = data.saver;
+        var nuevoPm = data.paymentMethod;
+        var nuevoPtype = data.paymentType;
   
       
   
@@ -58,9 +60,21 @@ function getMessage() {
           
         }
   
+    //alert("Orden número: "+nuevoOrderNumber+". Id de orden: "+nuevoOrderId+". Total: $"+nuevoTotal+". Subtotal: $"+nuevoSubTotal+". Ahorro: $"+nuevoSaver+" tip "+nuevoPtype);
+    //showNotify(nuevoMensaje, re);
+    //showNotify(nuevoMensaje, re);
+  if(nuevoPtype==="app" || nuevoPtype==="cc" || nuevoPtype==="dc" || nuevoPtype==="points_isCredit_mc" || nuevoPtype==="points_isCredit_vs" || nuevoPtype==="points_isDebit_mc" || nuevoPtype==="points_isDebit_vs" ){
+   alert("Orden número: "+nuevoOrderNumber+". Id de orden: "+nuevoOrderId+". Total: $"+nuevoTotal+". Subtotal: $"+nuevoSubTotal+". Ahorro: $"+nuevoSaver+".");
+   openModValPosShopBanking(); 
+   showNotify(nuevoMensaje, re);
+  }
+  if(nuevoPtype==="cash"){
+    alert("Orden número: "+nuevoOrderNumber+". Id de orden: "+nuevoOrderId+". Total: $"+nuevoTotal+". Subtotal: $"+nuevoSubTotal+". Ahorro: $"+nuevoSaver+".");
+   // openModValPosShopBanking(); 
+    showNotify(nuevoMensaje, re);
+   }
         
-        alert("Orden número: "+nuevoOrderNumber+". Id de orden: "+nuevoOrderId+". Total: $"+nuevoTotal+". Subtotal: $"+nuevoSubTotal+". Ahorro: $"+nuevoSaver+".");
-        showNotify(nuevoMensaje, re);
+       
   
       })
       .catch(error => {

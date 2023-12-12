@@ -39,19 +39,46 @@ var user= sessionStorage.getItem('userId');
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       console.log(encodeURIComponent(cartData));
       getMessageOrder();
-      totality=0;
-subtotality=0;
- shoppingCart = [];
-shoppingCartPayment = [];
- shoppingProducts = [];
- products=[];
- updateCartView('9999');
- 
- arrayToHTMLCards();
- arrayToHTMLCardsPayload();
+
+      fetch('controller/getPHPVariablesOrders.php')
+      .then(response => response.json())
+      .then(data => {
+        // Aquí obtienes los nuevos valores de las variables PHP en el objeto "data"
+        // Puedes acceder a los valores como data.mensaje y data.error
+        // Por ejemplo:
+        var nuevoMensaje = data.mensaje;
+        var nuevoError = data.error;
+        var nuevoOrderNumber = data.orderNumber;
+        var nuevoOrderId = data.orderId;
+        var nuevoTotal = data.total;
+        var nuevoSubTotal = data.subTotal;
+        var nuevoSaver = data.saver;
+        var nuevoPm = data.paymentMethod;
+        var nuevoPtype = data.paymentType;
+
+
+        if(nuevoError==="true"){
+          totality=0;
+          subtotality=0;
+           shoppingCart = [];
+          shoppingCartPayment = [];
+           shoppingProducts = [];
+           products=[];
+           updateCartView('9999');
+           
+           arrayToHTMLCards();
+           arrayToHTMLCardsPayload();
+        }
+        if(nuevoError==="false"){
+            alert(nuevoMensaje);
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener las variables PHP:', error);
+      });
+   
+     
  //closeModValPosShop();
- location.reload();
- location.href = location.href;
      
     })
     .catch(error => {

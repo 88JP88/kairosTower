@@ -1968,3 +1968,46 @@ value= document.getElementById('list-customerget').value;
           document.getElementById("loading-container").style.display = "none";
       });
 }
+
+
+
+function putOrderPaymentStatus() {
+  // Obtener el valor del campo de texto correspondiente al botón
+  const url1 = window.location.href;
+  //value= document.getElementById('list-customerget').value;
+    // Crear un objeto URL a partir de la URL actual
+    const urlObj = new URL(url1);
+    
+    // Obtener el valor del parámetro "parametro1"
+    var clientId = urlObj.searchParams.get("clientId");
+ 
+
+    var input = document.getElementById('paymentReference').value;
+    
+
+  // Construir la URL con los parámetros de la petición GET
+  var url = 'controller/putClientOrderPayment.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+       // getClientStores('filter',param,value);
+
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  
+ 
+  }
+ 
+
+

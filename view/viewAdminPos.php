@@ -23,4 +23,5 @@ require_once 'modal/modaldesAssignUserTime.php';
 require_once 'modal/modaldesAssignUserTimeAdmin.php';
 require_once 'modal/modalAssigndesElement.php';
 require_once 'modal/modalValidatePosShop.php';
+require_once 'modal/modalValidatePosBanking.php';
 ?>

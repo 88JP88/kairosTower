@@ -93,9 +93,9 @@
         </div>
   </div>
                 </p>
-            <button class="btn btn-primary" onClick="arrayToHTMLCardsPayload();createPosOrder();">Validar compra</button>
-
-                <?php
+                <button type="button" class="btn btn-primary" onclick="arrayToHTMLCardsPayload();createPosOrder();">Validar compra</button>
+      
+               <?php
                 // PHP - Lógica para determinar qué formulario de usuario requerir
                 
                     require_once 'layout/formValidatePosShop.php';
