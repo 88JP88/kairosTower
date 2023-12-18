@@ -75,7 +75,7 @@
   
   <div id="cartItems1" class="cart-items1"></div>
  
-  <button class="btn btn-primary" onClick="openModValPosShop();arrayToHTMLCards('card-validatePosShop');getCustomerList('list-customerget');">Validar compra</button>
+  <button class="btn btn-primary" onClick="openModValEcmShop();arrayToHTMLCards('card-validateEcmShop');getCustomerList('list-customerget');">Validar compra</button>
 
 
 
@@ -95,7 +95,7 @@
 <div class="mb-3">
 
 <select id="list-categoriesListPos" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value','card-container1');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value','card-container2');"><i class="fas fa-filter"></i></button>
           
 
   
@@ -112,60 +112,13 @@
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value','card-container1');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value','card-container2');"><i class="fas fa-filter"></i></button>
           
 
   
 </div>
               </p>
 
-
-              <p class="card-text">Filtro por caracter en específico:
-  
-
-           
-
-  <div class="mb-3">
-  
-  <select id="list-caracterspecific" class="form-control" name="lista" required>
-
-  <option value="productName">Nombre de producto</option>
-  <option value="description">Caracteristicas de producto</option>
-  <option value="stock">Stock de catálogo</option>
-  <option value="outPrice">Precio de venta</option>
-  <option value="discount">Descuento</option>
-  </select>
-  <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
- 
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','specific','value','card-container1');"><i class="fas fa-filter"></i></button>
-            
- 
-    
-  </div>
-                </p>
-
-
-                <p class="card-text">Filtro por caracteristica de catalogo:
-  
-
-           
-
-  <div class="mb-3">
-  
-  <select id="list-caracterCatalog" class="form-control" name="lista" required>
-
-  <option value="isStocked">Bodega</option>
-  <option value="isInternal">Reserva interna</option>
-  <option value="secStock">Bajo stock</option>
-  <option value="isPromo">Promociones</option>
-  <option value="isDiscount">Descuentos</option>
-  <option value="isActive">Activos</option>
-  <option value="isActiveNot">Inactivos</option>
-  <option value="stock">Sin stock</option>
-  </select>
- 
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('specificCatalog|','specificCatalog','value','card-container1');"><i class="fas fa-filter"></i></button>
-            
   <button class="btn btn-primary" onClick="openModClientOrders();getClientOrders('clientId','byStore','storeId','value','tableClientOrders');">VER ORDENES</button>
 
     
@@ -174,13 +127,13 @@
 
 </div>
 
-    <div id="card-container1" class="card-container">
+    <div id="card-container2" class="card-container">
             <!-- Contenido de la sección expandible -->
             
         </div>
         
 
-        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container1');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
+        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container2');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
   </div>
 
       
@@ -308,4 +261,4 @@
     }
 </style>
 <script>getClientCategoriesListaddPost('all','all','all');
-profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container1');</script>
+profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container2');</script>

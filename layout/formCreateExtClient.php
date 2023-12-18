@@ -95,7 +95,7 @@
 
 
 
-<button type="button" class="btn btn-primary1 edit-button" id="postClient" title="CREAR CLIENTE"><i class="fas fa-folder-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postClientExternal" title="CREAR CLIENTE"><i class="fas fa-folder-plus"></i></button>
 
 <script  src="scripts/posts/postExtClient.js"></script>
 

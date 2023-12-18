@@ -46,7 +46,7 @@ if(param=="unlock"){
       <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.clientName}" title="${info.clientName}" onclick="makeEditable(this)"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;,&quot;client&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
-      <button onClick="postTest();">editar prueba</button>
+     
       </div>
       </td>
 

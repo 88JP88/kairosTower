@@ -691,13 +691,14 @@ async function getClientStores(filter,param,value) {
               card11.classList.add("card");
               const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+              const referencia = info.storeType === "pos" ? ref="pos.php" : info.storeType === "ecm" ? ref="ecm.php" : info.storeType === "pos_ecm" ? ref="pos_ecm.php" : ref="session.php";
              
               card11.innerHTML = `
                   <div class="card-body" style="background-color: ${backgroundColor};">
                   <h5 class="card-title">
                   <p class="card-text"> <i class="fas fa-guitar"></i></p>
                 
-                  <a href="pos.php?clientId=${info.clientId}&storeId=${info.storeId}&st=${info.storeType}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
+                  <a href="${referencia}?clientId=${info.clientId}&storeId=${info.storeId}&st=${info.storeType}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
                   <i class="fas fa-store"></i>
                 </a>
 

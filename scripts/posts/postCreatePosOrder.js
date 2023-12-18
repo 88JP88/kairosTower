@@ -38,7 +38,7 @@ var user= sessionStorage.getItem('userId');
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       console.log(encodeURIComponent(cartData));
-      getMessageOrder();
+      
 
       fetch('controller/getPHPVariablesOrders.php')
       .then(response => response.json())
@@ -64,6 +64,7 @@ var user= sessionStorage.getItem('userId');
           shoppingCartPayment = [];
            shoppingProducts = [];
            products=[];
+           getMessageOrder();
            updateCartView('9999');
            
            arrayToHTMLCards();
@@ -71,6 +72,7 @@ var user= sessionStorage.getItem('userId');
         }
         if(nuevoError==="false"){
             alert(nuevoMensaje);
+            getMessageOrder();
         }
       })
       .catch(error => {

@@ -40,3 +40,5 @@ const epGetClientStores= `${subDomain}/kairosGateway/apiCom/v1/getStores/${ranCo
 const epGetFullCalendar= `${subDomain}/kairosGateway/apiCompanies/v1/getFullCalendar/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 const epGetClientCustomers= `${subDomain}/kairosGateway/apiClient/v1/getCustomers/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const epGetClientOrders= `${subDomain}/kairosGateway/apiClient/v1/getClientOrders/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

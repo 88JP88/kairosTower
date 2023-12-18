@@ -10,7 +10,7 @@ function generarID() {
 
 
 
-async function getClientCatalogsAdmin(filter,param,value) {
+async function getClientCatalogsAdmin(filter,param,value,contenedor) {
 
   const url = window.location.href;
 
@@ -36,13 +36,19 @@ var storeId = urlObj.searchParams.get("storeId");
 // Obtener el valor del parámetro "parametro1"
 var st = urlObj.searchParams.get("st");
 
-
+if(st==="pos"){
   document.getElementById("loading-container").style.display = "flex";
   var catid= document.getElementById("list-categoriesListPos").value;
   var catid1= document.getElementById("simil").value;
   var catid2= document.getElementById("scaracter").value;
   var catid3= document.getElementById("list-caracterspecific").value;
   var catid4= document.getElementById("list-caracterCatalog").value;
+}
+if(st==="ecm"){
+  document.getElementById("loading-container").style.display = "flex";
+  var catid= document.getElementById("list-categoriesListPos").value;
+  var catid1= document.getElementById("simil").value;
+}
   if(param=="categoryId"){
 value=catid;
   }
@@ -63,7 +69,7 @@ value=catid;
   fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value+"/"+st)
       .then(response => response.json())
       .then(data => {
-          const cardContainer11 = document.getElementById("card-container1");
+          const cardContainer11 = document.getElementById(contenedor);
           
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
           data.catalogs.forEach(info => {
@@ -320,250 +326,6 @@ function updateCartView(id) {
   }
 }
 
-async function getClientCategories(filter,param,value) {
-  document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
-  var idin1=1;
-  fetch(epGetClientCategories + clientId+"/"+filter+"/"+param+"/"+value)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-clientCategories");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.categories.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-             
-              card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                  <h5 class="card-title">
-                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
-                
-                
-
-              </h5>
-              <p class="card-text">Categoría:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.categoryName}" title="${info.categoryName}">
-  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;catName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-              
-              
-              
-             <p class="card-text">
-              <div class="edit-container">
-              ${info.isActive !== "0" ? `<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-  <i class="fas fa-ban"></i>
-  </button>` 
-  : `<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-  <i class="fas fa-check"></i>
-  </button>`}${activo1} 
-    
-</div>
-                     
-                  
-
-
-            
-
-
-
-
-
-
-            
-
-
-              <p class="card-text">Comentarios:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.comments}" title="${info.comments}">
-  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-
-              <p class="card-text">Categoria madre:
-              ${info.parentName}
-<div class="mb-3">
-
-<select id="list-categoriesList1${idin1}" class="form-control" name="lista" required>
-
-</select>
-
-<button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;parentId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Categoria madre:
-              ${info.categoryType}
-              </p>
-                            <p class="card-text">Palabras clave:
-                            <div class="edit-container">
-                <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.keyWords}" title="${info.keyWords}">
-                <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-                  <i class="fas fa-edit"></i>
-                </button>
-              </div>
-                            </p>
-              
-              <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="editClientCategorie(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-    <i class="fas fa-trash"></i>
-  </button>
-</div>
-              </p>
-                      
-                  </div>
-                  
-              `;
-
-              cardContainer11.appendChild(card11);
-              getClientCategoriesList3('all','all','all',idin1);
-              //getClientStoresList13('all','all','all',idin1);
-
-              idin1++;
-          });
-          
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-
-
-async function getClientStores(filter,param,value) {
-  document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
-  var idin1=1;
-  fetch(epGetClientStores + clientId+"/"+filter+"/"+param+"/"+value)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-clientStores");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.stores.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-             
-              card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                  <h5 class="card-title">
-                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
-                
-                
-
-              </h5>
-              <p class="card-text">Tienda:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.storeName}" title="${info.storeName}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;storeName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-              
-              
-              
-             <p class="card-text">
-              <div class="edit-container">
-              ${info.isActive !== "0" ? `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-  <i class="fas fa-ban"></i>
-  </button>` 
-  : `<button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-  <i class="fas fa-check"></i>
-  </button>`}${activo1} 
-    
-</div>
-                     
-                  
-
-
-            
-
-
-
-
-
-
-            
-
-
-              <p class="card-text">Comentarios:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.comments}" title="${info.comments}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-
-             
-              <p class="card-text">Tipo de tienda:
-              ${info.storeType}
-              <div class="edit-container">
-              <select id="list-storesListstoreq2" class="form-control" name="lista1" required>
-              <option value="ecm">E-commerce</option>
-              <option value="pos">E-Punto de venta</option>
-              <option value="pos_ecm">E-commerce y punto de venta</option>
-              </select>
-                <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;storeType&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-
-              <p class="card-text">Palabras clave:
-              <div class="edit-container">
-  <input type="text" class="form-control label-input" id="${info.storeId}" value="${info.keyWords}" title="${info.keyWords}">
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.storeId}&quot;,&quot;keyWords&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-              </p>
-             
-              
-              <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="editClientStore(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-    <i class="fas fa-trash"></i>
-  </button>
-</div>
-              </p>
-                      
-                  </div>
-                  
-              `;
-
-              cardContainer11.appendChild(card11);
-           //   getClientCategoriesList3('all','all','all',idin1);
-              //getClientStoresList13('all','all','all',idin1);
-
-              idin1++;
-          });
-          
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-
 
 
 async function getClientCategoriesListaddPost(filter,param,value) {
@@ -671,332 +433,11 @@ var uid=sessionStorage.getItem('clientNow');
  }
 
 
- async function getClientStoresList1(filter,param,value,catid) {
-
-  var reposSelect = document.getElementById("list-storesListstore"+catid);
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.stores.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.storeId;
-      option.text = info.storeName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
- 
- async function getClientStoresList12(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-storesListstoreq");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.stores.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.storeId;
-      option.text = info.storeName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
-
- async function getClientStoresList1add(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-storeListstadd");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.stores.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.storeId;
-      option.text = info.storeName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
-
- async function getClientProductList1add(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-productListstadd");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientProducts+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.products.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.productId;
-      option.text = info.productName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
-
-
-async function getClientStyle(param) {
-  document.getElementById("loading-container").style.display = "flex";
-  fetch(epGetClientStyle + param)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-clientStyle");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.clientStyle.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-
-              card11.innerHTML = `
-                  <div class="card-body">
-                  <div class="edit-container">Fondo:
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.bgColor}" style="background-color: #${info.bgColor}; color: #${info.textColor};" onclick="makeEditable(this)" title="${info.textColor}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;bgColor&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-
-      <div class="edit-container">Texto:
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.textColor}" style="background-color: #${info.textColor}; color: #${info.bgColor};" onclick="makeEditable(this)" title="${info.bgColor}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;textColor&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-      Icono:
-      <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgIcon}" onclick="makeEditable(this)" title="${info.imgIcon}">
-
- <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgIcon&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div>
-      <h5 class="card-title">
-      
-      <img src="${info.imgIcon}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-  </h5>  
-  Logo:
-  <div class="edit-container">
-
-  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgLogo}" onclick="makeEditable(this)" title="${info.imgLogo}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgLogo&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-  <i class="fas fa-edit"></i>
-  </button>
-  </div>  
-
-              <h5 class="card-title">
-            
-              <img src="${info.imgLogo}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-          </h5>
-
-          Gif:
-          <div class="edit-container">
-
-          <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.imgGif}" onclick="makeEditable(this)" title="${info.imgGif}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;imgGif&quot;,&quot;style&quot;)" class="btn btn-primary1 edit-button" title="EDITAR">
-          <i class="fas fa-edit"></i>
-          </button>
-          </div>  
-
-          <h5 class="card-title">
-          
-          <img src="${info.imgGif}" alt="Icono" style="width: 100px; height: 100px; display: block; margin: 0 auto;">
-          </h5>
-
-                      
-                      
-                   
-              `;
-
-              cardContainer11.appendChild(card11);
-          });
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-      
-}
-function makeEditable(inputElement) {
-  inputElement.removeAttribute("readonly");
-}
-
-
-
-
-async function getCalendarTimedes(param) {
-  document.getElementById("loading-container").style.display = "flex";
-
-  sessionStorage.setItem('timeNow',param)
-  fetch(epGetCalendarTimedes + param)
-      .then(response => response.json())
-      .then(data => {
-          const cardContainer11 = document.getElementById("card-usertimedes");
-          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-          data.assignRoom.forEach(info => {
-              const card11 = document.createElement("div");
-              card11.classList.add("card");
-              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-              card11.innerHTML = `
-                  <div class="card-body" style="background-color: ${backgroundColor};">
-                      <h5 class="card-title"><i class="fas fa-clock"></i>${info.comments}</h5>
-                      <p class="card-text">Usuario: ${info.userName}</p>
-                      <p class="card-text">
-<h3>Elementos actuales</h3>
-                     
-<div id="checkbox-des${info.assignId}" class="card-container">
-<!-- Contenido de la sección expandible -->
-</div>
-
-
-<div class="edit-container">
-<button onclick="assignDeselement(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR">
-<i class="fas fa-ban"></i>
-</button>
-</div>
-</p>
-<p class="card-text">
-<h3>Asignar elemento</h3>
-                     
-<div id="checkbox-desa${info.roomId}" class="card-container">
-<!-- Contenido de la sección expandible -->
-</div>
-<div class="edit-container">
-<button onclick="assignelementbyuser(&quot;${info.roomId}&quot;,&quot;${info.userId}&quot;,&quot;${info.assignId}&quot;)" class="btn btn-primary1 edit-button" title="VERIFICAR">
-<i class="fas fa-plus"></i>
-</button>
-
-</div>
-</p>
-<p class="card-text">
-                      <div class="edit-container">
-                    
-          <button onclick="assignDes(&quot;${info.assignId}&quot;)" class="btn btn-primary1 delete-button" title="DESASIGNAR ROOM">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-                      </p>
-                      
-                        </div>
-              `;
-              getClientElemntCheckdes(info.assignId,info.roomId);
-              getClientElemntCheck(info.roomId,'notassign',info.userId,info.assignId);
-              cardContainer11.appendChild(card11);
-          });
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-
-
-
-function editClientCalendar(button, id,filter,reason,value,recharge) {
-  // Obtener el valor del campo de texto correspondiente al botón
-  var input = button.previousElementSibling;
-  //var nombre = input.value;
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCalendar.php?calendarId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      if(reason=="calendarDays"){
-
-        getCalendarDays(recharge);
-
-       
-      }
-      if(reason=="calendarDaysAssign"){
-
-        getCalendarDaysAssign(recharge);
-
-       
-      }
-      if(reason=="calendarTime"){
-
-        getCalendarTime(recharge);
-
-       
-      }
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-}
-
-function editClientRoom(button, id,filter,reason,value,recharge) {
-  // Obtener el valor del campo de texto correspondiente al botón
-
-  if(reason=="comments"){
-
-    var input = button.previousElementSibling;
-    var value = input.value;
-
-  }
-
  
 
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientRoom.php?roomId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
 
-      getMessage();
-      
-        getClientRooms();
 
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-}
 
 
 // Define una función para mostrar el modal de confirmación cerca del botón
@@ -1047,705 +488,16 @@ function showConfirmationModalNearButton(message, onConfirm, button) {
 }
 
 
-function editClientProduct(button, clientId,productId,param,value,reason) {
-  // Obtener el valor del campo de texto correspondiente al botón
 
-  if(reason=="data"){
 
-    var input = button.previousElementSibling;
-    var value = input.value;
 
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
 
-      getMessage();
-      
-        getClientProducts('filter',param,value);
 
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="isActive"){
 
-    
 
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-        getClientProducts('filter',param,value);
-
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientProducts('filter',param,value);
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
- 
-
-}
-
-function editClientStore(button, clientId,productId,param,value,reason) {
-  // Obtener el valor del campo de texto correspondiente al botón
-
-  if(reason=="data"){
-
-    var input = button.previousElementSibling;
-    var value = input.value;
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-        getClientStores('filter',param,value);
-
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="isActive"){
-
-    
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-        getClientProducts('filter',param,value);
-
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientProducts('filter',param,value);
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
- 
-
-}
-
-
-
-function editClientCatalog(button, clientId,catalogId,param,value,reason) {
-  // Obtener el valor del campo de texto correspondiente al botón
-
-  if(reason=="data"){
-
-    var input = button.previousElementSibling;
-    var value = input.value;
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientCatalogs('basic|'+catalogId,'catalogId',catalogId);
-
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="isActive"){
-
-    
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      getClientCatalogs('basic|'+catalogId,'catalogId',catalogId);
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientProducts('filter',param,value);
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
- 
-
-}
-
-
-function editClientCategorie(button, clientId,catalogId,param,value,reason) {
-  // Obtener el valor del campo de texto correspondiente al botón
-
-  if(reason=="data"){
-
-    var input = button.previousElementSibling;
-    var value = input.value;
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      console.log(catalogId+" "+value);
-      getClientCategories('filter','catId',catalogId);
-
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="isActive"){
-
-    
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      getClientCategories('filter','catId',catalogId);
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientCategories('filter',param,value);
-       
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
- 
-
-}
-
-function createCheckbox(info) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.name = "assignCheckbox"; // Asigna un nombre a los checkboxes
-  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
-  checkbox.addEventListener("change", handleCheckboxChange); // Agrega un manejador de eventos para el cambio
-
-  const label = document.createElement("label");
-  label.appendChild(checkbox);
-  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
-  label.classList.add("custom-checkbox-label"); // Agrega una clase CSS al label
-
-  return label;
-}
-
-function createCheckbox1(info) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.name = "assignCheckboxelement"; // Asigna un nombre a los checkboxes
-  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
-  checkbox.addEventListener("change", handleCheckboxChangeAssignElement); // Agrega un manejador de eventos para el cambio
-
-  const label = document.createElement("label");
-  label.appendChild(checkbox);
-  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
-
-  label.classList.add("custom-checkbox-label"); // Agrega una clase CSS al label
-  return label;
-}
-
-function createCheckbox3(info) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.name = "assignCheckboxelementbyadmin"; // Asigna un nombre a los checkboxes
-  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
-  checkbox.addEventListener("change", handleCheckboxChangeAssignElementbyuser); // Agrega un manejador de eventos para el cambio
-
-  const label = document.createElement("label");
-  label.appendChild(checkbox);
-  label.appendChild(document.createTextNode(info.elementName+" / "+info.comments));
-
-  label.classList.add("custom-checkbox-label"); // Agrega una clase CSS al label
-  return label;
-}
-
-function createCheckbox4(info) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.name = "assignCheckboxelementbyadminnot"; // Asigna un nombre a los checkboxes
-  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
-  checkbox.addEventListener("change", handleCheckboxChangeAssignElementbyusernot); // Agrega un manejador de eventos para el cambio
-
-  const label = document.createElement("label");
-  label.appendChild(checkbox);
-  label.appendChild(document.createTextNode(info.elementName+" / "+info.comments));
-
-  label.classList.add("custom-checkbox-label"); // Agrega una clase CSS al label
-  return label;
-}
-
-async function getClientElemntCheck(filter,param,ids,ids1) {
-  
-  document.getElementById("loading-container").style.display = "flex";
-if(param=="assign"){
-
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/free/"+filter+"/"+ids+"/"+ids1)
-      .then(response => response.json())
-      .then(data => {
-        
-          const checkboxContainer = document.getElementById("checkbox-container");
-        
-          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
-
-          data.clientElement.forEach(info => {
-              const checkbox = createCheckbox(info);
-              checkboxContainer.appendChild(checkbox);
-          });
-
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-
-}if(param="notassign"){
-  
-
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/assign/"+filter+"/"+ids+"/"+ids1)
-      .then(response => response.json())
-      .then(data => {
-        
-          const checkboxContainer = document.getElementById("checkbox-desa"+filter);
-        
-          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
-
-          data.clientElement.forEach(info => {
-              const checkbox = createCheckbox1(info);
-              checkboxContainer.appendChild(checkbox);
-          });
-
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-
-    }
-    if(param="usedbyclient"){
-  
-
-      var param=sessionStorage.getItem('clientNow');
-      fetch(epGetClientElements + param+"/usedbyclient/"+filter+"/"+ids+"/"+ids1)
-          .then(response => response.json())
-          .then(data => {
-            
-              const checkboxContainer = document.getElementById("checkbox-roomid"+filter);
-            
-              checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
-    
-              data.clientElement.forEach(info => {
-                  const checkbox = createCheckbox3(info);
-                  checkboxContainer.appendChild(checkbox);
-              });
-    
-              document.getElementById("loading-container").style.display = "none";
-          })
-          .catch(error => {
-              console.error("Error:", error);
-              document.getElementById("loading-container").style.display = "none";
-          });
-    
-        }
-
-        if(param="notusedbyclient"){
-  
-
-          var param=sessionStorage.getItem('clientNow');
-          fetch(epGetClientElements + param+"/notusedbyclient/"+filter+"/"+ids+"/"+ids1)
-              .then(response => response.json())
-              .then(data => {
-                
-                  const checkboxContainer = document.getElementById("checkbox-roomid1"+filter);
-                
-                  checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
-        
-                  data.clientElement.forEach(info => {
-                      const checkbox = createCheckbox4(info);
-                      checkboxContainer.appendChild(checkbox);
-                  });
-        
-                  document.getElementById("loading-container").style.display = "none";
-              })
-              .catch(error => {
-                  console.error("Error:", error);
-                  document.getElementById("loading-container").style.display = "none";
-              });
-        
-            }
-}
-var selectedAssignments = []; // Array para almacenar los elementos seleccionados
-
-function handleCheckboxChange(event) {
-    const assignId = event.target.value;
-
-    if (event.target.checked) {
-        // Checkbox seleccionado, agrega el assignId al array
-        selectedAssignments.push(assignId);
-       
-    } else {
-        // Checkbox deseleccionado, elimina el assignId del array
-        const index = selectedAssignments.indexOf(assignId);
-        if (index !== -1) {
-            selectedAssignments.splice(index, 1);
-            
-        }
-    }
-
-    // Muestra el contenido del array
-   // console.log(selectedAssignments);
-}
-
-// Función para ejecutar al cambiar la selección en el select
-
-
-// Función para ejecutar al cambiar la selección en el select
-function onClientRoomSelect(param) {
-  const selectElement = document.getElementById("list-clientroom");
-  const selectedValue = selectElement.value;
-  selectedAssignments.splice(0, selectedAssignments.length);
-
-  // Verifica si se ha seleccionado un valor
-  if (selectedValue) {
-    // Ejecuta la función getClientElemntCheck con el valor seleccionado
-    getClientElemntCheck(selectedValue,param,"1","1");
-
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-function createCheckboxdes(info) {
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.name = "assignCheckbox"; // Asigna un nombre a los checkboxes
-  checkbox.value = info.elementId; // Asigna un valor (puedes usar un identificador único)
-  checkbox.addEventListener("change", handleCheckboxChangedes); // Agrega un manejador de eventos para el cambio
-
-  const label = document.createElement("label");
-  label.appendChild(checkbox);
-  label.appendChild(document.createTextNode(info.elementName+" $"+info.amount));
-
-  return label;
-}
-
-async function getClientElemntCheckdes(filter,param) {
-  document.getElementById("loading-container").style.display = "flex";
-
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/hold/"+filter+"/1/1")
-      .then(response => response.json())
-      .then(data => {
-          const checkboxContainer = document.getElementById("checkbox-des"+filter);
-          checkboxContainer.innerHTML = ""; // Borra los checkboxes antiguos
-
-          data.clientElement.forEach(info => {
-              const checkbox = createCheckboxdes(info);
-              checkboxContainer.appendChild(checkbox);
-          });
-
-          document.getElementById("loading-container").style.display = "none";
-      })
-      .catch(error => {
-          console.error("Error:", error);
-          document.getElementById("loading-container").style.display = "none";
-      });
-}
-var selectedAssignmentsdes = []; // Array para almacenar los elementos seleccionados
-
-function handleCheckboxChangedes(event) {
-    const assignId = event.target.value;
-
-    if (event.target.checked) {
-        // Checkbox seleccionado, agrega el assignId al array
-        selectedAssignmentsdes.push(assignId);
-       
-    } else {
-        // Checkbox deseleccionado, elimina el assignId del array
-        const index = selectedAssignmentsdes.indexOf(assignId);
-        if (index !== -1) {
-          selectedAssignmentsdes.splice(index, 1);
-            
-        }
-    }
-
-    // Muestra el contenido del array
-    //console.log(selectedAssignmentsdes);
-}
-
-// Función para ejecutar al cambiar la selección en el select
-
-
-
-var selectedAssignmentselement = [];
-
-function handleCheckboxChangeAssignElement(event) {
-  const assignId = event.target.value;
-
-  if (event.target.checked) {
-      // Checkbox seleccionado, agrega el assignId al array
-      selectedAssignmentselement.push(assignId);
-     
-  } else {
-      // Checkbox deseleccionado, elimina el assignId del array
-      const index = selectedAssignmentselement.indexOf(assignId);
-      if (index !== -1) {
-        selectedAssignmentselement.splice(index, 1);
-          
-      }
-  }
-
-  // Muestra el contenido del array
-  //console.log(selectedAssignmentselement);
-}
-
-// Función para ejecutar al cambiar la selección en el select
-
-
-
-var selectedAssignmentselementbyuser = [];
-
-function handleCheckboxChangeAssignElementbyuser(event) {
-  const assignId = event.target.value;
-
-  if (event.target.checked) {
-      // Checkbox seleccionado, agrega el assignId al array
-      selectedAssignmentselementbyuser.push(assignId);
-     
-  } else {
-      // Checkbox deseleccionado, elimina el assignId del array
-      const index = selectedAssignmentselementbyuser.indexOf(assignId);
-      if (index !== -1) {
-        selectedAssignmentselementbyuser.splice(index, 1);
-          
-      }
-  }
-
-  // Muestra el contenido del array
- // console.log(selectedAssignmentselementbyuser);
-}
-
-
-
-var selectedAssignmentselementbyusernot = [];
-
-function handleCheckboxChangeAssignElementbyusernot(event) {
-  const assignId = event.target.value;
-
-  if (event.target.checked) {
-      // Checkbox seleccionado, agrega el assignId al array
-      selectedAssignmentselementbyusernot.push(assignId);
-     
-  } else {
-      // Checkbox deseleccionado, elimina el assignId del array
-      const index = selectedAssignmentselementbyusernot.indexOf(assignId);
-      if (index !== -1) {
-        selectedAssignmentselementbyusernot.splice(index, 1);
-          
-      }
-  }
-
-  // Muestra el contenido del array
-  //console.log(selectedAssignmentselementbyusernot);
-}
-
-
-
-
-
-
-
-
-
-
-function arrayToHTMLCards() {
-  const cardsContainer = document.getElementById('card-validatePosShop');
+function arrayToHTMLCards(container) {
+  const cardsContainer = document.getElementById(container);
   cardsContainer.innerHTML = ""; // Borra las tarjetas antiguas
   shoppingCart.forEach(item => {
     const card = document.createElement('div');
@@ -1770,8 +522,8 @@ function arrayToHTMLCards() {
 
 
 
-function arrayToHTMLCardsPayload() {
-  const cardsContainer = document.getElementById('card-validatePosShopPayload');
+function arrayToHTMLCardsPayload(container) {
+  const cardsContainer = document.getElementById(container);
   var pType= document.getElementById('list-paymentType').value;
   var pMethod= document.getElementById('list-paymentMethod').value;
   var pBank= document.getElementById('list-bankMethod').value;
@@ -1971,7 +723,7 @@ value= document.getElementById('list-customerget').value;
 
 
 
-function putOrderPaymentStatus() {
+function putOrderPaymentStatus(button,id,param) {
   // Obtener el valor del campo de texto correspondiente al botón
   const url1 = window.location.href;
   //value= document.getElementById('list-customerget').value;
@@ -1980,14 +732,21 @@ function putOrderPaymentStatus() {
     
     // Obtener el valor del parámetro "parametro1"
     var clientId = urlObj.searchParams.get("clientId");
- 
+ if(param==="validateModal"){
+  var input = document.getElementById('paymentReference').value;
+  var url = 'controller/putClientOrderPayment.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId);
 
-    var input = document.getElementById('paymentReference').value;
+ }
+ if(param==="validateList"){
+  var nombre = button.previousElementSibling;
+  var input = nombre.value;    
+  var url = 'controller/putClientOrderPayment1.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId)+ '&orderId=' + encodeURIComponent(id);
+
+ }
     
 
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientOrderPayment.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId);
-
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -2011,3 +770,148 @@ function putOrderPaymentStatus() {
  
 
 
+
+  async function getClientOrders(clientId,filter,param,value,containerId) {
+    //  const subInternalClients = `${subDomain}/kairosGateway/apiCore/v1/getInternalClients/${ranCodetask} ${apiKeytask}/`;
+   
+
+     document.getElementById("loading-container").style.display = "flex";
+
+
+     const url1 = window.location.href;
+  //value= document.getElementById('list-customerget').value;
+    // Crear un objeto URL a partir de la URL actual
+    const urlObj = new URL(url1);
+    
+    // Obtener el valor del parámetro "parametro1"
+    if(clientId==="clientId"){
+    clientId = urlObj.searchParams.get("clientId");
+    value = urlObj.searchParams.get("storeId");
+    fetch(epGetClientOrders+clientId+"/"+filter+"/"+param+"/"+value)
+     
+     .then(response => response.json())
+     .then(data => {
+       const publicgroupsTableBody = document.querySelector("#"+containerId+" tbody");
+       // Borramos los datos antiguos
+       publicgroupsTableBody.innerHTML = "";
+       data.orders.forEach(info => {
+         const row = document.createElement("tr");
+         row.innerHTML = `
+        
+       
+         <td>
+         
+         <div class="edit-container">
+     
+        
+       
+         <button onclick="openModClientOrdersPayload();getClientOrders(&quot;${info.clientId}&quot;,&quot;byStore&quot;,&quot;orderId&quot;,&quot;${info.orderId}&quot;,&quot;tableClientOrdersPayload&quot;);" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
+           <i class="fas fa-eye"></i>
+         </button>
+         
+        
+        
+   
+       
+       
+       </div>
+   
+       
+   
+         </td>
+         <td>${info.orderId}</td>
+         <td>${info.carId}</td>
+         <td>${info.orderNumber}</td>
+         <td>${info.vendor}</td>
+         <td>${info.customer}</td>
+         <td>${info.storeName}</td>
+         <td>${info.total}</td>
+         <td>${info.subTotal}</td>
+         <td>${info.saver}</td>
+         <td>${info.payWith}</td>
+         <td>${info.exchange}</td>
+        
+         <td>
+         <div class="edit-container">
+         <input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)"> <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+        
+         </div>
+         </td>
+         <td>${info.orderProgress}</td>
+         <td>${info.paymentStatus}</td>
+         <td>${info.bankAccount}</td>
+         <td>${info.paymentMethod}</td>
+         <td>${info.numberProducts}</td>
+         <td>${info.numberPacks}</td>
+         <td>${info.inDate} - ${info.inTime}</td>
+        
+      
+           
+         `;
+    
+    
+         publicgroupsTableBody.appendChild(row);
+       });
+       document.getElementById("loading-container").style.display = "none";
+     })
+     .catch(error => {
+       console.error("Error:", error);
+       document.getElementById("loading-container").style.display = "none";
+     });
+    
+    }
+
+    else{
+      
+      fetch(epGetClientOrders + clientId + "/" + filter + "/" + param + "/" + value)
+  .then(response => response.json())
+  .then(data => {
+    const publicgroupsTableBody = document.querySelector("#" + containerId + " tbody");
+    // Borramos los datos antiguos
+    publicgroupsTableBody.innerHTML = "";
+    data.orders.forEach(info => {
+      const orderPayloadString = info.orderPayload;
+
+      // Convertir el string JSON a un objeto
+      const orderPayload = JSON.parse(orderPayloadString);
+      console.log(typeof orderPayload);
+      if (Array.isArray(orderPayload)) {
+        orderPayload.forEach(item => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+         
+            <td>${item.item.productName}</td>
+            <td>${item.item.productDescription}</td>
+            <td>${item.item.outPrice}</td>
+            <td>${item.item.productQty}</td>
+            <td>${item.item.totalShopping}</td>
+            <td>${item.item.subTotalShopping}</td>
+            <td>${item.item.discount}</td>
+            <td>${item.item.storeName}</td>
+            <td>${item.item.categoryName}</td>
+            <!-- Agrega más columnas según tus necesidades -->
+          `;
+          publicgroupsTableBody.appendChild(row);
+        });
+      } else {
+        console.error("El orderPayload no es un array");
+      }
+    });
+    document.getElementById("loading-container").style.display = "none";
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    document.getElementById("loading-container").style.display = "none";
+  });
+
+      
+      }
+   
+     
+   
+   
+      
+   
+   }
