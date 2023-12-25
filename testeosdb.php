@@ -20,6 +20,10 @@ try {
             echo "<li>" . $row['Field'] . " - " . $row['Type'] . "</li>";
         }
         echo "</ul>";
+
+        $sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
+        VALUES ('POS','REPARTIDOR','ESTANDAR','2e44d504','1','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+    $result = $conn->query($sql);
     } else {
         echo "No se encontraron resultados.";
     }
