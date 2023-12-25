@@ -154,7 +154,7 @@
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
 <script  src="scripts/gets/getClientCommerceAdmin.js"></script>
-<script  src="scripts/posts/postCreatePosOrder.js"></script>
+<script  src="scripts/posts/postCreateEcmOrder.js"></script>
 
 
 <div id="loading-container" class="loading-container">

@@ -24,7 +24,13 @@
       <th scope="col"><i>Número de productos</i></th>
       <th scope="col"><i>Número de paquetes</i></th>
       <th scope="col"><i>Fecha y hora</i></th>
-     
+
+      <th scope="col"><i>Método de entrega</i></th>
+
+      <th scope="col"><i>Dirección de entrega</i></th>
+
+      <th scope="col"><i>Domiciliario</i></th>
+
     </tr>
   </thead>
   <tbody>

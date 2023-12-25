@@ -571,6 +571,55 @@ pExc=0;
   });
 }
 
+function arrayToHTMLCardsPayloadEcm(container) {
+  const cardsContainer = document.getElementById(container);
+  var pType= document.getElementById('list-paymentTypeEcm').value;
+  var pMethod= document.getElementById('list-paymentMethodEcm').value;
+  var pBank= document.getElementById('list-bankMethodEcm').value;
+  var pWith= document.getElementById('paymentcashEcm').value;
+  var pExc=+pWith-totality;
+  cardsContainer.innerHTML = ""; // Borra las tarjetas antiguas
+var subto=subtotality-totality;
+ 
+
+if(pType!="cash"){
+pWith=pType+"/"+pMethod+"/"+pBank;
+pExc=0;
+}
+  const payment = {
+    total: totality,
+    subTotal: subtotality,
+    saver: subto,
+    paymentType: pType,
+    paymentMethod: pMethod,
+    bankMethod: pBank,
+    payWith: pWith,
+    exchangeCash: pExc
+    
+  };
+  shoppingCartPayment = [];
+  // Agregar el elemento al carrito de compras
+  shoppingCartPayment.push({payment});
+  shoppingCart.push({payment});
+  //console.log(JSON.stringify(shoppingCart));
+  shoppingCartPayment.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const cardContent = `
+      <h4>Resumen</h4>
+      
+      <p>Total: $${item.payment.total}</p>
+      <p>Sub-Total: $${item.payment.subTotal}</p>
+      <p>Ahorro: $${item.payment.saver}</p>
+          
+      `;
+
+    card.innerHTML = cardContent;
+    cardsContainer.appendChild(card);
+  });
+}
+
 
 function paramsValidation(maxqty,minqty,value,readUnit){
 
@@ -769,8 +818,50 @@ function putOrderPaymentStatus(button,id,param) {
   }
  
 
+  function putOrderStatusStatus(button,id,param) {
+    // Obtener el valor del campo de texto correspondiente al botón
+    const url1 = window.location.href;
+    //value= document.getElementById('list-customerget').value;
+      // Crear un objeto URL a partir de la URL actual
+      const urlObj = new URL(url1);
+      
+      // Obtener el valor del parámetro "parametro1"
+      var clientId = urlObj.searchParams.get("clientId");
+  
+   
+    var nombre = button.previousElementSibling;
+    var input = nombre.value;    
+    var url = 'controller/putClientOrderStatus.php?orderId=' + encodeURIComponent(id)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(input);
+  
+   
+      
+  
+    // Construir la URL con los parámetros de la petición GET
+   
+    // Realizar la petición GET al archivo PHP
+    fetch(url)
+      .then(response => {
+        // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+        // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+  
+        getMessage();
+        
+         // getClientStores('filter',param,value);
+  
+        
+   
+      })
+      .catch(error => {
+        // Aquí puedes manejar los errores en caso de que la petición falle
+        console.log('Error en la petición:', error);
+      });
+    
+   
+    }
+   
+  
 
-
+    let contador=1;
   async function getClientOrders(clientId,filter,param,value,containerId) {
     //  const subInternalClients = `${subDomain}/kairosGateway/apiCore/v1/getInternalClients/${ranCodetask} ${apiKeytask}/`;
    
@@ -785,8 +876,11 @@ function putOrderPaymentStatus(button,id,param) {
     
     // Obtener el valor del parámetro "parametro1"
     if(clientId==="clientId"){
+      
     clientId = urlObj.searchParams.get("clientId");
     value = urlObj.searchParams.get("storeId");
+    var storetype=urlObj.searchParams.get("st");
+    if(storetype==="ecm"){
     fetch(epGetClientOrders+clientId+"/"+filter+"/"+param+"/"+value)
      
      .then(response => response.json())
@@ -839,28 +933,133 @@ function putOrderPaymentStatus(button,id,param) {
         
          </div>
          </td>
-         <td>${info.orderProgress}</td>
+         <td>
+         <div class="edit-container">${info.orderProgress}
+        <select>
+          <option value="in_progress">EN CURSO</option>
+          <option value="packing">EMPACANDO</option>
+          <option value="ready">LISTA</option>
+          <option value="on_way">EN CAMINO</option>
+          <option value="delivered">ENTREGADA</option>
+          <option value="done">FINALIZADA</option>
+          <option value="canceled">CANCELADA</option>
+        </select>
+         <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;orderProgress&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+        
+         </div>
+         </td>
+        
          <td>${info.paymentStatus}</td>
          <td>${info.bankAccount}</td>
          <td>${info.paymentMethod}</td>
          <td>${info.numberProducts}</td>
          <td>${info.numberPacks}</td>
          <td>${info.inDate} - ${info.inTime}</td>
+         <td>${info.deliveryMethod}</td>
+         <td>${info.deliveryAdd}</td>
+         <td>${info.deliveryName} ${info.deliveryName}
+         <select id='delivery${contador}'></select>
+         <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
+         <i class="fas fa-plus"></i>
+         </button></td>
+         
         
       
            
          `;
-    
+        
+         
     
          publicgroupsTableBody.appendChild(row);
-       });
+         getClientDelivery('delivery'+contador);
+         contador++;
+       }
+       
+       );
        document.getElementById("loading-container").style.display = "none";
      })
      .catch(error => {
        console.error("Error:", error);
        document.getElementById("loading-container").style.display = "none";
      });
-    
+      }
+      if(storetype==="pos"){
+        fetch(epGetClientOrders+clientId+"/"+filter+"/"+param+"/"+value)
+         
+         .then(response => response.json())
+         .then(data => {
+           const publicgroupsTableBody = document.querySelector("#"+containerId+" tbody");
+           // Borramos los datos antiguos
+           publicgroupsTableBody.innerHTML = "";
+           data.orders.forEach(info => {
+             const row = document.createElement("tr");
+             row.innerHTML = `
+            
+           
+             <td>
+             
+             <div class="edit-container">
+         
+            
+           
+             <button onclick="openModClientOrdersPayload();getClientOrders(&quot;${info.clientId}&quot;,&quot;byStore&quot;,&quot;orderId&quot;,&quot;${info.orderId}&quot;,&quot;tableClientOrdersPayload&quot;);" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
+               <i class="fas fa-eye"></i>
+             </button>
+             
+            
+            
+       
+           
+           
+           </div>
+       
+           
+       
+             </td>
+             <td>${info.orderId}</td>
+             <td>${info.carId}</td>
+             <td>${info.orderNumber}</td>
+             <td>${info.vendor}</td>
+             <td>${info.customer}</td>
+             <td>${info.storeName}</td>
+             <td>${info.total}</td>
+             <td>${info.subTotal}</td>
+             <td>${info.saver}</td>
+             <td>${info.payWith}</td>
+             <td>${info.exchange}</td>
+            
+             <td>
+             <div class="edit-container">
+             <input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)"> <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+          <i class="fas fa-edit"></i>
+          </button>
+            
+             </div>
+             </td>
+             <td>${info.orderProgress}</td>
+             <td>${info.paymentStatus}</td>
+             <td>${info.bankAccount}</td>
+             <td>${info.paymentMethod}</td>
+             <td>${info.numberProducts}</td>
+             <td>${info.numberPacks}</td>
+             <td>${info.inDate} - ${info.inTime}</td>
+            
+          
+               
+             `;
+        
+        
+             publicgroupsTableBody.appendChild(row);
+           });
+           document.getElementById("loading-container").style.display = "none";
+         })
+         .catch(error => {
+           console.error("Error:", error);
+           document.getElementById("loading-container").style.display = "none";
+         });
+          }
     }
 
     else{
@@ -914,4 +1113,155 @@ function putOrderPaymentStatus(button,id,param) {
    
       
    
+   }
+
+   function getCustomerOrderData(){
+
+
+    var delMeth=document.getElementById('list-deliverymethod').value;
+
+    
+      if(delMeth==="delivery"){
+        const card11 = document.createElement("div");
+        const cardContainer11 = document.getElementById("orderData");
+        cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas  
+              card11.classList.add("card");
+           
+             
+              card11.innerHTML = `
+                  <div class="card-body">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                 
+
+              </h5>
+              <div class="edit-container">
+              <p class="card-text">Dirección de entrega:
+             
+              </p>
+         <input type="text" class="form-control" id="deliveryAddress" value="" title="" onclick="makeEditable(this)">
+        
+         </div>
+             
+
+             
+             
+              
+          
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+           //   getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+      }
+      if(delMeth==="pickup"){
+
+        const url1 = window.location.href;
+        //value= document.getElementById('list-customerget').value;
+          // Crear un objeto URL a partir de la URL actual
+          const urlObj = new URL(url1);
+          
+          // Obtener el valor del parámetro "parametro1"
+         
+         var clientId = urlObj.searchParams.get("clientId");
+        fetch(epGetClientPickupPoints  + clientId+"/all/all/all")
+      .then(response => response.json())
+      .then(data => {
+          const cardContainer11 = document.getElementById("orderData");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          data.pickupPoints.forEach(info => {
+              const card11 = document.createElement("div");
+              card11.classList.add("card");
+              const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
+              const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+             
+              card11.innerHTML = `
+                  <div class="card-body" style="background-color: ${backgroundColor};">
+                  <h5 class="card-title">
+                  <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                
+                 
+
+              </h5>
+              <p class="card-text">${info.pointName}
+             
+              </p>
+              <p class="card-text">${info.pointAdd}
+              
+              </p>
+
+              <p class="card-text">${info.cityPoint}
+            
+              </p>
+             
+
+             
+             
+              
+          
+                      
+                  </div>
+                  
+              `;
+
+              cardContainer11.appendChild(card11);
+           //   getClientCategoriesList3('all','all','all',idin1);
+              //getClientStoresList13('all','all','all',idin1);
+
+              idin1++;
+          });
+          
+          document.getElementById("loading-container").style.display = "none";
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("loading-container").style.display = "none";
+      });
+
+        
+      }
+   }
+
+
+
+
+
+
+   
+   function getClientDelivery(containerId){
+
+
+    const url1 = window.location.href;
+    //value= document.getElementById('list-customerget').value;
+      // Crear un objeto URL a partir de la URL actual
+      const urlObj = new URL(url1);
+      
+      // Obtener el valor del parámetro "parametro1"
+     console.log(containerId);
+     var clientId = urlObj.searchParams.get("clientId");
+    var reposSelect = document.getElementById(containerId);
+
+
+  
+  console.log(epGetClientDelivery + clientId+'/all/all/all');
+  
+  
+    fetch(epGetClientDelivery  + clientId+"/all/all/all")
+    .then(response => response.json())
+    .then(data => {
+      data.delivery.forEach(info => {
+        const option = document.createElement("option");
+        option.value = info.deliveryId;
+        option.text = info.deliveryName+" "+info.deliveryLastName;
+        reposSelect.add(option);
+      });
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+     
    }

@@ -3,22 +3,23 @@
 session_start();
 
 $clientId = $_GET['clientId'];
-$mail = $_GET['customerMail'];
-$valCode = $_GET['valCode'];
+$orderId = $_GET['orderId'];
+$param = $_GET['param'];
+$value = $_GET['value'];
 
-$json_data1 = urldecode($cart);
 //$json_data1 = json_encode($cart);
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiClient/v1/validateEcmValCode/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+$url = $sub_domain . "/kairosGateway/apiClient/v1/putClientOrderStatus/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'clientId' => $clientId, 
-    'customerMail' => $mail,
-    'valCode' => $valCode
+    'orderId' => $orderId,
+    'param'=>$param,
+    'value'=>$value
     
 );
 
@@ -44,7 +45,13 @@ curl_close($curl);
 $array = explode("|", $response1);
 $response12=$array[0];
 $message=$array[1];
-$statusCode=$array[2];
+$ordernumber=$array[2];
+$orderid=$array[3];
+$ftotal=$array[4];
+$fstotal=$array[5];
+$fsaver=$array[6];
+$pmethod=$array[7];
+$ptype=$array[8];
 //echo $_SESSION['key'];
 
 $response1 = trim($response12); // Eliminar espacios en blanco alrededor de la respuesta
@@ -54,7 +61,14 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
-    $_SESSION["statusCode"] = $statusCode;
+    $_SESSION["orderNumber"] = $ordernumber;
+    $_SESSION["orderId"] = $orderid;
+    $_SESSION["ftotal"] = $ftotal;
+    $_SESSION["fstotal"] = $fstotal;
+    $_SESSION["fsaver"] = $fsaver;
+    $_SESSION["pMethod"] = $pmethod;
+    $_SESSION["pType"] = $pmethod;
+    
    // header ('Location: ../room.php?roomId='.$roomId);
 }
 
@@ -63,7 +77,6 @@ if (strtolower($response1) != "true") { // Convertir la respuesta a minúsculas 
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
-    $_SESSION["statusCode"] = $statusCode;
   
   
   

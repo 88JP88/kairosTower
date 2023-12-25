@@ -24,6 +24,7 @@ require_once 'modal/modaldesAssignUserTimeAdmin.php';
 require_once 'modal/modalAssigndesElement.php';
 require_once 'modal/modalValidateEcmShop.php';
 require_once 'modal/modalValidateEcmCode.php';
+require_once 'modal/modalValidateEcmData.php';
 require_once 'modal/modalClientOrders.php';
 require_once 'modal/modalClientOrderPayload.php';
 ?>

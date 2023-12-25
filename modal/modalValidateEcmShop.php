@@ -32,31 +32,28 @@
  
     
   </div>
-                </p>
-                
-<div class="mb-3">
+  <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Paga con:</label>
-  <input type="text" class="form-control" id="paymentcash" placeholder="Ingresa valor">
+  <input type="text" class="form-control" id="paymentcashEcm" placeholder="Ingresa valor">
 </div>
-
-                <p class="card-text">Entrega:
   
-
-           
-
   <div class="mb-3">
   
   <select id="list-paymentMethodEcm" class="form-control" name="lista" required>
 
   <option value="cash"></option>
-  <option value="app">Domicilio</option>
-  <option value="dc">Recoge en punto</option>
+  <option value="app">Aplicación (Transacción)</option>
+  <option value="dc">Tarjeta débito (Tarjeta)</option>
   <option value="cc">Tarjeta crédito  (Tarjeta)</option>
   </select>
  
     
   </div>
                 </p>
+                
+
+
+                
                 <p class="card-text">Entidad bancaria:
   
 
@@ -72,6 +69,23 @@
   <option value="tfy">Transfi YA (Aplicación)</option>
   <option value="vs">Visa (Tarjeta)</option>
   <option value="mc">Master Card (Tarjeta)</option>
+  </select>
+ 
+    
+  </div>
+                </p>
+                <p class="card-text">Entrega:
+  
+
+           
+
+  <div class="mb-3">
+  
+  <select id="list-deliverymethod" class="form-control" name="lista" required>
+
+  
+  <option value="delivery">Domicilio</option>
+  <option value="pickup">Recoge en punto</option>
   </select>
  
     
