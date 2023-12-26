@@ -28,7 +28,7 @@ try {
 
 $sql = "UPDATE generalDelivery SET distanceRules='$data' where clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
   */  
-$sql = "DELETE FROM generalDelivery WHERE deliveryName='Delyvery' and clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+$sql = "DELETE FROM generalDelivery WHERE deliveryName='nuevo delivery' and clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
  
      $result = $conn->query($sql);
 try {
