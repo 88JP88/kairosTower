@@ -1003,11 +1003,11 @@ function putOrderPaymentStatus(button,id,param) {
        
 
          <td>${info.deliveryName} ${info.deliveryLastName}
-         ${disRulesArray[0]['distance']['startStreet'] >= deliveryAddArray[0]['deliveryAdd']['startStreet'] ?
+         ${deliveryAddArray[0]['deliveryAdd']['startStreet'] >= disRulesArray[0]['distance']['startStreet'] && deliveryAddArray[0]['deliveryAdd']['startStreet'] <= disRulesArray[0]['distance']['endStreet'] ?
          ` <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-plus"></i>
-         </button>` : '' // Aquí puedes añadir más condiciones según sea necesario
+         </button>` : `<select id='delivery${contador}'></select>` // Aquí puedes añadir más condiciones según sea necesario
        }
          
          </td>
