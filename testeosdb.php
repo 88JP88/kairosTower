@@ -9,7 +9,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Consulta para obtener la información de la tabla
-    $sql = "DESCRIBE generalDelivery"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+    $sql = "DESCRIBE generalOrders"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
     $result = $conn->query($sql);
 
     // Imprimir los resultados
