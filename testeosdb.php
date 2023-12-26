@@ -26,6 +26,8 @@ try {
         VALUES ('23456545','Delyvery','Norte','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
     $result = $conn->query($sql);
 */
+$sql = "UPDATE generalDelivery SET distanceRules='$data' where clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+    $result = $conn->query($sql);
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

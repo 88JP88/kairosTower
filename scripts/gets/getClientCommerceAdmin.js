@@ -892,6 +892,7 @@ function putOrderPaymentStatus(button,id,param) {
        data.orders.forEach(info => {
          const row = document.createElement("tr");
          const deliveryAddArray = JSON.parse(info.deliveryAdd);
+         const disRulesArray = JSON.parse(info.distanceRules);
          row.innerHTML = `
         
        
@@ -993,6 +994,8 @@ function putOrderPaymentStatus(button,id,param) {
          <td>${info.deliveryMethod}</td>
          
          <td>
+
+         
          ${deliveryAddArray[0]['deliveryAdd']['paramOne']} ${deliveryAddArray[0]['deliveryAdd']['startStreet']}${deliveryAddArray[0]['deliveryAdd']['paramOneLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramOneBis']}
          ${deliveryAddArray[0]['deliveryAdd']['paramSecond']} # ${deliveryAddArray[0]['deliveryAdd']['startAvenue']}${deliveryAddArray[0]['deliveryAdd']['paramSecondLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramSecondBis']}
         Casa: ${deliveryAddArray[0]['deliveryAdd']['context']}
@@ -1000,10 +1003,14 @@ function putOrderPaymentStatus(button,id,param) {
        
 
          <td>${info.deliveryName} ${info.deliveryLastName}
-         <select id='delivery${contador}'></select>
+         ${disRulesArray[0]['distance']['startStreet'] >= deliveryAddArray[0]['deliveryAdd']['startStreet'] ?
+         ` <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-plus"></i>
-         </button></td>
+         </button>` : '' // Aquí puedes añadir más condiciones según sea necesario
+       }
+         
+         </td>
          
         
       
