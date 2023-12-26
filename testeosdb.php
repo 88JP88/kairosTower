@@ -22,13 +22,15 @@ try {
         echo "</ul>";
         $data = '[{"distance":{"startStreet":"10","endStreet":"03","startAvenue":"1","endAvenue":"45"}}]';
 /*
-        
+        $sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
+        VALUES ('43456567','nuevo delivery','de prueba','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+ 
 
 $sql = "UPDATE generalDelivery SET distanceRules='$data' where clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
   */  
-  $sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
-        VALUES ('43456567','nuevo delivery','de prueba','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
-    $result = $conn->query($sql);
+$sql = "DELETE FROM generalDelivery WHERE deliveryName='Delyvery' and clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+ 
+     $result = $conn->query($sql);
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
