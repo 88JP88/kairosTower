@@ -26,18 +26,28 @@ try {
         VALUES ('23456545','Delyvery','Norte','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
     $result = $conn->query($sql);
 */
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Consulta para obtener el JSON de la base de datos
     $stmt = $conn->prepare("SELECT distanceRules FROM generalDelivery WHERE deliveryId='23456545'");
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Decodificar el JSON
-    $json_data = json_decode($result['columna_json'], true);
+    $json_data = json_decode($result['distanceRules'], true);
 
     // Mostrar el JSON decodificado en pantalla
     echo "<pre>";
     print_r($json_data);
     echo "</pre>";
+
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+$conn = null;
     } else {
         echo "No se encontraron resultados.";
     }
