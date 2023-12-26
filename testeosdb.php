@@ -20,9 +20,10 @@ try {
             echo "<li>" . $row['Field'] . " - " . $row['Type'] . "</li>";
         }
         echo "</ul>";
+        $data = '[{"distance":{"startStreet":"1","endStreet":"45","startAvenue":"1","endAvenue":"45"}}]';
 
         $sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
-        VALUES ('POS','REPARTIDOR','ESTANDAR','2e44d504','1','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+        VALUES ('23456545','Delyvery','Norte','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
     $result = $conn->query($sql);
     } else {
         echo "No se encontraron resultados.";

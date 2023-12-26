@@ -805,7 +805,7 @@ function putOrderPaymentStatus(button,id,param) {
       getMessage();
       
        // getClientStores('filter',param,value);
-
+       getClientOrders('clientId','byStore','storeId','value','tableClientOrders');
       
  
     })
@@ -845,7 +845,8 @@ function putOrderPaymentStatus(button,id,param) {
         // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
   
         getMessage();
-        
+        getClientOrders('clientId','byStore','storeId','value','tableClientOrders');
+
          // getClientStores('filter',param,value);
   
         
@@ -924,32 +925,63 @@ function putOrderPaymentStatus(button,id,param) {
          <td>${info.saver}</td>
          <td>${info.payWith}</td>
          <td>${info.exchange}</td>
-        
          <td>
          <div class="edit-container">
-         <input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)"> <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-        
+           ${info.paymentReference === "cash" ?
+           info.paymentReference
+            :
+             
+             (info.orderProgress !== "done" && info.orderProgress !== "canceled" && info.orderProgress !== "DONE"  ?
+             `<input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)">
+              <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+                <i class="fas fa-edit"></i>
+              </button>` :
+             info.paymentReference
+           ) 
+           }
          </div>
-         </td>
+       </td>
+       
+       
+       
+
+         
+        
+      
          <td>
          <div class="edit-container">${info.orderProgress}
-        <select>
-          <option value="in_progress">EN CURSO</option>
-          <option value="packing">EMPACANDO</option>
-          <option value="ready">LISTA</option>
-          <option value="on_way">EN CAMINO</option>
-          <option value="delivered">ENTREGADA</option>
-          <option value="done">FINALIZADA</option>
-          <option value="canceled">CANCELADA</option>
-        </select>
-         <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;orderProgress&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-        
+           <select>
+             ${info.orderProgress === "RECEIVED" ?
+               `<option value="in_progress">EN CURSO</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "in_progress" ?
+               `<option value="packing">EMPACANDO</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "packing" ?
+               `<option value="ready">LISTA</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "ready" ?
+               `<option value="on_way">EN CAMINO</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "on_way" ?
+               `<option value="delivered">ENTREGADA</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "delivered" ?
+               `<option value="done">FINALIZADA</option>
+                <option value="canceled">CANCELADA</option>` :
+              info.orderProgress === "done" || info.orderProgress === "DONE"  ?
+               '' : '' // Aquí puedes añadir más condiciones según sea necesario
+             }
+           </select>
+           <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;orderProgress&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+             <i class="fas fa-edit"></i>
+           </button>
          </div>
-         </td>
+       </td>
+       
+         
+        
+        
         
          <td>${info.paymentStatus}</td>
          <td>${info.bankAccount}</td>
@@ -959,7 +991,7 @@ function putOrderPaymentStatus(button,id,param) {
          <td>${info.inDate} - ${info.inTime}</td>
          <td>${info.deliveryMethod}</td>
          <td>${info.deliveryAdd}</td>
-         <td>${info.deliveryName} ${info.deliveryName}
+         <td>${info.deliveryName} ${info.deliveryLastName}
          <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-plus"></i>
