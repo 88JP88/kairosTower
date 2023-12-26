@@ -40,7 +40,7 @@ try {
 
     // Mostrar el JSON decodificado en pantalla
     echo "<pre>";
-    print_r($json_data);
+    print_r($result['distanceRules']);
     echo "</pre>";
 
 } catch(PDOException $e) {
