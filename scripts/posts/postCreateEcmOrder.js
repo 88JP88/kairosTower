@@ -13,7 +13,37 @@ var payW=document.getElementById('paymentcashEcm').value;
 var bEnt=document.getElementById('list-bankMethodEcm').value;
 var delMeth=document.getElementById('list-deliverymethod').value;
 var delAdd=document.getElementById('deliveryAddress').value;
+var delAddAv=document.getElementById('deliveryAddressAv').value;
+var delAddHm=document.getElementById('deliveryAddressHm').value;
+var delAddpparam=document.getElementById('selprimerparametro').value;
+var delAddsparam=document.getElementById('selsegundoparametro').value;
+var delAddpparambis=document.getElementById('selprimerparametrobis').value;
+var delAddsparambis=document.getElementById('selsegundoparametrobis').value;
+var delAddl1=document.getElementById('letras1').value;
+var delAddl2=document.getElementById('letras2').value;
+var delAdddes=document.getElementById('deliveryAddressdes').value;
 
+
+const deliveryAdd = {
+  startStreet: delAdd,
+  startAvenue: delAddAv,
+  context: delAddHm,
+  paramOne: delAddpparam,
+  paramSecond: delAddsparam,
+  paramOneBis: delAddpparambis,
+  paramSecondBis: delAddsparambis,
+  paramOneLet: delAddl1,
+  paramSecondLet: delAddl2,
+  paramDescription: delAdddes
+};
+
+// Colocar el objeto en un array como en tu ejemplo original
+const jsonArray = [
+  {
+      "deliveryAdd": deliveryAdd
+  }
+];
+ delAdd = JSON.stringify(jsonArray);
 
 const urlCart = window.location.href;
 
@@ -34,7 +64,7 @@ var user= sessionStorage.getItem('userId');
             "&payWith=" + encodeURIComponent(payW)+
             "&bankEntity=" + encodeURIComponent(bEnt)+
             "&deliveryMethod=" + encodeURIComponent(delMeth)+
-            "&deliveryAddress=" + encodeURIComponent(delAdd); // Agrega los assignments a la URL
+            "&deliveryAddress=" + delAdd; // Agrega los assignments a la URL
             
   // Realizar la solicitud GET utilizando fetch
   fetch(url)

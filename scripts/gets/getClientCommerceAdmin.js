@@ -891,6 +891,7 @@ function putOrderPaymentStatus(button,id,param) {
        publicgroupsTableBody.innerHTML = "";
        data.orders.forEach(info => {
          const row = document.createElement("tr");
+         const deliveryAddArray = JSON.parse(info.deliveryAdd);
          row.innerHTML = `
         
        
@@ -990,7 +991,14 @@ function putOrderPaymentStatus(button,id,param) {
          <td>${info.numberPacks}</td>
          <td>${info.inDate} - ${info.inTime}</td>
          <td>${info.deliveryMethod}</td>
-         <td>${info.deliveryAdd}</td>
+         
+         <td>
+         ${deliveryAddArray[0]['deliveryAdd']['paramOne']} ${deliveryAddArray[0]['deliveryAdd']['startStreet']}${deliveryAddArray[0]['deliveryAdd']['paramOneLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramOneBis']}
+         ${deliveryAddArray[0]['deliveryAdd']['paramSecond']} # ${deliveryAddArray[0]['deliveryAdd']['startAvenue']}${deliveryAddArray[0]['deliveryAdd']['paramSecondLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramSecondBis']}
+        Casa: ${deliveryAddArray[0]['deliveryAdd']['context']}
+       </td>
+       
+
          <td>${info.deliveryName} ${info.deliveryLastName}
          <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
@@ -1169,13 +1177,132 @@ function putOrderPaymentStatus(button,id,param) {
 
               </h5>
               <div class="edit-container">
-              <p class="card-text">Dirección de entrega:
+              <p class="card-text">Primer parámetro:
+              <select id="selprimerparametro">
+              <option value="AC">Avenida Calle</option>
+              <option value="CL">Calle</option>
+              <option value="DG">Diagonal</option>
+              <option value="AK">Avenida Karrera</option>
+              <option value="KR">Karrera</option>
+              <option value="TV">Transversal</option>
+              </select>
              
               </p>
+              </div>
          <input type="text" class="form-control" id="deliveryAddress" value="" title="" onclick="makeEditable(this)">
-        
+         <div class="edit-container">
+         <p class="card-text">
+         <select id="letras1">
+         <option value="">Seleccionar</option>
+         <option value="A">A</option>
+         <option value="B">B</option>
+         <option value="C">C</option>
+         <option value="D">D</option>
+         <option value="E">E</option>
+         <option value="F">F</option>
+         <option value="G">G</option>
+         <option value="H">H</option>
+         <option value="I">I</option>
+         <option value="J">J</option>
+         <option value="K">K</option>
+         <option value="L">L</option>
+         <option value="M">M</option>
+         <option value="N">N</option>
+         <option value="O">O</option>
+         <option value="P">P</option>
+         <option value="Q">Q</option>
+         <option value="R">R</option>
+         <option value="S">S</option>
+         <option value="T">T</option>
+         <option value="U">U</option>
+         <option value="V">V</option>
+         <option value="W">W</option>
+         <option value="X">X</option>
+         <option value="Y">Y</option>
+         <option value="Z">Z</option>
+       </select>
+       </p>
+       </div>
+       <div class="edit-container">
+       <p class="card-text">
+         <select id="selprimerparametrobis">
+         <option value=""></option>
+         <option value="BIS">Bis</option>
+         </select>
          </div>
-             
+         </p>
+         <div class="edit-container">
+         <p class="card-text">Segundo parámetro:
+         <select id="selsegundoparametro">
+         <option value="AK">Avenida Karrera</option>
+         <option value="KR">Karrera</option>
+         <option value="TV">Transversal</option>
+         <option value="AC">Avenida Calle</option>
+              <option value="CL">Calle</option>
+              <option value="DG">Diagonal</option>
+         </select>
+         </p>
+         </div>
+    <input type="text" class="form-control" id="deliveryAddressAv" value="" title="" onclick="makeEditable(this)">
+    <div class="edit-container">
+    <p class="card-text">
+    <select id="letras2">
+    <option value="">Seleccionar</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+    <option value="K">K</option>
+    <option value="L">L</option>
+    <option value="M">M</option>
+    <option value="N">N</option>
+    <option value="O">O</option>
+    <option value="P">P</option>
+    <option value="Q">Q</option>
+    <option value="R">R</option>
+    <option value="S">S</option>
+    <option value="T">T</option>
+    <option value="U">U</option>
+    <option value="V">V</option>
+    <option value="W">W</option>
+    <option value="X">X</option>
+    <option value="Y">Y</option>
+    <option value="Z">Z</option>
+  </select>
+  </p>
+  </div>
+  <div class="edit-container">
+  <p class="card-text">
+    <select id="selsegundoparametrobis">
+         <option value=""></option>
+         <option value="BIS">Bis</option>
+         </select>
+         </p>
+    </div>
+    <div class="edit-container">
+
+    <p class="card-text">Número de locación:
+   
+    </p>
+    </div>
+<input type="text" class="form-control" id="deliveryAddressHm" value="" title="" onclick="makeEditable(this)">
+
+</div>
+<div class="edit-container">
+
+<p class="card-text">Descripción de locación:
+
+</p>
+</div>
+<input type="text" class="form-control" id="deliveryAddressdes" value="" title="" onclick="makeEditable(this)">
+
+</div>
 
              
              
