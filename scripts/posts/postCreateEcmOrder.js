@@ -22,6 +22,8 @@ var delAddsparambis=document.getElementById('selsegundoparametrobis').value;
 var delAddl1=document.getElementById('letras1').value;
 var delAddl2=document.getElementById('letras2').value;
 var delAdddes=document.getElementById('deliveryAddressdes').value;
+var delCar1=document.getElementById('selprimercardinalidad').value;
+var delCar2=document.getElementById('selsegundocardinalidad').value;
 
 
 const deliveryAdd = {
@@ -34,7 +36,9 @@ const deliveryAdd = {
   paramSecondBis: delAddsparambis,
   paramOneLet: delAddl1,
   paramSecondLet: delAddl2,
-  paramDescription: delAdddes
+  paramDescription: delAdddes,
+  paramCardinaleOne: delCar1,
+  paramCardinaleSecond: delCar2
 };
 
 // Colocar el objeto en un array como en tu ejemplo original

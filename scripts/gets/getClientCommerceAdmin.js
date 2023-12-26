@@ -996,8 +996,8 @@ function putOrderPaymentStatus(button,id,param) {
          <td>
 
          
-         ${deliveryAddArray[0]['deliveryAdd']['paramOne']} ${deliveryAddArray[0]['deliveryAdd']['startStreet']}${deliveryAddArray[0]['deliveryAdd']['paramOneLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramOneBis']}
-         ${deliveryAddArray[0]['deliveryAdd']['paramSecond']} # ${deliveryAddArray[0]['deliveryAdd']['startAvenue']}${deliveryAddArray[0]['deliveryAdd']['paramSecondLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramSecondBis']}
+         ${deliveryAddArray[0]['deliveryAdd']['paramOne']} ${deliveryAddArray[0]['deliveryAdd']['startStreet']}${deliveryAddArray[0]['deliveryAdd']['paramOneLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramCardinaleOne'] } ${deliveryAddArray[0]['deliveryAdd']['paramOneBis']}
+         ${deliveryAddArray[0]['deliveryAdd']['paramSecond']} # ${deliveryAddArray[0]['deliveryAdd']['startAvenue']}${deliveryAddArray[0]['deliveryAdd']['paramSecondLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramCardinaleSecond'] } ${deliveryAddArray[0]['deliveryAdd']['paramSecondBis']}
         Casa: ${deliveryAddArray[0]['deliveryAdd']['context']}
        </td>
        
@@ -1235,6 +1235,19 @@ function putOrderPaymentStatus(button,id,param) {
        </select>
        </p>
        </div>
+
+       <div class="edit-container">
+       <p class="card-text">Cardinalidad:
+       <select id="selprimercardinalidad">
+       <option value="">No aplica</option>
+       <option value="N">Norte</option>
+       <option value="S">Sur</option>
+       <option value="EST">Este</option>
+       <option value="OEST">Oeste Karrera</option>
+       </select>
+      
+       </p>
+       </div>
        <div class="edit-container">
        <p class="card-text">
          <select id="selprimerparametrobis">
@@ -1289,6 +1302,18 @@ function putOrderPaymentStatus(button,id,param) {
   </select>
   </p>
   </div>
+  <div class="edit-container">
+       <p class="card-text">Cardinalidad:
+       <select id="selsegundocardinalidad">
+       <option value="">No aplica</option>
+       <option value="N">Norte</option>
+       <option value="S">Sur</option>
+       <option value="EST">Este</option>
+       <option value="OEST">Oeste Karrera</option>
+       </select>
+      
+       </p>
+       </div>
   <div class="edit-container">
   <p class="card-text">
     <select id="selsegundoparametrobis">

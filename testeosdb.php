@@ -9,7 +9,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Consulta para obtener la información de la tabla
-    $sql = "DESCRIBE generalDelivery"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+    $sql = "DESCRIBE generalOrders"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
     $result = $conn->query($sql);
 
     // Imprimir los resultados
@@ -27,10 +27,13 @@ try {
 $sql = "UPDATE generalDelivery SET distanceRules='$data' where clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
   */  
 //$sql = "DELETE FROM generalDelivery WHERE deliveryName='nuevo delivery' and clientId='2e44d504'"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
-$sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
-VALUES ('53452599','nuevo deprueba','repartidor','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+//$sql = "INSERT INTO generalDelivery (deliveryId,deliveryName,deliveryLastName,clientId,distanceRules,deliveryMail,deliveryContact) 
+//VALUES ('53452599','nuevo deprueba','repartidor','2e44d504','$data','paezcastrojuansebastian@gmail.com','1232123456') "; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+$sql = "ALTER TABLE generalOrders ADD COLUMN deliveryStatus VARCHAR(50) DEFAULT 'undefined'";
 
      $result = $conn->query($sql);
+     $sql = "DESCRIBE generalOrders"; // Otra opción: "SHOW COLUMNS FROM nombre_de_la_tabla";
+    $result = $conn->query($sql);
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
