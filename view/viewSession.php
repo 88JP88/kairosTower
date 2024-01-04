@@ -29,8 +29,10 @@ require_once 'modal/modalClientCategories.php';
 require_once 'modal/modalCreateClientCategorie.php';
 require_once 'modal/modalClientStores.php';
 require_once 'modal/modalClientCustomers.php';
+require_once 'modal/modalClientDelivery.php';
 require_once 'modal/modalCreateClientStore.php';
 require_once 'modal/modalClientPos.php';
 require_once 'modal/modalCreateClientCustomer.php';
+require_once 'modal/modalCreateClientDelivery.php';
 require_once 'modal/m.php';
 ?>

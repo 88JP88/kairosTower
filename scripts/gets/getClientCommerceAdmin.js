@@ -93,7 +93,7 @@ value=catid;
               }
 //id unico de agregado al carrito
               let idGenerado = generarID();
-              card11.innerHTML = `
+             card11.innerHTML =  `
                  
                  
              
@@ -818,7 +818,7 @@ function putOrderPaymentStatus(button,id,param) {
   }
  
 
-  function putOrderStatusStatus(button,id,param) {
+  function putOrderStatusStatus(button,id,param,delPerson) {
     // Obtener el valor del campo de texto correspondiente al botón
     const url1 = window.location.href;
     //value= document.getElementById('list-customerget').value;
@@ -827,10 +827,17 @@ function putOrderPaymentStatus(button,id,param) {
       
       // Obtener el valor del parámetro "parametro1"
       var clientId = urlObj.searchParams.get("clientId");
-  
-   
+      
+
+  if(param==="deliveryStatus"){
+
+    var input = delPerson; 
+  }else{
     var nombre = button.previousElementSibling;
-    var input = nombre.value;    
+    var input = nombre.value;  
+  }
+   
+     
     var url = 'controller/putClientOrderStatus.php?orderId=' + encodeURIComponent(id)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(input);
   
    
@@ -848,7 +855,7 @@ function putOrderPaymentStatus(button,id,param) {
         getClientOrders('clientId','byStore','storeId','value','tableClientOrders');
 
          // getClientStores('filter',param,value);
-  
+  console.log(input);
         
    
       })
@@ -1003,11 +1010,11 @@ function putOrderPaymentStatus(button,id,param) {
        
 
          <td>${info.deliveryName} ${info.deliveryLastName}
-         ${deliveryAddArray[0]['deliveryAdd']['startStreet'] >= disRulesArray[0]['distance']['startStreet'] && deliveryAddArray[0]['deliveryAdd']['startStreet'] <= disRulesArray[0]['distance']['endStreet'] ?
+         ${deliveryAddArray[0]['deliveryAdd']['startStreet'] >= disRulesArray[0]['distance']['startStreet'] && deliveryAddArray[0]['deliveryAdd']['startStreet'] <= disRulesArray[0]['distance']['endStreet'] && deliveryAddArray[0]['deliveryAdd']['startAvenue'] >= disRulesArray[0]['distance']['startAvenue'] && deliveryAddArray[0]['deliveryAdd']['startAvenue'] <= disRulesArray[0]['distance']['endAvenue'] ?
          ` <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-plus"></i>
-         </button><button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
+         </button><button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryStatus&quot;,&quot;${info.deliveryPerson}&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-eye"></i>
          </button>` : `<select id='delivery${contador}'></select>
           <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
@@ -1017,7 +1024,7 @@ function putOrderPaymentStatus(button,id,param) {
          
          </td>
          
-        
+         <td>${info.deliveryStatus}</td>
       
            
          `;

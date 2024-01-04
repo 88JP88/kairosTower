@@ -126,6 +126,15 @@
                     </p>
                       
                   </div>
+
+                     
+        <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-truck"></i> REPARTIDORES</h5>
+                      <p class="card-text"><button onclick="openModClientDelivery();getClientDelivery('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientDeliveryCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
         </div>
     </div>
     <script>
