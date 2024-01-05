@@ -120,6 +120,17 @@ if (strtolower($_SESSION['response']) === "true") { // Convertir la respuesta a 
     $_SESSION["mensaje"] = $_SESSION['message'];
     $_SESSION["error"] = $_SESSION['message'];
     //echo $_SESSION['clientId1'];
+    
+//inicio de log
+require_once 'postLog.php';
+$backtrace = debug_backtrace();
+$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+//final de log
   header ('Location: ../session.php');
 }
 
@@ -130,6 +141,15 @@ elseif (strtolower($_SESSION['response']) === "false") { // Convertir la respues
     $_SESSION["error"] = $_SESSION['message'];
   
  
+//inicio de log
+require_once 'postLog.php';
+$backtrace = debug_backtrace();
+$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+//final de log
   
   header ('Location: ../index.php');
 }
@@ -143,6 +163,16 @@ elseif (strtolower($_SESSION['response']) === "false") { // Convertir la respues
     $_SESSION["response"] = $response11;
   
   //echo $response11;
+  
+//inicio de log
+require_once 'postLog.php';
+$backtrace = debug_backtrace();
+$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+//final de log
     header ('Location: ../index.php');
     //header ('Location: ../room.php?roomId='.$roomId);
 }
