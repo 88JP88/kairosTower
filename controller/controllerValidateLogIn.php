@@ -9,6 +9,23 @@ $navegador1 = $_SERVER['HTTP_USER_AGENT'];
 $ip = $_SERVER['REMOTE_ADDR'];
 $navegador = base64_encode($navegador1);
 
+//inicio de log ESTRUCTURA
+require_once '../model/modelSecurity/uuid/uuidd.php';
+
+$gen_uuid = new generateUuid();
+$myuuid = $gen_uuid->guidv4();
+
+$trackId = substr($myuuid, 0, 8);
+ 
+ require_once 'postLog.php';
+ $backtrace = debug_backtrace();
+ $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+ $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+//final log ESTRUCTURA
+
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domCore();
@@ -18,6 +35,7 @@ $url = $sub_domain . "/lugmagateway/apiCore/v1/validateLogIn/93q89NnAwIUNiOn2mOl
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'mail' => $mail, 
+    'trackId' => $trackId, 
     'pass' => $pass
     
 );
@@ -61,6 +79,7 @@ $url = $sub_domain . "/kairosGateway/apiCore/v1/validateLogInInternal/6WclAmsaP9
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'mail' => $mail,
+    'trackId'=>$trackId,
     'browser' => $navegador,
     'ipId' => $ip
     
@@ -68,6 +87,8 @@ $data = array(
 
 // Convertir los datos a formato JSON
 $json_data = json_encode($data);
+
+ kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
 
 // Inicializar la sesión cURL
 $curl = curl_init();
@@ -121,15 +142,8 @@ if (strtolower($_SESSION['response']) === "true") { // Convertir la respuesta a 
     $_SESSION["error"] = $_SESSION['message'];
     //echo $_SESSION['clientId1'];
     
-//inicio de log
-require_once 'postLog.php';
-$backtrace = debug_backtrace();
-$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
-$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
-$justFileName = basename($currentFile);
-$rutaCompleta = __DIR__;
-$status = http_response_code();
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
   header ('Location: ../session.php');
 }
@@ -141,14 +155,8 @@ elseif (strtolower($_SESSION['response']) === "false") { // Convertir la respues
     $_SESSION["error"] = $_SESSION['message'];
   
  
-//inicio de log
-require_once 'postLog.php';
-$backtrace = debug_backtrace();
-$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
-$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
-$justFileName = basename($currentFile);
-$rutaCompleta = __DIR__;
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
   
   header ('Location: ../index.php');
@@ -164,14 +172,8 @@ kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info[
   
   //echo $response11;
   
-//inicio de log
-require_once 'postLog.php';
-$backtrace = debug_backtrace();
-$info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
-$currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
-$justFileName = basename($currentFile);
-$rutaCompleta = __DIR__;
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+
+kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
     header ('Location: ../index.php');
     //header ('Location: ../room.php?roomId='.$roomId);

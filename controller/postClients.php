@@ -142,7 +142,16 @@ if (!is_dir($nombreCarpeta)) {
                    
                    
                    
-                   
+                     //inicio de log
+                require_once 'postLog.php';
+                $backtrace = debug_backtrace();
+                $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+                $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+            $justFileName = basename($currentFile);
+            $rutaCompleta = __DIR__;
+            $status = http_response_code();
+                kronos($response1,$message,$message, $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+            //final de log
                    
                    } else {
                        echo "No se pudo crear el archivo $nombreArchivo.";
@@ -187,7 +196,16 @@ if (strtolower($response1) != "true") { // Convertir la respuesta a minúsculas 
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
-  
+    //inicio de log
+    require_once 'postLog.php';
+    $backtrace = debug_backtrace();
+    $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+    $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+    kronos($response1,$message,$message, $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+//final de log
   
   
     //header ('Location: ../room.php?roomId='.$roomId);

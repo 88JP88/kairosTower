@@ -9,14 +9,34 @@ $clientId = $_GET['clientId'];
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
+//inicio de log ESTRUCTURA
+require_once '../model/modelSecurity/uuid/uuidd.php';
 
+$gen_uuid = new generateUuid();
+$myuuid = $gen_uuid->guidv4();
+
+$trackId = substr($myuuid, 0, 8);
+ 
+ require_once 'postLog.php';
+ $backtrace = debug_backtrace();
+ $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+ $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+//final log ESTRUCTURA
 $url = $sub_domain . "/kairosGateway/apiClient/v1/postCatalogBulk/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'bulk' => $bulk,
+    'trackId'=>$trackId,
     'clientId' => $clientId
 );
+
+
+ 
+ kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
 
 // Convertir los datos a formato JSON
 $json_data = json_encode($data);
@@ -50,6 +70,10 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
     
+
+     
+      kronos($response1,$message,$message, $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+
    // header ('Location: ../room.php?roomId='.$roomId);
 }
 
@@ -59,7 +83,9 @@ if (strtolower($response1) != "true") { // Convertir la respuesta a minúsculas 
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
   
-  
+   
+    kronos($response1,$message,$message, $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status);
+
   
     //header ('Location: ../room.php?roomId='.$roomId);
 }

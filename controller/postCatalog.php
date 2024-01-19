@@ -22,12 +22,28 @@ $unitUnit = $_GET['unitUnit'];
 require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
+//inicio de log ESTRUCTURA
+require_once '../model/modelSecurity/uuid/uuidd.php';
 
-$url = $sub_domain . "/kairosGateway/apiCom/v1/postCatalog/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+$gen_uuid = new generateUuid();
+$myuuid = $gen_uuid->guidv4();
+
+$trackId = substr($myuuid, 0, 8);
+ 
+ require_once 'postLog.php';
+ $backtrace = debug_backtrace();
+ $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+ $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+//final log ESTRUCTURA
+$url = $sub_domain . "/kairosGateway/apiClient/v1/postCatalog/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'clientId' => $clientId, 
+    'trackId'=>$trackId,
     'productId' => $product,
     'categoryId' => $category,
     'stock' => $stock,
@@ -44,6 +60,9 @@ $data = array(
     'unitUnit' => $unitUnit
     
 );
+
+
+ kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
 
 // Convertir los datos a formato JSON
 $json_data = json_encode($data);
@@ -76,7 +95,9 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["respuesta"] = $response1;
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
-    
+     
+    kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
+ 
    // header ('Location: ../room.php?roomId='.$roomId);
 }
 
@@ -86,7 +107,9 @@ if (strtolower($response1) != "true") { // Convertir la respuesta a minúsculas 
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
   
-  
+   
+    kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
+
   
     //header ('Location: ../room.php?roomId='.$roomId);
 }

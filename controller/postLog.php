@@ -1,8 +1,8 @@
 <?php
 
-function kronos($response,$message,$error,$function,$filename,$module,$clientId,$data,$endpoint,$userId,$referer,$statusCode) {
+function kronos($response,$message,$error,$function,$filename,$module,$clientId,$data,$endpoint,$userId,$referer,$statusCode,$trackId,$logTypeInternal) {
 require_once '../database/db_users.php';
-$conectar=conn();
+//$conectar=conn();
   // Establecer la zona horaria a Bogotá
 date_default_timezone_set('America/Bogota');
 
@@ -25,6 +25,8 @@ $jsonData = '{
     "log":{
       "front":{
         "timestamp": "'.$currentDateTime.'",
+        "trackId": "'.$trackId.'",
+        "logType": "'.$logTypeInternal.'",
         "level": "'.$level.'",
         "clientId": "'.$clientId.'",
         "userId": "'.$userId.'",
@@ -60,7 +62,7 @@ $jsonData = '{
   // Definir los datos a enviar en la solicitud POST
   $data = array(
       'data' => $jsonData,
-      'logType' => 'tp log'
+      'logType' => 'kairosTower'
       
   );
   

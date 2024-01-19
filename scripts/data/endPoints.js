@@ -29,7 +29,7 @@ const epGetClientProducts= `${subDomain}/kairosGateway/apiCom/v1/getProducts/${r
 const epGetClientCatalogs= `${subDomain}/kairosGateway/apiCom/v1/getCatalogs/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 
-const epGetClientCatalogsAdmin= `${subDomain}/kairosGateway/apiClient/v1/getCatalogs/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+const epGetClientCatalogsAdmin= `${subDomain}/kairosGateway/apiCom/v1/getCatalogs/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 
 const epGetClientCategories= `${subDomain}/kairosGateway/apiCom/v1/getCategories/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

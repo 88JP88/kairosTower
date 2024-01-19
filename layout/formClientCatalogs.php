@@ -61,7 +61,9 @@
     </script>
 </body>
 </html>
-
+<div id="card-clientCatalogsInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
 <div id="card-clientCatalogs" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>

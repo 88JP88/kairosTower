@@ -13,11 +13,18 @@ require_once '../env/domain.php';
 $sub_domaincon = new model_domain();
 $sub_domain = $sub_domaincon->domainGateway();
 
-$url = $sub_domain . "/kairosGateway/apiCom/v1/postCategorie/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
+require_once '../model/modelSecurity/uuid/uuidd.php';
+
+$gen_uuid = new generateUuid();
+$myuuid = $gen_uuid->guidv4();
+
+$trackId = substr($myuuid, 0, 8);
+$url = $sub_domain . "/kairosGateway/apiClient/v1/postCategorie/fL2jz91ptFMA3UwVkBbu/6WclAmsaP9H7SR2WmpDbl1OL9";
 
 // Definir los datos a enviar en la solicitud POST
 $data = array(
     'clientId' => $clientId, 
+    'trackId' => $trackId, 
     'categoryName' => $catName,
     'comments' => $comments,
     'parentId' => $parentId,
@@ -57,6 +64,17 @@ if (strtolower($response1) === "true") { // Convertir la respuesta a minúsculas
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
     
+  //inicio de log
+  require_once 'postLog.php';
+  $backtrace = debug_backtrace();
+  $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+  $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+$justFileName = basename($currentFile);
+$rutaCompleta = __DIR__;
+$status = http_response_code();
+kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
+//final de log
+
    // header ('Location: ../room.php?roomId='.$roomId);
 }
 
@@ -66,6 +84,17 @@ if (strtolower($response1) != "true") { // Convertir la respuesta a minúsculas 
     $_SESSION["mensaje"] = $message;
     $_SESSION["error"] = $response1;
   
+
+      //inicio de log
+      require_once 'postLog.php';
+      $backtrace = debug_backtrace();
+      $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
+      $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
+  $justFileName = basename($currentFile);
+  $rutaCompleta = __DIR__;
+  $status = http_response_code();
+  kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
+  //final de log
   
   
     //header ('Location: ../room.php?roomId='.$roomId);

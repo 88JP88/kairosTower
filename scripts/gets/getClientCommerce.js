@@ -5,12 +5,23 @@ async function getClientProducts(filter,param,value) {
   var clientId=sessionStorage.getItem('clientNow');
   fetch(epGetClientProducts + clientId+"/"+filter+"/"+param+"/"+value)
       .then(response => response.json())
-      .then(data => {
+      .then(data => {  
+       // console.log('Valor real de data.response.response:', data.response.response);
+
+        if (data.response && data.response.response == "true") {
           const cardContainer11 = document.getElementById("card-clientProducts");
+          const cardContainer11Info = document.getElementById("card-clientProductsInfo");
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          cardContainer11Info.innerHTML = ""; 
+          
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>`;
+              cardContainer11Info.appendChild(card11Info);
           data.products.forEach(info => {
               const card11 = document.createElement("div");
               card11.classList.add("card");
+              
               const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
               const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
              
@@ -151,9 +162,27 @@ async function getClientProducts(filter,param,value) {
           });
           
           document.getElementById("loading-container").style.display = "none";
+        }
+        else {
+          // Manejar el caso donde la respuesta no es 'true'
+          const cardContainer11 = document.getElementById("card-clientProducts");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          const cardContainer11Info = document.getElementById("card-clientProductsInfo");
+       
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>
+              <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+              cardContainer11Info.appendChild(card11Info);
+
+         
+          //console.error("La respuesta no es 'true' "+data.response.response);
+          document.getElementById("loading-container").style.display = "none";
+      }
       })
       .catch(error => {
-          console.error("Error:", error);
+        //  console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
       });
 }
@@ -245,8 +274,15 @@ async function getClientCatalogs(filter,param,value) {
   fetch(epGetClientCatalogs + clientId+"/"+filter+"/"+param+"/"+value)
       .then(response => response.json())
       .then(data => {
+        if (data.response && data.response.response == "true") {
           const cardContainer11 = document.getElementById("card-clientCatalogs");
+          const cardContainer11Info = document.getElementById("card-clientCatalogsInfo");
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>`;
+              cardContainer11Info.appendChild(card11Info);
           data.catalogs.forEach(info => {
               const card11 = document.createElement("div");
               card11.classList.add("card");
@@ -546,7 +582,25 @@ async function getClientCatalogs(filter,param,value) {
           });
           
           document.getElementById("loading-container").style.display = "none";
-      })
+        } else {
+          // Manejar el caso donde la respuesta no es 'true'
+          const cardContainer11 = document.getElementById("card-clientCatalogs");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          const cardContainer11Info = document.getElementById("card-clientCatalogsInfo");
+       
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>
+              <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+              cardContainer11Info.appendChild(card11Info);
+
+         
+          //console.error("La respuesta no es 'true' "+data.response.response);
+          document.getElementById("loading-container").style.display = "none";
+      }
+     
+        })
       .catch(error => {
           console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
@@ -561,7 +615,14 @@ async function getClientCategories(filter,param,value) {
   fetch(epGetClientCategories + clientId+"/"+filter+"/"+param+"/"+value)
       .then(response => response.json())
       .then(data => {
+        if (data.response && data.response.response == "true") {
           const cardContainer11 = document.getElementById("card-clientCategories");
+          const cardContainer11Info = document.getElementById("card-clientCategoriesInfo");
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>`;
+              cardContainer11Info.appendChild(card11Info);
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
           data.categories.forEach(info => {
               const card11 = document.createElement("div");
@@ -669,7 +730,24 @@ async function getClientCategories(filter,param,value) {
           });
           
           document.getElementById("loading-container").style.display = "none";
-      })
+        }else {
+          // Manejar el caso donde la respuesta no es 'true'
+          const cardContainer11 = document.getElementById("card-clientCategories");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          const cardContainer11Info = document.getElementById("card-clientCategoriesInfo");
+       
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>
+              <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+              cardContainer11Info.appendChild(card11Info);
+
+         
+          //console.error("La respuesta no es 'true' "+data.response.response);
+          document.getElementById("loading-container").style.display = "none";
+      }
+        })
       .catch(error => {
           console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
@@ -684,8 +762,16 @@ async function getClientStores(filter,param,value) {
   fetch(epGetClientStores + clientId+"/"+filter+"/"+param+"/"+value)
       .then(response => response.json())
       .then(data => {
+        if (data.response && data.response.response == "true") {
           const cardContainer11 = document.getElementById("card-clientStores");
+          const cardContainer11Info = document.getElementById("card-clientStoresInfo");
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>`;
+              cardContainer11Info.appendChild(card11Info);
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          
           data.stores.forEach(info => {
               const card11 = document.createElement("div");
               card11.classList.add("card");
@@ -794,7 +880,24 @@ async function getClientStores(filter,param,value) {
           });
           
           document.getElementById("loading-container").style.display = "none";
-      })
+        }else {
+          // Manejar el caso donde la respuesta no es 'true'
+          const cardContainer11 = document.getElementById("card-clientStores");
+          cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+          const cardContainer11Info = document.getElementById("card-clientStoresInfo");
+       
+          cardContainer11Info.innerHTML = ""; 
+          const card11Info = document.createElement("div");
+          card11Info.classList.add("card");
+              card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>
+              <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+              cardContainer11Info.appendChild(card11Info);
+
+         
+          //console.error("La respuesta no es 'true' "+data.response.response);
+          document.getElementById("loading-container").style.display = "none";
+      }
+        })
       .catch(error => {
           console.error("Error:", error);
           document.getElementById("loading-container").style.display = "none";
