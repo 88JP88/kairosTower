@@ -41,7 +41,7 @@
   </select>
 <option selected>Tipo de cliente</option>
 </div>
-<button type="button" class="btn btn-primary1 edit-button" id="postCustomerbtn" title="CREAR CLIENTE"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postCustomerbtn" title="CREAR CLIENTE" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 
 

@@ -63,7 +63,7 @@
   <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Especificaciones técnicas</label>
   <input type="text" class="form-control" id="pspc" placeholder="Ingresa valor por hora">
 </div>
-<button type="button" class="btn btn-primary1 edit-button" id="postProductsbtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
+<button type="button" data-bs-dismiss="modal" class="btn btn-primary1 edit-button" id="postProductsbtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
 
 
 

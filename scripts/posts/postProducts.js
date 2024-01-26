@@ -1,49 +1,59 @@
 
 document.getElementById("postProductsbtn").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var name = document.getElementById("pName").value;
-  var descr = document.getElementById("pDesc").value;
-  var ean1 = document.getElementById("pean1").value;
-  var ean2 = document.getElementById("pean2").value;
-  var sku = document.getElementById("psku").value;
-  var ptype = document.getElementById("ptype").value;
-  var pvalue = document.getElementById("pvalue").value;
-  var pprovider = document.getElementById("pprovider").value;
-  var imgurl = document.getElementById("pimageurl").value;
-  var pspc = document.getElementById("pspc").value;
-  
-var clientIdNow=sessionStorage.getItem('clientNow');
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postProduct.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&productName=" + encodeURIComponent(name) +
-            "&description=" + encodeURIComponent(descr) +
-            "&ean1=" + encodeURIComponent(ean1)+
-            "&ean2=" + encodeURIComponent(ean2)+
-            "&sku=" + encodeURIComponent(sku)+
-            "&productType=" + encodeURIComponent(ptype)+
-            "&providerId=" + encodeURIComponent(pprovider)+
-            "&imgUrl=" + encodeURIComponent(imgurl)+
-            "&techSpef=" + encodeURIComponent(pspc)+
-            "&pValue=" + encodeURIComponent(pvalue);
 
+            var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "productName": document.getElementById("pName").value,
+              "description": document.getElementById("pDesc").value,
+              "ean1": document.getElementById("pean1").value,
+              "ean2": document.getElementById("pean2").value,
+              "sku": document.getElementById("psku").value,
+              "productType": document.getElementById("ptype").value,
+              "providerId": document.getElementById("pprovider").value,
+              "imgUrl": document.getElementById("pimageurl").value,
+              "techSpef": document.getElementById("pspc").value,
+              "inPrice": document.getElementById("pvalue").value,
+
+              "apiValues":{
+                "apiName": "apiCom",
+                "apiVersion": "v1",
+                "endPoint": "postProduct"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      document.getElementById("names1").value = "";
-      document.getElementById("lastnames156").value = "";
-      document.getElementById("lastnames123").value = "";
-      document.getElementById("pmail134").value = "";
-      document.getElementById("rol1").value = "Selecciona rol";
-      document.getElementById("pass11").value = "";
-      document.getElementById("pass22").value = "";
-      document.getElementById("clientcomments").value = "";
-      document.getElementById("clientnames").value = "";
+      document.getElementById("pName").value = "";
+      document.getElementById("pDesc").value = "";
+      document.getElementById("pean1").value = "";
+      document.getElementById("pean2").value = "";
+      document.getElementById("psku").value = "";
+      document.getElementById("ptype").value = "";
+      document.getElementById("pprovider").value = "";
+      document.getElementById("pimageurl").value = "";
+      document.getElementById("pspc").value = "";
+      document.getElementById("pvalue").value = "";
       getMessage();
+      var confirmCreateClient = window.confirm("¿Desea crear otro producto?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientProductsCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
       
     })
     .catch(error => {

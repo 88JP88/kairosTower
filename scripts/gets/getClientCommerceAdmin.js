@@ -18,22 +18,6 @@ async function getClientCatalogsAdmin(filter,param,value,contenedor) {
 const urlObj = new URL(url);
 
 // Obtener el valor del parámetro "parametro1"
-var clientId = urlObj.searchParams.get("clientId");
-
-
-
-// Crear un objeto URL a partir de la URL actual
-
-
-// Obtener el valor del parámetro "parametro1"
-var storeId = urlObj.searchParams.get("storeId");
-
-
-
-// Crear un objeto URL a partir de la URL actual
-
-
-// Obtener el valor del parámetro "parametro1"
 var st = urlObj.searchParams.get("st");
 
 if(st==="pos"){
@@ -46,7 +30,7 @@ if(st==="pos"){
 }
 if(st==="ecm"){
   document.getElementById("loading-container").style.display = "flex";
-  var catid= document.getElementById("list-categoriesListPos").value;
+  var catid= document.getElementById("list-categoriesListECM").value;
   var catid1= document.getElementById("simil").value;
 }
   if(param=="categoryId"){
@@ -65,8 +49,25 @@ value=catid;
               }
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
+  var apiData = {
+   
+    "clientId":urlObj.searchParams.get("clientId"),
+    "filter": filter+urlObj.searchParams.get("storeId"),
+    "param": param,
+    "value": value
+          };
+
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCatalogs";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   //console.log(epGetClientCatalogsAdmin);
-  fetch(epGetClientCatalogsAdmin + clientId+"/"+filter+storeId+"/"+param+"/"+value+"/"+st)
+ 
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById(contenedor);
@@ -328,115 +329,6 @@ function updateCartView(id) {
 
 
 
-async function getClientCategoriesListaddPost(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-categoriesListPos");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-
-
-  const url = window.location.href;
-
-  // Crear un objeto URL a partir de la URL actual
-  const urlObj = new URL(url);
-  
-  // Obtener el valor del parámetro "parametro1"
-  var uid = urlObj.searchParams.get("clientId");
-//var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.categories.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.categoryId;
-      option.text = info.categoryName;
-      reposSelect.add(option);
-      //console.log("hola");
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
- 
-async function getClientCategoriesList3(filter,param,value,catId) {
-
-  var reposSelect = document.getElementById("list-categoriesList1"+catId);
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.categories.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.categoryId;
-      option.text = info.categoryName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
- async function getClientCategoriesListadd(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-categoryListstadd");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.categories.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.categoryId+"|"+info.parentId;
-      option.text = info.categoryName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
- 
- async function getClientCategoriesListadd96(filter,param,value) {
-
-  var reposSelect = document.getElementById("list-categoryListstadd96");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
-  .then(response => response.json())
-  .then(data => {
-    data.categories.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.categoryId;
-      option.text = info.categoryName;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
-
-
- 
-
-
-
 
 
 
@@ -662,11 +554,27 @@ function esEntero(numero) {
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
+  const url = window.location.href;
+  const urlObj = new URL(url);
+  
 
-
-
-
-	fetch('https://dev-kairosgateway.lugma.tech/kairosGateway/apiClient/v1/getCustomers/UfbHdZaJ%206WclAmsaP9H7SR2WmpDbl1OL9/2e44d504/all/all/all')
+  var apiData = {
+    
+    "clientId":urlObj.searchParams.get("clientId"),
+    "filter": "all",
+    "param": "all",
+    "value": "all"
+          };
+  
+  var serviceName="kairosGateway";
+  var apiName="apiClient";
+  var apiVersion="v1";
+  var endPoint="getCustomers";
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+  
   .then(response => response.json())
   .then(data => {
     data.customers.forEach(info => {
@@ -695,7 +603,23 @@ value= document.getElementById('list-customerget').value;
   var clientId = urlObj.searchParams.get("clientId");
   //var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
-  fetch(epGetClientCustomers + clientId+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+    
+   "clientId":urlObj.searchParams.get("clientId"),
+   "filter": filter,
+   "param": param,
+   "value": value
+         };
+ 
+ var serviceName="kairosGateway";
+ var apiName="apiClient";
+ var apiVersion="v1";
+ var endPoint="getCustomers";
+ // Construir la URL con los parámetros de la petición GET
+ 
+ const apiInfo = JSON.stringify(apiData);
+ fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+ 
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-validateClientPos");
@@ -781,12 +705,12 @@ function putOrderPaymentStatus(button,id,param) {
     
     // Obtener el valor del parámetro "parametro1"
     var clientId = urlObj.searchParams.get("clientId");
- if(param==="validateModal"){
-  var input = document.getElementById('paymentReference').value;
-  var url = 'controller/putClientOrderPayment.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId);
+//  if(param=="validateModal"){
+//   var input = document.getElementById('paymentReference').value;
+//   var url = 'controller/putClientOrderPayment.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId);
 
- }
- if(param==="validateList"){
+//  }
+ if(param=="validateList"){
   var nombre = button.previousElementSibling;
   var input = nombre.value;    
   var url = 'controller/putClientOrderPayment1.php?reference=' + encodeURIComponent(input)  + '&clientId=' + encodeURIComponent(clientId)+ '&orderId=' + encodeURIComponent(id);
@@ -832,13 +756,49 @@ function putOrderPaymentStatus(button,id,param) {
   if(param==="deliveryStatus"){
 
     var input = delPerson; 
+
+    var apiData = {
+      "orderId": id,
+      "clientId": urlObj.searchParams.get("clientId"),
+      "param": param,
+      "value": input,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putClientOrderStatus"
+      }
+      
+    };
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+  
   }else{
+
     var nombre = button.previousElementSibling;
     var input = nombre.value;  
+    var apiData = {
+      "orderId": id,
+      "clientId": urlObj.searchParams.get("clientId"),
+      "param": param,
+      "value": input,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putClientOrderStatus"
+      }
+      
+    };
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+  
   }
    
-     
-    var url = 'controller/putClientOrderStatus.php?orderId=' + encodeURIComponent(id)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(input);
+
+   // var url = 'controller/putClientOrderStatus.php?orderId=' + encodeURIComponent(id)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(input);
   
    
       
@@ -850,12 +810,12 @@ function putOrderPaymentStatus(button,id,param) {
       .then(response => {
         // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
         // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-  
+  console.log(id,param,input);
         getMessage();
         getClientOrders('clientId','byStore','storeId','value','tableClientOrders');
 
          // getClientStores('filter',param,value);
-  console.log(input);
+  //console.log(input);
         
    
       })
@@ -889,7 +849,23 @@ function putOrderPaymentStatus(button,id,param) {
     value = urlObj.searchParams.get("storeId");
     var storetype=urlObj.searchParams.get("st");
     if(storetype==="ecm"){
-    fetch(epGetClientOrders+clientId+"/"+filter+"/"+param+"/"+value)
+      var apiData = {
+       
+        "clientId":clientId,
+        "filter": filter,
+        "param": param,
+        "value": value
+              };
+    
+    var serviceName="kairosGateway";
+    var apiName="apiClient";
+    var apiVersion="v1";
+    var endPoint="getClientOrders";
+    // Construir la URL con los parámetros de la petición GET
+    
+    const apiInfo = JSON.stringify(apiData);
+    fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+    
      
      .then(response => response.json())
      .then(data => {
@@ -898,7 +874,7 @@ function putOrderPaymentStatus(button,id,param) {
        publicgroupsTableBody.innerHTML = "";
        data.orders.forEach(info => {
          const row = document.createElement("tr");
-         const deliveryAddArray = JSON.parse(info.deliveryAdd);
+        // const deliveryAddArray = JSON.parse(info.deliveryAdd);
          const disRulesArray = JSON.parse(info.distanceRules);
          row.innerHTML = `
         
@@ -1003,25 +979,16 @@ function putOrderPaymentStatus(button,id,param) {
          <td>
 
          
-         ${deliveryAddArray[0]['deliveryAdd']['paramOne']} ${deliveryAddArray[0]['deliveryAdd']['startStreet']}${deliveryAddArray[0]['deliveryAdd']['paramOneLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramCardinaleOne'] } ${deliveryAddArray[0]['deliveryAdd']['paramOneBis']}
-         ${deliveryAddArray[0]['deliveryAdd']['paramSecond']} # ${deliveryAddArray[0]['deliveryAdd']['startAvenue']}${deliveryAddArray[0]['deliveryAdd']['paramSecondLet'] } ${deliveryAddArray[0]['deliveryAdd']['paramCardinaleSecond'] } ${deliveryAddArray[0]['deliveryAdd']['paramSecondBis']}
-        Casa: ${deliveryAddArray[0]['deliveryAdd']['context']}
-       </td>
+           </td>
        
 
          <td>${info.deliveryName} ${info.deliveryLastName}
-         ${deliveryAddArray[0]['deliveryAdd']['startStreet'] >= disRulesArray[0]['distance']['startStreet'] && deliveryAddArray[0]['deliveryAdd']['startStreet'] <= disRulesArray[0]['distance']['endStreet'] && deliveryAddArray[0]['deliveryAdd']['startAvenue'] >= disRulesArray[0]['distance']['startAvenue'] && deliveryAddArray[0]['deliveryAdd']['startAvenue'] <= disRulesArray[0]['distance']['endAvenue'] ?
-         ` <select id='delivery${contador}'></select>
+         <select id='delivery${contador}'></select>
          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-plus"></i>
          </button><button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryStatus&quot;,&quot;${info.deliveryPerson}&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
          <i class="fas fa-eye"></i>
-         </button>` : `<select id='delivery${contador}'></select>
-          <button onclick="putOrderStatusStatus(this,&quot;${info.orderId}&quot;,&quot;deliveryPerson&quot;)" class="btn btn-primary1 delete-button" title="ASIGNAR ENTREGA">
-         <i class="fas fa-plus"></i>
-         </button>` // Aquí puedes añadir más condiciones según sea necesario
-       }
-         
+         </button>
          </td>
          
          <td>${info.deliveryStatus}</td>
@@ -1032,7 +999,7 @@ function putOrderPaymentStatus(button,id,param) {
          
     
          publicgroupsTableBody.appendChild(row);
-         getClientDelivery('delivery'+contador);
+         getClientDelivery1('delivery'+contador);
          contador++;
        }
        
@@ -1045,8 +1012,23 @@ function putOrderPaymentStatus(button,id,param) {
      });
       }
       if(storetype==="pos"){
-        fetch(epGetClientOrders+clientId+"/"+filter+"/"+param+"/"+value)
+        var apiData = {
          
+          "clientId":clientId,
+          "filter": filter,
+          "param": param,
+          "value": value
+                };
+      
+      var serviceName="kairosGateway";
+      var apiName="apiClient";
+      var apiVersion="v1";
+      var endPoint="getClientOrders";
+      // Construir la URL con los parámetros de la petición GET
+      
+      const apiInfo = JSON.stringify(apiData);
+      fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+      
          .then(response => response.json())
          .then(data => {
            const publicgroupsTableBody = document.querySelector("#"+containerId+" tbody");
@@ -1091,12 +1073,20 @@ function putOrderPaymentStatus(button,id,param) {
             
              <td>
              <div class="edit-container">
-             <input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)"> <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-          <i class="fas fa-edit"></i>
-          </button>
-            
+               ${info.paymentReference === "cash" ?
+               info.paymentReference
+                :
+                 
+                 (info.orderProgress !== "done" && info.orderProgress !== "canceled" && info.orderProgress !== "DONE"  ?
+                 `<input type="text" class="form-control label-input" id="${info.orderId}" value="${info.paymentReference}" title="${info.paymentReference}" onclick="makeEditable(this)">
+                  <button onclick="putOrderPaymentStatus(this,&quot;${info.orderId}&quot;,&quot;validateList&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+                    <i class="fas fa-edit"></i>
+                  </button>` :
+                 info.paymentReference
+               ) 
+               }
              </div>
-             </td>
+           </td>
              <td>${info.orderProgress}</td>
              <td>${info.paymentStatus}</td>
              <td>${info.bankAccount}</td>
@@ -1123,7 +1113,23 @@ function putOrderPaymentStatus(button,id,param) {
 
     else{
       
-      fetch(epGetClientOrders + clientId + "/" + filter + "/" + param + "/" + value)
+      var apiData = {
+       
+        "clientId":clientId,
+        "filter": filter,
+        "param": param,
+        "value": value
+              };
+    
+    var serviceName="kairosGateway";
+    var apiName="apiClient";
+    var apiVersion="v1";
+    var endPoint="getClientOrders";
+    // Construir la URL con los parámetros de la petición GET
+    
+    const apiInfo = JSON.stringify(apiData);
+    fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+    
   .then(response => response.json())
   .then(data => {
     const publicgroupsTableBody = document.querySelector("#" + containerId + " tbody");
@@ -1134,7 +1140,7 @@ function putOrderPaymentStatus(button,id,param) {
 
       // Convertir el string JSON a un objeto
       const orderPayload = JSON.parse(orderPayloadString);
-      console.log(typeof orderPayload);
+     // console.log(typeof orderPayload);
       if (Array.isArray(orderPayload)) {
         orderPayload.forEach(item => {
           const row = document.createElement("tr");
@@ -1435,7 +1441,7 @@ function putOrderPaymentStatus(button,id,param) {
 
 
    
-   function getClientDelivery(containerId){
+   function getClientDelivery1(containerId){
 
 
     const url1 = window.location.href;
@@ -1444,17 +1450,36 @@ function putOrderPaymentStatus(button,id,param) {
       const urlObj = new URL(url1);
       
       // Obtener el valor del parámetro "parametro1"
-     console.log(containerId);
+    // console.log(containerId);
      var clientId = urlObj.searchParams.get("clientId");
     var reposSelect = document.getElementById(containerId);
 
 
   
-  console.log(epGetClientDelivery + clientId+'/all/all/all');
+ // console.log(epGetClientDelivery + clientId+'/all/all/all');
   
+  var apiData = {
+   
+    
+      "clientId":urlObj.searchParams.get("clientId"),
+      "filter": "filter",
+      "param": "param",
+      "value": "value"
+    
+    
+  };
+  var serviceName="kairosGateway";
+  var apiName="apiClient";
+  var apiVersion="v1";
+  var endPoint="getDelivery";
+  // Construir la URL con los parámetros de la petición GET
   
-    fetch(epGetClientDelivery  + clientId+"/all/all/all")
-    .then(response => response.json())
+  const apiInfo = JSON.stringify(apiData);
+  fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)      .then(response => response.json())
+   
+  
+   
+    
     .then(data => {
       data.delivery.forEach(info => {
         const option = document.createElement("option");
@@ -1467,4 +1492,53 @@ function putOrderPaymentStatus(button,id,param) {
       console.error("Error:", error);
     });
      
+   }
+
+
+   async function getCategoriesListWithParam(filter,param,value,containerId) {
+
+    var reposSelect = document.getElementById(containerId);
+    while (reposSelect.firstChild) {
+      reposSelect.removeChild(reposSelect.firstChild);
+    }
+
+    
+    const url1 = window.location.href;
+    //value= document.getElementById('list-customerget').value;
+      // Crear un objeto URL a partir de la URL actual
+      const urlObj = new URL(url1);
+      
+      // Obtener el valor del parámetro "parametro1"
+    // console.log(containerId);
+    var apiData = {
+     
+      "clientId":urlObj.searchParams.get("clientId"),
+      "filter": filter,
+      "param": param,
+      "value": value
+    
+    
+  };
+  var serviceName="kairosGateway";
+  var apiName="apiCom";
+  var apiVersion="v1";
+  var endPoint="getCategories";
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+  
+    .then(response => response.json())
+    .then(data => {
+      data.categories.forEach(info => {
+        const option = document.createElement("option");
+        option.value = info.categoryId;
+        option.text = info.categoryName;
+        reposSelect.add(option);
+      });
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  
    }

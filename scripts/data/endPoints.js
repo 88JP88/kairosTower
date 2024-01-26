@@ -46,3 +46,7 @@ const epGetClientOrders= `${subDomain}/kairosGateway/apiClient/v1/getClientOrder
 const epGetClientPickupPoints= `${subDomain}/kairosGateway/apiClient/v1/getClientPickupPoints/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
 
 const epGetClientDelivery= `${subDomain}/kairosGateway/apiClient/v1/getDelivery/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+
+
+const modelGel= `${subDomain}/kairosGateway/apiClient/v1/getDelivery/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS

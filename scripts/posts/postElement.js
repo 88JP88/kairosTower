@@ -1,43 +1,52 @@
 
 document.getElementById("postElement").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var name = document.getElementById("eName").value;
-  var carac = document.getElementById("eCaract").value;
-  var comments = document.getElementById("eCommentse").value;
-  var brand = document.getElementById("eBrand").value;
-  var type = document.getElementById("eType").value;
-  var img = document.getElementById("eImg").value;
-  var valu = document.getElementById("eValue").value;
-  
-var clientIdNow=sessionStorage.getItem('clientNow');
+ 
+            var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "name": document.getElementById("eName").value,
+              "caract": document.getElementById("eCaract").value,
+              "comments": document.getElementById("eCommentse").value,
+              "brand": document.getElementById("eBrand").value,
+              "type": document.getElementById("eType").value,
+              "img": document.getElementById("eImg").value,
+              "value": document.getElementById("eValue").value,
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postElement.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&name=" + encodeURIComponent(name) +
-            "&caract=" + encodeURIComponent(carac) +
-            "&comments=" + encodeURIComponent(comments)+
-            "&brand=" + encodeURIComponent(brand)+
-            "&type=" + encodeURIComponent(type)+
-            "&img=" + encodeURIComponent(img)+
-            "&value=" + encodeURIComponent(valu);
-
+              "apiValues":{
+                "apiName": "apiCompanies",
+                "apiVersion": "v1",
+                "endPoint": "postClientElement"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      document.getElementById("names1").value = "";
-      document.getElementById("lastnames156").value = "";
-      document.getElementById("lastnames123").value = "";
-      document.getElementById("pmail134").value = "";
-      document.getElementById("rol1").value = "Selecciona rol";
-      document.getElementById("pass11").value = "";
-      document.getElementById("pass22").value = "";
-      document.getElementById("clientcomments").value = "";
-      document.getElementById("clientnames").value = "";
+      document.getElementById("eName").value = "";
+      document.getElementById("eCaract").value = "";
+      document.getElementById("eCommentse").value = "";
+      document.getElementById("eBrand").value = "";
+      document.getElementById("eType").value = "";
+      document.getElementById("eImg").value = "";
+      document.getElementById("eValue").value = "";
       getMessage();
+      var confirmCreateClient = window.confirm("¿Desea crear otro elemento?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientElementsCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
       
     })
     .catch(error => {

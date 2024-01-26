@@ -1,34 +1,43 @@
 
 document.getElementById("postStoressbtn").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var name = document.getElementById("sName").value;
-  var descr = document.getElementById("sComments").value;
-  var ean1 = document.getElementById("list-storeType1").value;
-var clientIdNow=sessionStorage.getItem('clientNow');
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postStore.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&storeName=" + encodeURIComponent(name) +
-            "&comments=" + encodeURIComponent(descr) +
-            "&storeType=" + encodeURIComponent(ean1);
+  
+var apiData = {
+  "clientId": sessionStorage.getItem('clientNow'),
+  "storeName": document.getElementById("sName").value,
+  "comments": document.getElementById("sComments").value,
+  "storeType": document.getElementById("list-storeType1").value,
+  "apiValues":{
+    "apiName": "apiCom",
+    "apiVersion": "v1",
+    "endPoint": "postStore"
+  }
+  
+};
+// Construir la URL con los parámetros de la petición GET
 
-  // Realizar la solicitud GET utilizando fetch
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       
-      document.getElementById("names1").value = "";
-      document.getElementById("lastnames156").value = "";
-      document.getElementById("lastnames123").value = "";
-      document.getElementById("pmail134").value = "";
-      document.getElementById("rol1").value = "Selecciona rol";
-      document.getElementById("pass11").value = "";
-      document.getElementById("pass22").value = "";
-      document.getElementById("clientcomments").value = "";
-      document.getElementById("clientnames").value = "";
+      document.getElementById("sName").value = "";
+      document.getElementById("sComments").value = "";
+      document.getElementById("sComments").value = "";
       getMessage();
+      var confirmCreateClient = window.confirm("¿Desea crear otra tienda?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientStoreCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
       
     })
     .catch(error => {

@@ -94,7 +94,7 @@
 
 <div class="mb-3">
 
-<select id="list-categoriesListPos" class="form-control" name="lista" required></select>
+<select id="list-categoriesListECM" class="form-control" name="lista" required></select>
 <button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value','card-container2');"><i class="fas fa-filter"></i></button>
           
 
@@ -260,5 +260,7 @@
         cursor: pointer;
     }
 </style>
-<script>getClientCategoriesListaddPost('all','all','all');
+<script>
+getCategoriesListWithParam('all','categoryId','value','list-categoriesListECM');
+
 profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container2');</script>

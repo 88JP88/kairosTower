@@ -1,34 +1,53 @@
 
 document.getElementById("postDeliverybtn").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var name = document.getElementById("delNamedel").value;
-  var lname = document.getElementById("dellNamedel").value;
-  var mail = document.getElementById("delMaildel").value;
-  var phone = document.getElementById("delContactdel").value;
+  document.getElementById("loading-container").style.display = "flex";
+var apiData = {
+  "clientId": sessionStorage.getItem('clientNow'),
+  "deliveryName": document.getElementById("delNamedel").value,
+  "deliveryLastName": document.getElementById("dellNamedel").value,
+  "deliveryMail": document.getElementById("delMaildel").value,
+  "deliveryContact": document.getElementById("delContactdel").value,
+  "apiValues":{
+    "apiName": "apiClient",
+    "apiVersion": "v1",
+    "endPoint": "postDelivery"
+  }
+  
+};
+// Construir la URL con los parámetros de la petición GET
 
-var clientIdNow=sessionStorage.getItem('clientNow');
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postDelivery.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&deliveryName=" + encodeURIComponent(name) +
-            "&deliveryLastName=" + encodeURIComponent(lname) +
-            "&deliveryMail=" + encodeURIComponent(mail)+
-            "&deliveryContact=" + encodeURIComponent(phone);
-
-  // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+      document.getElementById("delNamedel").value = "";
+      document.getElementById("dellNamedel").value = "";
+      document.getElementById("delMaildel").value = "";
+      document.getElementById("delContactdel").value = "";
       
-      getMessage();
+      
+      var confirmCreateClient = window.confirm("¿Desea crear otro repartidor?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientDeliveryCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
       
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
+    document.getElementById("loading-container").style.display = "none";
+
 });
 
 

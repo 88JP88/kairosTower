@@ -37,7 +37,7 @@
 <option selected>Selecciona categoria</option>
 </div>
 
-<button type="button" class="btn btn-primary1 edit-button" id="postCategoriebtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postCategoriebtn" title="CREAR ELEMENTO" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 <!DOCTYPE html>
 <html lang="es">

@@ -179,6 +179,7 @@
 
 
 <script  src="scripts/gets/getClientConfig.js"></script>
+<script  src="scripts/gets/getClientCommerce.js"></script>
 
     
 

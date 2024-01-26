@@ -34,7 +34,7 @@
   <input type="text" class="form-control" id="delContactdel" placeholder="Ingresa nombre de room">
 </div>
 
-<button type="button" class="btn btn-primary1 edit-button" id="postDeliverybtn" title="CREAR REPARTIDOR"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postDeliverybtn" title="CREAR REPARTIDOR" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 
 

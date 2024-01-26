@@ -1,30 +1,45 @@
 
 document.getElementById("postCategoriebtn").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var categoryName = document.getElementById("catname").value;
-  var comments = document.getElementById("catcomments").value;
-  var catType = document.getElementById("list-cattipe").value;
-  var parentId = document.getElementById("list-categoryListstadd96").value;
-  
-var clientIdNow=sessionStorage.getItem('clientNow');
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postCategorie.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&categoryName=" + encodeURIComponent(categoryName) +
-            "&comments=" + encodeURIComponent(comments) +
-            "&catType=" + encodeURIComponent(catType)+
-            "&parentId=" + encodeURIComponent(parentId);
-
+            var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "categoryName": document.getElementById("catname").value,
+              "comments": document.getElementById("catcomments").value,
+              "categoryType": document.getElementById("list-cattipe").value,
+              "parentId": document.getElementById("list-categoryListstadd96").value,
+             
+              "apiValues":{
+                "apiName": "apiCom",
+                "apiVersion": "v1",
+                "endPoint": "postCategorie"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
+      document.getElementById("catname").value = "";
+      document.getElementById("catcomments").value = "";
     
       getMessage();
-      
+      var confirmCreateClient = window.confirm("¿Desea crear otra categoría?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientCategorieCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

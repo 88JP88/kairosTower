@@ -26,7 +26,7 @@
 
 
 
-<button type="button" class="btn btn-primary1 edit-button" id="postRoom" title="Crear room"><i class="fas fa-plus"></i></button>
+<button type="button" data-bs-dismiss="modal" class="btn btn-primary1 edit-button" id="postRoom" title="Crear room"><i class="fas fa-plus"></i></button>
 
 <script  src="scripts/posts/postRoom.js"></script>
 

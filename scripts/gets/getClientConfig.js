@@ -544,9 +544,25 @@ function editClientRoom(button, id,filter,reason,value,recharge) {
   }
 
  
+  var apiData = {
+    "roomId": id,
+    "reason": reason,
+    "filter": filter,
+    "value": value,
+    "apiValues":{
+      "apiName": "apiCompanies",
+      "apiVersion": "v1",
+      "endPoint": "putClientRoom"
+    }
+    
+  };
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientRoom.php?roomId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
+  //var url = 'controller/putClientRoom.php?roomId=' + encodeURIComponent(id)  + '&filter=' + encodeURIComponent(filter)+ '&reason=' + encodeURIComponent(reason)+ '&value=' + encodeURIComponent(value);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)

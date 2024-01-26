@@ -1,15 +1,24 @@
 
 document.getElementById("postRoom").addEventListener("click", function() {
-  // Obtén los valores de los campos
-  var room = document.getElementById("cRoomc").value;
-  
-var clientIdNow=sessionStorage.getItem('clientNow');
 
-  // Construye la URL para la solicitud GET
-  var url = "controller/postRoom.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&comments=" + encodeURIComponent(room);
+            
 
+            var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "comments": document.getElementById("cRoomc").value,
+
+              "apiValues":{
+                "apiName": "apiCompanies",
+                "apiVersion": "v1",
+                "endPoint": "postClientRoom"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
@@ -18,6 +27,17 @@ var clientIdNow=sessionStorage.getItem('clientNow');
       
       document.getElementById("cRoomc").value = "";
       getMessage();
+
+      var confirmCreateClient = window.confirm("¿Desea crear otro room?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientRoomsCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

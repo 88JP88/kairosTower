@@ -112,7 +112,7 @@
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value','card-container1');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','simil','value','card-container1');"><i class="fas fa-filter"></i></button>
           
 
   
@@ -307,5 +307,7 @@
         cursor: pointer;
     }
 </style>
-<script>getClientCategoriesListaddPost('all','all','all');
+<script>
+  getCategoriesListWithParam('all','categoryId','value','list-categoriesListPos');
+getClientCategoriesListaddPost('all','all','all');
 profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container1');</script>

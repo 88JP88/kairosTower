@@ -143,7 +143,7 @@
   </select>
 <option selected>Selecciona Unidad dentro de unidad</option>
 </div>
-<button type="button" class="btn btn-primary1 edit-button" id="postCatalogbtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
+<button type="button" data-bs-dismiss="modal" class="btn btn-primary1 edit-button" id="postCatalogbtn" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
 
 
 

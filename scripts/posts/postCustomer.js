@@ -1,31 +1,49 @@
 
 document.getElementById("postCustomerbtn").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var name = document.getElementById("cusName").value;
-  var lname = document.getElementById("cuslName").value;
-  var mail = document.getElementById("cusMail").value;
-  var phone = document.getElementById("cusNumber").value;
-  var type = document.getElementById("cusType").value;
+  
 
-var clientIdNow=sessionStorage.getItem('clientNow');
-
-  // Construye la URL para la solicitud GET
-  var url = "controller/postCustomer.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&customerName=" + encodeURIComponent(name) +
-            "&customerLastName=" + encodeURIComponent(lname) +
-            "&customerMail=" + encodeURIComponent(mail)+
-            "&customerPhone=" + encodeURIComponent(phone)+
-            "&customerType=" + encodeURIComponent(type);
-
+            var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "customerName": document.getElementById("cusName").value,
+              "customerLastName": document.getElementById("cuslName").value,
+              "customerMail": document.getElementById("cusMail").value,
+              "customerPhone": document.getElementById("cusNumber").value,
+              "customerType": document.getElementById("cusType").value,
+              "apiValues":{
+                "apiName": "apiClient",
+                "apiVersion": "v1",
+                "endPoint": "postCustomer"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
       // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      
       getMessage();
+      document.getElementById("cusName").value = "";
+      document.getElementById("cuslName").value = "";
+      document.getElementById("cusMail").value = "";
+      document.getElementById("cusNumber").value = "";
+      document.getElementById("cusType").value = "";
       
+      var confirmCreateClient = window.confirm("¿Desea crear otro cliente?");
+
+      // Verifica la respuesta del usuario
+      if (confirmCreateClient) {
+        openModClientCustomerCreate();
+          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
+         // console.log("No se ejecutó el código para crear otro cliente.");
+      } else {
+       
+      }
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

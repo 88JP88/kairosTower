@@ -49,7 +49,7 @@
   <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Valor por hora</label>
   <input type="text" class="form-control" id="eValue" placeholder="Ingresa valor por hora">
 </div>
-<button type="button" class="btn btn-primary1 edit-button" id="postElement" title="CREAR ELEMENTO"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postElement" title="CREAR ELEMENTO" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 <script  src="scripts/posts/postElement.js"></script>
 

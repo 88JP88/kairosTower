@@ -2,8 +2,25 @@
 
 async function getClientProducts(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
-  fetch(epGetClientProducts + clientId+"/"+filter+"/"+param+"/"+value)
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getProducts";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {  
        // console.log('Valor real de data.response.response:', data.response.response);
@@ -269,9 +286,26 @@ document.getElementById("filtercatalogsbystoresimple").addEventListener("click",
 
 async function getClientCatalogs(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
   var idin=1;
-  fetch(epGetClientCatalogs + clientId+"/"+filter+"/"+param+"/"+value)
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCatalogs";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
         if (data.response && data.response.response == "true") {
@@ -610,9 +644,26 @@ async function getClientCatalogs(filter,param,value) {
 
 async function getClientCategories(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
-  fetch(epGetClientCategories + clientId+"/"+filter+"/"+param+"/"+value)
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCategories";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
         if (data.response && data.response.response == "true") {
@@ -757,9 +808,26 @@ async function getClientCategories(filter,param,value) {
 
 async function getClientStores(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
-  fetch(epGetClientStores + clientId+"/"+filter+"/"+param+"/"+value)
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getStores";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
         if (data.response && data.response.response == "true") {
@@ -908,9 +976,26 @@ async function getClientStores(filter,param,value) {
 
 async function getClientCustomers(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
-  var clientId=sessionStorage.getItem('clientNow');
+  
   var idin1=1;
-  fetch(epGetClientCustomers + clientId+"/"+filter+"/"+param+"/"+value)
+
+  var apiData = {
+   
+      "clientId":sessionStorage.getItem('clientNow'),
+      "filter": filter,
+      "param": param,
+      "value": value
+    
+    
+  };
+  var serviceName="kairosGateway";
+  var apiName="apiClient";
+  var apiVersion="v1";
+  var endPoint="getCustomers";
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientCustomer");
@@ -1042,8 +1127,27 @@ async function getClientDelivery(filter,param,value) {
   document.getElementById("loading-container").style.display = "flex";
   var clientId=sessionStorage.getItem('clientNow');
   var idin1=1;
-  fetch(epGetClientDelivery + clientId+"/"+filter+"/"+param+"/"+value)
-      .then(response => response.json())
+
+
+
+  var apiData = {
+   
+    
+      "clientId":sessionStorage.getItem('clientNow'),
+      "filter": filter,
+      "param": param,
+      "value": value
+    
+    
+  };
+  var serviceName="kairosGateway";
+  var apiName="apiClient";
+  var apiVersion="v1";
+  var endPoint="getDelivery";
+  // Construir la URL con los parámetros de la petición GET
+  
+  const apiInfo = JSON.stringify(apiData);
+  fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)      .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientDelivery");
           cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
@@ -1107,7 +1211,7 @@ async function getClientDelivery(filter,param,value) {
               <p class="card-text">Correo:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryMail}" title="${info.customerMail}">
-  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;customerName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryMail&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -1115,7 +1219,7 @@ async function getClientDelivery(filter,param,value) {
               <p class="card-text">Teléfono:
               <div class="edit-container">
   <input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryContact}" title="${info.deliveryContact}">
-  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;customerPhone&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryContact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -1206,7 +1310,7 @@ async function getClientDelivery(filter,param,value) {
               <p class="card-text">
               <div class="edit-container">
   
-  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;del&quot;,&quot;1&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
+  <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;del&quot;,&quot;data&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
     <i class="fas fa-trash"></i>
   </button>
 </div>
@@ -1250,8 +1354,25 @@ async function getClientCategoriesList(filter,param,value,catId) {
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCategories";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.categories.forEach(info => {
@@ -1273,8 +1394,24 @@ async function getClientCategoriesList3(filter,param,value,catId) {
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCategories";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.categories.forEach(info => {
@@ -1296,8 +1433,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCategories";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.categories.forEach(info => {
@@ -1321,8 +1474,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientCategories+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getCategories";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.categories.forEach(info => {
@@ -1345,8 +1514,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getStores";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.stores.forEach(info => {
@@ -1368,8 +1553,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getStores";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.stores.forEach(info => {
@@ -1392,8 +1593,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientStores+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getStores";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.stores.forEach(info => {
@@ -1416,8 +1633,24 @@ var uid=sessionStorage.getItem('clientNow');
   while (reposSelect.firstChild) {
     reposSelect.removeChild(reposSelect.firstChild);
   }
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientProducts+uid+"/"+filter+"/"+param+"/"+value)
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": filter,
+    "param": param,
+    "value": value
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCom";
+var apiVersion="v1";
+var endPoint="getProducts";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.products.forEach(info => {
@@ -1486,15 +1719,29 @@ function showConfirmationModalNearButton(message, onConfirm, button) {
 
 function editClientProduct(button, clientId,productId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
 
   if(reason=="data"){
 
     var input = button.previousElementSibling;
     var value = input.value;
-
+    var apiData = {
+      "productId": productId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putProduct"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1518,7 +1765,22 @@ function editClientProduct(button, clientId,productId,param,value,reason) {
     
 
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+  var apiData = {
+    "prductId": productId,
+    "clientId": clientId,
+    "param": param,
+    "value": value,
+    "apiValues":{
+      "apiName": "apiCom",
+      "apiVersion": "v1",
+      "endPoint": "putProduct"
+    }
+    
+  };
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
@@ -1540,11 +1802,23 @@ function editClientProduct(button, clientId,productId,param,value,reason) {
   if(reason=="del"){
     var confirmMessage = '¿Seguro quieres eliminar el elemento?';
     showConfirmationModalNearButton(confirmMessage, () => {
-
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientProduct.php?productId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
+      var apiData = {
+        "prductId": productId,
+        "clientId": clientId,
+        "param": param,
+        "value": value,
+        "apiValues":{
+          "apiName": "apiCom",
+          "apiVersion": "v1",
+          "endPoint": "putProduct"
+        }
+        
+      };
+    // Construir la URL con los parámetros de la petición GET
+  
+    const apiInfo = JSON.stringify(apiData);
+    var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+   
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1564,21 +1838,36 @@ function editClientProduct(button, clientId,productId,param,value,reason) {
     });
   },button);
   }
- 
+  document.getElementById("loading-container").style.display = "none";
+
 
 }
 
 function editClientStore(button, clientId,productId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
 
   if(reason=="data"){
 
     var input = button.previousElementSibling;
     var value = input.value;
-
+    var apiData = {
+      "storeId": productId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putStore"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1600,10 +1889,23 @@ function editClientStore(button, clientId,productId,param,value,reason) {
   if(reason=="isActive"){
 
     
-
+    var apiData = {
+      "storeId": productId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putStore"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1625,10 +1927,23 @@ function editClientStore(button, clientId,productId,param,value,reason) {
     var confirmMessage = '¿Seguro quieres eliminar el elemento?';
     showConfirmationModalNearButton(confirmMessage, () => {
 
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientStore.php?storeId=' + encodeURIComponent(productId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
+      var apiData = {
+        "storeId": productId,
+        "clientId": clientId,
+        "param": param,
+        "value": value,
+        "apiValues":{
+          "apiName": "apiCom",
+          "apiVersion": "v1",
+          "endPoint": "putStore"
+        }
+        
+      };
+    // Construir la URL con los parámetros de la petición GET
+  
+    const apiInfo = JSON.stringify(apiData);
+    var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+   
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1648,22 +1963,38 @@ function editClientStore(button, clientId,productId,param,value,reason) {
     });
   },button);
   }
- 
+  document.getElementById("loading-container").style.display = "none";
+
 
 }
 
 
 function editClientCustomer(button, clientId,customerId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
 
   if(reason=="data"){
 
+
     var input = button.previousElementSibling;
     var value = input.value;
-
+    var apiData = {
+      "customerId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putCustomer"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1686,9 +2017,23 @@ function editClientCustomer(button, clientId,customerId,param,value,reason) {
 
     
 
+    var apiData = {
+      "customerId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putCustomer"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1710,10 +2055,23 @@ function editClientCustomer(button, clientId,customerId,param,value,reason) {
     var confirmMessage = '¿Seguro quieres eliminar el elemento?';
     showConfirmationModalNearButton(confirmMessage, () => {
 
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
+      var apiData = {
+        "customerId": customerId,
+        "clientId": clientId,
+        "param": param,
+        "value": value,
+        "apiValues":{
+          "apiName": "apiClient",
+          "apiVersion": "v1",
+          "endPoint": "putCustomer"
+        }
+        
+      };
+    // Construir la URL con los parámetros de la petición GET
+  
+    const apiInfo = JSON.stringify(apiData);
+    var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+   
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1734,20 +2092,36 @@ function editClientCustomer(button, clientId,customerId,param,value,reason) {
   },button);
   }
  
+  document.getElementById("loading-container").style.display = "none";
 
 }
 
 
 function editClientDelivery(button, clientId,customerId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
-
+  document.getElementById("loading-container").style.display = "flex";
   if(reason=="data"){
 
     var input = button.previousElementSibling;
     var value = input.value;
 
+    var apiData = {
+      "deliveryId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putDelivery"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientDelivery.php?deliveryId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+  //var url = 'controller/putClientDelivery.php?data=' + apiData;
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
@@ -1760,7 +2134,7 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
         getClientDelivery('filter',param,value);
 
       
- 
+
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
@@ -1770,10 +2144,23 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
   if(reason=="isActive"){
 
     
-
+    var apiData = {
+      "deliveryId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putDelivery"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1783,7 +2170,6 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
       getMessage();
       
       getClientCustomers('filter',param,value);
-
  
     })
     .catch(error => {
@@ -1794,10 +2180,23 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
   if(reason=="del"){
     var confirmMessage = '¿Seguro quieres eliminar el elemento?';
     showConfirmationModalNearButton(confirmMessage, () => {
+param="del";
+var apiData = {
+  "deliveryId": customerId,
+  "clientId": clientId,
+  "param": param,
+  "value": value,
+  "apiValues":{
+    "apiName": "apiClient",
+    "apiVersion": "v1",
+    "endPoint": "putDelivery"
+  }
+  
+};
+// Construir la URL con los parámetros de la petición GET
 
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCustomer.php?customerId=' + encodeURIComponent(customerId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
   // Realizar la petición GET al archivo PHP
   fetch(url)
@@ -1807,8 +2206,7 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
 
       getMessage();
       
-      getClientCustomers('filter',param,value);
-       
+      getClientDelivery('filter','clientId',clientId);
       
  
     })
@@ -1818,7 +2216,7 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
     });
   },button);
   }
- 
+  document.getElementById("loading-container").style.display = "none";
 
 }
 
@@ -1826,15 +2224,30 @@ function editClientDelivery(button, clientId,customerId,param,value,reason) {
 
 function editClientCatalog(button, clientId,catalogId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
 
   if(reason=="data"){
 
     var input = button.previousElementSibling;
     var value = input.value;
 
+    var apiData = {
+      "catalogId": catalogId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putProduct"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1857,9 +2270,23 @@ function editClientCatalog(button, clientId,catalogId,param,value,reason) {
 
     
 
+    var apiData = {
+      "catalogId": catalogId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putProduct"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1880,9 +2307,23 @@ function editClientCatalog(button, clientId,catalogId,param,value,reason) {
     showConfirmationModalNearButton(confirmMessage, () => {
 
 
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCatalog.php?catalogId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
+      var apiData = {
+        "catalogId": catalogId,
+        "clientId": clientId,
+        "param": param,
+        "value": value,
+        "apiValues":{
+          "apiName": "apiCom",
+          "apiVersion": "v1",
+          "endPoint": "putProduct"
+        }
+        
+      };
+    // Construir la URL con los parámetros de la petición GET
+  
+    const apiInfo = JSON.stringify(apiData);
+    var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+   
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1902,22 +2343,37 @@ function editClientCatalog(button, clientId,catalogId,param,value,reason) {
     });
   },button);
   }
- 
+  document.getElementById("loading-container").style.display = "none";
+
 
 }
 
 
 function editClientCategorie(button, clientId,catalogId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
 
   if(reason=="data"){
 
     var input = button.previousElementSibling;
     var value = input.value;
-
+    var apiData = {
+      "categoryId": catalogId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putCategorie"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1939,10 +2395,23 @@ function editClientCategorie(button, clientId,catalogId,param,value,reason) {
   if(reason=="isActive"){
 
     
-
+    var apiData = {
+      "categoryId": catalogId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiCom",
+        "apiVersion": "v1",
+        "endPoint": "putCategorie"
+      }
+      
+    };
   // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
 
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1962,10 +2431,23 @@ function editClientCategorie(button, clientId,catalogId,param,value,reason) {
     var confirmMessage = '¿Seguro quieres eliminar el elemento?';
     showConfirmationModalNearButton(confirmMessage, () => {
 
-
-  // Construir la URL con los parámetros de la petición GET
-  var url = 'controller/putClientCategorie.php?categoryId=' + encodeURIComponent(catalogId)  + '&clientId=' + encodeURIComponent(clientId)+ '&param=' + encodeURIComponent(param)+ '&value=' + encodeURIComponent(value);
-
+      var apiData = {
+        "categoryId": catalogId,
+        "clientId": clientId,
+        "param": param,
+        "value": value,
+        "apiValues":{
+          "apiName": "apiCom",
+          "apiVersion": "v1",
+          "endPoint": "putCategorie"
+        }
+        
+      };
+    // Construir la URL con los parámetros de la petición GET
+  
+    const apiInfo = JSON.stringify(apiData);
+    var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+   
   // Realizar la petición GET al archivo PHP
   fetch(url)
     .then(response => {
@@ -1986,6 +2468,7 @@ function editClientCategorie(button, clientId,catalogId,param,value,reason) {
   },button);
   }
  
+  document.getElementById("loading-container").style.display = "none";
 
 }
 
