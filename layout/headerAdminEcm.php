@@ -95,7 +95,7 @@
 <div class="mb-3">
 
 <select id="list-categoriesListECM" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value','card-container2');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'categoryId','all');"><i class="fas fa-filter"></i></button>
           
 
   
@@ -112,7 +112,7 @@
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('filter|','simil','value','card-container2');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'simil','all');"><i class="fas fa-filter"></i></button>
           
 
   
@@ -127,16 +127,26 @@
 
 </div>
 
+<script> const url = window.location.href;
+
+// Crear un objeto URL a partir de la URL actual
+const urlObj = new URL(url);
+
+// Obtener el valor del parámetro "parametro1"
+var st = urlObj.searchParams.get("storeId");</script>
     <div id="card-container2" class="card-container">
+            <!-- Contenido de la sección expandible -->
+            
+        </div>
+        <div id="card-container2info" class="card-container">
             <!-- Contenido de la sección expandible -->
             
         </div>
         
 
-        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container2');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
+        <a class="dropdown-item" onclick="profileInfoLog();getApiDataPromise(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'all','all');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
   </div>
 
-      
   <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
   <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
   <div class="tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
@@ -263,4 +273,4 @@
 <script>
 getCategoriesListWithParam('all','categoryId','value','list-categoriesListECM');
 
-profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container2');</script>
+profileInfoLog();getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','containerCatalogsInfo','all|all','all','all');</script>

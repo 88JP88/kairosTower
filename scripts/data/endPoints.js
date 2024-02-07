@@ -50,3 +50,11 @@ const epGetClientDelivery= `${subDomain}/kairosGateway/apiClient/v1/getDelivery/
 
 
 const modelGel= `${subDomain}/kairosGateway/apiClient/v1/getDelivery/${ranCodetask} ${apiKeytask}/`;//{parametro} despues del (/)  llama todos los clientes de KAIROS
+
+const apiDataApiClient = {
+          
+            
+    "serviceName":"kairosGateway",
+    "apiName": "apiClient"
+     
+};

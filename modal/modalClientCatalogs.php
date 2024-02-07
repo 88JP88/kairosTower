@@ -11,8 +11,8 @@
 
       </div>
       <div class="modal-body">
-      <button type="button" class="btn btn-primary1 edit-button1" onclick="getClientCatalogs('all|all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
-      <button type="button" class="btn btn-primary1 edit-button1" onclick="getClientCatalogs('deleted|all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
+      <button type="button" class="btn btn-primary1 edit-button1" onclick="getApiData(getCatalogs,'apiCom','v1','getCatalogs','containerCatalogsData','containerCatalogsInfo','all|all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
+      <button type="button" class="btn btn-primary1 edit-button1" onclick="getApiData(getCatalogs,'apiCom','v1','getCatalogs','containerCatalogsData','containerCatalogsInfo','deleted|all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
 
       <div class="mb-3">
  <label for="currency">Busqueda por parámetro</label>

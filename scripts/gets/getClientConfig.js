@@ -7,7 +7,26 @@ async function getCalendarDays(param) {
   const año = fechaActual.getFullYear();
 
   document.getElementById("loading-container").style.display = "flex";
-  fetch(epGetCalendarDays + param+"/all")
+
+  
+  var apiData = {
+   
+    "clientId":param,
+    "filter": param,
+    "param": 'all',
+    "value": ""
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getCalendarDays";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
           const cardContainer = document.getElementById("card-container");
@@ -77,7 +96,26 @@ async function getCalendarDaysAssign(param) {
 
   document.getElementById("loading-container").style.display = "flex";
   sessionStorage.setItem('calendarNow',param);
-  fetch(epGetCalendarDaysAssign + param+"/all")
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": param,
+    "param": 'all',
+    "value": ""
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getCalendarDaysAssign";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
+ 
       .then(response => response.json())
       .then(data => {
           const cardContainer1 = document.getElementById("card-container1");
@@ -114,7 +152,26 @@ async function getCalendarDaysAssign(param) {
 async function getCalendarTime(param) {
   document.getElementById("loading-container").style.display = "flex";
   sessionStorage.setItem('registNow',param);
-  fetch(epGetCalendarTime + param+"/all")
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": param,
+    "param": 'all',
+    "value": ""
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getCalendarTime";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
+ 
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-container11");
@@ -150,7 +207,26 @@ async function getCalendarTime(param) {
 async function getClientRooms() {
   document.getElementById("loading-container").style.display = "flex";
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientRooms + param+"/all")
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": "",
+    "param": 'all',
+    "value": ""
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientRooms";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
+
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientRooms");
@@ -213,8 +289,30 @@ async function getClientRooms() {
 
 async function getClientElements() {
   document.getElementById("loading-container").style.display = "flex";
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/all/na/na/na")
+  
+
+
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": "",
+    "param": 'all',
+    "value": "",
+    "value1": "",
+    "value2": "",
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientElements";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-clientElements");
@@ -425,7 +523,27 @@ async function getCalendarTimedes(param) {
   document.getElementById("loading-container").style.display = "flex";
 
   sessionStorage.setItem('timeNow',param)
-  fetch(epGetCalendarTimedes + param)
+
+
+  
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": param,
+    "param": 'all',
+    "value": ""
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getCalendarTimedes";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
           const cardContainer11 = document.getElementById("card-usertimedes");
@@ -762,7 +880,29 @@ async function getClientElemntCheck(filter,param,ids,ids1) {
 if(param=="assign"){
 
   var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/free/"+filter+"/"+ids+"/"+ids1)
+
+
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": "",
+    "param": "free",
+    "value": filter,
+    "value1": ids,
+    "value2": ids1
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientElements";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
+
       .then(response => response.json())
       .then(data => {
         
@@ -785,8 +925,27 @@ if(param=="assign"){
 }if(param="notassign"){
   
 
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/assign/"+filter+"/"+ids+"/"+ids1)
+
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": "",
+    "param": "assign",
+    "value": filter,
+    "value1": ids,
+    "value2": ids1
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientElements";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
       .then(response => response.json())
       .then(data => {
         
@@ -810,8 +969,29 @@ if(param=="assign"){
     if(param="usedbyclient"){
   
 
-      var param=sessionStorage.getItem('clientNow');
-      fetch(epGetClientElements + param+"/usedbyclient/"+filter+"/"+ids+"/"+ids1)
+     
+      var apiData = {
+   
+        "clientId":sessionStorage.getItem('clientNow'),
+        "filter": "",
+        "param": "usedbyclient",
+        "value": filter,
+        "value1": ids,
+        "value2": ids1
+      
+      
+    };
+    var serviceName="kairosGateway";
+    var apiName="apiCompanies";
+    var apiVersion="v1";
+    var endPoint="getClientElements";
+    // Construir la URL con los parámetros de la petición GET
+    
+    const apiInfo = JSON.stringify(apiData);
+    fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+    
+
+
           .then(response => response.json())
           .then(data => {
             
@@ -836,8 +1016,27 @@ if(param=="assign"){
         if(param="notusedbyclient"){
   
 
-          var param=sessionStorage.getItem('clientNow');
-          fetch(epGetClientElements + param+"/notusedbyclient/"+filter+"/"+ids+"/"+ids1)
+          var apiData = {
+   
+            "clientId":sessionStorage.getItem('clientNow'),
+            "filter": "",
+            "param": "notusedbyclient",
+            "value": filter,
+            "value1": ids,
+            "value2": ids1
+          
+          
+        };
+        var serviceName="kairosGateway";
+        var apiName="apiCompanies";
+        var apiVersion="v1";
+        var endPoint="getClientElements";
+        // Construir la URL con los parámetros de la petición GET
+        
+        const apiInfo = JSON.stringify(apiData);
+        fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+        
+
               .then(response => response.json())
               .then(data => {
                 
@@ -932,8 +1131,28 @@ function createCheckboxdes(info) {
 async function getClientElemntCheckdes(filter,param) {
   document.getElementById("loading-container").style.display = "flex";
 
-  var param=sessionStorage.getItem('clientNow');
-  fetch(epGetClientElements + param+"/hold/"+filter+"/1/1")
+
+  var apiData = {
+   
+    "clientId":sessionStorage.getItem('clientNow'),
+    "filter": "",
+    "param": "hold",
+    "value": filter,
+    "value1": "1",
+    "value2": "1"
+  
+  
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientElements";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
+
       .then(response => response.json())
       .then(data => {
           const checkboxContainer = document.getElementById("checkbox-des"+filter);

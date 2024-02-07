@@ -1,25 +1,31 @@
 
 document.getElementById("postAssignRoom").addEventListener("click", function() {
   // Obtén los valores de los campos
-  var room = document.getElementById("list-clientroom").value;
-  var user = document.getElementById("list-internalusers").value;
-  
-var clientIdNow=sessionStorage.getItem('clientNow');
-var timeId=sessionStorage.getItem('timeNow');
-var rId=sessionStorage.getItem('registNow');
-var cId=sessionStorage.getItem('calendarNow');
+
 
 var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el array en una cadena con valores separados por "|"
 
   // Construye la URL para la solicitud GET
-  var url = "controller/postAssignRoom.php?" +
-            "clientId=" + encodeURIComponent(clientIdNow) +
-            "&roomId=" + encodeURIComponent(room) +
-            "&userId=" + encodeURIComponent(user)+
-            "&timeId=" + encodeURIComponent(timeId)+
-            "&param=" + encodeURIComponent('assign')+
-            "&assignments=" + encodeURIComponent(selectedAssignmentsString); // Agrega los assignments a la URL
+   var apiData = {
+              "clientId": sessionStorage.getItem('clientNow'),
+              "roomId": document.getElementById("list-clientroom").value,
+              "userId": document.getElementById("list-internalusers").value,
+              "timeId": sessionStorage.getItem('timeNow'),
+              "param": "assign",
+              "assignments": selectedAssignmentsString,
 
+              "apiValues":{
+                "apiName": "apiCompanies",
+                "apiVersion": "v1",
+                "endPoint": "postAssignRoom"
+              }
+              
+            };
+            // Construir la URL con los parámetros de la petición GET
+            
+            const apiInfo = JSON.stringify(apiData);
+            var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+            
   // Realizar la solicitud GET utilizando fetch
   fetch(url)
     .then(response => {
@@ -36,10 +42,10 @@ var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el a
       const checkboxContainer = document.getElementById("checkbox-container");
       checkboxContainer.innerHTML = ""; 
       getMessage();
-      getCalendarTime(rId);
-      getCalendarDaysAssign(cId);
-      getClientRoomsList(timeId);
-      getCalendarDays(clientIdNow);
+      getCalendarTime(sessionStorage.getItem('registNow'));
+      getCalendarDaysAssign(sessionStorage.getItem('calendarNow'));
+      getClientRoomsList(sessionStorage.getItem('timeNow'));
+      getCalendarDays(sessionStorage.getItem('clientNow'));
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

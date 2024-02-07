@@ -89,7 +89,7 @@
             <!-- Contenido de la sección expandible -->
             <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-cube"></i> INVENTARIOS</h5>
-                      <p class="card-text"><button onclick="openModClientProducts();getClientProducts('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientProducts();getApiData(getProducts,'apiCom','v1','getProducts','containerProductsData','containerProductsInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
                       <p class="card-text"><button onclick="openModClientProductsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
@@ -97,21 +97,21 @@
 
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-box"></i> CATÁLOGO</h5>
-                      <p class="card-text"><button onclick="openModClientCatalogs();getClientCategories('all','all','all');getClientStoresList12('all','all','all');getClientCategoriesList('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientCatalogCreate();getClientCategoriesListadd('all','all','all');getClientStoresList1add('all','all','all');getClientProductList1add('all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientCatalogs();getApiData(getCatalogs,'apiCom','v1','getCatalogs','containerCatalogsData','containerCatalogsInfo','all|all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCatalogCreate();getApiData(getClientCategoriesListBtn,'apiCom','v1','getCategories','list-categoryListstadd','','all','all','all');getApiData(getClientStoresList,'apiCom','v1','getStores','list-storeListstadd','containerCustomersInfo','all','all','all');getApiData(getClientProductList,'apiCom','v1','getProducts','list-productListstadd','containerProductsInfo','all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-filter"></i> CATEGORÍAS</h5>
-                      <p class="card-text"><button onclick="openModClientCategories();getClientCategories('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
-                      <p class="card-text"><button onclick="openModClientCategorieCreate();getClientCategoriesListadd96('all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="openModClientCategories();getApiData(getCategories,'apiCom','v1','getCategories','containerCategorieData','containerCategorieInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCategorieCreate();getApiData(getClientCategoriesListBtnParent,'apiCom','v1','getCategories','list-categoryListstadd96','','all','all','all');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-store"></i> TIENDAS</h5>
-                      <p class="card-text"><button onclick="openModClientStores();getClientStores('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientStores();getApiData(getStores,'apiCom','v1','getStores','containerStoresData','containerStoresInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
                       <p class="card-text"><button onclick="openModClientStoreCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
@@ -121,7 +121,7 @@
         
         <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-phone"></i> CLIENTES</h5>
-                      <p class="card-text"><button onclick="openModClientCustomers();getClientCustomers('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientCustomers();getApiData(getCustomers,'apiClient','v1','getCustomers','containerCustomersData','containerCustomersInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
                       <p class="card-text"><button onclick="openModClientCustomerCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
@@ -130,7 +130,7 @@
                      
         <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-truck"></i> REPARTIDORES</h5>
-                      <p class="card-text"><button onclick="openModClientDelivery();getClientDelivery('all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
+                      <p class="card-text"><button onclick="openModClientDelivery();getApiData(getDelivery,'apiClient','v1','getDelivery','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button></p>
                       <p class="card-text"><button onclick="openModClientDeliveryCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
@@ -180,6 +180,12 @@
 
 <script  src="scripts/gets/getClientConfig.js"></script>
 <script  src="scripts/gets/getClientCommerce.js"></script>
+<script  src="scripts/gets/getProducts.js"></script>
+<script  src="scripts/gets/getCatalogs.js"></script>
+<script  src="scripts/gets/getCategories.js"></script>
+<script  src="scripts/gets/getcustomers.js"></script>
+<script  src="scripts/gets/getDeliveries.js"></script>
+<script  src="scripts/gets/getStores.js"></script>
 
     
 

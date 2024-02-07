@@ -433,8 +433,27 @@ async function getClientRoomsList(timeid) {
 sessionStorage.setItem('timeNow',timeid);
 
 
-var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientRooms+uid+"/"+timeid)
+
+
+
+var apiData = {
+   
+  "clientId":sessionStorage.getItem('clientNow'),
+  "filter": "",
+  "param": timeid,
+  "value": ""
+
+
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientRooms";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
   .then(response => response.json())
   .then(data => {
     data.clientRoom.forEach(info => {
@@ -466,10 +485,27 @@ const url = window.location.href;
 // Crear un objeto URL a partir de la URL actual
 const urlObj = new URL(url);
 
-// Obtener el valor del parámetro "parametro1"
-var uid = urlObj.searchParams.get("clientId");
+
+
+var apiData = {
+   
+  "clientId":urlObj.searchParams.get("clientId"),
+  "filter": "",
+  "param": timeid,
+  "value": ""
+
+
+};
+var serviceName="kairosGateway";
+var apiName="apiCompanies";
+var apiVersion="v1";
+var endPoint="getClientRooms";
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
+
 //var uid=sessionStorage.getItem('clientNow');
-	fetch(epGetClientRooms+uid+"/"+timeid)
   .then(response => response.json())
   .then(data => {
     data.clientRoom.forEach(info => {

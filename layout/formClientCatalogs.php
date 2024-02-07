@@ -61,12 +61,13 @@
     </script>
 </body>
 </html>
-<div id="card-clientCatalogsInfo" class="card-container">
+<div id="containerCatalogsInfo" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
-<div id="card-clientCatalogs" class="card-container">
+<div id="containerCatalogsData" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
+
 </body>
 </html>
 

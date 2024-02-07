@@ -11,7 +11,7 @@
 
       </div>
       <div class="modal-body">
-      <button type="button" class="btn btn-primary1 edit-button1" onclick="getClientCategories('all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
+      <button type="button" class="btn btn-primary1 edit-button1" onclick="getApiData(getCategories,'apiCom','v1','getCategories','containerCategorieData','containerCategorieInfo','all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
       <button type="button" class="btn btn-primary1 edit-button1" onclick="getClientCatalogs('deleted|all','all','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-globe"></i></button>
 
       <div class="mb-3">

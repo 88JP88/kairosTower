@@ -61,10 +61,10 @@
 </body>
 </html>
 <body>
-<div id="card-clientProductsInfo" class="card-container">
+<div id="containerProductsInfo" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
-<div id="card-clientProducts" class="card-container">
+<div id="containerProductsData" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
 </body>
