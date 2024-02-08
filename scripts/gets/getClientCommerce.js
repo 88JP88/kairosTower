@@ -60,7 +60,7 @@
 // }
 
 
-function getApiData(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value) {
+function getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value) {
   return new Promise((resolve, reject) => {
       document.getElementById("loading-container").style.display = "flex";
 
@@ -100,9 +100,9 @@ function getApiData(getApiInfo, apiName, apiVersion, endPoint, contaiderData, co
   });
 }
 
-function getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value) {
+function getApiData(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value) {
 // Uso de la función getApiData como una promesa
-getApiData(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value)
+getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, contaiderData, containerInfo, filter, param, value)
   .then(data => {
       // Manejar el éxito de la promesa
       console.log("Datos recibidos:", data);
