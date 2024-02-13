@@ -1,5 +1,7 @@
 
-async function getStores(data,containerData,containerInfo) {
+async function getStoresPromise(data,containerData,containerInfo) {
+  return new Promise(async (resolve, reject) => {
+    try {
   document.getElementById("loading-container").style.display = "flex";
   var idin1=1;
   if (data.response && data.response.response == "true") {
@@ -120,6 +122,8 @@ async function getStores(data,containerData,containerInfo) {
     });
     
     document.getElementById("loading-container").style.display = "none";
+    resolve("Catálogos obtenidos exitosamente: "+data.response.apiMessage); // Resuelve la promesa cuando los catálogos se obtienen correctamente
+
   }else {
     // Manejar el caso donde la respuesta no es 'true'
     const cardContainer11 = document.getElementById(containerData);
@@ -132,31 +136,53 @@ async function getStores(data,containerData,containerInfo) {
         card11Info.innerHTML = ` <p>${data.response.apiMessage}</p>
         <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
         cardContainer11Info.appendChild(card11Info);
+        reject("Error al obtener los catálogos: "+data.response.apiMessage); // Rechaza la promesa si hay un error al obtener los catálogos
 
    
     //console.error("La respuesta no es 'true' "+data.response.response);
     document.getElementById("loading-container").style.display = "none";
+} } catch(error) {
+  console.error("Error:", error);
+  document.getElementById("loading-container").style.display = "none";
+  reject(error); // Rechaza la promesa si hay un error
 }
+});
 }
 
 
+async function getStores(data, containerData, containerInfo) {
+  try {
+      const message = await getStoresPromise(data, containerData, containerInfo);
+      console.log(message); // Manejar el mensaje de éxito
+  } catch (error) {
+      console.error(error); // Manejar el error
+  }
+}
 
 
-
-
-async function getClientStoresList(data,containerData,containerInfo) {
-
+async function getClientStoresListPromise(data, containerData, containerInfo) {
   var reposSelect = document.getElementById(containerData);
   while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
+      reposSelect.removeChild(reposSelect.firstChild);
   }
-  
-    data.stores.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.storeId;
-      option.text = info.storeName;
-      reposSelect.add(option);
-    });
 
- }
- 
+  await Promise.all(data.stores.map(info => {
+      return new Promise(resolve => {
+          const option = document.createElement("option");
+          option.value = info.storeId;
+          option.text = info.storeName;
+          reposSelect.add(option);
+          resolve();
+      });
+  }));
+}
+
+
+async function getClientStoresList(data, containerData, containerInfo) {
+  try {
+      await getClientStoresListPromise(data, containerData, containerInfo);
+      // Manejar el mensaje de éxito si es necesario
+  } catch (error) {
+      console.error(error); // Manejar el error
+  }
+}

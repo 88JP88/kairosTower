@@ -75,7 +75,7 @@
   
   <div id="cartItems1" class="cart-items1"></div>
  
-  <button class="btn btn-primary" onClick="openModValEcmShop();arrayToHTMLCards('card-validateEcmShop');getCustomerList('list-customerget');">Validar compra</button>
+  <button class="btn btn-primary" onClick="openModValEcmShop();arrayToHTMLCards('card-validateEcmShop');">Validar compra</button>
 
 
 
@@ -119,7 +119,31 @@
 </div>
               </p>
 
-  <button class="btn btn-primary" onClick="openModClientOrders();getClientOrders('clientId','byStore','storeId','value','tableClientOrders');">VER ORDENES</button>
+  <button class="btn btn-primary" onClick="openModal('clientOrdersMod');createTable('tableClientOrders','containerOrdersTable', [
+        'Acciones',
+        'ID de orden',
+        'ID de carro',
+        'Número de orden',
+        'Vendedor',
+        'Cliente',
+        'Tienda',
+        'Total',
+        'Sub-Total',
+        'Descuento',
+        'Paga con',
+        'Cambio',
+        'Referencia de pago',
+        'Estado de orden',
+        'Estado de pago',
+        'Entidad de pago',
+        'Método de pago',
+        'Número de productos',
+        'Número de paquetes',
+        'Fecha y hora',
+        'Método de entrega',
+        'Dirección de entrega',
+        'Domiciliario'
+    ]);getApiData(getClientOrders,'apiClient','v1','getClientOrders','tableClientOrders','clientId','byStore','storeId',urlObj.searchParams.get('storeId'));">VER ORDENES</button>
 
     
   </div>
@@ -134,17 +158,18 @@ const urlObj = new URL(url);
 
 // Obtener el valor del parámetro "parametro1"
 var st = urlObj.searchParams.get("storeId");</script>
+<div id="card-container2info" class="card-container">
+            <!-- Contenido de la sección expandible -->
+            
+        </div>
     <div id="card-container2" class="card-container">
             <!-- Contenido de la sección expandible -->
             
         </div>
-        <div id="card-container2info" class="card-container">
-            <!-- Contenido de la sección expandible -->
-            
-        </div>
+        
         
 
-        <a class="dropdown-item" onclick="profileInfoLog();getApiDataPromise(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'all','all');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
+        <a class="dropdown-item" onclick="profileInfoLog();getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'all','all');getApiData(getClientCategoriesListBtn,'apiCom','v1','getCategories','list-categoriesListECM','containerCatalogsInfo','all','all','all');">Todos los productos</a>
   </div>
 
   <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
@@ -164,13 +189,24 @@ var st = urlObj.searchParams.get("storeId");</script>
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
 <script  src="scripts/gets/getClientCommerceAdmin.js"></script>
+<script  src="scripts/gets/getClientCommerce.js"></script>
+<script  src="scripts/gets/getOrders.js"></script>
+<script  src="scripts/posts/cart.js"></script>
 <script  src="scripts/posts/postCreateEcmOrder.js"></script>
 
 
 <div id="loading-container" class="loading-container">
   <div class="loading-icon"></div>
 </div>
-
+<script  src="scripts/gets/getClientCommerce.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  profileInfoLog();
+    getApiData(getClientCategoriesListBtn, 'apiCom', 'v1', 'getCategories', 'list-categoriesListECM', 'containerCatalogsInfo', 'all', 'all', 'all');
+   
+    getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'all','all');
+});
+</script>
 
 
 <style>
@@ -270,7 +306,3 @@ var st = urlObj.searchParams.get("storeId");</script>
         cursor: pointer;
     }
 </style>
-<script>
-getCategoriesListWithParam('all','categoryId','value','list-categoriesListECM');
-
-profileInfoLog();getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','containerCatalogsInfo','all|all','all','all');</script>

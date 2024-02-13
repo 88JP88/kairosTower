@@ -86,3 +86,132 @@ function csvToJsonPostCustomer(csvData) {
           console.log('Error en la petición:', error);
       });
 }
+
+
+
+
+
+function editClientDelivery(button, clientId,customerId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+    var apiData = {
+      "deliveryId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putDelivery"
+      }
+      
+    };
+  // Construir la URL con los parámetros de la petición GET
+
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+  //var url = 'controller/putClientDelivery.php?data=' + apiData;
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+        getClientDelivery('filter',param,value);
+
+      
+
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="isActive"){
+
+    
+    var apiData = {
+      "deliveryId": customerId,
+      "clientId": clientId,
+      "param": param,
+      "value": value,
+      "apiValues":{
+        "apiName": "apiClient",
+        "apiVersion": "v1",
+        "endPoint": "putDelivery"
+      }
+      
+    };
+  // Construir la URL con los parámetros de la petición GET
+
+  const apiInfo = JSON.stringify(apiData);
+  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+ 
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientCustomers('filter',param,value);
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  }
+  if(reason=="del"){
+    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
+    showConfirmationModalNearButton(confirmMessage, () => {
+param="del";
+var apiData = {
+  "deliveryId": customerId,
+  "clientId": clientId,
+  "param": param,
+  "value": value,
+  "apiValues":{
+    "apiName": "apiClient",
+    "apiVersion": "v1",
+    "endPoint": "putDelivery"
+  }
+  
+};
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+
+  // Realizar la petición GET al archivo PHP
+  fetch(url)
+    .then(response => {
+      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+      getMessage();
+      
+      getClientDelivery('filter','clientId',clientId);
+      
+ 
+    })
+    .catch(error => {
+      // Aquí puedes manejar los errores en caso de que la petición falle
+      console.log('Error en la petición:', error);
+    });
+  },button);
+  }
+  document.getElementById("loading-container").style.display = "none";
+
+}
+
+

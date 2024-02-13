@@ -1,6 +1,8 @@
 
 
-async function getProducts(data,containerData,containerInfo) {
+async function getProductsPromise(data,containerData,containerInfo) {
+      return new Promise(async (resolve, reject) => {
+            try {
     document.getElementById("loading-container").style.display = "flex";
    
   if (data.response && data.response.response == "true") {
@@ -157,6 +159,8 @@ async function getProducts(data,containerData,containerInfo) {
     });
     
     document.getElementById("loading-container").style.display = "none";
+    resolve("Productos obtenidos exitosamente: "+data.response.apiMessage); // Resuelve la promesa cuando los catálogos se obtienen correctamente
+
   }
   else {
     // Manejar el caso donde la respuesta no es 'true'
@@ -175,10 +179,24 @@ async function getProducts(data,containerData,containerInfo) {
     //console.error("La respuesta no es 'true' "+data.response.response);
     document.getElementById("loading-container").style.display = "none";
   }
+} catch(error) {
+      console.error("Error:", error);
+      document.getElementById("loading-container").style.display = "none";
+      reject(error); // Rechaza la promesa si hay un error
+  }
+});
   }
   
 
-
+  async function getProducts(data, containerData, containerInfo) {
+      try {
+          const message = await getProductsPromise(data, containerData, containerInfo);
+          console.log(message); // Manejar el mensaje de éxito
+      } catch (error) {
+          console.error(error); // Manejar el error
+      }
+  }
+  
   
 
 
@@ -201,19 +219,30 @@ document.getElementById("filterproducts").addEventListener("click", function() {
     //getClientProducts('browser','param',value);
   });
   
-  
-async function getClientProductList(data,containerData,containerInfo) {
 
+  async function getClientProductListPromise(data, containerData, containerInfo) {
       var reposSelect = document.getElementById(containerData);
       while (reposSelect.firstChild) {
-        reposSelect.removeChild(reposSelect.firstChild);
+          reposSelect.removeChild(reposSelect.firstChild);
       }
-      
-      data.products.forEach(info => {
+  
+      await Promise.all(data.products.map(info => {
+          return new Promise(resolve => {
               const option = document.createElement("option");
               option.value = info.productId;
               option.text = info.productName;
               reposSelect.add(option);
-            });
-    
-     }
+              resolve();
+          });
+      }));
+  }
+  async function getClientProductList(data, containerData, containerInfo) {
+      try {
+          const message = await getClientProductListPromise(data, containerData, containerInfo);
+          // console.log(message); // Manejar el mensaje de éxito
+      } catch (error) {
+          console.error(error); // Manejar el error
+      }
+  }
+  
+     

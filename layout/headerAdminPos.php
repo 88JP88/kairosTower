@@ -29,6 +29,13 @@
   
 
 
+  <script> const url = window.location.href;
+
+// Crear un objeto URL a partir de la URL actual
+const urlObj = new URL(url);
+
+// Obtener el valor del parámetro "parametro1"
+var st = urlObj.searchParams.get("storeId");</script>
  
   <div class="btn-group">
       <button type="button" class="btn btn-primary1 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,7 +82,7 @@
   
   <div id="cartItems1" class="cart-items1"></div>
  
-  <button class="btn btn-primary" onClick="openModValPosShop();arrayToHTMLCards('card-validatePosShop');getCustomerList('list-customerget');">Validar compra</button>
+  <button class="btn btn-primary" onClick="openModValPosShop();arrayToHTMLCards('card-validatePosShop');getApiData(getCustomerList,'apiClient','v1','getCustomers','list-customerget','containerPosCatalogInfo','all','all','all');">Validar compra</button>
 
 
 
@@ -95,7 +102,7 @@
 <div class="mb-3">
 
 <select id="list-categoriesListPos" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('basic|','categoryId','value','card-container1');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'categoryId','all');"><i class="fas fa-filter"></i></button>
           
 
   
@@ -112,7 +119,7 @@
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','simil','value','card-container1');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'simil','value');" ><i class="fas fa-filter"></i></button>
           
 
   
@@ -137,7 +144,7 @@
   </select>
   <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('browser|','specific','value','card-container1');"><i class="fas fa-filter"></i></button>
+  <button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'specific','value');"><i class="fas fa-filter"></i></button>
             
  
     
@@ -164,9 +171,30 @@
   <option value="stock">Sin stock</option>
   </select>
  
-  <button class="btn btn-primary" onClick="getClientCatalogsAdmin('specificCatalog|','specificCatalog','value','card-container1');"><i class="fas fa-filter"></i></button>
+  <button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'charact','value');"><i class="fas fa-filter"></i></button>
             
-  <button class="btn btn-primary" onClick="openModClientOrders();getClientOrders('clientId','byStore','storeId','value','tableClientOrders');">VER ORDENES</button>
+  <button class="btn btn-primary" onClick="openModal('clientOrdersMod');createTable('tableClientOrders','containerOrdersTable', [
+        'Acciones',
+        'ID de orden',
+        'ID de carro',
+        'Número de orden',
+        'Vendedor',
+        'Cliente',
+        'Tienda',
+        'Total',
+        'Sub-Total',
+        'Descuento',
+        'Paga con',
+        'Cambio',
+        'Referencia de pago',
+        'Estado de orden',
+        'Estado de pago',
+        'Entidad de pago',
+        'Método de pago',
+        'Número de productos',
+        'Número de paquetes',
+        'Fecha y hora'
+    ]);getApiData(getClientOrders,'apiClient','v1','getClientOrders','tableClientOrders','clientId','byStore','storeId',urlObj.searchParams.get('storeId'));">VER ORDENES</button>
 
     
   </div>
@@ -174,13 +202,17 @@
 
 </div>
 
-    <div id="card-container1" class="card-container">
+    <div id="containerPosCatalogInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+            
+        </div>
+        <div id="containerPosCatalogData" class="card-container">
             <!-- Contenido de la sección expandible -->
             
         </div>
         
 
-        <a class="dropdown-item" onclick="profileInfoLog();getClientCatalogsAdmin('store|','param','value','card-container1');getClientCategoriesListaddPost('all','all','all');">Todos los productos</a>
+        <a class="dropdown-item" onclick="profileInfoLog();getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'all','all');">Todos los productos</a>
   </div>
 
       
@@ -201,14 +233,25 @@
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
 <script  src="scripts/gets/getClientCommerceAdmin.js"></script>
+<script  src="scripts/gets/getClientCommerce.js"></script>
 <script  src="scripts/posts/postCreatePosOrder.js"></script>
+<script  src="scripts/gets/getOrders.js"></script>
+<script  src="scripts/posts/cart.js"></script>
 
 
 <div id="loading-container" class="loading-container">
   <div class="loading-icon"></div>
 </div>
 
-
+<script  src="scripts/gets/getClientCommerce.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  profileInfoLog();
+    getApiData(getClientCategoriesListBtn, 'apiCom', 'v1', 'getCategories', 'list-categoriesListPos', 'containerCatalogsInfo', 'all', 'all', 'all');
+   
+    getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'all','all');
+});
+</script>
 
 <style>
   .cart-container {

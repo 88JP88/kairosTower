@@ -87,7 +87,7 @@
   <select id="list-customerget" class="form-control" name="lista" required>
 
   </select>
-  <button class="btn btn-primary" onClick="getClientCustomersPos('filter','customerId','value');">Validar cliente</button>
+  <button class="btn btn-primary" onClick="getApiData(getClientCustomersPos,'apiClient','v1','getCustomers','card-validateClientPos','containerCustomersInfo','all','all','all');">Validar cliente</button>
   <div id="card-validateClientPos" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>

@@ -1,5 +1,7 @@
 
-async function getCategories(data,containerData,containerInfo) {
+async function getCategoriesPromise(data,containerData,containerInfo) {
+        return new Promise((resolve, reject) => {
+
         document.getElementById("loading-container").style.display = "flex";
         var idin1=1;
         if (data.response && data.response.response == "true") {
@@ -119,6 +121,8 @@ async function getCategories(data,containerData,containerInfo) {
           });
           
           document.getElementById("loading-container").style.display = "none";
+          resolve("Categprìas obtenidas exitosamente: "+data.response.apiMessage); // Resuelve la promesa cuando los catálogos se obtienen correctamente
+
         }else {
           // Manejar el caso donde la respuesta no es 'true'
           const cardContainer11 = document.getElementById(containerData);
@@ -135,59 +139,122 @@ async function getCategories(data,containerData,containerInfo) {
          
           //console.error("La respuesta no es 'true' "+data.response.response);
           document.getElementById("loading-container").style.display = "none";
+     
+          reject("Error al obtener las categorìas: "+data.response.apiMessage); // Rechaza la promesa si hay un error al obtener los catálogos
+
+        }
+});
       }
+
+
+      
+     async function getCategories(data,containerData,containerInfo) {
+        getCategoriesPromise(data, containerData, containerInfo)
+            .then(message => {
+              console.log(message); // Manejar el mensaje de éxito
+            })
+            .catch(error => {
+              console.error(error); // Manejar el error
+            });
+        }
+        async function getClientCategoriesListPromise(data, containerData, containerInfo) {
+          var reposSelect = document.getElementById(containerData);
+          while (reposSelect.firstChild) {
+              reposSelect.removeChild(reposSelect.firstChild);
+          }
+      
+          await Promise.all(data.categories.map(info => {
+              return new Promise(resolve => {
+                  const option = document.createElement("option");
+                  option.value = containerInfo;
+                  option.text = info.categoryName;
+                  reposSelect.add(option);
+                  resolve();
+              });
+          }));
+      
+          if (data.categories && data.categories.length > 0) {
+              return "categoría";
+          } else {
+              throw new Error("No se encontraron categorías en los datos proporcionados.");
+          }
       }
-
-
       
-      
-
-async function getClientCategoriesList(data,containerData,containerInfo) {
-
-        var reposSelect = document.getElementById(containerData);
-        while (reposSelect.firstChild) {
-          reposSelect.removeChild(reposSelect.firstChild);
+       async function getClientCategoriesList(data, containerData, containerInfo) {
+        try {
+            const message = await getClientCategoriesListPromise(data, containerData, containerInfo);
+            // console.log(message); // Manejar el mensaje de éxito
+        } catch (error) {
+            console.error(error); // Manejar el error
         }
-        
-        data.categories.forEach(info => {
-                const option = document.createElement("option");
-                option.value = containerInfo;
-                option.text = info.categoryName;
-                reposSelect.add(option);
-              });
-      
-       }
+    }
+    
        
-       
-async function getClientCategoriesListBtn(data,containerData,containerInfo) {
 
-        var reposSelect = document.getElementById(containerData);
-        while (reposSelect.firstChild) {
-          reposSelect.removeChild(reposSelect.firstChild);
-        }
-        
-        data.categories.forEach(info => {
-                const option = document.createElement("option");
-                option.value = info.categoryId;
-                option.text = info.categoryName;
-                reposSelect.add(option);
-              });
-      
-       }
-       
-async function getClientCategoriesListBtnParent(data,containerData,containerInfo) {
 
-        var reposSelect = document.getElementById(containerData);
-        while (reposSelect.firstChild) {
+    async function getClientCategoriesListBtnPromise(data, containerData, containerInfo) {
+      var reposSelect = document.getElementById(containerData);
+      while (reposSelect.firstChild) {
           reposSelect.removeChild(reposSelect.firstChild);
-        }
-        
-        data.categories.forEach(info => {
-                const option = document.createElement("option");
-                option.value = info.categoryId+"|"+info.parentId;
-                option.text = info.categoryName;
-                reposSelect.add(option);
+      }
+  
+      if (data.categories && data.categories.length > 0) {
+          await Promise.all(data.categories.map(info => {
+              return new Promise(resolve => {
+                  const option = document.createElement("option");
+                  option.value = info.categoryId;
+                  option.text = info.categoryName;
+                  reposSelect.add(option);
+                  resolve();
               });
-      
-       }
+          }));
+          return "categoría";
+      } else {
+          throw new Error("No se encontraron categorías en los datos proporcionados.");
+      }
+  }
+  
+  async function getClientCategoriesListBtn(data, containerData, containerInfo) {
+    try {
+        await getClientCategoriesListBtnPromise(data, containerData, containerInfo);
+        //console.log("Operación completada con éxito"); // Manejar el mensaje de éxito
+    } catch (error) {
+        console.error(error); // Manejar el error
+    }
+}
+
        
+
+
+async function getClientCategoriesListBtnParentPromise(data, containerData, containerInfo) {
+  var reposSelect = document.getElementById(containerData);
+  while (reposSelect.firstChild) {
+      reposSelect.removeChild(reposSelect.firstChild);
+  }
+
+  await Promise.all(data.categories.map(info => {
+      return new Promise(resolve => {
+          const option = document.createElement("option");
+          option.value = info.categoryId + "|" + info.parentId;
+          option.text = info.categoryName;
+          reposSelect.add(option);
+          resolve();
+      });
+  }));
+
+  if (data.categories && data.categories.length > 0) {
+      return "categorìa"; // Resuelve la promesa cuando los catálogos se obtienen correctamente
+  } else {
+      throw new Error("No se encontraron categorías en los datos proporcionados.");
+  }
+}
+
+
+async function getClientCategoriesListBtnParent(data, containerData, containerInfo) {
+  try {
+      await getClientCategoriesListBtnPromise(data, containerData, containerInfo);
+      // Manejar el mensaje de éxito si es necesario
+  } catch (error) {
+      console.error(error); // Manejar el error
+  }
+}

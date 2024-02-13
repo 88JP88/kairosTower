@@ -1,5 +1,9 @@
 
-async function getCustomers(data,containerData,containerInfo) {
+async function getCustomersPromise(data,containerData,containerInfo) {
+
+      return new Promise(async (resolve, reject) => {
+            try {
+
   document.getElementById("loading-container").style.display = "flex";
   if (data.response && data.response.response == "true") {
   var idin1=1;const cardContainer11 = document.getElementById(containerData);
@@ -116,6 +120,8 @@ async function getCustomers(data,containerData,containerInfo) {
   });
   
   document.getElementById("loading-container").style.display = "none";
+  resolve("Clientes obtenidos exitosamente: "+data.response.apiMessage); // Resuelve la promesa cuando los catálogos se obtienen correctamente
+
 }else {
   // Manejar el caso donde la respuesta no es 'true'
   const cardContainer11 = document.getElementById(containerData);
@@ -133,6 +139,147 @@ async function getCustomers(data,containerData,containerInfo) {
   //console.error("La respuesta no es 'true' "+data.response.response);
   document.getElementById("loading-container").style.display = "none";
 }
+} catch(error) {
+      console.error("Error:", error);
+      document.getElementById("loading-container").style.display = "none";
+      reject(error); // Rechaza la promesa si hay un error
+  }
+});
 }
 
 
+
+async function getCustomers(data, containerData, containerInfo) {
+      try {
+          const message = await getCustomersPromise(data, containerData, containerInfo);
+          console.log(message); // Manejar el mensaje de éxito
+      } catch (error) {
+          console.error(error); // Manejar el error
+      }
+  }
+
+  
+
+
+     
+async function getCustomerListPromise(data, containerData, containerInfo) {
+      var reposSelect = document.getElementById(containerData);
+      while (reposSelect.firstChild) {
+          reposSelect.removeChild(reposSelect.firstChild);
+      }
+    
+      await Promise.all(data.customers.map(info => {
+          return new Promise(resolve => {
+              const option = document.createElement("option");
+              option.value = info.customerId;
+              option.text =  info.customerName+" "+info.customerLastName;
+              reposSelect.add(option);
+              resolve();
+          });
+      }));
+    
+      if (data.categories && data.categories.length > 0) {
+          return "customers"; // Resuelve la promesa cuando los catálogos se obtienen correctamente
+      } else {
+          throw new Error("No se encontraron customers en los datos proporcionados.");
+      }
+    }
+    
+async function getCustomerList(data, containerData, containerInfo) {
+      try {
+          await getCustomerListPromise(data, containerData, containerInfo);
+          // Manejar el mensaje de éxito si es necesario
+      } catch (error) {
+          console.error(error); // Manejar el error
+      }
+    }
+
+
+
+
+
+
+    function getClientCustomersPosPromise(data, containerData, containerInfo) {
+      return new Promise((resolve, reject) => {
+          try {
+              
+              var value = document.getElementById('list-customerget').value;
+              const cardContainer11 = document.getElementById(containerData);
+              cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+              data.customers.forEach(info => {
+                  if(info.customerId==value){
+                  const card11 = document.createElement("div");
+                  card11.classList.add("card");
+                  const backgroundColor = info.isActive === "0" ? "#cc0007" : "#ffffff";
+                  const activo1 = info.isActive === "0" ? activo = "INACTIVO" : activo = "ACTIVO";
+  
+                  card11.innerHTML = `
+                      <div class="card-body" style="background-color: ${backgroundColor};">
+                      <h5 class="card-title">
+                      <p class="card-text"> <i class="fas fa-guitar"></i></p>
+                      
+                      </h5>
+                      <p class="card-text">Nombre: ${info.customerName}
+                      
+                      </p>
+                      <p class="card-text">Apellido: ${info.customerLastName}
+                      
+                      </p>
+  
+                      <p class="card-text">Datos: ${info.customerMail} / ${info.customerPhone}
+                      
+                      </p>
+                      
+                      
+                      <p class="card-text">Puntos:
+                      ${info.customerPoints}
+                      
+                      </p>
+                      <p class="card-text">Estrellas:
+                      ${info.customerStars}
+                      
+                      </p>
+                      <p class="card-text">Cada punto equivale:
+                      $${info.pointsValue}
+                      
+                      </p>
+                      <p class="card-text">Con cada $${info.pointsEq} en compras recolectas un punto:
+                      
+                      
+                      </p>
+                      <p class="card-text">Total en puntos:
+                      $${info.customerPoints * info.pointsValue}
+                      
+                      </p>
+                      
+                      
+                  
+                  
+                              </div>
+                              
+                          `;
+  
+                  cardContainer11.appendChild(card11);
+                 // idin1++;
+                  document.getElementById("loading-container").style.display = "none";
+                  }
+              });
+            
+              document.getElementById("loading-container").style.display = "none";
+              resolve(); // Resolvemos la promesa sin ningún valor adicional
+            
+          } catch (error) {
+              reject(error); // Si ocurre un error, rechazamos la promesa con el error
+          }
+      });
+  }
+  
+  async function getClientCustomersPos(data, containerData, containerInfo) {
+      try {
+          await getClientCustomersPosPromise(data, containerData, containerInfo);
+          // Manejar el mensaje de éxito si es necesario
+          document.getElementById("loading-container").style.display = "none";
+      } catch (error) {
+          console.error(error); // Manejar el error
+      }
+    }

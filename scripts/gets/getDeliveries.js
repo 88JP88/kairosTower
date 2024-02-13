@@ -1,17 +1,29 @@
 
-async function getDelivery(data,containerData,containerInfo) {
-  document.getElementById("loading-container").style.display = "flex";
 
-  var idin1=1;
-  const cardContainer11 = document.getElementById(containerData);
-  cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
-  data.delivery.forEach(info => {
-      const card11 = document.createElement("div");
-      card11.classList.add("card");
-      const backgroundColor = info.isActive === "0" ? "  #cc0007" : "#ffffff";
-      const activo1 = info.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
-      const disRulesArray = JSON.parse(info.distanceRules);
-      card11.innerHTML = `
+
+  async function getDeliveryPromise(data, containerData, containerInfo) {
+    return new Promise(async (resolve, reject) => {
+        document.getElementById("loading-container").style.display = "flex";
+
+        var idin1 = 1;
+        try {
+            if (data.response && data.response.response == "true") {
+                const cardContainer11 = document.getElementById(containerData);
+                const cardContainer11Info = document.getElementById(containerInfo);
+                cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+                cardContainer11Info.innerHTML = "";
+                const card11Info = document.createElement("div");
+                card11Info.classList.add("card");
+                card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
+                cardContainer11Info.appendChild(card11Info);
+
+                for (const info of data.delivery) {
+                    const card11 = document.createElement("div");
+                    card11.classList.add("card");
+                    const backgroundColor = info.isActive === "0" ? "#cc0007" : "#ffffff";
+                    const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
+                    const disRulesArray = JSON.parse(info.distanceRules);
+                    card11.innerHTML = `
           <div class="card-body" style="background-color: ${backgroundColor};">
           <h5 class="card-title">
           <p class="card-text"> <i class="fas fa-guitar"></i></p>
@@ -169,7 +181,36 @@ Cardinalidad fin
       //getClientStoresList13('all','all','all',idin1);
 
       idin1++;
-  });
-  
-  document.getElementById("loading-container").style.display = "none";
+                }
+
+                document.getElementById("loading-container").style.display = "none";
+                resolve("Repartidores obtenidos exitosamente: " + data.response.apiMessage);
+            } else {
+                const cardContainer11 = document.getElementById(containerData);
+                cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+                const cardContainer11Info = document.getElementById(containerInfo);
+                cardContainer11Info.innerHTML = "";
+                const card11Info = document.createElement("div");
+                card11Info.classList.add("card");
+                card11Info.innerHTML = `<p>${data.response.apiMessage}</p>
+                                         <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+                cardContainer11Info.appendChild(card11Info);
+
+                document.getElementById("loading-container").style.display = "none";
+                reject("Error al obtener los repartidores: " + data.response.apiMessage);
+            }
+        } catch (error) {
+            document.getElementById("loading-container").style.display = "none";
+            reject("Error al procesar los datos: " + error);
+        }
+    });
+}
+
+async function getDelivery(data, containerData, containerInfo) {
+    try {
+        const message = await getDeliveryPromise(data, containerData, containerInfo);
+        console.log(message); // Manejar el mensaje de éxito
+    } catch (error) {
+        console.error(error); // Manejar el error
+    }
 }
