@@ -10,9 +10,12 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModCalendarTime();"></button>
       </div>
       <div class="modal-body">
-     <?php 
-     require_once 'layout/formCalendarTime.php';
-     ?>
+      <div id="containerCalendarTimeInfo" class="card-container">
+        <!-- Las tarjetas se agregarán aquí -->
+    </div>
+    <div id="containerCalendarTimeData" class="card-container">
+        <!-- Las tarjetas se agregarán aquí -->
+    </div>
 </div>
 
 

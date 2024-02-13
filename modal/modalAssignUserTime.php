@@ -10,9 +10,27 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModUserTime();"></button>
       </div>
       <div class="modal-body">
-     <?php 
-     require_once 'layout/formUserTime.php';
-     ?>
+    
+<form>
+
+<div class="mb-3">
+ <label for="currency">Usuario</label>
+<select id="list-internalusers" class="form-control" name="currency" required></select>
+<option selected>Selecciona usuario</option>
+</div>
+<div class="mb-3">
+ <label for="currency">Room</label>
+<select id="list-clientroom" class="form-control" name="currency" required onclick="onClientRoomSelect('assign')"></select>
+<option value="0">Selecciona room</option>
+</div>
+<div id="checkbox-container" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        
+<button type="button" class="btn btn-primary1 edit-button" id="postAssignRoom" title="ASIGNAR USUARIO"><i class="fas fa-user-plus"></i></button>
+
+</form>
+<script  src="scripts/posts/postAssignRoom.js"></script>
 </div>
 
 

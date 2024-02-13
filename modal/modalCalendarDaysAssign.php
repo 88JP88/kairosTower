@@ -10,9 +10,12 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModCalendarDaysAssign()"></button>
       </div>
       <div class="modal-body">
-     <?php 
-     require_once 'layout/formCalendarDaysAssign.php';
-     ?>
+      <div id="containerDaysAssignInfo" class="card-container">
+        <!-- Las tarjetas se agregarán aquí -->
+    </div>
+    <div id="containerDaysAssignData" class="card-container">
+        <!-- Las tarjetas se agregarán aquí -->
+    </div>
 </div>
 
 

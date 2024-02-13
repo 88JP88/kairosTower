@@ -10,9 +10,12 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModClientElements()"></button>
       </div>
       <div class="modal-body">
-     <?php 
-     require_once 'layout/formClientElements.php';
-     ?>
+      <div id="containerElementsInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="containerElementsData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
 </div>
 
 

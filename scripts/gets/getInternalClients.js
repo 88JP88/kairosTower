@@ -23,7 +23,7 @@ if(param=="unlock"){
   
      
     
-      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getCalendarDays(&quot;${info.clientId}&quot;);" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
+      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getApiData(getCalendarDays,'apiCompanies','v1','getCalendarDays','containerCalendarDaysData','containerCalendarDaysInfo','${info.clientId}','all','all');" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
         <i class="fas fa-cog"></i>
       </button>
       <a href="adminSchedule.php?clientId=${info.clientId}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
@@ -422,52 +422,6 @@ var uid = urlObj.searchParams.get("clientId");
   
 }
 
-
-
-async function getClientRoomsList(timeid) {
-
-  const reposSelect = document.getElementById("list-clientroom");
-  while (reposSelect.firstChild) {
-    reposSelect.removeChild(reposSelect.firstChild);
-  }
-sessionStorage.setItem('timeNow',timeid);
-
-
-
-
-
-var apiData = {
-   
-  "clientId":sessionStorage.getItem('clientNow'),
-  "filter": "",
-  "param": timeid,
-  "value": ""
-
-
-};
-var serviceName="kairosGateway";
-var apiName="apiCompanies";
-var apiVersion="v1";
-var endPoint="getClientRooms";
-// Construir la URL con los parámetros de la petición GET
-
-const apiInfo = JSON.stringify(apiData);
-fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiVersion+"/"+endPoint+"/"+sessionStorage.getItem('ranCode')+" "+sessionStorage.getItem('key')+"/"+apiInfo)
-
-  .then(response => response.json())
-  .then(data => {
-    data.clientRoom.forEach(info => {
-      const option = document.createElement("option");
-      option.value = info.roomId;
-      option.text = info.comments;
-      reposSelect.add(option);
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-  });
-
- }
 
 
 

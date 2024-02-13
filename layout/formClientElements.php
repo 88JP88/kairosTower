@@ -30,9 +30,7 @@
     </style>
 </head>
 <body>
-<div id="card-clientElements" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
+
 </body>
 </html>
 

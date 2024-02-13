@@ -12,7 +12,10 @@
               
               </a>
     <div class="expandable-section" id="expandable-section">
-        <div id="card-container" class="card-container">
+        <div id="containerCalendarDaysInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="containerCalendarDaysData" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
     </div>
@@ -41,7 +44,7 @@
                       <p class="card-text">
               <div class="edit-container">
   
-  <button onclick="openModClientRooms();getClientRooms();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;">
+  <button onclick="openModClientRooms();getApiData(getClientRooms,'apiCompanies','v1','getClientRooms','containerRoomsData','containerRoomsInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;">
     <i class="fas fa-eye"></i>
   </button>
 </div>
@@ -61,7 +64,7 @@
                   </div>
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-guitar"></i>Elementos</h5>
-                      <p class="card-text"><button onclick="openModClientElements();getClientElements();" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button>
+                      <p class="card-text"><button onclick="openModClientElements();getApiData(getElements,'apiCompanies','v1','getClientElements','containerElementsData','containerElementsInfo','all','all','all');" class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-eye"></i></button>
                       <p class="card-text"><button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
@@ -186,6 +189,9 @@
 <script  src="scripts/gets/getcustomers.js"></script>
 <script  src="scripts/gets/getDeliveries.js"></script>
 <script  src="scripts/gets/getStores.js"></script>
+<script  src="scripts/gets/getCalendar.js"></script>
+<script  src="scripts/gets/getRooms.js"></script>
+<script  src="scripts/gets/getElements.js"></script>
 
     
 
