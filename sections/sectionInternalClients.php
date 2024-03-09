@@ -6,12 +6,19 @@
     <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalClients('unlock');"  style="color: #C70039;" title="CLIENTES ACTIVOS"><i class="fas fa-eye"></i></button>
     <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalClients('lock');" style="color: #C70039;" title="CLIENTES INACTIVOS"><i class="fas fa-eye-slash"></i></button>
 
-    
-<?php
 
-require_once  'layout/tableInternalClients.php';
-//require_once 'layout/tableInternalUsers.php';
-?>
+    <div id="containerInternalClientsInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="containerInternalClientsData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+
+
+
+    <script  src="scripts/gets/getInternalClients.js"></script>
+
+
 
 
  

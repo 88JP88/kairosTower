@@ -113,7 +113,23 @@ async function getCategoriesPromise(data,containerData,containerInfo) {
       
               cardContainer11.appendChild(card11);
              // getClientCategoriesList3('all','all','all',idin1);
-              getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesIntoCat'+idin1,info.categoryId,'all','all','all');
+             getApiData(getClientCategoriesList,
+                {
+                  'apiService':'apiCom',
+                  'apiVersion':'v1',
+                  'endPoint':'getCategories'
+              },
+                {
+                  'containerData':'list-categoriesIntoCat'+idin1,
+                  'containerInfo':info.categoryId,
+              },
+                {
+                  'filter':'all',
+                  'param':'all',
+                  'value':'all'
+              }
+                  );
+              //getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesIntoCat'+idin1,info.categoryId,'all','all','all');
 
               //getClientStoresList13('all','all','all',idin1);
       

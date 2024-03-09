@@ -1,17 +1,137 @@
 
  
 
-async function getInternalClients(param) {
+async function getInternalClientsPromise(data,containerData,containerInfo) {
+  return new Promise(async (resolve, reject) => {
+    try {
+document.getElementById("loading-container").style.display = "flex";
+
+
+const buttonContainer = document.getElementById("containerBtn");
+if (buttonContainer) {
+  buttonContainer.innerHTML = '';
+}
+
+
+// 2. Crear el botón dentro del contenedor
+const button = document.createElement("button");
+button.type = "button";
+button.classList.add("btn", "btn-primary1", "edit-button1");
+button.setAttribute("style", "color: #C70039;");
+button.setAttribute("title", "VER CLIENTES ACTIVOS");
+button.innerHTML = '<i class="fas fa-eye"></i>';
+
+// Agregar el evento onclick para ejecutar las funciones
+button.onclick = function() {
+  changeSection('generalUsers');
+              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+  createTable('tableGeneralUsers','containerGeneralUsersData', [
+    'Acciones',
+    'Id',
+    'Cliente',
+    'Nombre',
+    'Comentarios',
+    'Tipo de Cliente',
+    'Responsable',
+    'Contacto',
+    'Activo'
+  ]);
+  getApiData(getInternalClients,
+    {
+      'apiService':'apiCore',
+      'apiVersion':'v1',
+      'endPoint':'getInternalClients'
+  },
+    {
+      'containerData':'tableGeneralUsers',
+      'containerInfo':'containerGeneralUsersInfo'
+  },
+    {
+      'filter':'unlock',
+      'param':'unlock',
+      'value':'all'
+  }
+      );
+};
+
+// 3. Agregar el contenedor con el botón al DOM
+buttonContainer.appendChild(button);
+document.body.appendChild(buttonContainer); // Puedes ajustar el contenedor según tu necesidad
+
+
+
+const button1 = document.createElement("button");
+button1.type = "button";
+button1.classList.add("btn", "btn-primary1", "edit-button1");
+button1.setAttribute("style", "color: #C70039;");
+button1.setAttribute("title", "VER USUARIOS INACTIVOS");
+button1.innerHTML = '<i class="fas fa-eye-slash"></i>';
+
+button1.onclick = function() {
+  changeSection('generalUsers');
+              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+              createTable('tableInternalClients','containerGeneralUsersData', [
+                'Acciones',
+                'Id',
+                'Cliente',
+                'Nombre',
+                'Comentarios',
+                'Tipo de Cliente',
+                'Responsable',
+                'Contacto',
+                'Activo'
+              ]);
+  getApiData(getInternalClients,
+    {
+      'apiService':'apiCore',
+      'apiVersion':'v1',
+      'endPoint':'getInternalClients'
+  },
+    {
+      'containerData':'tableInternalClients',
+      'containerInfo':'containerGeneralUsersInfo'
+  },
+    {
+      'filter':'lock',
+      'param':'lock',
+      'value':'all'
+  }
+      );
+};
+buttonContainer.appendChild(button1);
+document.body.appendChild(buttonContainer); // Puedes ajustar el contenedor según tu necesidad
+
+
+
+
+const button2 = document.createElement("button");
+button2.type = "button";
+button2.classList.add("btn", "btn-primary1", "edit-button1");
+button2.setAttribute("style", "color: #C70039;");
+button2.setAttribute("title", "CREAR CLIENTE");
+button2.innerHTML = '<i class="fas fa-folder-plus"></i>';
+
+button2.onclick = function() {
+  openModCreateExtClients();
+  //getInternalClientsList();
+};
+buttonContainer.appendChild(button2);
+document.body.appendChild(buttonContainer); // Puedes ajustar el contenedor según tu necesidad
+
+
+
+if (data.response && data.response.response == "true") {
  //  const subInternalClients = `${subDomain}/kairosGateway/apiCore/v1/getInternalClients/${ranCodetask} ${apiKeytask}/`;
-if(param=="unlock"){
-  document.getElementById("loading-container").style.display = "flex";
-  fetch(epGetInternalClients+param)
+if(data.response.sentData.param=="unlock"){
+  const cardContainer11 = document.querySelector("#"+containerData+" tbody");
+  const cardContainer11Info = document.getElementById(containerInfo);
+  cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+  cardContainer11Info.innerHTML = ""; 
   
-  .then(response => response.json())
-  .then(data => {
-    const publicgroupsTableBody = document.querySelector("#tableInternalClients tbody");
-    // Borramos los datos antiguos
-    publicgroupsTableBody.innerHTML = "";
+  const card11Info = document.createElement("div");
+  card11Info.classList.add("card");
+      card11Info.innerHTML = ` <p><H2>CLIENTES</H2></p><p>${data.response.apiMessage}</p>`;
+      cardContainer11Info.appendChild(card11Info);
     data.clients.forEach(info => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -23,9 +143,40 @@ if(param=="unlock"){
   
      
     
-      <button onclick="createCalendarId(&quot;${info.clientId}&quot;);openModClientConfig();getClientStyle(&quot;${info.clientId}&quot;);getApiData(getCalendarDays,'apiCompanies','v1','getCalendarDays','containerCalendarDaysData','containerCalendarDaysInfo','${info.clientId}','all','all');" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
+      <button class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES"
+       onclick="
+       createCalendarId(&quot;${info.clientId}&quot;);
+       changeSection('internalUsers');
+       getClientStyle(&quot;${info.clientId}&quot;);
+       eraseContainers('containerCalendarDaysData','containerCalendarDaysInfo');
+              createTable('tableInternalClients','containerCalendarDaysData', [
+                                'Mes / Año',
+                                'Días del mes',
+                                'Días Disponibles',
+                                'Activo',
+                                'Acciones'
+                            ]);
+       getApiData(getCalendarDays,
+        {
+          'apiService':'apiCompanies',
+          'apiVersion':'v1',
+          'endPoint':'getCalendarDays'
+      },
+        {
+          'containerData':'containerCalendarDaysData',
+          'containerInfo':'containerCalendarDaysInfo',
+          'modelView':'table',
+      },
+        {
+          'filter':'${info.clientId}',
+          'param':'all',
+          'value':'all'
+      }
+          );
+           " >
         <i class="fas fa-cog"></i>
       </button>
+
       <a href="adminSchedule.php?clientId=${info.clientId}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
       <i class="fas fa-calendar"></i>
     </a>
@@ -74,27 +225,24 @@ if(param=="unlock"){
       `;
  
  
-      publicgroupsTableBody.appendChild(row);
+      cardContainer11.appendChild(row);
     });
     document.getElementById("loading-container").style.display = "none";
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    document.getElementById("loading-container").style.display = "none";
-  });
+ 
  
 
 }
    
-if(param=="lock"){
-  document.getElementById("loading-container").style.display = "flex";
-  fetch(epGetInternalClients+param)
-  
-  .then(response => response.json())
-  .then(data => {
-    const publicgroupsTableBody = document.querySelector("#tableInternalClients tbody");
-    // Borramos los datos antiguos
-    publicgroupsTableBody.innerHTML = "";
+if(data.response.sentData.param=="lock"){
+  const cardContainer11 = document.querySelector("#"+containerData+" tbody");7
+    const cardContainer11Info = document.getElementById(containerInfo);
+    cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+    cardContainer11Info.innerHTML = ""; 
+    
+    const card11Info = document.createElement("div");
+    card11Info.classList.add("card");
+        card11Info.innerHTML = `  <p><H2>CLIENTES</H2></p><p>${data.response.apiMessage}</p>`;
+        cardContainer11Info.appendChild(card11Info);
     data.clients.forEach(info => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -147,22 +295,51 @@ if(param=="lock"){
       `;
  
  
-      publicgroupsTableBody.appendChild(row);
+      cardContainer11.appendChild(row);
     });
     document.getElementById("loading-container").style.display = "none";
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    document.getElementById("loading-container").style.display = "none";
-  });
  
 
 }
    
 
+resolve("Clientes obtenidos exitosamente: "+data.response.apiMessage); // Resuelve la promesa cuando los catálogos se obtienen correctamente
 
 }
+else {
+  // Manejar el caso donde la respuesta no es 'true'
+  const cardContainer11 = document.getElementById(containerData);
+  cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+  const cardContainer11Info = document.getElementById(containerInfo);
 
+  cardContainer11Info.innerHTML = ""; 
+  const card11Info = document.createElement("div");
+  card11Info.classList.add("card");
+      card11Info.innerHTML = ` <p><H2>CLIENTES</H2></p> <p>${data.response.apiMessage}</p>
+      <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+      cardContainer11Info.appendChild(card11Info);
+
+ 
+  //console.error("La respuesta no es 'true' "+data.response.response);
+  document.getElementById("loading-container").style.display = "none";
+}
+} catch(error) {
+    console.error("Error:", error);
+    document.getElementById("loading-container").style.display = "none";
+    reject(error); // Rechaza la promesa si hay un error
+}
+});
+}
+
+
+async function getInternalClients(data, containerData, containerInfo) {
+  try {
+      const message = await getInternalClientsPromise(data, containerData, containerInfo);
+      console.log(message); // Manejar el mensaje de éxito
+  } catch (error) {
+      console.error(error); // Manejar el error
+  }
+}
 
 
     function togglePassword(button) {

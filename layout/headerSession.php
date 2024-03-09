@@ -60,8 +60,41 @@
           </a>
           <ul class="dropdown-menu br-0">
             <li>
-              <a class="dropdown-item" onclick="changeSection('generalUsers');
-                getGeneralUsers('unlock','free');" id="schedule-tab" data-bs-toggle="tab" 
+              <a class="dropdown-item" 
+              onclick="
+
+             
+              changeSection('generalUsers');
+              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+              createTable('tableGeneralUsers','containerGeneralUsersData', [
+                                'Acciones',
+                                'Id',
+                                'Usuario',
+                                'Nombre',
+                                'Contacto',
+                                'Correo',
+                                'Rol',
+                                'Activo'
+                            ]);
+              getApiData(getGeneralUsers,
+                      {
+                        'apiService':'apiCore',
+                        'apiVersion':'v1',
+                        'endPoint':'getGeneralUsers'
+                    },
+                      {
+                        'containerData':'tableGeneralUsers',
+                        'containerInfo':'containerGeneralUsersInfo'
+                    },
+                      {
+                        'filter':'all',
+                        'param':'unlock',
+                        'value':'all'
+                    }
+                        );
+               "
+                
+                id="schedule-tab" data-bs-toggle="tab" 
                 data-bs-target="#schedule-tab-pane" type="button" role="tab" 
                 aria-controls="schedule-tab-pane" aria-selected="true" 
                 style="color: #3c3c3b;">
@@ -71,8 +104,38 @@
             </li>
             
             <li>
-              <a class="dropdown-item" onclick="changeSection('internalUsers');
-              getInternalUsers('unlock');" id="schedule-tab" data-bs-toggle="tab"
+              <a class="dropdown-item" 
+              
+              onclick="
+              changeSection('generalUsers');
+              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+              createTable('tableGeneralUsers','containerGeneralUsersData', [
+                                'Acciones',
+                                'Id',
+                                'Usuario',
+                                'Nombre',
+                                'Contacto',
+                                'Correo',
+                                'Rol',
+                                'Activo'
+                            ]);
+              getApiData(getInternalUsers,
+                      {
+                        'apiService':'apiCore',
+                        'apiVersion':'v1',
+                        'endPoint':'getInternalUsers'
+                    },
+                      {
+                        'containerData':'tableGeneralUsers',
+                        'containerInfo':'containerGeneralUsersInfo'
+                    },
+                      {
+                        'filter':'unlock',
+                        'param':'unlock',
+                        'value':'all'
+                    }
+                        );
+              " id="schedule-tab" data-bs-toggle="tab"
                data-bs-target="#schedule-tab-pane" type="button" role="tab"
                 aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
                 <i class="fas fa-toolbox"></i> 
@@ -90,9 +153,41 @@
             Clientes
           </a>
           <ul class="dropdown-menu br-0">
+          
             <li> 
-              <a class="dropdown-item" onclick="changeSection('internalClients');
-                getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" 
+              <a class="dropdown-item" 
+              onclick="
+              changeSection('generalUsers');
+              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+              createTable('tableInternalClients','containerGeneralUsersData', [
+                                'Acciones',
+                                'Id',
+                                'Cliente',
+                                'Comentarios',
+                                'Tipo de Cliente',
+                                'Responsable',
+                                'Contacto',
+                                'Activo'
+                            ]);
+              getApiData(getInternalClients,
+                      {
+                        'apiService':'apiCore',
+                        'apiVersion':'v1',
+                        'endPoint':'getInternalClients'
+                    },
+                      {
+                        'containerData':'tableInternalClients',
+                        'containerInfo':'containerGeneralUsersInfo'
+                    },
+                      {
+                        'filter':'unlock',
+                        'param':'unlock',
+                        'value':'all'
+                    }
+                        );
+
+              "
+                 id="schedule-tab" data-bs-toggle="tab" 
                 data-bs-target="#schedule-tab-pane" type="button" role="tab" 
                 aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
                 <i class="fas fa-building"></i> 
@@ -221,6 +316,8 @@
 <script  src="scripts/gets/sessionStatus.js"></script>
 <script  src="scripts/gets/profileInfoLog.js"></script>
 <script  src="scripts/gets/getMySessions.js"></script>
+<script  src="scripts/gets/getUsers.js"></script>
+<script  src="scripts/gets/getInternalClients.js"></script>
 <script  src="scripts/posts/postFullCalendar.js"></script>
 
 

@@ -16,27 +16,6 @@ require_once 'sections/sectionRepos.php';
 ?>
 
 
-  <div id="spam" class="email-section" style="text-align: center;">
-    <h2>Spam123</h2>
-    
-    <p>Contenido de los correos spam...</p>
-  </div>
-
-  <div id="importantes" class="email-section" style="text-align: center;">
-    <h2>Importantes</h2>
-    
-    <p>Contenido de los correos importantes...</p>
-  </div>
-  <div id="leidos" class="email-section" style="text-align: center;">
-    <h2>Leídos</h2>
-    
-    <p>Contenido de los correos leídos...</p>
-  </div>
-  <div id="papelera" class="email-section" style="text-align: center;">
-    <h2>Eliminados</h2>
-   
-    <p>Contenido de los correos eliminados...</p>
-  </div>
 
 
   <script>

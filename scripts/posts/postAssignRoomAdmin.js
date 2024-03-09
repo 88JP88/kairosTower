@@ -47,10 +47,8 @@ var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el a
       const checkboxContainer = document.getElementById("checkbox-containerz");
       checkboxContainer.innerHTML = ""; 
       getMessage();
-      getCalendarTime1(rId);
-      getCalendarDaysAssign1(cId);
-      getClientRoomsList1(timeId);
-      getCalendarDays1(clientIdNow);
+    
+     
       console.log("here");
     })
     .catch(error => {

@@ -32,6 +32,32 @@ var cId=sessionStorage.getItem('calendarNow');
       getCalendarDaysAssign(cId);
       getClientRoomsList(timeId);
       getCalendarDays(clientIdNow);
+      eraseContainers('containerCalendarDaysData','containerCalendarDaysInfo');
+      createTable('tableInternalClients','containerCalendarDaysData', [
+                        'Mes / Año',
+                        'Días del mes',
+                        'Días Disponibles',
+                        'Activo',
+                        'Acciones'
+                    ]);
+               getApiData(getCalendarTime,
+                   {
+                     'apiService':'apiCompanies',
+                     'apiVersion':'v1',
+                     'endPoint':'getCalendarTime'
+                 },
+                   {
+                     'containerData':'containerCalendarDaysData',
+                     'containerInfo':'containerCalendarDaysInfo',
+                     'modelView':'table',
+                     
+                 },
+                   {
+                     'filter':sessionStorage.getItem("registNow"),
+                     'param':'all',
+                     'value':'all'
+                 }
+                     );
       //console.log(assignid);
 
     })

@@ -1,23 +1,51 @@
-<div class="container email-section" id="generalUsers" style="text-align: left;">
 
-  <h1 class="fs-3">Usuarios Generales</h1>
+<div class="container email-section" id="generalUsers" style="text-align: center;">
 
- 
-  <button type="button" class="btn btn-primary1 edit-button1" onclick="openModCreateUser();getInternalClientsList();<?php echo $_SESSION['tipoUsuario'] = 2; ?>" style="color: #C70039;" title="CREAR USUARIO INTERNO"><i class="fas fa-user-plus"></i></button>
-   
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="getGeneralUsers('unlock','all');"  style="color: #C70039;" title="VER USUARIOS ACTIVOS"><i class="fas fa-eye"></i></button>
-    <button type="button" class="btn btn-primary1 edit-button1" onclick="getGeneralUsers('lock','all');" style="color: #C70039;" title="VER USUARIOS INACTIVOS"><i class="fas fa-eye-slash"></i></button>
-
- 
-    
-<?php
-
-require_once 'layout/tableGeneralUsers.php';
-?>
-
-
+  <div id="containerBtn" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+  
+    <div id="containerGeneralUsersInfo" class="card-container"> 
+           <!-- Contenido de la sección expandible -->
+           
+        </div>
+        <div id="containerGeneralUsersData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+           
+        </div>
+       
+       
  
     
   
   
 </div>
+<script>
+    // Función para cambiar la sección activa
+    function changeSection(section) {
+      // Ocultar todas las secciones
+      const sections = document.getElementsByClassName('email-section');
+      for (let i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+      }
+
+      // Mostrar la sección seleccionada
+      const selectedSection = document.getElementById(section);
+      selectedSection.style.display = 'block';
+
+      // Agregar clase "active" al enlace seleccionado
+      const links = document.getElementsByTagName('a');
+      for (let i = 0; i < links.length; i++) {
+        links[i].classList.remove('active');
+      }
+     // event.target.classList.add('active');
+    }
+
+    // Función para mostrar el formulario de enviar mensaje
+    function showForm() {
+      const formSection = document.getElementById('form');
+      formSection.classList.toggle('show-form');
+    }
+
+    
+  </script>

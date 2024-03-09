@@ -307,9 +307,42 @@
                     `;
             
                     cardContainer11.appendChild(card11);
-                    getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesList'+idin,info.categoryId+"|"+info.parentId,'all','all','all');
+
+                    getApiData(getClientCategoriesList,
+                      {
+                        'apiService':'apiCom',
+                        'apiVersion':'v1',
+                        'endPoint':'getCategories'
+                    },
+                      {
+                        'containerData':'list-categoriesList'+idin,
+                        'containerInfo':info.categoryId+'|'+info.parentId,
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                    //getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesList'+idin,info.categoryId+"|"+info.parentId,'all','all','all');
                     //getClientCategoriesList('all','all','all',idin);
-                    getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
+                    getApiData(getClientStoresList,
+                      {
+                        'apiService':'apiCom',
+                        'apiVersion':'v1',
+                        'endPoint':'getStores'
+                    },
+                      {
+                        'containerData':'list-storesListstore'+idin,
+                        'containerInfo':'containerCustomersInfo',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                   // getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
         
                    // getClientStoresList1('all','all','all',idin);
             

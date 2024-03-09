@@ -42,10 +42,33 @@ var selectedAssignmentsString = selectedAssignments.join("|"); // Convierte el a
       const checkboxContainer = document.getElementById("checkbox-container");
       checkboxContainer.innerHTML = ""; 
       getMessage();
-      getCalendarTime(sessionStorage.getItem('registNow'));
-      getCalendarDaysAssign(sessionStorage.getItem('calendarNow'));
-      getClientRoomsList(sessionStorage.getItem('timeNow'));
-      getCalendarDays(sessionStorage.getItem('clientNow'));
+     
+        eraseContainers('containerCalendarDaysData','containerCalendarDaysInfo');
+               createTable('tableInternalClients','containerCalendarDaysData', [
+                                 'Mes / Año',
+                                 'Días del mes',
+                                 'Días Disponibles',
+                                 'Activo',
+                                 'Acciones'
+                             ]);
+                        getApiData(getCalendarTime,
+                            {
+                              'apiService':'apiCompanies',
+                              'apiVersion':'v1',
+                              'endPoint':'getCalendarTime'
+                          },
+                            {
+                              'containerData':'containerCalendarDaysData',
+                              'containerInfo':'containerCalendarDaysInfo',
+                              'modelView':'table',
+                              
+                          },
+                            {
+                              'filter':sessionStorage.getItem("registNow"),
+                              'param':'all',
+                              'value':'all'
+                          }
+                              );
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle

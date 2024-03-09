@@ -82,7 +82,28 @@ var st = urlObj.searchParams.get("storeId");</script>
   
   <div id="cartItems1" class="cart-items1"></div>
  
-  <button class="btn btn-primary" onClick="openModValPosShop();arrayToHTMLCards('card-validatePosShop');getApiData(getCustomerList,'apiClient','v1','getCustomers','list-customerget','containerPosCatalogInfo','all','all','all');">Validar compra</button>
+  <button class="btn btn-primary" 
+  onClick="
+  openModValPosShop();
+  arrayToHTMLCards('card-validatePosShop');
+  
+getApiData(getCustomerList,
+                            {
+                              'apiService':'apiClient',
+                              'apiVersion':'v1',
+                              'endPoint':'getCustomers'
+                          },
+                            {
+                              'containerData':'list-customerget',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'all',
+                              'param':'all',
+                              'value':'all'
+                          }
+                              );
+                              ">Validar compra</button>
 
 
 
@@ -102,7 +123,25 @@ var st = urlObj.searchParams.get("storeId");</script>
 <div class="mb-3">
 
 <select id="list-categoriesListPos" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'categoryId','all');"><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary" 
+onClick="
+getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'categoryId',
+                              'value':'all'
+                          }
+                              );
+                              "><i class="fas fa-filter"></i></button>
           
 
   
@@ -119,7 +158,25 @@ var st = urlObj.searchParams.get("storeId");</script>
 
 <input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'simil','value');" ><i class="fas fa-filter"></i></button>
+<button class="btn btn-primary"
+ onClick="
+ getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'simil',
+                              'value':'value'
+                          }
+                              );
+                              " ><i class="fas fa-filter"></i></button>
           
 
   
@@ -144,7 +201,25 @@ var st = urlObj.searchParams.get("storeId");</script>
   </select>
   <input type="text" id="scaracter" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
  
-  <button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'specific','value');"><i class="fas fa-filter"></i></button>
+  <button class="btn btn-primary" 
+  onClick="
+  getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'specific',
+                              'value':'value'
+                          }
+                              );
+                              "><i class="fas fa-filter"></i></button>
             
  
     
@@ -171,7 +246,25 @@ var st = urlObj.searchParams.get("storeId");</script>
   <option value="stock">Sin stock</option>
   </select>
  
-  <button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'charact','value');"><i class="fas fa-filter"></i></button>
+  <button class="btn btn-primary" 
+  onClick="
+  getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'charact',
+                              'value':'value'
+                          }
+                              );
+                              "><i class="fas fa-filter"></i></button>
             
   <button class="btn btn-primary" onClick="openModal('clientOrdersMod');createTable('tableClientOrders','containerOrdersTable', [
         'Acciones',
@@ -194,7 +287,24 @@ var st = urlObj.searchParams.get("storeId");</script>
         'Número de productos',
         'Número de paquetes',
         'Fecha y hora'
-    ]);getApiData(getClientOrders,'apiClient','v1','getClientOrders','tableClientOrders','clientId','byStore','storeId',urlObj.searchParams.get('storeId'));">VER ORDENES</button>
+    ]);
+    getApiData(getClientOrders,
+                            {
+                              'apiService':'apiClient',
+                              'apiVersion':'v1',
+                              'endPoint':'getClientOrders'
+                          },
+                            {
+                              'containerData':'tableClientOrders',
+                              'containerInfo':'clientId',
+                          },
+                            {
+                              'filter':'byStore',
+                              'param':'storeId',
+                              'value':urlObj.searchParams.get('storeId')
+                          }
+                              );
+                              ">VER ORDENES</button>
 
     
   </div>
@@ -212,7 +322,26 @@ var st = urlObj.searchParams.get("storeId");</script>
         </div>
         
 
-        <a class="dropdown-item" onclick="profileInfoLog();getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'all','all');">Todos los productos</a>
+        <a class="dropdown-item" 
+        onclick="
+        profileInfoLog();
+        getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'all',
+                              'value':'all'
+                          }
+                              );
+                              ">Todos los productos</a>
   </div>
 
       
@@ -247,9 +376,41 @@ var st = urlObj.searchParams.get("storeId");</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   profileInfoLog();
-    getApiData(getClientCategoriesListBtn, 'apiCom', 'v1', 'getCategories', 'list-categoriesListPos', 'containerCatalogsInfo', 'all', 'all', 'all');
+  getApiData(getClientCategoriesListBtn,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCategories'
+                          },
+                            {
+                              'containerData':'list-categoriesListPos',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'all',
+                              'param':'all',
+                              'value':'all'
+                          }
+                              );
+    //getApiData(getClientCategoriesListBtn, 'apiCom', 'v1', 'getCategories', 'list-categoriesListPos', 'containerCatalogsInfo', 'all', 'all', 'all');
    
-    getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'all','all');
+    getApiData(getCatalogsV2,
+                            {
+                              'apiService':'apiCom',
+                              'apiVersion':'v1',
+                              'endPoint':'getCatalogs'
+                          },
+                            {
+                              'containerData':'containerPosCatalogData',
+                              'containerInfo':'containerPosCatalogInfo',
+                          },
+                            {
+                              'filter':'store|'+urlObj.searchParams.get('storeId'),
+                              'param':'all',
+                              'value':'all'
+                          }
+                              );
+    //getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','containerPosCatalogData','containerPosCatalogInfo','store|'+urlObj.searchParams.get('storeId'),'all','all');
 });
 </script>
 

@@ -15,7 +15,7 @@ function closeModal(modalId) {
 }
 
 
-async function getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, containerData, containerInfo, filter, param, value) {
+async function getApiDataPromise(getApiInfo, apiData1, containers, params) {
   return new Promise(async (resolve, reject) => {
     try {
       document.getElementById("loading-container").style.display = "flex";
@@ -31,21 +31,17 @@ async function getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, cont
         clientId = sessionStorage.getItem('clientNow');
       }
 
-      var apiData = {
-        "clientId": clientId,
-        "filter": filter,
-        "param": param,
-        "value": value
-      };
+      var apiData = params;
+      apiData.clientId=clientId;
 
       var serviceName = "kairosGateway";
       const apiInfo = JSON.stringify(apiData);
 
-      const response = await fetch(sessionStorage.getItem('subDomain') + "/" + serviceName + "/" + apiName + "/" + apiVersion + "/" + endPoint + "/" + sessionStorage.getItem('ranCode') + " " + sessionStorage.getItem('key') + "/" + apiInfo);
+      const response = await fetch(sessionStorage.getItem('subDomain') + "/" + serviceName + "/" + apiData1.apiService + "/" + apiData1.apiVersion + "/" + apiData1.endPoint + "/" + sessionStorage.getItem('ranCode') + " " + sessionStorage.getItem('key') + "/" + apiInfo);
       const data = await response.json();
       
       document.getElementById("loading-container").style.display = "none";
-      getApiInfo(data, containerData, containerInfo);
+      getApiInfo(data, containers.containerData, containers.containerInfo,containers.modelView);
       resolve(data); // Resuelve la promesa con los datos
     } catch (error) {
       console.error("Error:", error);
@@ -55,9 +51,9 @@ async function getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, cont
   });
 }
 
-async function getApiData(getApiInfo, apiName, apiVersion, endPoint, containerData, containerInfo, filter, param, value) {
+async function getApiData(getApiInfo, apiData, containers, params) {
   try {
-    const data = await getApiDataPromise(getApiInfo, apiName, apiVersion, endPoint, containerData, containerInfo, filter, param, value);
+    const data = await getApiDataPromise(getApiInfo, apiData, containers, params);
     console.log("Datos recibidos:", data);
   } catch (error) {
     console.error("Error:", error);
@@ -176,17 +172,59 @@ function showConfirmationModalNearButton(message, onConfirm, button) {
   });
 }
 
+async function eraseTable(tableId){
+  const existingTable = document.getElementById(tableId);
+  if (existingTable) {
+    existingTable.parentNode.removeChild(existingTable);
+    //resolve(existingTable);
+    return;
+  }
+}
 
+async function eraseContainers(containerdata, containerinfo) {
+  // Eliminar el contenido de los contenedores si existen
+  const containerInternalClientsInfo = document.getElementById(containerinfo);
+  if (containerInternalClientsInfo) {
+    containerInternalClientsInfo.innerHTML = '';
+  }
+  
+  const containerInternalClientsData = document.getElementById(containerdata);
+  if (containerInternalClientsData) {
+    containerInternalClientsData.innerHTML = '';
+  }
+}
+
+
+
+function createButton(container,functionsData,titulo) {
+  // Crear el elemento de botón
+  var button = document.createElement("button");
+  button.type = "button";
+  button.classList.add("btn", "btn-primary1", "edit-button1");
+  button.setAttribute("onclick", functionsData);
+  button.setAttribute("style", "color: #C70039;");
+  button.setAttribute("title", titulo);
+
+  // Agregar icono al botón
+  var icon = document.createElement("i");
+  icon.classList.add("fas", "fa-user-plus");
+  button.appendChild(icon);
+
+  // Agregar el botón al contenedor
+  container.appendChild(button);
+}
 
 
 async function createTablePromise(tableId, container, header) {
   return new Promise((resolve, reject) => {
+    eraseTable(tableId);
       const tableContainer = document.getElementById(container);
 
 
       const existingTable = document.getElementById(tableId);
       if (existingTable) {
           existingTable.querySelector('tbody').innerHTML = '';
+          existingTable.parentNode.removeChild(existingTable);
           resolve(existingTable);
           return;
       }
