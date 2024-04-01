@@ -74,9 +74,11 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end">
         <li> <a class="dropdown-item" onclick="changeSection('internalClients');getInternalClients('unlock');" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #<?php echo $_SESSION['txtColor']?>;"><i class="fas fa-building"></i> Mi cliente</a></li>
+        <li> <a class="dropdown-item" onclick="changeSection('internalUsers1');getClientStyle(sessionStorage.getItem('clientId'));" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #<?php echo $_SESSION['txtColor']?>;"><i class="fas fa-building"></i> Comercio</a></li>
        
        
       </ul>
+     
     </div> 
 
 
@@ -141,6 +143,15 @@
 <script  src="../scripts/gets/sessionStatus.js"></script>
 <script  src="../scripts/gets/profileInfoLog.js"></script>
 <script  src="../scripts/gets/getMySessions.js"></script>
+<script  src="../../scripts/posts/postStores.js"></script>
+
+<script  src="../../scripts/posts/postAssignRoom.js"></script>
+<script  src="../../scripts/posts/postCatalogs.js"></script>
+<script  src="../../scripts/posts/postCategories.js"></script>
+<script  src="../../scripts/posts/postCustomer.js"></script>
+<script  src="../../scripts/posts/postDelivery.js"></script>
+<script  src="../../scripts/posts/postProducts.js"></script>
+<script src="../../qrcodejs/qrcode.min.js"></script>
 
 
 <div id="loading-container" class="loading-container">

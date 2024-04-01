@@ -136,7 +136,7 @@
     </script>
 </body>
 </html>
-<script  src="scripts/posts/postCustomer.js"></script>
+
 </div>
 
 

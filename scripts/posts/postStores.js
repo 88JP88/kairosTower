@@ -5,6 +5,7 @@ document.getElementById("postStoressbtn").addEventListener("click", function() {
 var apiData = {
   "clientId": sessionStorage.getItem('clientNow'),
   "storeName": document.getElementById("sName").value,
+  "imgStore": document.getElementById("sNameImg").value,
   "comments": document.getElementById("sComments").value,
   "storeType": document.getElementById("list-storeType1").value,
   "apiValues":{

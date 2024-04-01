@@ -81,7 +81,10 @@
   <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Nombre de la tienda</label>
   <input type="text" class="form-control" id="sName" placeholder="Ingresa nombre de room">
 </div>
-  
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Imagen de la tienda</label>
+  <input type="text" class="form-control" id="sNameImg" placeholder="Ingresa imagen de la tienda">
+</div>
 
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Comentarios</label>
@@ -130,7 +133,7 @@
     </script>
 </body>
 </html>
-<script  src="scripts/posts/postStores.js"></script>
+
 
 </div>
 
@@ -142,3 +145,4 @@
   </div>
 </div>
 
+<script  src="scripts/posts/postStores.js"></script>

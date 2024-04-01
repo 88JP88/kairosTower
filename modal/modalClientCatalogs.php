@@ -248,7 +248,7 @@
 </body>
 </html>
 
-<script  src="scripts/posts/postCatalogs.js"></script>
+
 
 </div>
 

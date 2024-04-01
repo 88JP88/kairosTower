@@ -131,7 +131,7 @@
 </div>
               </p>
 
-            </p>
+            
                       
                   </div>
                   <div class="card-body">
@@ -141,7 +141,21 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModClientElements();
+                        
+                          eraseContainers('containerResourcesData','containerResourcesInfo');
+               createTable('tableInternalClients1','containerResourcesData', [
+                                 'Imágen',
+                                 'Editar imágen',
+                                 'Elemento',
+                                 'Estado',
+                                 'Caracteristicas',
+                                 'Marca',
+                                 'Tipo',
+                                 'Estado Asignación',
+                                 'Comentarios',
+                                 'Valor por hora',
+                                 'Eliminar'
+                             ]);
                         getApiData(getElements,
                       {
                         'apiService':'apiCompanies',
@@ -149,21 +163,29 @@
                         'endPoint':'getClientElements'
                     },
                       {
-                        'containerData':'containerElementsData',
-                        'containerInfo':'containerElementsInfo'
+                        'containerData':'containerResourcesData',
+                        'containerInfo':'containerResourcesInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
-                    }
-                        );" 
+                    });
+                        " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
                       
-                     
+                <p class="card-text">
+              <div class="edit-container">
+  
+  <button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;">
+    <i class="fas fa-plus"></i>
+  </button>
+</div>
+              </p>
                       
                   </div>
                   <div id="card-clientresources" class="card-container">
@@ -195,13 +217,23 @@
     <div class="expandable-section1" id="expandable-section3">
         <div id="card-clientresources" class="card-container">
             <!-- Contenido de la sección expandible -->
+          
             <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-cube"></i> INVENTARIOS</h5>
                 <p class="card-text">
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientProducts');
+                        eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                                 'PRODUCTO',
+                                 'SKU',
+                                 'EAN1',
+                                 'EAN2',
+                                 'QR',
+                                 'ESTADO',
+                                 'EDICIÒN'
+                             ]);
                         getApiData(getProducts,
                       {
                         'apiService':'apiCom',
@@ -209,15 +241,17 @@
                         'endPoint':'getProducts'
                     },
                       {
-                        'containerData':'containerProductsData',
-                        'containerInfo':'containerProductsInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
                     }
-                        );" 
+                        );
+                        " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
@@ -234,7 +268,25 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientCatalogs');
+                         eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                                 
+                                 'Producto',
+                                
+                                
+                                 'Stock',
+                                 'Precio',
+                                 
+                                 'Locación',
+                                'ean1',
+                                'ean2',
+                                'sku',
+                                 
+                                 'QR',
+                                 'Estado',
+                                 'Ampliar',
+                                 'Edición'
+                             ]);
                         getApiData(getCatalogs,
                       {
                         'apiService':'apiCom',
@@ -242,8 +294,9 @@
                         'endPoint':'getCatalogs'
                     },
                       {
-                        'containerData':'containerCatalogsData',
-                        'containerInfo':'containerCatalogsInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all|all',
@@ -251,23 +304,9 @@
                         'value':'all'
                     }
                         );
+                       
                         
-                        getApiData(getClientStoresList,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getStores'
-                    },
-                      {
-                        'containerData':'list-storesListstoreq',
-                        'containerInfo':'containerCustomersInfo'
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
+                       
                         " 
                       >
                       <i class="fas fa-eye"></i>
@@ -343,7 +382,14 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientCategories');
+                        eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                                 'Categoría',
+                                 'Palabras clave',
+                                 'QR',
+                                 'Estado',
+                                 'Edición'
+                             ]);
                         getApiData(getCategories,
                       {
                         'apiService':'apiCom',
@@ -351,15 +397,17 @@
                         'endPoint':'getCategories'
                     },
                       {
-                        'containerData':'containerCategorieData',
-                        'containerInfo':'containerCategorieInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
                     }
-                        );" 
+                        );
+                   " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
@@ -402,7 +450,15 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientStores');
+                        eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                                 
+                                 'Tienda',
+                                 'Palabras clave',
+                                 'QR',
+                                 'Estado',
+                                 'Edición'
+                             ]);
                         getApiData(getStores,
                       {
                         'apiService':'apiCom',
@@ -410,15 +466,17 @@
                         'endPoint':'getStores'
                     },
                       {
-                        'containerData':'containerStoresData',
-                        'containerInfo':'containerStoresInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
                     }
-                        );" 
+                        );
+                       " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
@@ -439,7 +497,18 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientCustomers');
+                        eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                                 'Nombre',
+                                 'Apellido',
+                                 'Estado',
+                                 'Correo',
+                                 'Contacto',
+                                 'Puntos',
+                                 'Estrellas',
+                                 'Tipo',
+                                 'Eliminar'
+                             ]);
                         getApiData(getCustomers,
                       {
                         'apiService':'apiClient',
@@ -447,15 +516,17 @@
                         'endPoint':'getCustomers'
                     },
                       {
-                        'containerData':'containerCustomersData',
-                        'containerInfo':'containerCustomersInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
                     }
-                        );" 
+                        );
+                      " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
@@ -477,7 +548,17 @@
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
-                        openModal('clientDelivery');
+                         eraseContainers('containerCommerceData','containerCommerceInfo');
+               createTable('tableInternalClients1','containerCommerceData', [
+                'Nombre',
+          'Apellido',
+          'Estado',
+          'Correo',
+          'Contacto',
+          'Parámetros',
+          
+          'Eliminar'
+                             ]);
                         getApiData(getDelivery,
                       {
                         'apiService':'apiClient',
@@ -485,15 +566,17 @@
                         'endPoint':'getDelivery'
                     },
                       {
-                        'containerData':'containerDeliveryData',
-                        'containerInfo':'containerDeliveryInfo'
+                        'containerData':'containerCommerceData',
+                        'containerInfo':'containerCommerceInfo',
+                        'modelView':'table',
                     },
                       {
                         'filter':'all',
                         'param':'all',
                         'value':'all'
                     }
-                        );" 
+                        );
+                        " 
                       >
                       <i class="fas fa-eye"></i>
                     </button>
@@ -504,11 +587,319 @@
                     </p>
                       
                   </div>
+                
         </div>
-    </div>
+        <p class="card-text">
+        <div class="card-container"> 
+          
+                      <div id="containerCommerceInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="containerCommerceData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+                      </div></p>
+                      </div>
+                      
     <script>
         function toggleExpandableSection3() {
             const expandableSection1 = document.getElementById("expandable-section3");
+            if (expandableSection1.style.display === "block") {
+                expandableSection1.style.display = "none";
+            } else {
+                expandableSection1.style.display = "block";
+            }
+        }
+    </script>
+
+
+
+
+<p class="expand-button1" onclick="toggleExpandableSection4()"><i class="fas fa-store"></i> On-Site</p>
+    <div class="expandable-section1" id="expandable-section4">
+        <div id="card-clientresources" class="card-container">
+            <!-- Contenido de la sección expandible -->
+          
+            <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Ubicaciones</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Ubicación',
+                                 'Dirección',
+                                 'Comentarios',
+                                 'Contacto',
+                                 'E-mail'
+                             ]);
+                        getApiData(getPlaces,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="openModal('OSPlaceCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Puestos</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Puesto',
+                                 'Comentarios',
+                                 'Ubicación'
+                             ]);
+                        getApiData(getSites,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getSites'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="openModal('OSSiteCreate');getApiData(getPlacesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'list-OSPlace',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                  
+                 
+
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Elementos</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Elemento',
+                                 'Comentarios',
+                                 'Puesto',
+                                 'Tipo'
+                             ]);
+                        getApiData(getElementsOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getElements'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="openModal('OSElementCreate');getApiData(getSitesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getSites'
+                    },
+                      {
+                        'containerData':'list-OSSite',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                  
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Productos</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Producto',
+                                 'Características',
+                                 'Comentarios',
+                                 'SKU',
+                                 'EAN1',
+                                 'EAN2',
+                                 'QR',
+                                 'Activo',
+                                 'Edición'
+                             ]);
+                        getApiData(getProductsOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getProducts'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="openModal('OSProductCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                 
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Categorias</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Producto',
+                                 'Características',
+                                 'Comentarios',
+                                 'SKU',
+                                 'EAN1',
+                                 'EAN2',
+                                 'QR',
+                                 'Activo',
+                                 'Edición'
+                             ]);
+                        getApiData(getCategoriesOSList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCategories'
+                    },
+                      {
+                        'containerData':'list-OSCategories',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="openModal('OSCatCreate');getApiData(getCategoriesOSList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCategories'
+                    },
+                      {
+                        'containerData':'list-OSCategories',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                
+        </div>
+        <p class="card-text">
+        <div class="card-container"> 
+          
+                      <div id="containerOSInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="containerOSData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+                      </div></p>
+                      </div>
+                      
+    <script>
+        function toggleExpandableSection4() {
+            const expandableSection1 = document.getElementById("expandable-section4");
             if (expandableSection1.style.display === "block") {
                 expandableSection1.style.display = "none";
             } else {
@@ -558,7 +949,11 @@
 <script  src="scripts/gets/getCalendar.js"></script>
 <script  src="scripts/gets/getRooms.js"></script>
 <script  src="scripts/gets/getElements.js"></script>
-
+<script  src="scripts/gets/os.getPlaces.js"></script>
+<script  src="scripts/gets/os.getSites.js"></script>
+<script  src="scripts/gets/os.getElements.js"></script>
+<script  src="scripts/gets/os.getProducts.js"></script>
+<script  src="scripts/gets/os.getCategories.js"></script>
     
 
   

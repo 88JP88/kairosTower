@@ -1,13 +1,14 @@
 
 document.getElementById("postCategoriebtn").addEventListener("click", function() {
   // Obtén los valores de los campos
-
+  console.log("entra a lector");
             var apiData = {
               "clientId": sessionStorage.getItem('clientNow'),
               "categoryName": document.getElementById("catname").value,
               "comments": document.getElementById("catcomments").value,
               "categoryType": document.getElementById("list-cattipe").value,
               "parentId": document.getElementById("list-categoryListstadd96").value,
+              "imgCat": document.getElementById("catimg").value,
              
               "apiValues":{
                 "apiName": "apiCom",
@@ -28,7 +29,7 @@ document.getElementById("postCategoriebtn").addEventListener("click", function()
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
       document.getElementById("catname").value = "";
       document.getElementById("catcomments").value = "";
-    
+    console.log("entra a fetch");
       getMessage();
       var confirmCreateClient = window.confirm("¿Desea crear otra categoría?");
 

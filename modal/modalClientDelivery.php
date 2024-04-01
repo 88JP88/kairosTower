@@ -129,7 +129,7 @@
     </script>
 </body>
 </html>
-<script  src="scripts/posts/postDelivery.js"></script>
+
 
     
 

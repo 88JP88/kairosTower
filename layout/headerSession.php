@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/locales-all.js"></script>
     <link rel="stylesheet" href="style/styleSession.php">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
   </head>
   <body class="container-flex " style="width: 100%; height:100%;">
@@ -319,7 +320,14 @@
 <script  src="scripts/gets/getUsers.js"></script>
 <script  src="scripts/gets/getInternalClients.js"></script>
 <script  src="scripts/posts/postFullCalendar.js"></script>
-
+<script  src="scripts/posts/postStores.js"></script>
+<script  src="scripts/posts/postAssignRoom.js"></script>
+<script  src="scripts/posts/postCatalogs.js"></script>
+<script  src="scripts/posts/postCategories.js"></script>
+<script  src="scripts/posts/postCustomer.js"></script>
+<script  src="scripts/posts/postDelivery.js"></script>
+<script  src="scripts/posts/postProducts.js"></script>
+<script src="qrcodejs/qrcode.min.js"></script>
 
 <div id="loading-container" class="loading-container">
   <div class="loading-icon"></div>

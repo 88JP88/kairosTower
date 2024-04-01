@@ -28,7 +28,12 @@ async function getApiDataPromise(getApiInfo, apiData1, containers, params) {
       if (st !== null) {
         clientId = st;
       } else {
-        clientId = sessionStorage.getItem('clientNow');
+        
+        if (sessionStorage.getItem('clientNow') !== null) {
+          clientId = sessionStorage.getItem('clientNow');
+        } else {
+          clientId = sessionStorage.getItem('clientId');
+        }
       }
 
       var apiData = params;
@@ -276,4 +281,97 @@ function generarID() {
   let numeroAleatorio = Math.floor(Math.random() * 100000000); // Genera un número aleatorio entre 0 y 99999999
   let idAleatorio = numeroAleatorio.toString().padStart(8, '0'); // Asegura que tenga 8 dígitos completando con ceros a la izquierda si es necesario
   return idAleatorio;
+}
+
+document.getElementById("filterproducts").addEventListener("click", function() {
+    // Obtén los valores de los campos
+    var param = document.getElementById("repos-productClient").value;
+    var value = document.getElementById("keywordsearch").value;
+    getApiData(getProducts,'apiCom','v1','getProducts','containerProductsData','containerProductsInfo','filter',param,value);
+    console.log("press");
+    //getClientProducts('filter',param,value);
+  });
+  
+  
+  document.getElementById("searchproducts").addEventListener("click", function() {
+    // Obtén los valores de los campos
+    var param = document.getElementById("repos-productClient").value;
+    var value = document.getElementById("keywordsearch").value;
+    getApiData(getProducts,'apiCom','v1','getProducts','containerProductsData','containerProductsInfo','browser','param',value);
+    //getClientProducts('browser','param',value);
+  });
+
+ async function genCode(modelView,valor,caseUse,btnId){
+    //console.log(modelView,valor);
+
+    if(caseUse=="view"){
+      const codigoQRDiv = document.getElementById(modelView);
+      codigoQRDiv.innerHTML = '';
+      var btnbc = document.getElementById("btn"+btnId+modelView);
+    var btncbc = document.getElementById("btnc"+btnId+modelView);
+      
+      btnbc.style.display = "none";
+      btncbc.style.display = "block";
+      const codigoQR = new QRCode(codigoQRDiv, {
+        text: valor,
+        width: 80,
+        height: 80
+      });
+    }
+    if(caseUse=="unview"){
+      const codigoQRDiv = document.getElementById(modelView);
+      codigoQRDiv.innerHTML = '';
+      var btnbc = document.getElementById("btn"+btnId+modelView);
+    var btncbc = document.getElementById("btnc"+btnId+modelView);
+    
+      btnbc.style.display = "block";
+      btncbc.style.display = "none";
+      
+    }
+}
+
+
+function generarCodigoDeBarras(modelView,codigo,caseUse,btnId) {
+  // Obtiene el valor del input
+ // var codigo = document.getElementById("codigoInput").value;
+  // Genera el código de barras en el elemento SVG con el ID "barcode"
+  if(caseUse=="view"){
+    var svgElement = document.getElementById(modelView);
+    var btnbc = document.getElementById("btn"+btnId+modelView);
+    var btncbc = document.getElementById("btnc"+btnId+modelView);
+      svgElement.style.display = "block";
+      btnbc.style.display = "none";
+      btncbc.style.display = "block";
+    JsBarcode("#" + modelView, codigo, {
+      width: 1.0,
+      height: 30
+    });
+
+  }
+  if(caseUse=="unview"){
+    var svgElement = document.getElementById(modelView);
+    var btnbc = document.getElementById("btn"+btnId+modelView);
+    var btncbc = document.getElementById("btnc"+btnId+modelView);
+    svgElement.style.display = "none";
+    //  svgElement.style.display = "block";
+      btnbc.style.display = "block";
+      btncbc.style.display = "none";
+    
+
+  }
+ 
+}
+
+function openClose(element,useCase){
+
+  var elemento = document.getElementById(element);
+    if(useCase=="unview"){
+    elemento.style.display = "none";
+    }
+    if(useCase=="view"){
+      elemento.style.display = "block";
+      }
+    
+
+
 }
