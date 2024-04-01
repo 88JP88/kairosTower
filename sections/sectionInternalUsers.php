@@ -841,14 +841,14 @@
                                  'Activo',
                                  'Edición'
                              ]);
-                        getApiData(getCategoriesOSList,
+                        getApiData(getCategoriesOS,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
                         'endPoint':'getCategories'
                     },
                       {
-                        'containerData':'list-OSCategories',
+                        'containerData':'containerOSData',
                         'containerInfo':'containerOSInfo',
                         'modelView':'table',
                     },
@@ -863,7 +863,9 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="openModal('OSCatCreate');getApiData(getCategoriesOSList,
+                      <p class="card-text"><button onclick="
+                      openModal('OSCatCreate');
+                      getApiData(getCategoriesOSList,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',

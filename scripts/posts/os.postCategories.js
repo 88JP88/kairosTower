@@ -1,15 +1,15 @@
 
-document.getElementById("postCategoryOSBtn").addEventListener("click", function() {
+document.getElementById("postCatOSBtn").addEventListener("click", function() {
   // Obtén los valores de los campos
   document.getElementById("loading-container").style.display = "flex";
 
  
 var apiData = {
   "clientId": sessionStorage.getItem('clientNow'),
-  "productName": document.getElementById("categoryOSname").value,
-  "productComments": document.getElementById("categoryOScomments").value,
-  "productImg": document.getElementById("categoryOSimg").value,
-  "productBydiscount": document.getElementById("list-OSCategories").value,
+  "categoryName": document.getElementById("catOSName").value,
+  "categoryComments": document.getElementById("catOSComments").value,
+  "categoryImg": document.getElementById("catOSImg").value,
+  "categoryParent": document.getElementById("list-OSCategories").value,
   "apiValues":{
     "apiName": "apiOS",
     "apiVersion": "v1",
@@ -36,7 +36,7 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
       // Verifica la respuesta del usuario
       if (confirmCreateClient) {
-        openModClientDeliveryCreate();
+       // openModClientDeliveryCreate();
           // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
          // console.log("No se ejecutó el código para crear otro cliente.");
       } else {

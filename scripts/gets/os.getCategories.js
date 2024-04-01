@@ -187,78 +187,47 @@ createTable('tableInternalClients2','containerOSData', [
      
       const row = document.createElement("tr");
       
-      const backgroundColor = info.infoProduct.params.isActive === "0" ? "  #cc0007" : "#ffffff";
-      const activo1 = info.infoProduct.params.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+      const backgroundColor = info.infoCategory.params.isActive === "0" ? "  #cc0007" : "#ffffff";
+      const activo1 = info.infoCategory.params.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
       
       row.innerHTML = `
      
     
       <td style="background-color: ${backgroundColor};">
-      <p style="margin-bottom: 5px;">${info.infoProduct.info.type =="service" ? `SERVICIO`:``}
-      ${info.infoProduct.info.type =="product" ? `PRODUCTO`:``}</p>
+      <p style="margin-bottom: 5px;">${info.infoCategory.info.type =="secondary" ? `SUB-CATEGORÍA`:``}
+      ${info.infoCategory.info.type =="main" ? `PRINCIPAL`:``}</p>
       <div style="max-width: 100px; max-height: 100px;">
-<img src="${info.infoProduct.info.imgProduct}" alt="Icono" style="max-width: 100%; max-height: 100%;">
+<img src="${info.infoCategory.info.imgCategory}" alt="Icono" style="max-width: 100%; max-height: 100%;">
 </div>
 <div style="margin-top: 10px;">
-<p style="margin-bottom: 5px;">${info.infoProduct.info.name}</p>
-<p style="margin-bottom: 5px;">${info.infoProduct.info.caracts}</p>
-<p>${info.infoProduct.info.unit} - $${info.infoProduct.info.value}</p>
+<p style="margin-bottom: 5px;">${info.infoCategory.info.name} (${info.parentName})</p>
+
 </div>
 
        </td>
-<td>${info.infoProduct.info.unitCaracts}</td>
-<td>${info.infoProduct.info.comments}</td>
+
        
-<td>
-${info.infoProduct.info.type =="service" ? `N/A`:``}
-${info.infoProduct.info.type =="product" ? `${info.infoProduct.info.sku}`:``}
-</td>
-       
-<td>
-${info.infoProduct.info.type =="service" ? `N/A`:``}
-${info.infoProduct.info.type =="product" ? `${info.infoProduct.info.ean1}
 
-<svg id="bc${info.productId}" style="display: none;"></svg>
-<button id="btnbc${info.productId}" onclick="generarCodigoDeBarras('bc${info.productId}', '${info.infoProduct.info.ean1}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-eye"></i>
-</button>
-<button id="btncbc${info.productId}" style="display: none;" onclick="generarCodigoDeBarras('bc${info.productId}', '${info.ean1}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-eye-slash"></i>
-</button>`:``}
+     
 
-</td>
 
 <td>
-${info.infoProduct.info.type =="service" ? `N/A`:``}
-${info.infoProduct.info.type =="product" ? `${info.infoProduct.info.ean2}
-<svg id="bc2${info.productId}" style="display: none;"></svg>
-
-<button id="btn2bc2${info.productId}" onclick="generarCodigoDeBarras('bc2${info.productId}', '${info.infoProduct.info.ean2}','view','2');" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-eye"></i>
-</button>
-<button id="btnc2bc2${info.productId}" style="display: none;" onclick="generarCodigoDeBarras('bc2${info.productId}', '${info.ean2}','unview','2');" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-eye-slash"></i>
-</button>`:``}
-
-</td>
-
-<td>
-  <div id="qr${info.productId}">
+  <div id="qr${info.categoryId}">
   </div>
   
-  <button id="btnqr${info.productId}" onclick="genCode('qr${info.productId}', '${info.productId}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button id="btnqr${info.categoryId}" onclick="genCode('qr${info.categoryId}', '${info.categoryId}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
   <i class="fas fa-eye"></i>
 </button>
-<button id="btncqr${info.productId}" style="display: none;" onclick="genCode('qr${info.productId}', '${info.productId}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<button id="btncqr${info.categoryId}" style="display: none;" onclick="genCode('qr${info.categoryId}', '${info.categoryId}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
   <i class="fas fa-eye-slash"></i>
 </button>
 </td>
 
 <td> <div class="edit-container">
-${info.infoProduct.params.isActive !== "0" ? `<button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
+${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
 <i class="fas fa-ban"></i>
 </button>` 
-: `<button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
+: `<button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
 <i class="fas fa-check"></i>
 </button>`}${activo1} 
 
@@ -281,45 +250,25 @@ ${info.infoProduct.params.isActive !== "0" ? `<button onclick="editOSProduct(thi
 
 <td>
 
-<button id="btnview${info.productId}" onclick="openClose('btnview${info.productId}','unview');openClose('btnunview${info.productId}','view');openClose('allContainer${info.productId}','view');" class="btn btn-primary1 delete-button" title="EDITAR">
+<button id="btnview${info.categoryId}" onclick="openClose('btnview${info.categoryId}','unview');openClose('btnunview${info.categoryId}','view');openClose('allContainer${info.categoryId}','view');" class="btn btn-primary1 delete-button" title="EDITAR">
 <i class="fas fa-eye"></i>
 </button>
-<button id="btnunview${info.productId}" style="display: none;" onclick="openClose('btnunview${info.productId}','unview');openClose('btnview${info.productId}','view');openClose('allContainer${info.productId}','unview');" class="btn btn-primary1 delete-button" title="EDITAR">
+<button id="btnunview${info.categoryId}" style="display: none;" onclick="openClose('btnunview${info.categoryId}','unview');openClose('btnview${info.categoryId}','view');openClose('allContainer${info.categoryId}','unview');" class="btn btn-primary1 delete-button" title="EDITAR">
 <i class="fas fa-eye-slash"></i>
 </button>
 
-<div id="allContainer${info.productId}" style="display: none;">
+<div id="allContainer${info.categoryId}" style="display: none;">
 
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">SKU:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.sku}" title="${info.sku}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','sku','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
 
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">EAN1:</p>
-  <input type="text" class="form-control label-input" id="ean1${info.productId}" value="${info.infoProduct.info.ean1}" title="${info.ean1}">
-  <button id="ean1${info.productId}" onclick="editOSProduct(this,'${info.clientId}','${info.productId}','ean1','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
 
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">EAN2:</p>
-  <input type="text" class="form-control label-input" id="ean2${info.productId}" value="${info.infoProduct.info.ean2}" title="${info.ean2}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','ean2','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
+
 
 
 <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Imágen:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.imgProduct}" title="${info.imgProduct}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','imgProduct','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.imgCategory}" title="${info.imgCategory}">
+  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','imgProduct','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -327,9 +276,9 @@ ${info.infoProduct.params.isActive !== "0" ? `<button onclick="editOSProduct(thi
 
 <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Producto:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.name}" title="${info.productName}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','name','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">Categoría:</p>
+  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.name}" title="${info.productName}">
+  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','name','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -339,39 +288,21 @@ ${info.infoProduct.params.isActive !== "0" ? `<button onclick="editOSProduct(thi
 <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Comentarios:</p>
-  <input type="text" class="form-control label-input" id="descriptiontext${info.productId}" value="${info.infoProduct.info.comments}" title="${info.description}">
-  <button id="btndescription${info.productId}" onclick="editOSProduct(this,'${info.clientId}','${info.productId}','comments','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <input type="text" class="form-control label-input" id="descriptiontext${info.categoryId}" value="${info.infoCategory.info.comments}" title="${info.description}">
+  <button id="btndescription${info.categoryId}" onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','comments','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
 </p>
 
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Precio:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.value}" title="${info.productId}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','value','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
 
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Caracteristicas:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.caracts}" title="${info.spcProduct}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','caracts','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
 
 
 <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Palabras clave:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.keyWords}" title="${info.keyWords}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','keyWords','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.keyWords}" title="${info.keyWords}">
+  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','keyWords','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -379,113 +310,22 @@ ${info.infoProduct.params.isActive !== "0" ? `<button onclick="editOSProduct(thi
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Tipo : ${info.infoProduct.info.type}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Tipo : ${info.infoCategory.info.type}</p>
 
-  <select id="list-producttype${info.productId}" class="form-control" name="lista1" required style="flex: 1;">
+  <select id="list-producttype${info.categoryId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="product">Producto</option>
   <option value="service">Servicio</option>
   </select>
-  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
+  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
     <i class="fas fa-edit"></i>
   </button>
 </div>
 
-${info.infoProduct.info.type =="service" ? `<div class="edit-container" style="display: flex;">
-
-
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Unidad: ${info.infoProduct.info.unit}</p>
-
-  <select id="list-producttype${info.productId}" class="form-control" name="lista1" required style="flex: 1;">
-  
-  <option value="srv">Servicio</option>
-  <option value="h">Hora</option>
-  </select>
-  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>`:`<div class="edit-container" style="display: flex;">
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Unidad: ${info.infoProduct.info.unit}</p>
-
-  <select id="list-producttype${info.productId}" class="form-control" name="lista1" required style="flex: 1;">
-  <option value="NA">N/A</option>
-    <option value="un">Unidad (un)</option>
-            <option value="cm">Centímetros (cm)</option>
-            <option value="m">Metros (m)</option>
-            <option value="km">Kilómetros (km)</option>
-            <option value="in">Pulgadas (in)</option>
-            <option value="ft">Pies (ft)</option>
-            <option value="mi">Millas (mi)</option>
-            <option value="g">Gramos (g)</option>
-            <option value="kg">Kilogramos (kg)</option>
-            <option value="oz">Onzas (oz)</option>
-            <option value="lb">Libras (lb)</option>
-            <option value="l">Litros (l)</option>
-            <option value="ml">Mililitros (ml)</option>
-            <option value="gal">Galones (gal)</option>
-            <option value="s">Segundos (s)</option>
-            <option value="min">Minutos (min)</option>
-            <option value="h">Horas (h)</option>
-            <option value="box">Caja (box)</option>
-            <option value="pkg">Paquete (pkg)</option>
-            <option value="bag">Bolsa (bag)</option>
-  </select>
-  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>`}
 
 
 
+</td>
 
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Características de unidad:</p>
-  <input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.unitCaracts}" title="${info.spcProduct}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','unitCaracts','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
-<p class="card-text" style="display: inline-block; margin-right: 10px;">OPCIONES AVANZADAS -></p>
-<div class="edit-container" style="display: flex;">
-
-
-
-
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Producto para descuento: ${info.infoProduct.info.byDiscount == "1" ? `DESCUENTO`:`NO-DESCUENTO`}</p>
-  <select id="list-producttype${info.productId}" class="form-control" name="lista1" required style="flex: 1;">
-  
-  <option value="0">No</option>
-    <option value="1">Sí</option>
-  </select>
-  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.productId}&quot;,&quot;byDiscount&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
-    <i class="fas fa-edit"></i>
-  </button>
-
-
-  
-</div>
-${info.infoProduct.info.byDiscount =="1" ? `<div class="edit-container" style="margin-bottom: 10px;">
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Stock por unidad de descuento:</p>
-<input type="text" class="form-control label-input" id="${info.productId}" value="${info.infoProduct.info.stockByUnit}" title="${info.spcProduct}">
-<button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','stockByUnit','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
-  <i class="fas fa-edit"></i>
-</button>
-</div>`:``}
-
-
-<div class="edit-container" style="margin-bottom: 10px;">
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Eliminar:&nbsp;&nbsp;&nbsp;</p>
-<p class="card-text">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.productId}','del','del','del')" class="btn btn-primary1 delete-button" title="ELIMINAR">
-    <i class="fas fa-trash"></i>
-  </button>
-</p>
-</div>
-
-
-</div>
-<td>
         
 
    
@@ -878,9 +718,9 @@ createTable('tableInternalClients2','containerOSData', [
     });
 }
 
-async function getProductsOS(data, containerData, containerInfo,modelView) {
+async function getCategoriesOS(data, containerData, containerInfo,modelView) {
     try {
-        const message = await getProductsOSPromise(data, containerData, containerInfo,modelView);
+        const message = await getCategoriesOSPromise(data, containerData, containerInfo,modelView);
         console.log(message); // Manejar el mensaje de éxito
     } catch (error) {
         console.error(error); // Manejar el error
@@ -906,7 +746,7 @@ await Promise.all(data.categories.map(info => {
     return new Promise(resolve => {
         const option = document.createElement("option");
         option.value = info.categoryId;
-        option.text = info.infoCategory.info.name;
+        option.text = info.infoCategory.info.name+" ("+info.parentName+")";
         reposSelect.add(option);
         resolve();
     });

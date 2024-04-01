@@ -18,41 +18,35 @@
      
 
   <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Nombre del puesto</label>
-  <input type="text" class="form-control" id="elementOSName" placeholder="Ingresa nombre de room">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Nombre de la categoría</label>
+  <input type="text" class="form-control" id="catOSName" placeholder="Ingresa nombre de room">
 </div>
   
 
 
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Comentarios del puesto</label>
-  <input type="mail" class="form-control" id="elementOSComments" placeholder="Ingresa nombre de room">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Comentarios de la categoríao</label>
+  <input type="mail" class="form-control" id="catOSComments" placeholder="Ingresa nombre de room">
 </div>
 
 
 
 <div class="mb-3">
   <select id="list-OSCategories" class="form-control" name="lista1" required>
-  <option selected>Selecciona ubicacion</option>
+  
 
   </select>
 
 </div>
 
 <div class="mb-3">
-<label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Tipo de elemento del puesto</label>
-
-  <select id="list-OSElementType" class="form-control" name="lista1" required>
-<option selected>Selecciona tipo</option>
-<option value="movil">Movil</option>
-<option value="fixed">Fijo tipo</option>
-</select>
-
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Imágen de la categoría</label>
+  <input type="mail" class="form-control" id="catOSImg" placeholder="Ingresa nombre de room">
 </div>
 
 
-<button type="button" class="btn btn-primary1 edit-button" id="postElementBtn" title="CREAR UBICACIÓN" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
+<button type="button" class="btn btn-primary1 edit-button" id="postCatOSBtn" title="CREAR UBICACIÓN" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 
 
@@ -72,5 +66,4 @@
   </div>
 </div>
 
-<script  src="scripts/posts/os.postElements.js"></script>
 <script  src="scripts/posts/os.postCategories.js"></script>
