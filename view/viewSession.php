@@ -33,5 +33,6 @@ require_once 'modal/modalOSSites.php';
 require_once 'modal/modalOSElements.php';
 require_once 'modal/modalOSProducts.php';
 require_once 'modal/modalOSCategories.php';
+require_once 'modal/modalOSCatalogs.php';
 require_once 'modal/m.php';
 ?>

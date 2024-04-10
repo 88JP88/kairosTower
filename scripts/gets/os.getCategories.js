@@ -26,7 +26,7 @@
       const card11Info = document.createElement("div");
       card11Info.classList.add("card");
       
-          card11Info.innerHTML = ` <p><H4>PRODUCTOS / SERVICIOS</H4></p><p>${data.response.apiMessage}</p>`;
+          card11Info.innerHTML = ` <p><H4>CATEGORÍAS</H4></p><p>${data.response.apiMessage}</p>`;
           cardContainer11Info.appendChild(card11Info);
 
     // Crear el primer botón
@@ -38,21 +38,17 @@
     button1.onclick = function() {
       eraseContainers('containerOSData','containerOSInfo');
       createTable('tableInternalClients2','containerOSData', [
-                        'Producto',
-                        'Características',
-                        'Comentarios',
-                        'SKU',
-                        'EAN1',
-                        'EAN2',
-                        'QR',
-                        'Activo',
-                        'Edición'
+        'Categoría',
+        'Comentarios',
+        'QR',
+        'Activo',
+        'Edición'
                     ]);
-               getApiData(getProductsOS,
+               getApiData(getCategoriesOS,
              {
                'apiService':'apiOS',
                'apiVersion':'v1',
-               'endPoint':'getProducts'
+               'endPoint':'getCategories'
            },
              {
                'containerData':'containerOSData',
@@ -84,7 +80,7 @@
     label1.textContent = 'Busqueda por parámetro';
     div1.appendChild(label1);
     const select = document.createElement('select');
-    select.id = 'OSProductsFilter';
+    select.id = 'OSCatsFilter';
     select.classList.add('form-control');
     select.name = 'currency';
     select.required = true;
@@ -96,7 +92,7 @@
     option3.value = 'comments';
     option3.textContent = 'Comentarios';
     const option4 = document.createElement('option');
-    option4.value = 'caracts';
+    option4.value = 'type';
     option4.textContent = 'Características';
     const option5 = document.createElement('option');
     option5.value = 'byDiscount';
@@ -137,7 +133,7 @@
      const input = document.createElement('input');
      input.setAttribute('type', 'text');
      input.classList.add('form-control');
-     input.id = 'OSProductsValue';
+     input.id = 'OSCatsValue';
      input.placeholder = 'Ingresa palabra a buscar';
      div2.appendChild(input);
      button2.appendChild(icon2);
@@ -147,25 +143,21 @@
 
      button2.addEventListener('click', function() {
               
-      var param = document.getElementById("OSProductsFilter").value;
-var value = document.getElementById("OSProductsValue").value;
+      var param = document.getElementById("OSCatsFilter").value;
+var value = document.getElementById("OSCatsValue").value;
 eraseContainers('containerOSData','containerOSInfo');
 createTable('tableInternalClients2','containerOSData', [
-                  'Producto',
-                  'Características',
-                  'Comentarios',
-                  'SKU',
-                  'EAN1',
-                  'EAN2',
-                  'QR',
-                  'Activo',
-                  'Edición'
+  'Categoría',
+  'Comentarios',
+  'QR',
+  'Activo',
+  'Edición'
               ]);
-         getApiData(getProductsOS,
+         getApiData(getCategoriesOS,
        {
          'apiService':'apiOS',
          'apiVersion':'v1',
-         'endPoint':'getProducts'
+         'endPoint':'getCategories'
      },
        {
          'containerData':'containerOSData',
@@ -208,8 +200,17 @@ createTable('tableInternalClients2','containerOSData', [
 
        
 
-     
+     <td>${info.infoCategory.info.comments}</td>
 
+     <td>
+     <p style="margin-bottom: 5px;">${info.parentInfo.info.type =="secondary" ? `SUB-CATEGORÍA`:``}
+     ${info.parentInfo.info.type =="main" ? `PRINCIPAL`:``}</p>
+     <p style="margin-bottom: 5px;">Categoría: 
+     ${info.parentInfo.info.name}
+     </p>
+     <p style="margin-bottom: 5px;">Comentarios: ${info.parentInfo.info.comments}  
+     </p>
+     </td>
 
 <td>
   <div id="qr${info.categoryId}">
@@ -268,7 +269,7 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Imágen:</p>
   <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.imgCategory}" title="${info.imgCategory}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','imgProduct','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editOSCategory(this,'${info.clientId}','${info.categoryId}','imgCategory','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -278,7 +279,7 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Categoría:</p>
   <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.name}" title="${info.productName}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','name','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editOSCategory(this,'${info.clientId}','${info.categoryId}','name','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -289,7 +290,7 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Comentarios:</p>
   <input type="text" class="form-control label-input" id="descriptiontext${info.categoryId}" value="${info.infoCategory.info.comments}" title="${info.description}">
-  <button id="btndescription${info.categoryId}" onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','comments','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button id="btndescription${info.categoryId}" onclick="editOSCategory(this,'${info.clientId}','${info.categoryId}','comments','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -302,7 +303,7 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Palabras clave:</p>
   <input type="text" class="form-control label-input" id="${info.categoryId}" value="${info.infoCategory.info.keyWords}" title="${info.keyWords}">
-  <button onclick="editOSProduct(this,'${info.clientId}','${info.categoryId}','keyWords','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button onclick="editOSCategory(this,'${info.clientId}','${info.categoryId}','keyWords','data','data')" class="btn btn-primary1 delete-button" title="EDITAR">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -312,11 +313,10 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
 
 <p class="card-text" style="display: inline-block; margin-right: 10px;">Tipo : ${info.infoCategory.info.type}</p>
 
-  <select id="list-producttype${info.categoryId}" class="form-control" name="lista1" required style="flex: 1;">
-  <option value="product">Producto</option>
-  <option value="service">Servicio</option>
+  <select id="list-catlistOS${idin}" class="form-control" name="lista1" required style="flex: 1;">
+  
   </select>
-  <button onclick="editOSProduct(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
+  <button onclick="editOSCategory(this,&quot;${info.clientId}&quot;,&quot;${info.categoryId}&quot;,&quot;type&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
     <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -333,15 +333,16 @@ ${info.infoCategory.params.isActive !== "0" ? `<button onclick="editOSProduct(th
       `;
      
       cardContainer11.appendChild(row);
-      getApiData(getSitesList,
+      getApiData(getCategoriesOSList,
         {
           'apiService':'apiOS',
           'apiVersion':'v1',
-          'endPoint':'getSites'
+          'endPoint':'getCategories'
       },
         {
-          'containerData':'list-siteName'+idin,
-          'containerInfo':'',
+          'containerData':'list-catlistOS'+idin,
+          'containerInfo':'containerOSInfo',
+          'modelView':'table',
       },
         {
           'filter':'all',
@@ -536,6 +537,7 @@ Cardinalidad fin
       `;
 
       cardContainer11.appendChild(card11);
+      
    //   getClientCategoriesList3('all','all','all',idin1);
       //getClientStoresList13('all','all','all',idin1);
 
@@ -551,7 +553,7 @@ Cardinalidad fin
                 cardContainer11Info.innerHTML = "";
                 const card11Info = document.createElement("div");
                 card11Info.classList.add("card");
-                card11Info.innerHTML = `<p>PRODUCTOS / SERVICIOS</p><p>${data.response.apiMessage}</p>
+                card11Info.innerHTML = `<p>CATEGORÍAS</p><p>${data.response.apiMessage}</p>
                                          <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
                 cardContainer11Info.appendChild(card11Info);
 
@@ -564,21 +566,17 @@ Cardinalidad fin
     button1.onclick = function() {
       eraseContainers('containerOSData','containerOSInfo');
       createTable('tableInternalClients2','containerOSData', [
-                        'Producto',
-                        'Características',
-                        'Comentarios',
-                        'SKU',
-                        'EAN1',
-                        'EAN2',
-                        'QR',
-                        'Activo',
-                        'Edición'
+        'Categoría',
+        'Comentarios',
+        'QR',
+        'Activo',
+        'Edición'
                     ]);
-               getApiData(getProductsOS,
+               getApiData(getCategoriesOS,
              {
                'apiService':'apiOS',
                'apiVersion':'v1',
-               'endPoint':'getProducts'
+               'endPoint':'getCategories'
            },
              {
                'containerData':'containerOSData',
@@ -610,7 +608,7 @@ Cardinalidad fin
     label1.textContent = 'Busqueda por parámetro';
     div1.appendChild(label1);
     const select = document.createElement('select');
-    select.id = 'OSProductsFilter';
+    select.id = 'OSCatsFilter';
     select.classList.add('form-control');
     select.name = 'currency';
     select.required = true;
@@ -663,7 +661,7 @@ Cardinalidad fin
      const input = document.createElement('input');
      input.setAttribute('type', 'text');
      input.classList.add('form-control');
-     input.id = 'OSProductsValue';
+     input.id = 'OSCatsValue';
      input.placeholder = 'Ingresa palabra a buscar';
      div2.appendChild(input);
      button2.appendChild(icon2);
@@ -673,25 +671,21 @@ Cardinalidad fin
 
      button2.addEventListener('click', function() {
               
-      var param = document.getElementById("OSProductsFilter").value;
-var value = document.getElementById("OSProductsValue").value;
+      var param = document.getElementById("OSCatsFilter").value;
+var value = document.getElementById("OSCatsValue").value;
 eraseContainers('containerOSData','containerOSInfo');
 createTable('tableInternalClients2','containerOSData', [
-                  'Producto',
-                  'Características',
-                  'Comentarios',
-                  'SKU',
-                  'EAN1',
-                  'EAN2',
-                  'QR',
-                  'Activo',
-                  'Edición'
+  'Categoría',
+  'Comentarios',
+  'QR',
+  'Activo',
+  'Edición'
               ]);
-         getApiData(getProductsOS,
+         getApiData(getCategoriesOS,
        {
          'apiService':'apiOS',
          'apiVersion':'v1',
-         'endPoint':'getProducts'
+         'endPoint':'getCategories'
      },
        {
          'containerData':'containerOSData',

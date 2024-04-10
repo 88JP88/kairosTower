@@ -889,32 +889,32 @@ async function getProductsOS(data, containerData, containerInfo,modelView) {
 
 
 
-async function getPlacesListPromise(data, containerData, containerInfo) {
+async function getProductsListPromise(data, containerData, containerInfo) {
   var reposSelect = document.getElementById(containerData);
   while (reposSelect.firstChild) {
       reposSelect.removeChild(reposSelect.firstChild);
   }
 
-  await Promise.all(data.places.map(info => {
+  await Promise.all(data.products.map(info => {
       return new Promise(resolve => {
           const option = document.createElement("option");
-          option.value = info.placeId;
-          option.text = info.infoPlace.info.name;
+          option.value = info.productId;
+          option.text = info.infoProduct.info.name;
           reposSelect.add(option);
           resolve();
       });
   }));
 
-  if (data.categories && data.categories.length > 0) {
+  if (data.products && data.products.length > 0) {
       return "Ubicaciones";
   } else {
       throw new Error("No se encontraron categorías en los datos proporcionados.");
   }
 }
 
-async function getPlacesList(data, containerData, containerInfo) {
+async function getProductsOSList(data, containerData, containerInfo) {
 try {
-    const message = await getPlacesListPromise(data, containerData, containerInfo);
+    const message = await getProductsListPromise(data, containerData, containerInfo);
     // console.log(message); // Manejar el mensaje de éxito
 } catch (error) {
     console.error(error); // Manejar el error

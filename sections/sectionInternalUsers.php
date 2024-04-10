@@ -831,12 +831,9 @@
                         onclick="
                         eraseContainers('containerOSData','containerOSInfo');
                createTable('tableInternalClients2','containerOSData', [
-                                 'Producto',
-                                 'Características',
+                                 'Categoría',
                                  'Comentarios',
-                                 'SKU',
-                                 'EAN1',
-                                 'EAN2',
+                                 'Parent Info',
                                  'QR',
                                  'Activo',
                                  'Edición'
@@ -873,6 +870,112 @@
                     },
                       {
                         'containerData':'list-OSCategories',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+
+
+
+
+
+
+                  
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Catálogos</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                 'Producto',
+                                 'Tienda',
+                                 'Categoría',
+                                 'Stock / Sec-Stock',
+                                 'Comentarios',
+                                 'Precio/ Precio regular / Ganancia',
+                                'EAN1 / EAN2 / SKU',
+                                'Descuento / Promoción',
+                                'minQty / maxQty',
+                                
+                                 'Activo',
+                                 'Edición'
+                             ]);
+                        getApiData(getCatalogsOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCatalogs'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="
+                      openModal('OSCatalogCreate');
+                      getApiData(getProductsOSList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getProducts'
+                    },
+                      {
+                        'containerData':'list-OSProductList',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        getApiData(getPlacesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'list-OSPlaceList',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        getApiData(getCategoriesOSList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCategories'
+                    },
+                      {
+                        'containerData':'list-OSCategoryList',
                         'containerInfo':'containerOSInfo',
                         'modelView':'table',
                     },
@@ -956,6 +1059,7 @@
 <script  src="scripts/gets/os.getElements.js"></script>
 <script  src="scripts/gets/os.getProducts.js"></script>
 <script  src="scripts/gets/os.getCategories.js"></script>
+<script  src="scripts/gets/os.getCatalogs.js"></script>
     
 
   

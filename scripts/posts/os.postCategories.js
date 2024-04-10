@@ -93,7 +93,7 @@ function csvToJsonPostCustomer(csvData) {
 
 
 
-function editOSProduct(button, clientId,productId,param,value,reason) {
+function editOSCategory(button, clientId,categoryId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
   document.getElementById("loading-container").style.display = "flex";
   if(reason=="data"){
@@ -102,14 +102,14 @@ function editOSProduct(button, clientId,productId,param,value,reason) {
     var value = input.value;
 
     var apiData = {
-      "productId": productId,
+      "categoryId": categoryId,
       "clientId": clientId,
       "param": param,
       "value": value,
       "apiValues":{
         "apiName": "apiOS",
         "apiVersion": "v1",
-        "endPoint": "putProduct"
+        "endPoint": "putCategory"
       }
       
     };
