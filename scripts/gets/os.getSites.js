@@ -244,7 +244,7 @@ createTable('tableInternalClients2','containerOSData', [
   }
 
 
-              if(modelView=="card"){
+              if(modelView=="cardOS"){
                 const cardContainer11 = document.getElementById(containerData);
                 const cardContainer11Info = document.getElementById(containerInfo);
                 cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
@@ -254,159 +254,138 @@ createTable('tableInternalClients2','containerOSData', [
                 card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
                 cardContainer11Info.appendChild(card11Info);
 
-                for (const info of data.delivery) {
+                for (const info of data.sites) {
                     const card11 = document.createElement("div");
-                    card11.classList.add("card");
-                    const backgroundColor = info.isActive === "0" ? "#cc0007" : "#ffffff";
+                    card11.classList.add("mesa");
+                    const isOutService = info.infoSite.params.isOutService === 1 || info.infoSite.params.isOutService === true;
+const isBussy = info.infoSite.params.isBussy === 1 || info.infoSite.params.isBussy === true;
+const isOrder = info.infoSite.params.isOrder === 1 || info.infoSite.params.isOrder === true;
+
+let backgroundColor = "";
+if (isOutService) {
+    backgroundColor = "#F2473B";
+} else if (isBussy && !isOrder) {
+    backgroundColor = "#F26D20";
+} else if (isOrder) {
+    backgroundColor = "#9BD792";
+} else {
+    backgroundColor = "#6645E9";
+}
                     const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
-                    const disRulesArray = JSON.parse(info.distanceRules);
+                  
                     card11.innerHTML = `
-          <div class="card-body" style="background-color: ${backgroundColor};">
+          <div class="card-body" >
           <h5 class="card-title">
-          <p class="card-text"> <i class="fas fa-guitar"></i></p>
+          <p class="card-text" style="background-color: ${backgroundColor};"> <i class="fas fa-table"> ${info.infoSite.info.name}</i></p>
         
          
 
       </h5>
-      <p class="card-text">Nombre del repartidor:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryName}" title="${info.deliveryName}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-      <p class="card-text">Apellido del repartidor:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryLastName}" title="${info.deliveryLastName}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryLastName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
+      <p class="card-text">${info.infoSite.info.comments}
+     ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
+      (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
+      <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)"  title="EDITAR">
+     <i class="fas fa-plus"> Calcular orden</i>
+     </button>
+     <button onclick=" openModal('OSCatalogViewOS');
       
+     createTable('tableInternalClients2','OSCatalogViewData', [
+       'Seleccionar',
+       'Producto',
+    'Categoría',
+       'Stock',
+       
+       'Comentarios',
+       'Precio',
+      'EAN1 / EAN2 / SKU',
+      'Descuento / Promoción'
+   ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+"  title="EDITAR">
+<i class="fas fa-plus"> Añadir productos</i>
+</button>
+<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)"  title="EDITAR">
+<i class="fas fa-plus"> Remover productos</i>
+</button>
+<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
+<i class="fas fa-plus"> Remover orden</i>
+</button>
       
+      `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
+    
+      "  title="EDITAR">
+      <i class="fas fa-plus"> Desocupar</i>
+      </button>
+      <button onclick="
+      openModal('OSCatalogViewOS');
       
-     <p class="card-text">
-      <div class="edit-container">
-      ${info.isActive !== "0" ? `<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-<i class="fas fa-ban"></i>
-</button>` 
-: `<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-<i class="fas fa-check"></i>
-</button>`}${activo1} 
+      createTable('tableInternalClients2','OSCatalogViewData', [
+        'Seleccionar',
+        'Producto',
+     'Categoría',
+        'Stock',
+        
+        'Comentarios',
+        'Precio',
+       'EAN1 / EAN2 / SKU',
+       'Descuento / Promoción'
+    ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Crear orden</i>
+     </button>`)
+      
+      :
+     `
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
+    "  title="EDITAR">
+     <i class="fas fa-plus"> Ocupar</i>
+     </button>
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> Sin servicio</i>
+     </button>
+     `):` <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> En servicio</i>
+     </button>`}
 
-</div>
-             
-          
-
-
-      <p class="card-text">Correo:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryMail}" title="${info.customerMail}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryMail&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-      <p class="card-text">Teléfono:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryContact}" title="${info.deliveryContact}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryContact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-
-      <p class="card-text">Reglas de distancia y tiempo:
-      <div class="edit-container">
-      <p class="card-text">
-      Calle inicio
-      <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startStreet']}" title=" ${disRulesArray[0]['distance']['startStreet']}">
-    </p>
-    </div>
-    <p class="card-text"> Cardinalidad inicio
-    <button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarStreetStart');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-    <!-- Popup -->
-    <div id="popCarStreetStart" class="popup">
-      <p>NORTE (N)<br>SUR (S)</p>
-      <button onclick="closePopup('popCarStreetStart')">Cerrar</button>
-    </div>
-    <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startLocationStreet']}" title=" ${disRulesArray[0]['distance']['startLocationStreet']}">
-  </p>
-    <p class="card-text">
-    Calle fin
-    <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endStreet']}" title=" ${disRulesArray[0]['distance']['endStreet']}">
-  </p>
-  <p class="card-text">
-  Cardinalidad fin
-  <button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarStreetEnd');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-  <!-- Popup -->
-  <div id="popCarStreetEnd" class="popup">
-    <p>NORTE (N)<br>SUR (S)</p>
-    <button onclick="closePopup('popCarStreetEnd')">Cerrar</button>
-  </div>
-  <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endLocationStreet']}" title=" ${disRulesArray[0]['distance']['endLocationStreet']}">
-</p>
-  <p class="card-text">
-  carrera inicio
-  <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startAvenue']}" title=" ${disRulesArray[0]['distance']['startAvenue']}">
-</p>
-<p class="card-text">
-Cardinalidad inicio
-<button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarAvenueStart');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-<!-- Popup -->
-<div id="popCarAvenueStart" class="popup">
-  <p>ESTE (EST)<br>OESTE (OES)</p>
-  <button onclick="closePopup('popCarAvenueStart')">Cerrar</button>
-</div>
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startLocationAvenue']}" title=" ${disRulesArray[0]['distance']['startLocationAvenue']}">
-</p>
-<p class="card-text">
-Carrera fin
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endAvenue']}" title=" ${disRulesArray[0]['distance']['endAvenue']}">
-</p>
-<p class="card-text">
-Cardinalidad fin
-<button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarAvenueEnd');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-<!-- Popup -->
-<div id="popCarAvenueEnd" class="popup">
-<p>ESTE (EST)<br>OESTE (OES)</p>
-<button onclick="closePopup('popCarAvenueEnd')">Cerrar</button>
-</div>
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endLocationAvenue']}" title=" ${disRulesArray[0]['distance']['endLocationAvenue']}">
-</p>
-
-<p class="card-text">
-Tiempo inicio
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startTime']}" title=" ${disRulesArray[0]['distance']['startTime']}">
-</p>
-<p class="card-text">
-Cardinalidad fin
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endTime']}" title=" ${disRulesArray[0]['distance']['endTime']}">
-</p>
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;customerPhone&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
      
-      
-      <p class="card-text">
-      <div class="edit-container">
 
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;del&quot;,&quot;data&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-<i class="fas fa-trash"></i>
-</button>
-</div>
+
+
+
+
       </p>
               
           </div>
@@ -417,7 +396,7 @@ Cardinalidad fin
    //   getClientCategoriesList3('all','all','all',idin1);
       //getClientStoresList13('all','all','all',idin1);
 
-      idin1++;
+      
                 }
               }
                 document.getElementById("loading-container").style.display = "none";
@@ -618,4 +597,9 @@ try {
 } catch (error) {
     console.error(error); // Manejar el error
 }
+}
+
+
+function setSession(name,value){
+sessionStorage.setItem(name,value);
 }

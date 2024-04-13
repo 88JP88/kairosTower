@@ -97,7 +97,8 @@ function editOSSite(button, clientId,siteId,param,value,reason) {
 
     var input = button.previousElementSibling;
     var value = input.value;
-
+  }
+  
     var apiData = {
       "siteId": siteId,
       "clientId": clientId,
@@ -124,7 +125,31 @@ function editOSSite(button, clientId,siteId,param,value,reason) {
 
       getMessage();
       
-        getClientDelivery('filter',param,value);
+       if(reason=="osdata")
+       {
+        
+const url = window.location.href;
+const urlObj = new URL(url);
+var place = urlObj.searchParams.get("placeId");
+//eraseContainers('placeOSData','placeOSInfo');
+        getApiData(getSites,
+          {
+            'apiService':'apiOS',
+            'apiVersion':'v1',
+            'endPoint':'getSites'
+        },
+          {
+            'containerData':'placeOSData',
+            'containerInfo':'placeOSInfo',
+            'modelView':'cardOS',
+        },
+          {
+            'filter':'filter',
+            'param':'placeIdCar',
+            'value':  place
+        }
+            );
+       }
 
       
 
@@ -133,84 +158,16 @@ function editOSSite(button, clientId,siteId,param,value,reason) {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
-  }
-  if(reason=="isActive"){
-
-    
-    var apiData = {
-      "deliveryId": customerId,
-      "clientId": clientId,
-      "param": param,
-      "value": value,
-      "apiValues":{
-        "apiName": "apiClient",
-        "apiVersion": "v1",
-        "endPoint": "putDelivery"
-      }
-      
-    };
-  // Construir la URL con los parámetros de la petición GET
-
-  const apiInfo = JSON.stringify(apiData);
-  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
- 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientCustomers('filter',param,value);
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-param="del";
-var apiData = {
-  "deliveryId": customerId,
-  "clientId": clientId,
-  "param": param,
-  "value": value,
-  "apiValues":{
-    "apiName": "apiClient",
-    "apiVersion": "v1",
-    "endPoint": "putDelivery"
-  }
   
-};
-// Construir la URL con los parámetros de la petición GET
-
-const apiInfo = JSON.stringify(apiData);
-var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientDelivery('filter','clientId',clientId);
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
   document.getElementById("loading-container").style.display = "none";
 
 }
 
+
+function editSiteHtml(){
+  const urlObj = new URL(url);
+      
+  editOSSite(this,urlObj.searchParams.get('clientId'),sessionStorage.getItem('siteNow'),'isOrder',true,'osdata');
+
+}
 

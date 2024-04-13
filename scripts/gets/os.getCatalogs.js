@@ -1,11 +1,11 @@
 
-
+let idin1 = 1;
 
   async function getCatalogsOSPromise(data, containerData, containerInfo,modelView) {
     return new Promise(async (resolve, reject) => {
         document.getElementById("loading-container").style.display = "flex";
 
-        var idin1 = 1;
+        
         try {
             if (data.response && data.response.response == "true") {
 
@@ -587,7 +587,12 @@ eraseContainers('containerOSData','containerOSInfo');
 
        </td>
 
-       <td>${info.infoPlace.info.name} - ${info.infoPlace.info.comments}</td>
+       <td>${info.infoPlace.info.name} - ${info.infoPlace.info.comments}
+       
+       <a href="place.php?clientId=${info.clientId}&placeId=${info.placeId}&st=${info.placeId}" target="_blank">
+      q
+      </a>
+       </td>
        <td style="background-color: ${backgroundColor};">
        <p style="margin-bottom: 5px;">${info.infoCategory.info.type =="secondary" ? `SUB-CATEGORÍA`:``}
        ${info.infoCategory.info.type =="main" ? `PRINCIPAL`:``}</p>
@@ -1005,6 +1010,190 @@ ${info.infoCatalog.info.isStocked === true || info.infoCatalog.info.isStocked ==
     
 
   }
+
+
+
+
+
+  
+  if(modelView=="tableOS"){
+               
+    const cardContainer11 = document.querySelector("#"+containerData+" tbody");
+    const cardContainer11Info = document.getElementById(containerInfo);
+    cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+    cardContainer11Info.innerHTML = ""; 
+    
+    const card11Info = document.createElement("div");
+    card11Info.classList.add("card");
+    
+        card11Info.innerHTML = ` <p><H4>CATÁLOGOS</H4></p><p>${data.response.apiMessage}</p>`;
+        cardContainer11Info.appendChild(card11Info);
+
+
+  data.catalogs.forEach(info => {
+   
+   
+    const row = document.createElement("tr");
+    
+    const backgroundColor = info.infoCatalog.params.isActive === 0 || info.infoCatalog.params.isActive === false ? "  #cc0007" : "#ffffff";
+    const activo1 = info.infoCatalog.params.isActive === 1 || info.infoCatalog.params.isActive === true ? activo="ACTIVO" : activo="INACTIVO";
+    
+    row.innerHTML = `
+   
+  <td><button" onclick="toCarOS('${info.catalogId}','toCar','uniqueId', {
+    'price':${info.infoCatalog.info.price},
+    'name':'${info.infoProduct.info.name}',
+    'qty':1,
+    'discount':${info.infoCatalog.info.discount},
+    'isDiscount':${info.infoCatalog.info.isDiscount}
+},'${sessionStorage.getItem('siteNow')}');" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-eye-slash"></i>
+  </button>
+  <button" onclick="toCarOS('${info.catalogId}', '${info.catalogId}${idin1}','toCarNot');" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-eye-slash"></i>
+  </button>
+  </td>
+    <td style="background-color: ${backgroundColor};">
+    
+  <div style="max-width: 60px; max-height: 60px;">
+    <img src="${info.infoProduct.info.imgProduct}" alt="Icono" style="max-width: 100%; max-height: 100%;">
+  </div>
+  <div style="margin-top: 10px;">
+    <p style="margin-bottom: 5px; font-size: 14px; color: green">${info.infoProduct.info.name}</p>
+    <p style="margin-bottom: 5px; font-size: 12px; color: orange">${info.infoProduct.info.caracts}</p>
+    <p style="margin-bottom: 5px; font-size: 12px; color: red">${info.infoProduct.info.unit}</p>
+
+  </div>
+  
+
+     </td>
+
+    
+     <td style="background-color: ${backgroundColor};">
+     
+     <div style="max-width: 60px; max-height: 60px;">
+<img src="${info.infoCategory.info.imgCategory}" alt="Icono" style="max-width: 100%; max-height: 100%;">
+</div>
+<div style="margin-top: 10px;">
+<p style="margin-bottom: 5px;">${info.infoCategory.info.name}</p>
+
+</div>
+
+      </td>
+
+     <td>${info.infoCatalog.info.stock}</td>
+<td>${info.infoCatalog.info.comments}</td>
+
+<td>
+$${info.infoCatalog.info.price}
+</td>
+     
+
+     
+<td>
+${info.infoProduct.info.type=="service" ? `SERVICIO 
+
+
+QR 
+<div id="qr${info.catalogId}">
+</div>
+
+<button id="btnqr${info.catalogId}" onclick="genCode('qr${info.catalogId}', '${info.catalogId}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye"></i>
+</button>
+<button id="btncqr${info.catalogId}" style="display: none;" onclick="genCode('qr${info.catalogId}', '${info.catalogId}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye-slash"></i>
+</button>
+`:`
+
+ean1 
+<svg id="bc${info.catalogId}" style="display: none;"></svg>
+<button id="btnbc${info.catalogId}" onclick="generarCodigoDeBarras('bc${info.catalogId}', '${info.infoProduct.info.ean1}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye"></i>
+</button>
+<button id="btncbc${info.catalogId}" style="display: none;" onclick="generarCodigoDeBarras('bc${info.catalogId}', '${info.ean1}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye-slash"></i>
+</button>
+
+
+ean2 
+<svg id="bc2${info.catalogId}" style="display: none;"></svg>
+
+<button id="btn2bc2${info.catalogId}" onclick="generarCodigoDeBarras('bc2${info.catalogId}', '${info.infoProduct.info.ean2}','view','2');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye"></i>
+</button>
+<button id="btnc2bc2${info.catalogId}" style="display: none;" onclick="generarCodigoDeBarras('bc2${info.catalogId}', '${info.ean2}','unview','2');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye-slash"></i>
+</button> 
+
+QR 
+<div id="qr${info.catalogId}">
+</div>
+
+<button id="btnqr${info.catalogId}" onclick="genCode('qr${info.catalogId}', '${info.catalogId}','view','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye"></i>
+</button>
+<button id="btncqr${info.catalogId}" style="display: none;" onclick="genCode('qr${info.catalogId}', '${info.catalogId}','unview','');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye-slash"></i>
+</button>
+
+sku 
+${info.infoProduct.info.sku}
+
+`}
+
+</td>
+
+<td>
+${info.infoCatalog.info.isDiscount ===true || info.infoCatalog.info.isDiscount === 1 ? `DESCUENTO: APLICA (${info.infoCatalog.info.discount}%)`:`DESCUENTO: NO APLICA`} / 
+${info.infoCatalog.info.isPromo ===true || info.infoCatalog.info.isPromo === 1 ? `PROMOCIÓN: APLICA (${info.infoCatalog.info.promo})`:`PROMOCIÓN: NO APLICA`}
+
+</td>
+
+
+
+
+    
+
+  
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+ 
+
+    `;
+   
+    cardContainer11.appendChild(row);
+    
+    //getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesList'+idin,info.categoryId+"|"+info.parentId,'all','all','all');
+    //getClientCategoriesList('all','all','all',idin);
+   
+   // getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
+
+ 
+    idin1++;
+   
+  });
+
+ 
+  // Array para almacenar los ítems seleccionados
+
+  
+
+}
 
 
               if(modelView=="card"){
@@ -1776,4 +1965,135 @@ try {
 } catch (error) {
     console.error(error); // Manejar el error
 }
+}
+let selectedItemsByTable = {};
+
+function toCarOS(catalogId, param, uniqueId, values, tableId) {
+    if (!selectedItemsByTable[tableId]) {
+        selectedItemsByTable[tableId] = []; // Crear un array vacío para la mesa si no existe
+    }
+
+    if (param === "toCar") {
+        // Agregar el valor al array correspondiente a la mesa
+        selectedItemsByTable[tableId].push({
+            'uniqueId': generarCodigoAleatorio(8),
+            'catalogId': catalogId,
+            'price': values.price,
+            'name': values.name,
+            'qty': values.qty,
+            'discount': values.discount,
+            'isDiscount':values.isDiscount
+            
+        });
+    } else {
+    // Eliminar el elemento con el mismo uniqueId del array correspondiente a la mesa
+    selectedItemsByTable[tableId] = selectedItemsByTable[tableId].filter(item => item.uniqueId !== uniqueId);
+}
+
+    // Actualizar el contenido del contenedor con la información seleccionada
+    updateCarContainer(tableId);
+}
+
+function updateCarContainer(tableId) {
+  const container = document.getElementById("placeOSCar");
+  container.innerHTML = ""; // Limpiar el contenido existente del contenedor
+
+  // Verificar si hay elementos seleccionados para esta mesa
+  if (selectedItemsByTable[tableId] && Array.isArray(selectedItemsByTable[tableId])) {
+      const selectedItems = selectedItemsByTable[tableId];
+
+      // Recorrer los elementos seleccionados y agregarlos al contenedor
+      selectedItems.forEach(item => {
+          const catalogId = item.catalogId;
+          const uniqueId = item.uniqueId;
+
+          // Crear un elemento div para mostrar la información del ítem
+          const itemDiv = document.createElement("div");
+          itemDiv.classList = "edit-container";
+          itemDiv.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">${item.qty} </p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"> ${item.name} $${item.price}</p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"><button onClick="toCarOS('${catalogId}','toCarNot','${uniqueId}',{
+            'uniqueId': '${uniqueId}',
+            'price':${item.price},
+              'name':'${item.name}',
+              'qty':1,
+              'discount':${item.discount},
+              'isDiscount':${item.isDiscount}
+          },'${tableId}');">Remover</button></p><br>`;
+
+          // Agregar el elemento al contenedor
+          container.appendChild(itemDiv);
+      });
+  }
+
+  console.log(selectedItemsByTable);
+  // Imprimir el objeto de elementos seleccionados por mesa en la consola
+
+  // Actualizar el contenedor de totales
+  updateCarContainerTotal(tableId);
+}
+
+function updateCarContainerTotal(tableId) {
+  const container = document.getElementById("placeOSCarTotal");
+  container.innerHTML = ""; // Limpiar el contenido existente del contenedor
+  const container1 = document.getElementById("placeOSCarsubTotal");
+  container1.innerHTML = "";
+  let totalFounds = 0;
+  let subtotalFounds = 0;
+  // Verificar si hay elementos seleccionados para esta mesa
+  if (selectedItemsByTable[tableId] && Array.isArray(selectedItemsByTable[tableId])) {
+      const selectedItems = selectedItemsByTable[tableId];
+
+      // Recorrer los elementos seleccionados y sumar sus precios
+      selectedItems.forEach(item => {
+        if(item.isDiscount===false || item.isDiscount===0){
+item.discount=0;
+        }
+        subtotalFounds += item.price;
+
+        // Calcular el total con descuento restando el descuento del precio del artículo
+        // Primero, calcula el descuento en términos de cantidad
+        let discountAmount = (item.price * item.discount) / 100;
+        // Resta el descuento del precio del artículo y suma al total
+        totalFounds += item.price - discountAmount;
+        sessionStorage.setItem('totalFounds',totalFounds);
+        sessionStorage.setItem('subTotalFounds',subtotalFounds);
+      });
+  }
+
+  // Crear un elemento div para mostrar el total
+  const totalDiv = document.createElement("div");
+  totalDiv.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">Total: ${totalFounds}</p>`;
+
+  const totalDiv1 = document.createElement("div");
+  totalDiv1.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">Sub-Total: ${subtotalFounds}</p>`;
+
+  // Agregar el elemento al contenedor
+  container.appendChild(totalDiv);
+  container1.appendChild(totalDiv1);
+
+  console.log(subtotalFounds); // Imprimir el total en la consola
+}
+
+
+
+function generarCodigoAleatorio(longitud) {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let codigo = '';
+
+    for (let i = 0; i < longitud; i++) {
+        const indice = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres.charAt(indice);
+    }
+
+    return codigo;
+}
+
+function removeOrder(tableId) {
+  // Verificar si hay elementos seleccionados para esta mesa
+  if (selectedItemsByTable[tableId]) {
+      // Eliminar los elementos del array correspondiente a la mesa
+      delete selectedItemsByTable[tableId];
+      
+      // Actualizar el contenido del contenedor
+      updateCarContainer(tableId);
+  }
 }

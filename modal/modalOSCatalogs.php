@@ -278,4 +278,74 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+const url = window.location.href;
+      
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="OSCatalogViewOS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-Xl">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #001219; color: #C70039;">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><img src="public/KAIROS2.png" alt="LUGMA" width="30" height="30" style="background-color: #001219; color: #C70039;">Crear Catálogo</h1>
+        
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModal('clientDeliveryCreate')"></button>
+      </div>
+      <div class="modal-body">
+      <div id="placeOSCar">
+       
+       </div>
+       <div id="placeOSCarTotal">
+       
+       </div>
+       <div id="placeOSCarsubTotal">
+       
+       </div>
+      <div id="OSCatalogViewInfo" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <div id="OSCatalogViewData" class="card-container">
+            <!-- Contenido de la sección expandible -->
+        </div>
+        <button onClick="editSiteHtml();createOsOrder();">Crear orden</button>
+
+</div>
+
+
+
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <script  src="scripts/posts/os.postCatalogs.js"></script>
+
+<script  src="scripts/posts/os.postSites.js"></script>
+
+<script  src="scripts/posts/os.createOrder.js"></script>
