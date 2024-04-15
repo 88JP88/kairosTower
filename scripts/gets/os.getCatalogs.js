@@ -2036,8 +2036,11 @@ function updateCarContainerTotal(tableId) {
   container.innerHTML = ""; // Limpiar el contenido existente del contenedor
   const container1 = document.getElementById("placeOSCarsubTotal");
   container1.innerHTML = "";
+  const container2 = document.getElementById("placeOSCarsubTotal");
+  container2.innerHTML = "";
   let totalFounds = 0;
   let subtotalFounds = 0;
+    let saver = 0;
   // Verificar si hay elementos seleccionados para esta mesa
   if (selectedItemsByTable[tableId] && Array.isArray(selectedItemsByTable[tableId])) {
       const selectedItems = selectedItemsByTable[tableId];
@@ -2053,9 +2056,11 @@ item.discount=0;
         // Primero, calcula el descuento en términos de cantidad
         let discountAmount = (item.price * item.discount) / 100;
         // Resta el descuento del precio del artículo y suma al total
+       saver +=discountAmount;
         totalFounds += item.price - discountAmount;
         sessionStorage.setItem('totalFounds',totalFounds);
         sessionStorage.setItem('subTotalFounds',subtotalFounds);
+        sessionStorage.setItem('saver',saver);
       });
   }
 
@@ -2065,16 +2070,19 @@ item.discount=0;
 
   const totalDiv1 = document.createElement("div");
   totalDiv1.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">Sub-Total: ${subtotalFounds}</p>`;
+ const totalDiv2 = document.createElement("div");
+  totalDiv2.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">Ahorro: ${saver}</p>`;
 
   // Agregar el elemento al contenedor
   container.appendChild(totalDiv);
   container1.appendChild(totalDiv1);
+    container2.appendChild(totalDiv2);
 
   console.log(subtotalFounds); // Imprimir el total en la consola
 }
 
 
-
+openModal();
 function generarCodigoAleatorio(longitud) {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let codigo = '';

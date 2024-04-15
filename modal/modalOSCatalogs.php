@@ -297,11 +297,7 @@
 
 
 
-<script>
 
-const url = window.location.href;
-      
-</script>
 
 <!-- Modal -->
 <div class="modal fade" id="OSCatalogViewOS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -322,10 +318,13 @@ const url = window.location.href;
        <div id="placeOSCarsubTotal">
        
        </div>
+       <div id="placeOSCarSaver">
+       
+       </div>
       <div id="OSCatalogViewInfo" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
-        <div id="OSCatalogViewData" class="card-container">
+        <div id="OSCatalogViewData" class="scard-container">
             <!-- Contenido de la sección expandible -->
         </div>
         <button onClick="editSiteHtml();createOsOrder();">Crear orden</button>

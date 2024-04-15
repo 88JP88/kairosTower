@@ -152,3 +152,33 @@ const codigoQR = new QRCode(codigoQRDiv, {
     </script>
 </body>
 </html>
+
+<?php
+// Función para hacer ping a una dirección IP o un nombre de dominio
+function ping($host) {
+    $port = 80; // Puerto HTTP
+    $timeout = 3; // Tiempo de espera en segundos
+
+    $fp = @fsockopen($host, $port, $errno, $errstr, $timeout);
+    if (!$fp) {
+        return "$host no responde en el puerto $port";
+    } else {
+        return "$host responde en el puerto $port";
+    }
+    fclose($fp);
+}
+
+// Función para realizar un traceroute a una dirección IP o un nombre de dominio
+function traceroute($host) {
+    $output = shell_exec("traceroute " . escapeshellarg($host));
+    echo "<pre>$output</pre>";
+}
+
+// Uso de las funciones para hacer ping y traceroute
+$target = "google.com";
+echo "Ping a $target:<br>";
+ping($target);
+
+echo "<br>Traceroute a $target:<br>";
+traceroute($target);
+?>
