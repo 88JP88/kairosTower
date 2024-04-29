@@ -13,11 +13,11 @@ let idin1 = 1;
 
 
 
-
+              let arr=[];
               
 
     if(modelView=="table"){
-               
+      
       const cardContainer11 = document.querySelector("#"+containerData+" tbody");
       const cardContainer11Info = document.getElementById(containerInfo);
       cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
@@ -1001,13 +1001,14 @@ ${info.infoCatalog.info.isStocked === true || info.infoCatalog.info.isStocked ==
      // getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
 
    
+   arr.push([info.infoProduct.info.name, info.infoCatalog.info.stock]);
       idin1++;
      
     });
 
    
     
-    
+    drawPieChart(arr, 'chart_div_Catalogs_os', 'Total de catalogos','bars');
 
   }
 
@@ -1040,12 +1041,26 @@ ${info.infoCatalog.info.isStocked === true || info.infoCatalog.info.isStocked ==
     
     row.innerHTML = `
    
-  <td><button" onclick="toCarOS('${info.catalogId}','toCar','uniqueId', {
-    'price':${info.infoCatalog.info.price},
-    'name':'${info.infoProduct.info.name}',
+  <td>
+  <input type="number" id="qty${info.catalogId}${idin1}" class="form-control label-input" value="1">
+  <button" onclick="toCarOS('${info.catalogId}','toCar','qty${info.catalogId}${idin1}', {
+    'catalogPrice':${info.infoCatalog.info.price},
+    'productName':'${info.infoProduct.info.name}',
     'qty':1,
     'discount':${info.infoCatalog.info.discount},
-    'isDiscount':${info.infoCatalog.info.isDiscount}
+    'isDiscount':${info.infoCatalog.info.isDiscount},
+    'categoryName':'${info.infoCategory.info.name}',
+    'productType':'${info.infoProduct.info.type}',
+    'productPrice':'${info.infoProduct.info.value}',
+    'sku':'${info.infoProduct.info.sku}',
+    'ean1':'${info.infoProduct.info.ean1}',
+    'ean2':'${info.infoProduct.info.ean2}',
+    'productCaracts':'${info.infoProduct.info.caracts}',
+    'placeName':'${info.infoPlace.info.name}',
+    'catalogComments':'${info.infoCatalog.info.comments}',
+    'isPromo':'${info.infoCatalog.info.isPromo}',
+    'promo':'${info.infoCatalog.info.promo}',
+    'stock':'${info.infoCatalog.info.stock}'
 },'${sessionStorage.getItem('siteNow')}');" class="btn btn-primary1 delete-button" title="EDITAR">
   <i class="fas fa-eye-slash"></i>
   </button>
@@ -1974,27 +1989,45 @@ function toCarOS(catalogId, param, uniqueId, values, tableId) {
     }
 
     if (param === "toCar") {
+      var uid=document.getElementById(uniqueId).value;
         // Agregar el valor al array correspondiente a la mesa
+if(document.getElementById(uniqueId).value<=values.stock && document.getElementById(uniqueId).value >0){
         selectedItemsByTable[tableId].push({
             'uniqueId': generarCodigoAleatorio(8),
             'catalogId': catalogId,
-            'price': values.price,
-            'name': values.name,
-            'qty': values.qty,
-            'discount': values.discount,
-            'isDiscount':values.isDiscount
+            'catalogPrice':values.catalogPrice,
+            'productName':values.productName,
+            'qty':document.getElementById(uniqueId).value,
+            'discount':values.discount,
+            'isDiscount':values.isDiscount,
+            'categoryName':values.categoryName,
+            'productType':values.productType,
+            'productPrice':values.productPrice,
+            'sku':values.sku,
+            'ean1':values.ean1,
+            'ean2':values.ean2,
+            'productCaracts':values.productCaracts,
+            'placeName':values.placeName,
+            'catalogComments':values.catalogComments,
+            'isPromo':values.isPromo,
+            'promo':values.promo,
+            'stock':values.stock
             
         });
+      }if(document.getElementById(uniqueId).value>values.stock && document.getElementById(uniqueId).value < 1){
+
+        alert("Cantidad mayor al stock actual");
+      }
     } else {
     // Eliminar el elemento con el mismo uniqueId del array correspondiente a la mesa
     selectedItemsByTable[tableId] = selectedItemsByTable[tableId].filter(item => item.uniqueId !== uniqueId);
 }
 
     // Actualizar el contenido del contenedor con la información seleccionada
-    updateCarContainer(tableId);
+    updateCarContainer(tableId,uid);
 }
 
-function updateCarContainer(tableId) {
+function updateCarContainer(tableId,dataQty) {
   const container = document.getElementById("placeOSCar");
   container.innerHTML = ""; // Limpiar el contenido existente del contenedor
 
@@ -2010,13 +2043,27 @@ function updateCarContainer(tableId) {
           // Crear un elemento div para mostrar la información del ítem
           const itemDiv = document.createElement("div");
           itemDiv.classList = "edit-container";
-          itemDiv.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">${item.qty} </p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"> ${item.name} $${item.price}</p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"><button onClick="toCarOS('${catalogId}','toCarNot','${uniqueId}',{
+          itemDiv.innerHTML = `<p class="card-text" style="display: inline-block; margin-right: 10px;">${item.qty} </p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"> ${item.productName} $${item.catalogPrice * item.qty}</p><br><p class="card-text" style="display: inline-block; margin-right: 10px;"><button onClick="toCarOS('${catalogId}','toCarNot','${uniqueId}',{
             'uniqueId': '${uniqueId}',
-            'price':${item.price},
-              'name':'${item.name}',
-              'qty':1,
-              'discount':${item.discount},
-              'isDiscount':${item.isDiscount}
+           
+
+              'catalogPrice':${item.price},
+    'productName':'${item.name}',
+    'qty': ${dataQty},
+    'discount':${item.discount},
+    'isDiscount':${item.isDiscount},
+    'categoryName':'${item.name}',
+    'productType':'${item.type}',
+    'productPrice':'${item.value}',
+    'sku':'${item.sku}',
+    'ean1':'${item.ean1}',
+    'ean2':'${item.ean2}',
+    'productCaracts':'${item.caracts}',
+    'placeName':'${item.name}',
+    'catalogComments':'${item.comments}',
+    'isPromo':'${item.isPromo}',
+    'promo':'${item.promo}',
+    'stock':${item.stock}
           },'${tableId}');">Remover</button></p><br>`;
 
           // Agregar el elemento al contenedor
@@ -2050,14 +2097,14 @@ function updateCarContainerTotal(tableId) {
         if(item.isDiscount===false || item.isDiscount===0){
 item.discount=0;
         }
-        subtotalFounds += item.price;
+        subtotalFounds += item.catalogPrice*item.qty;
 
         // Calcular el total con descuento restando el descuento del precio del artículo
         // Primero, calcula el descuento en términos de cantidad
-        let discountAmount = (item.price * item.discount) / 100;
+        let discountAmount = (item.catalogPrice * item.discount) / 100 * item.qty;
         // Resta el descuento del precio del artículo y suma al total
        saver +=discountAmount;
-        totalFounds += item.price - discountAmount;
+        totalFounds += item.catalogPrice*item.qty - discountAmount;
         sessionStorage.setItem('totalFounds',totalFounds);
         sessionStorage.setItem('subTotalFounds',subtotalFounds);
         sessionStorage.setItem('saver',saver);

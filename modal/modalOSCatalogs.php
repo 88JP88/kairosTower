@@ -321,7 +321,17 @@
        <div id="placeOSCarSaver">
        
        </div>
+       <div class="card-container">
+Responsable:
+       <select id="list-OSEmployeesList" class="form-control" name="lista1" required></select>
+       </div>
+       <div class="card-container">
+Cliente:
+       <select id="list-OSCustomerListOS" class="form-control" name="lista1" required></select>
+       </div>
+
       <div id="OSCatalogViewInfo" class="card-container">
+
             <!-- Contenido de la sección expandible -->
         </div>
         <div id="OSCatalogViewData" class="scard-container">

@@ -1,6 +1,43 @@
 
 
 
+function drawPieChart(dataArray, chartContainerId, chartTitle, chartType) {
+  google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.setOnLoadCallback(function() {
+    if (chartType == "circle") {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task');
+      data.addColumn('number', 'Hours');
+      data.addRows(dataArray);
+  
+      var options = {
+        title: chartTitle,
+        pieHole: 0.4,
+      };
+  
+      var chart = new google.visualization.PieChart(document.getElementById(chartContainerId));
+      chart.draw(data, options);
+    }
+  
+    if (chartType == "bars") {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Categoria');
+      data.addColumn('number', 'Valor');
+      data.addRows(dataArray);
+  
+      var options = {
+        title: 'Gráfico de Barras',
+        chartArea: { width: '50%' },
+        hAxis: { title: 'Valor', minValue: 0 },
+        vAxis: { title: 'Categoria' }
+      };
+  
+      var chart = new google.visualization.BarChart(document.getElementById(chartContainerId));
+      chart.draw(data, options);
+    }
+  });
+}
+
 
 function openModal(modalId) {
   var myModal = new bootstrap.Modal(document.getElementById(modalId));

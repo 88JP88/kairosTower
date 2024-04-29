@@ -1,0 +1,137 @@
+[
+    {
+      "versions": {
+       
+        "changeLogs": [
+          {
+            "changeLog": {
+              "version": "1.1.0",
+              "date": "2024/04/18",
+              "isUpdated": true,
+            "changes": "NUEVO PROCESO DE COMUNICACIÓN",
+            "isNewFunction": false,
+            "functions": "",
+              "isRelease":true,
+              "previusVersion":"1.0.2A",
+              "semanticLetter":"A",
+              "isAcumulative":false,
+              "isDeprecated":false,
+              "deprecated":"",
+
+              "acumulativeVersions":[
+                {
+                "acumulativeVersion":{
+                    "version":""
+                }
+                }
+              ]
+            }
+            
+          },
+          {
+            "changeLog": {
+              "version": "1.0.2",
+              "date": "2024/04/20",
+              "isUpdated": true,
+            "changes": "se corrige versión anterior",
+            "isNewFunction": true,
+            "functions": "nueva funcion de api",
+              "isRelease":true,
+              "previusVersion":"0.0.0A",
+              "semanticLetter":"A",
+              "isAcumulative":true,
+              "isDeprecated":false,
+              "deprecated":"",
+              "acumulativeVersions":[
+                {
+                "acumulativeVersion":{
+                    "version":"1.0.0A"
+                }
+                },
+                {
+                    "acumulativeVersion":{
+                        "version":"1.0.1A"
+                    }
+                    }
+              ]
+            }
+            
+          }, {
+            "changeLog": {
+              "version": "1.0.1",
+              "date": "2024/04/18",
+              "isUpdated": true,
+            "changes": "se corrige funcion anterior",
+            "isNewFunction": false,
+            "functions": "",
+              "isRelease":false,
+              "previusVersion":"",
+              "semanticLetter":"A",
+              "isAcumulative":true,
+              "isDeprecated":false,
+              "deprecated":"",
+
+              "acumulativeVersions":[
+                {
+                "acumulativeVersion":{
+                    "version":"1.0.0A"
+                }
+                }
+              ]
+            }
+            
+          },
+          {
+            "changeLog": {
+              "version": "1.0.0",
+              "date": "2024/04/18",
+              "isUpdated": false,
+            "changes": "",
+            "isNewFunction": true,
+            "functions": "Lanzamiento",
+              "isRelease":false,
+              "previusVersion":"",
+              "semanticLetter":"A",
+              "isAcumulative":false,
+              "isDeprecated":false,
+              "deprecated":"",
+
+              "acumulativeVersions":[
+                {
+                "acumulativeVersion":{
+                    "version":""
+                }
+                }
+              ]
+            }
+            
+          }
+        ],
+        "currentVersion": {
+          "versions": {
+            "version": "1.1.0",
+            "date": "2024/04/18",
+            "isUpdated": true,
+          "changes": "NUEVO PROCESO DE COMUNICACIÓN",
+          "isNewFunction": false,
+          "functions": "",
+            "isRelease":true,
+            "previusVersion":"1.0.2A",
+            "semanticLetter":"A",
+            "isAcumulative":false,
+            "isDeprecated":false,
+            "deprecated":"",
+
+            "acumulativeVersions":[
+              {
+              "acumulativeVersion":{
+                  "version":""
+              }
+              }
+            ]
+          }
+        }
+        }
+      }
+    
+  ]

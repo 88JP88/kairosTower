@@ -25,4 +25,6 @@ require_once '../../modal/modalClientCategories.php';
 require_once '../../modal/modalClientStores.php';
 require_once '../../modal/modalClientCustomers.php';
 require_once '../../modal/modalClientDelivery.php';
+require_once '../../modal/modalOSPlaces.php';
+
 ?>

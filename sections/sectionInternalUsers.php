@@ -755,7 +755,9 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="openModal('OSElementCreate');getApiData(getSitesList,
+                      <p class="card-text"><button onclick="
+                      openModal('OSElementCreate');
+                      getApiData(getSitesList,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
@@ -892,6 +894,8 @@
                   <div class="card-body">
                       <h5 style="color: #C70039"><i class="fas fa-cube"></i> Catálogos</h5>
                 <p class="card-text">
+                <div id="chart_div_Catalogs_os" style="width: 200px; height: 200px;"></div>
+
                     <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
 
                         onclick="
@@ -988,6 +992,243 @@
                     </p>
                       
                   </div>
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Ordenes</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                              'Estado',
+                              'Total',
+                                'Sub-Total',
+                                
+                                'Ahorro',
+                                'Pago',
+                                'Responsable'
+                             ]);
+                        getApiData(getOrdersOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getOrders'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        getApiData(getSitesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getSites'
+                    },
+                      {
+                        'containerData':'OSSelectSiteFilterFilter',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        getApiData(getPlacesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'OSSelectPlaceOSFilter',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'OSSelectOwnerOSFilter',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'all',
+    'param':'all',
+    'value':'all'
+}
+    );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="
+                      openModal('OSCatCreate');
+                      getApiData(getCategoriesOSList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCategories'
+                    },
+                      {
+                        'containerData':'list-OSCategories',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Equipo</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                              
+                              'Nombre',
+                                'Comentarios',
+                                
+                                'Contacto',
+                                'Email',
+                                'Rol',
+                                'Cargo',
+                                'Locación'
+                             ]);
+                        getApiData(getEmployeesOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getEmployees'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="
+                      openModal('OSEmployeeCreate');
+                      getApiData(getPlacesList,
+                              {
+                                'apiService':'apiOS',
+                                'apiVersion':'v1',
+                                'endPoint':'getPlaces'
+                            },
+                              {
+                                'containerData':'list-OSPlaceOwner',
+                                'containerInfo':'containerOSInfo',
+                                'modelView':'table',
+                            },
+                              {
+                                'filter':'all',
+                                'param':'all',
+                                'value':'all'
+                            }
+                                );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+                  <div class="card-body">
+                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> Clientes</h5>
+                <p class="card-text">
+                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+
+                        onclick="
+                        eraseContainers('containerOSData','containerOSInfo');
+               createTable('tableInternalClients2','containerOSData', [
+                                              
+                              'Nombre',
+                                'Comentarios',
+                                
+                                'Contacto',
+                                'Email',
+                                'Dirección',
+                                'Locación'
+                             ]);
+                        getApiData(getCustomersOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCustomers'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                        " 
+                      >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                </p>
+                      <p class="card-text"><button onclick="
+                      openModal('OSCustomerCreate');
+                      getApiData(getPlacesList,
+                              {
+                                'apiService':'apiOS',
+                                'apiVersion':'v1',
+                                'endPoint':'getPlaces'
+                            },
+                              {
+                                'containerData':'list-OSPlaceOwnerCustomer',
+                                'containerInfo':'containerOSInfo',
+                                'modelView':'table',
+                            },
+                              {
+                                'filter':'all',
+                                'param':'all',
+                                'value':'all'
+                            }
+                                );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                    </p>
+                      
+                  </div>
+
                 
         </div>
         <p class="card-text">
@@ -1060,6 +1301,9 @@
 <script  src="scripts/gets/os.getProducts.js"></script>
 <script  src="scripts/gets/os.getCategories.js"></script>
 <script  src="scripts/gets/os.getCatalogs.js"></script>
+<script  src="scripts/gets/os.getOrders.js"></script>
+<script  src="scripts/gets/os.getEmployees.js"></script>
+<script  src="scripts/gets/os.getCustomers.js"></script>
     
 
   

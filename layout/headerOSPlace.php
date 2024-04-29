@@ -11,12 +11,14 @@
     <link rel="icon" type="image/x-icon" href="public/KAIROS2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   </head>
   <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script>
 
-</script>
+
     
 <div class="notification" id="notification">
         <p id="notificationText"></p>
@@ -137,6 +139,9 @@ const url = window.location.href;
 
 
 
+
+
+  
 
 
   <p class="card-text">Filtro por categoría:
@@ -319,6 +324,7 @@ var st = urlObj.searchParams.get("storeId");</script>
 <script  src="scripts/posts/postCreateEcmOrder.js"></script>
 <script  src="scripts/gets/os.getSites.js"></script>
 <script  src="scripts/posts/os.postSites.js"></script>
+<script  src="scripts/gets/os.getOrders.js"></script>
 
 
 <div id="loading-container" class="loading-container">
@@ -464,3 +470,5 @@ document.addEventListener("DOMContentLoaded", function() {
         cursor: pointer;
     }
 </style>
+
+

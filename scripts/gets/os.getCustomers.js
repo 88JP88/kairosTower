@@ -1,11 +1,11 @@
 
 
 
-  async function getPlacesPromise(data, containerData, containerInfo,modelView) {
+  async function getCustomersOSPromise(data, containerData, containerInfo,modelView) {
     return new Promise(async (resolve, reject) => {
         document.getElementById("loading-container").style.display = "flex";
 
-        var idin1 = 1;
+        var idin = 1;
         try {
             if (data.response && data.response.response == "true") {
 
@@ -26,7 +26,7 @@
       const card11Info = document.createElement("div");
       card11Info.classList.add("card");
       
-          card11Info.innerHTML = ` <p><H4>UBICACIONES</H4></p><p>${data.response.apiMessage}</p>`;
+          card11Info.innerHTML = ` <p><H4>CLIENTES</H4></p><p>${data.response.apiMessage}</p>`;
           cardContainer11Info.appendChild(card11Info);
 
     // Crear el primer botón
@@ -38,17 +38,16 @@
     button1.onclick = function() {
       eraseContainers('containerOSData','containerOSInfo');
       createTable('tableInternalClients2','containerOSData', [
-                        'Ubicación',
-                        'Dirección',
+                        'Elemento',
                         'Comentarios',
-                        'Contacto',
-                        'E-mail'
+                        'Puesto',
+                        'Tipo'
                     ]);
-               getApiData(getPlaces,
+               getApiData(getElementsOS,
              {
                'apiService':'apiOS',
                'apiVersion':'v1',
-               'endPoint':'getPlaces'
+               'endPoint':'getElements'
            },
              {
                'containerData':'containerOSData',
@@ -80,23 +79,26 @@
     label1.textContent = 'Busqueda por parámetro';
     div1.appendChild(label1);
     const select = document.createElement('select');
-    select.id = 'OSPlaceFilter';
+    select.id = 'OSElementsFilter';
     select.classList.add('form-control');
     select.name = 'currency';
     select.required = true;
    
     const option2 = document.createElement('option');
     option2.value = 'name';
-    option2.textContent = 'Nombre ubicación';
+    option2.textContent = 'Nombre elemento';
     const option3 = document.createElement('option');
-    option3.value = 'address';
-    option3.textContent = 'Dirección';
+    option3.value = 'comments';
+    option3.textContent = 'Comentarios';
     const option4 = document.createElement('option');
-    option4.value = 'comments';
-    option4.textContent = 'Comentarios';
+    option4.value = 'placeId';
+    option4.textContent = 'Ubicación';
     const option5 = document.createElement('option');
-    option5.value = 'email';
-    option5.textContent = 'Email';
+    option5.value = 'siteId';
+    option5.textContent = 'Puesto';
+    const option6 = document.createElement('option');
+    option6.value = 'type';
+    option6.textContent = 'Tipo de elemento';
 
     
     
@@ -130,7 +132,7 @@
      const input = document.createElement('input');
      input.setAttribute('type', 'text');
      input.classList.add('form-control');
-     input.id = 'OSPlaceValue';
+     input.id = 'OSElementsValue';
      input.placeholder = 'Ingresa palabra a buscar';
      div2.appendChild(input);
      button2.appendChild(icon2);
@@ -140,21 +142,20 @@
 
      button2.addEventListener('click', function() {
               
-      var param = document.getElementById("OSPlaceFilter").value;
-var value = document.getElementById("OSPlaceValue").value;
+      var param = document.getElementById("OSElementsFilter").value;
+var value = document.getElementById("OSElementsValue").value;
 eraseContainers('containerOSData','containerOSInfo');
 createTable('tableInternalClients2','containerOSData', [
-                  'Ubicación',
-                  'Dirección',
+                  'Elemento',
                   'Comentarios',
-                  'Contacto',
-                  'E-mail'
+                  'Puesto',
+                  'Tipo'
               ]);
-         getApiData(getPlaces,
+         getApiData(getElementsOS,
        {
          'apiService':'apiOS',
          'apiVersion':'v1',
-         'endPoint':'getPlaces'
+         'endPoint':'getElements'
      },
        {
          'containerData':'containerOSData',
@@ -171,13 +172,13 @@ createTable('tableInternalClients2','containerOSData', [
       
         // Aquí puedes agregar la funcionalidad que deseas para el botón 2
     });
-    data.places.forEach(info => {
+    data.customers.forEach(info => {
      
      
       const row = document.createElement("tr");
       
-      const backgroundColor = info.infoPlace.params.isActive === "0" ? "  #cc0007" : "#ffffff";
-      const activo1 = info.infoPlace.params.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+      const backgroundColor = info.infoCustomer.params.isActive === "0" ? "  #cc0007" : "#ffffff";
+      const activo1 = info.infoCustomer.params.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
       
       row.innerHTML = `
      
@@ -185,156 +186,81 @@ createTable('tableInternalClients2','containerOSData', [
     
       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.name}" title="${info.deliveryName}">
-      <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.name}" title="${info.customerId}">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
 
+       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.address}" title="${info.deliveryName}">
-      <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;address&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.comments}" title="${info.customerId}">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
 
+       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.comments}" title="${info.deliveryName}">
-      <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.contact}" title="${info.customerId}">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;contact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
-
-      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.contact}" title="${info.deliveryName}">
-      <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;contact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div></td>
-
-      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.email}" title="${info.deliveryName}">
-      <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
-      </button>
-      </div></td>
-
-      <td>
-
-      <button id="btnview${info.placeId}" onclick="openClose('btnview${info.placeId}','unview');openClose('btnunview${info.placeId}','view');openClose('allContainer${info.placeId}','view');" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-eye"></i>
-      </button>
-      <button id="btnunview${info.placeId}" style="display: none;" onclick="openClose('btnunview${info.placeId}','unview');openClose('btnview${info.placeId}','view');openClose('allContainer${info.placeId}','unview');" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-eye-slash"></i>
-      </button>
-      
-      <div id="allContainer${info.placeId}" style="display: none;">
-      
-     
-      
-      <p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Sistema de puntos: ${info.infoPlace.params.isPoint === true ? `APLICA`:`NO APLICA`}</p>
-  <select class="form-control" id="list-OSProductDiscount1Place" name="unidad" required>
   
-    <option value="false">No</option>
-    <option value="true">Sí</option>
-  </select>
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;isPoint&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
+      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+      <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.email}" title="${info.customerId}">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div></td>
       
-      
-      
-     
-     
-      
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Puntos por compra: ${info.infoPlace.params.points}</p>
-  <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.params.points}" title="${info.placeId}">
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;points&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
-     
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Compra minima para puntos completos: ${info.infoPlace.params.pointsValue}</p>
-  <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.params.pointsValue}" title="${info.placeId}">
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;pointsValue&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
+      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+      <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.address}" title="${info.customerId}">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div></td>
 
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Puntos mínimos para redimir: ${info.infoPlace.params.pointsOut}</p>
-  <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.params.pointsOut}" title="${info.placeId}">
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;pointsOut&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
+      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+      ${info.placeName}
+      <select id="list-OSplaceCustomerOS${idin}" class="form-control" name="lista1" required></select>
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+      </div></td>
       
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Precio de cada punto: ${info.infoPlace.params.pointPrice}</p>
-  <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.params.pointPrice}" title="${info.placeId}">
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;pointPrice&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
-
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Auto descuento de puntos: ${info.infoPlace.params.pointsAutoDiscount === true ? `APLICA`:`NO APLICA`}</p>
-  <select class="form-control" id="list-OSProductDiscount1Place" name="unidad" required>
-  
-    <option value="false">No</option>
-    <option value="true">Sí</option>
-  </select>
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;pointsAutoDiscount&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
-
-<p class="card-text">
-<div class="edit-container" style="margin-bottom: 10px;">
-  <p class="card-text" style="display: inline-block; margin-right: 10px;">Auto descuento total de puntos: ${info.infoPlace.params.poinsDiscountTotal === true ? `APLICA`:`NO APLICA`}</p>
-  <select class="form-control" id="list-OSProductDiscount1Place" name="unidad" required>
-  
-    <option value="false">No</option>
-    <option value="true">Sí</option>
-  </select>
-  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;poinsDiscountTotal&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-    <i class="fas fa-edit"></i>
-  </button>
-</div>
-</p>
-
-      </div>
-      <td>
-              
-      
+      <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+      ${info.infoCustomer.info.points}
+      </div></td>
 
       `;
      
       cardContainer11.appendChild(row);
-      
+      getApiData(getPlacesList,
+        {
+          'apiService':'apiOS',
+          'apiVersion':'v1',
+          'endPoint':'getPlaces'
+      },
+        {
+          'containerData':'list-OSplaceCustomerOS'+idin,
+          'containerInfo':'containerOSInfo',
+          'modelView':'table',
+      },
+        {
+          'filter':'all',
+          'param':'all',
+          'value':'all'
+      }
+          );
       //getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesList'+idin,info.categoryId+"|"+info.parentId,'all','all','all');
       //getClientCategoriesList('all','all','all',idin);
      
      // getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
 
    
-      
+      idin++;
      
     });
 
@@ -530,7 +456,7 @@ Cardinalidad fin
                 cardContainer11Info.innerHTML = "";
                 const card11Info = document.createElement("div");
                 card11Info.classList.add("card");
-                card11Info.innerHTML = `<p>UBICACIONES</p><p>${data.response.apiMessage}</p>
+                card11Info.innerHTML = `<p>ELEMENTOS</p><p>${data.response.apiMessage}</p>
                                          <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
                 cardContainer11Info.appendChild(card11Info);
 
@@ -543,17 +469,16 @@ Cardinalidad fin
     button1.onclick = function() {
       eraseContainers('containerOSData','containerOSInfo');
       createTable('tableInternalClients2','containerOSData', [
-                        'Ubicación',
-                        'Dirección',
+                        'Elemento',
                         'Comentarios',
-                        'Contacto',
-                        'E-mail'
+                        'Puesto',
+                        'Tipo'
                     ]);
-               getApiData(getPlaces,
+               getApiData(getElementsOS,
              {
                'apiService':'apiOS',
                'apiVersion':'v1',
-               'endPoint':'getPlaces'
+               'endPoint':'getElements'
            },
              {
                'containerData':'containerOSData',
@@ -585,23 +510,26 @@ Cardinalidad fin
     label1.textContent = 'Busqueda por parámetro';
     div1.appendChild(label1);
     const select = document.createElement('select');
-    select.id = 'OSPlaceFilter';
+    select.id = 'OSElementsFilter';
     select.classList.add('form-control');
     select.name = 'currency';
     select.required = true;
    
     const option2 = document.createElement('option');
     option2.value = 'name';
-    option2.textContent = 'Nombre ubicación';
+    option2.textContent = 'Nombre elemento';
     const option3 = document.createElement('option');
-    option3.value = 'address';
-    option3.textContent = 'Dirección';
+    option3.value = 'comments';
+    option3.textContent = 'Comentarios';
     const option4 = document.createElement('option');
-    option4.value = 'comments';
-    option4.textContent = 'Comentarios';
+    option4.value = 'placeId';
+    option4.textContent = 'Ubicación';
     const option5 = document.createElement('option');
-    option5.value = 'email';
-    option5.textContent = 'Email';
+    option5.value = 'siteId';
+    option5.textContent = 'Puesto';
+    const option6 = document.createElement('option');
+    option6.value = 'type';
+    option6.textContent = 'Tipo de elemento';
 
     
     
@@ -635,7 +563,7 @@ Cardinalidad fin
      const input = document.createElement('input');
      input.setAttribute('type', 'text');
      input.classList.add('form-control');
-     input.id = 'OSPlaceValue';
+     input.id = 'OSElementsValue';
      input.placeholder = 'Ingresa palabra a buscar';
      div2.appendChild(input);
      button2.appendChild(icon2);
@@ -645,21 +573,20 @@ Cardinalidad fin
 
      button2.addEventListener('click', function() {
               
-      var param = document.getElementById("OSPlaceFilter").value;
-var value = document.getElementById("OSPlaceValue").value;
+      var param = document.getElementById("OSElementsFilter").value;
+var value = document.getElementById("OSElementsValue").value;
 eraseContainers('containerOSData','containerOSInfo');
 createTable('tableInternalClients2','containerOSData', [
-                  'Ubicación',
-                  'Dirección',
+                  'Elemento',
                   'Comentarios',
-                  'Contacto',
-                  'E-mail'
+                  'Puesto',
+                  'Tipo'
               ]);
-         getApiData(getPlaces,
+         getApiData(getElementsOS,
        {
          'apiService':'apiOS',
          'apiVersion':'v1',
-         'endPoint':'getPlaces'
+         'endPoint':'getElements'
      },
        {
          'containerData':'containerOSData',
@@ -686,9 +613,9 @@ createTable('tableInternalClients2','containerOSData', [
     });
 }
 
-async function getPlaces(data, containerData, containerInfo,modelView) {
+async function getCustomersOS(data, containerData, containerInfo,modelView) {
     try {
-        const message = await getPlacesPromise(data, containerData, containerInfo,modelView);
+        const message = await getCustomersOSPromise(data, containerData, containerInfo,modelView);
         console.log(message); // Manejar el mensaje de éxito
     } catch (error) {
         console.error(error); // Manejar el error
@@ -697,17 +624,17 @@ async function getPlaces(data, containerData, containerInfo,modelView) {
 
 
 
-async function getPlacesListPromise(data, containerData, containerInfo) {
+async function getCustomersListPromise(data, containerData, containerInfo) {
   var reposSelect = document.getElementById(containerData);
   while (reposSelect.firstChild) {
       reposSelect.removeChild(reposSelect.firstChild);
   }
 
-  await Promise.all(data.places.map(info => {
+  await Promise.all(data.customers.map(info => {
       return new Promise(resolve => {
           const option = document.createElement("option");
-          option.value = info.placeId;
-          option.text = info.infoPlace.info.name;
+          option.value = info.customerId;
+          option.text = info.infoCustomer.info.name;
           reposSelect.add(option);
           resolve();
       });
@@ -720,9 +647,9 @@ async function getPlacesListPromise(data, containerData, containerInfo) {
   }
 }
 
-async function getPlacesList(data, containerData, containerInfo) {
+async function getCustomersList(data, containerData, containerInfo) {
 try {
-    const message = await getPlacesListPromise(data, containerData, containerInfo);
+    const message = await getCustomersListPromise(data, containerData, containerInfo);
     // console.log(message); // Manejar el mensaje de éxito
 } catch (error) {
     console.error(error); // Manejar el error

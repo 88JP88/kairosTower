@@ -284,7 +284,45 @@ if (isOutService) {
       <p class="card-text">${info.infoSite.info.comments}
      ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
       (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
-      <button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)"  title="EDITAR">
+      <button onclick="
+      
+openModal('OSOrdersVerify');
+      
+createTable('tableInternalClients22','containerOrdersVerifyData', [
+  
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  
+getApiData(getOrdersOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getOrders'
+},
+{
+'containerData':'containerOrdersVerifyData',
+'containerInfo':'containerOrdersVerifyInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'bySiteOrderTrackIdStatusFinished',
+'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+'value': '${sessionStorage.getItem('siteNow')}'
+}
+);
+      
+      
+      "  title="EDITAR">
      <i class="fas fa-plus"> Calcular orden</i>
      </button>
      <button onclick=" openModal('OSCatalogViewOS');
@@ -317,6 +355,41 @@ getApiData(getCatalogsOS,
 'value':'${info.placeId}'
 }
 );setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'all',
+    'param':'all',
+    'value':'all'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'all',
+        'param':'all',
+        'value':'all'
+    }
+        );
 "  title="EDITAR">
 <i class="fas fa-plus"> Añadir productos</i>
 </button>
@@ -325,6 +398,45 @@ getApiData(getCatalogsOS,
 </button>
 <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
 <i class="fas fa-plus"> Remover orden</i>
+</button>
+<button onclick="
+
+openModal('OSOrdersView');
+      
+createTable('tableInternalClients2','containerOrdersData', [
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  setSession('siteNow','${info.siteId}');
+getApiData(getOrdersOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getOrders'
+},
+{
+'containerData':'containerOrdersData',
+'containerInfo':'containerOrdersInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'bySite',
+'param':'finished',
+'value':'${info.siteId}'
+}
+);
+
+"  title="EDITAR">
+<i class="fas fa-plus"> Ver ordenes</i>
 </button>
       
       `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
@@ -363,6 +475,40 @@ getApiData(getCatalogsOS,
 'value':'${info.placeId}'
 }
 );setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'all',
+    'param':'all',
+    'value':'all'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'all',
+        'param':'all',
+        'value':'all'
+    }
+        );
       "  title="EDITAR">
      <i class="fas fa-plus"> Crear orden</i>
      </button>`)
@@ -370,7 +516,9 @@ getApiData(getCatalogsOS,
       :
      `
      <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
-    "  title="EDITAR">
+     setSessionUN('ot${info.siteId}');
+    
+     "  title="EDITAR">
      <i class="fas fa-plus"> Ocupar</i>
      </button>
      <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
@@ -396,7 +544,7 @@ getApiData(getCatalogsOS,
    //   getClientCategoriesList3('all','all','all',idin1);
       //getClientStoresList13('all','all','all',idin1);
 
-      
+      idin++;
                 }
               }
                 document.getElementById("loading-container").style.display = "none";
@@ -603,3 +751,21 @@ try {
 function setSession(name,value){
 sessionStorage.setItem(name,value);
 }
+
+
+function setSessionUN(name){
+
+
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let codigo = '';
+var longitud=8;
+    for (let i = 0; i < longitud; i++) {
+        const indice = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres.charAt(indice);
+    }
+
+  sessionStorage.setItem(name,codigo);
+  }
+
+
+

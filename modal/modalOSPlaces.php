@@ -36,10 +36,144 @@
   <input type="text" class="form-control" id="placeEmail" placeholder="Ingresa nombre de room">
 </div>
 
+
+<div class="mb-3">
+  <input type="checkbox" id="checkDiscountPlace">
+  <label for="checkDiscount">Opciones avanzadas</label>
+</div>
+<div id="unidadSelect2Place" class="mb-3" style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i> Sistema de puntos</label>
+  <select class="form-control" id="list-OSProductDiscountPlace" name="unidad" required>
+  
+    <option value="false">No</option>
+    <option value="true">Sí</option>
+  </select>
+</div>
+
+<div class="mb-3" id="unidadSelect3Place"  style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Puntos por compra</label>
+  <input type="number" class="form-control" id="pointBySale" value="0">
+</div>
+<div class="mb-3" id="unidadSelect4Place"  style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Valor minimo para puntos</label>
+  <input type="number" class="form-control" id="minValBySale" value="0">
+</div>
+<div class="mb-3" id="unidadSelect5Place"  style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Valor minimo de puntos para redimir</label>
+  <input type="number" class="form-control" id="minValToRedem" value="0">
+</div>
+<div class="mb-3" id="unidadSelect8Place"  style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>Precio de cada punto</label>
+  <input type="number" class="form-control" id="pointsPriceOS" value="0">
+</div>
+<div id="unidadSelect6Place" class="mb-3" style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i> Auto descuento de puntos</label>
+  <select class="form-control" id="list-OSProductDiscount1Place" name="unidad" required>
+  
+    <option value="false">No</option>
+    <option value="true">Sí</option>
+  </select>
+</div>
+<div id="unidadSelect7Place" class="mb-3" style="display: none;">
+  <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i> Descontar total de puntos</label>
+  <select class="form-control" id="list-OSProductDiscount2Place" name="unidad" required>
+  
+    <option value="false">No</option>
+    <option value="true">Sí</option>
+  </select>
+</div>
 <button type="button" class="btn btn-primary1 edit-button" id="postPlaceBtn" title="CREAR UBICACIÓN" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 
+<script>
+  document.getElementById('list-OSProductDiscount1Place').addEventListener('change', function() {
+    var tipo = document.getElementById('list-OSProductDiscount1Place').value;
+    
+    if (tipo === "true") {
+   
+      document.getElementById('unidadSelect7Place').style.display = 'block';
+      
+     
+    } else if (tipo === "false") {
+     
+      document.getElementById('unidadSelect7Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscount2Place').value = 'false';
 
+    
+    }
+  });
+
+  document.getElementById('list-OSProductDiscountPlace').addEventListener('change', function() {
+    var tipo = document.getElementById('list-OSProductDiscountPlace').value;
+    if (tipo === "true") {
+      document.getElementById('unidadSelect3Place').style.display = 'block';
+      document.getElementById('unidadSelect4Place').style.display = 'block';
+      document.getElementById('unidadSelect5Place').style.display = 'block';
+      document.getElementById('unidadSelect6Place').style.display = 'block';
+      document.getElementById('unidadSelect8Place').style.display = 'block';
+
+
+    } else if (tipo === "false") {
+     
+      document.getElementById('unidadSelect3Place').style.display = 'none';
+      document.getElementById('pointBySale').value = '0';
+
+      document.getElementById('unidadSelect4Place').style.display = 'none';
+      document.getElementById('minValBySale').value = '0';
+
+      
+      document.getElementById('unidadSelect5Place').style.display = 'none';
+      document.getElementById('minValToRedem').value = '0';
+      document.getElementById('unidadSelect8Place').style.display = 'block';
+      document.getElementById('pointsPriceOS').value = '0';
+     
+      document.getElementById('unidadSelect6Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscount1Place').value = 'false';
+
+
+
+      document.getElementById('unidadSelect7Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscount2Place').value = 'false';
+
+     
+    }
+  });
+
+  document.getElementById('checkDiscountPlace').addEventListener('change', function() {
+    var isChecked = this.checked;
+    var select = document.getElementById('list-OSProductDiscount');
+    var inputStock = document.getElementById('productOSStock');
+    if (isChecked) {
+      document.getElementById('unidadSelect2Place').style.display = 'block';
+    } else {
+      document.getElementById('unidadSelect2Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscountPlace').value = 'false';
+
+     
+       
+      document.getElementById('unidadSelect3Place').style.display = 'none';
+      document.getElementById('pointBySale').value = '0';
+
+      document.getElementById('unidadSelect4Place').style.display = 'none';
+      document.getElementById('minValBySale').value = '0';
+
+      
+      document.getElementById('unidadSelect5Place').style.display = 'none';
+      document.getElementById('minValToRedem').value = '0';
+      document.getElementById('unidadSelect8Place').style.display = 'block';
+      document.getElementById('pointsPriceOS').value = '0';
+     
+      document.getElementById('unidadSelect6Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscount1Place').value = 'false';
+
+
+
+      document.getElementById('unidadSelect7Place').style.display = 'none';
+      document.getElementById('list-OSProductDiscount2Place').value = 'false';
+
+    }
+  });
+</script>
 
 <!DOCTYPE html>
 <html lang="es">

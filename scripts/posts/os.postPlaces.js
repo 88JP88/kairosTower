@@ -9,6 +9,14 @@ var apiData = {
   "placeComments": document.getElementById("placeComments").value,
   "placeContact": document.getElementById("placeContact").value,
   "placeEmail": document.getElementById("placeEmail").value,
+  "isPoint": document.getElementById("list-OSProductDiscountPlace").value,
+  "points": document.getElementById("pointBySale").value,
+  "pointsValue": document.getElementById("minValBySale").value,
+  "pointsOut": document.getElementById("minValToRedem").value,
+  "pointsAutoDiscount": document.getElementById("list-OSProductDiscount1Place").value,
+  "pointsDiscountTotal": document.getElementById("list-OSProductDiscount2Place").value,
+  "pointsPrice": document.getElementById("pointsPriceOS").value,
+
   "apiValues":{
     "apiName": "apiOS",
     "apiVersion": "v1",
@@ -25,22 +33,7 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
     .then(response => {
       getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      document.getElementById("delNamedel").value = "";
-      document.getElementById("dellNamedel").value = "";
-      document.getElementById("delMaildel").value = "";
-      document.getElementById("delContactdel").value = "";
-      
-      
-      var confirmCreateClient = window.confirm("¿Desea crear otra ubicación?");
-
-      // Verifica la respuesta del usuario
-      if (confirmCreateClient) {
-        openModClientDeliveryCreate();
-          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
-         // console.log("No se ejecutó el código para crear otro cliente.");
-      } else {
-       
-      }
+    
       
     })
     .catch(error => {
@@ -100,117 +93,43 @@ function editOSPlace(button, clientId,placeId,param,value,reason) {
     var input = button.previousElementSibling;
     var value = input.value;
 
-    var apiData = {
-      "placeId": placeId,
-      "clientId": clientId,
-      "param": param,
-      "value": value,
-      "apiValues":{
-        "apiName": "apiOS",
-        "apiVersion": "v1",
-        "endPoint": "putPlace"
-      }
-      
-    };
-  // Construir la URL con los parámetros de la petición GET
-
-  const apiInfo = JSON.stringify(apiData);
-  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
-  //var url = 'controller/putClientDelivery.php?data=' + apiData;
-
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-        getClientDelivery('filter',param,value);
-
-      
-
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  }
-  if(reason=="isActive"){
-
     
-    var apiData = {
-      "deliveryId": customerId,
-      "clientId": clientId,
-      "param": param,
-      "value": value,
-      "apiValues":{
-        "apiName": "apiClient",
-        "apiVersion": "v1",
-        "endPoint": "putDelivery"
-      }
-      
-    };
-  // Construir la URL con los parámetros de la petición GET
-
-  const apiInfo = JSON.stringify(apiData);
-  var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
- 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-
-      getMessage();
-      
-      getClientCustomers('filter',param,value);
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
   }
-  if(reason=="del"){
-    var confirmMessage = '¿Seguro quieres eliminar el elemento?';
-    showConfirmationModalNearButton(confirmMessage, () => {
-param="del";
-var apiData = {
-  "deliveryId": customerId,
-  "clientId": clientId,
-  "param": param,
-  "value": value,
-  "apiValues":{
-    "apiName": "apiClient",
-    "apiVersion": "v1",
-    "endPoint": "putDelivery"
-  }
-  
-};
+  var apiData = {
+    "placeId": placeId,
+    "clientId": clientId,
+    "param": param,
+    "value": value,
+    "apiValues":{
+      "apiName": "apiOS",
+      "apiVersion": "v1",
+      "endPoint": "putPlace"
+    }
+    
+  };
 // Construir la URL con los parámetros de la petición GET
 
 const apiInfo = JSON.stringify(apiData);
 var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+//var url = 'controller/putClientDelivery.php?data=' + apiData;
 
-  // Realizar la petición GET al archivo PHP
-  fetch(url)
-    .then(response => {
-      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
-      // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+// Realizar la petición GET al archivo PHP
+fetch(url)
+  .then(response => {
+    // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+    // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
 
-      getMessage();
-      
-      getClientDelivery('filter','clientId',clientId);
-      
- 
-    })
-    .catch(error => {
-      // Aquí puedes manejar los errores en caso de que la petición falle
-      console.log('Error en la petición:', error);
-    });
-  },button);
-  }
+    getMessage();
+    
+      getClientDelivery('filter',param,value);
+
+    
+
+  })
+  .catch(error => {
+    // Aquí puedes manejar los errores en caso de que la petición falle
+    console.log('Error en la petición:', error);
+  });
   document.getElementById("loading-container").style.display = "none";
 
 }

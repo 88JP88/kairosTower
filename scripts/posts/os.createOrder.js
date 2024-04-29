@@ -3,7 +3,8 @@
 function createOsOrder(tableId) {
     let shoppingCartOS = [];
     // Inicializar el arreglo para el carrito de compras
-    shoppingCartOS = [];
+    let productCounter=0;
+    let selectCounter=0;
 tableId=sessionStorage.getItem('siteNow');
     // Verificar si hay elementos seleccionados para esta mesa
     if (selectedItemsByTable[tableId] && Array.isArray(selectedItemsByTable[tableId])) {
@@ -13,26 +14,94 @@ tableId=sessionStorage.getItem('siteNow');
         selectedItems.forEach(item => {
             const {
                 uniqueId,
-                isDiscount
+                isDiscount,
+                productName,
+                catalogPrice,
+                qty,
+                discount,
+                categoryName,
+                catalogId,
+                productType,
+                productPrice,
+                sku,
+                ean1,
+                ean2,
+                productCaracts,
+                placeName,
+                catalogComments,
+                isPromo,
+                promo
+
             } = item;
 
             // Crear el objeto de producto para esta mesa
             const productObj = {
                 product:{
-                uniqueId,
-                isDiscount}
+                  uniqueId,
+                isDiscount,
+                productName,
+                catalogPrice,
+                qty,
+                discount,
+                categoryName,
+                catalogId,
+                productType,
+                productPrice,
+                sku,
+                ean1,
+                ean2,
+                productCaracts,
+                placeName,
+                catalogComments,
+                isPromo,
+                promo}
             };
-
+productCounter=productCounter+qty;
+selectCounter++;
             // Agregar el producto al carrito de compras
             shoppingCartOS.push(productObj);
         });
     }
     var totall={
-        'paymentInfo':{
+        'infoPayment':{
         'total':sessionStorage.getItem('totalFounds'),
-        'subTotal':sessionStorage.getItem('subTotalFounds')}
+        'subTotal':sessionStorage.getItem('subTotalFounds'),
+        'saver':sessionStorage.getItem('saver'),
+        'productCounter':productCounter,
+        'selectCounter':selectCounter
+      }
     };
-    shoppingCartOS.push(totall);
+    const selectElement = document.getElementById('list-OSEmployeesList');
+const selectedOption = selectElement.options[selectElement.selectedIndex];
+const selectedText = selectedOption.textContent;
+
+const selectElement1 = document.getElementById('list-OSCustomerListOS');
+const selectedOption1 = selectElement1.options[selectElement1.selectedIndex];
+const selectedText1 = selectedOption1.textContent;
+var otid=sessionStorage.getItem('siteNow');
+    var orderStatus={
+      'orderStatus':{
+      'status':'created',
+      'orderTrackId':sessionStorage.getItem("ot"+otid)
+    },
+    'paymentStatus':{
+      
+      'status':'unPayed'
+    },
+    'ownerStatus':{
+      'ownerId':document.getElementById('list-OSEmployeesList').value,
+      'status':'active',
+      'name':selectedText,
+      'tip':0
+
+    },
+    'customerStatus':{
+      'customerId':document.getElementById('list-OSCustomerListOS').value,
+      
+      'name':selectedText1
+
+    }
+  };
 
     // Devolver el carrito de compras con los productos de la mesa especificada
     
@@ -45,42 +114,40 @@ tableId=sessionStorage.getItem('siteNow');
 var apiData = {
   "clientId": urlObj.searchParams.get("clientId"),
   "siteId": sessionStorage.getItem('siteNow'),
-  "payload": JSON.stringify(shoppingCartOS),
-
+ "products":JSON.stringify(shoppingCartOS),
+"payload":JSON.stringify(totall),
+"order":JSON.stringify(orderStatus),
   "apiValues":{
     "apiName": "apiOS",
     "apiVersion": "v1",
     "endPoint": "postOrder"
   }
   
+  
 };
 // Construir la URL con los parámetros de la petición GET
 
 const apiInfo = JSON.stringify(apiData);
-console.log(apiInfo);
+//console.log(apiInfo);
 var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
   fetch(url)
     .then(response => {
       getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      document.getElementById("delNamedel").value = "";
-      document.getElementById("dellNamedel").value = "";
-      document.getElementById("delMaildel").value = "";
-      document.getElementById("delContactdel").value = "";
-      
-      
-      var confirmCreateClient = window.confirm("¿Desea crear otra ubicación?");
-
+    
+      selectedItemsByTable={};
+      shoppingCartOS = [];
+    totall={};
+    orderStatus={};
+    productCounter=0;
+     selectCounter=0;
+     shoppingCartOS.length = 0; // Vacía el array
+    
       // Verifica la respuesta del usuario
-      if (confirmCreateClient) {
-        openModClientDeliveryCreate();
-          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
-         // console.log("No se ejecutó el código para crear otro cliente.");
-      } else {
-       
-      }
-      
+      updateCarContainer(sessionStorage.getItem('siteNow'));
+     // console.log("shoppingCartOS");
+      //console.log(shoppingCartOS);
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
@@ -93,3 +160,74 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
     
     return shoppingCartOS;
 }
+
+
+
+
+
+
+function editOSOrder(button, clientId,orderId,param,value,reason) {
+  // Obtener el valor del campo de texto correspondiente al botón
+  document.getElementById("loading-container").style.display = "flex";
+  if(reason=="data"){
+
+    var input = button.previousElementSibling;
+    var value = input.value;
+
+  
+  }
+  var apiData = {
+    "orderId": orderId,
+    "clientId": clientId,
+    "param": param,
+    "value": value,
+    "apiValues":{
+      "apiName": "apiOS",
+      "apiVersion": "v1",
+      "endPoint": "putOrder"
+    }
+    
+  };
+// Construir la URL con los parámetros de la petición GET
+
+const apiInfo = JSON.stringify(apiData);
+var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+//var url = 'controller/putClientDelivery.php?data=' + apiData;
+
+// Realizar la petición GET al archivo PHP
+fetch(url)
+  .then(response => {
+    // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+    // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
+
+    getMessage();
+    
+    getApiData(getOrdersOS,
+      {
+      'apiService':'apiOS',
+      'apiVersion':'v1',
+      'endPoint':'getOrders'
+      },
+      {
+      'containerData':'containerOrdersData',
+      'containerInfo':'containerOrdersInfo',
+      'modelView':'tableOS',
+      },
+      {
+      'filter':'bySiteOrderStatusExcludeOne',
+      'param':'finished',
+      'value':sessionStorage.getItem('siteNow')
+      }
+      );
+
+    
+
+  })
+  .catch(error => {
+    // Aquí puedes manejar los errores en caso de que la petición falle
+    console.log('Error en la petición:', error);
+  });
+  document.getElementById("loading-container").style.display = "none";
+
+}
+

@@ -24,22 +24,7 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
     .then(response => {
       getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-      document.getElementById("delNamedel").value = "";
-      document.getElementById("dellNamedel").value = "";
-      document.getElementById("delMaildel").value = "";
-      document.getElementById("delContactdel").value = "";
-      
-      
-      var confirmCreateClient = window.confirm("¿Desea crear otra ubicación?");
-
-      // Verifica la respuesta del usuario
-      if (confirmCreateClient) {
-        openModClientDeliveryCreate();
-          // Usuario hizo clic en "Aceptar", puedes ejecutar tu código aquí
-         // console.log("No se ejecutó el código para crear otro cliente.");
-      } else {
-       
-      }
+    
       
     })
     .catch(error => {
