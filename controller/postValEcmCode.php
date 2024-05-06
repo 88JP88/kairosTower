@@ -58,7 +58,7 @@ curl_close($curl);
 $data = json_decode($response1, true);
 //$response1 = trim($response1); // Eliminar espacios en blanco alrededor de la respuesta
 // $array = explode("|", $response1);
-$response12=$data['response'][0]['response'];
+$data = json_decode($response1, true);
 $message=$data['response'][0]['message'];
 $statusCode=$data['response'][0]['statusCode'];
 //echo $_SESSION['key'];

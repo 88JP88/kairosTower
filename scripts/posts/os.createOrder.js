@@ -194,8 +194,26 @@ const apiInfo = JSON.stringify(apiData);
 var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 //var url = 'controller/putClientDelivery.php?data=' + apiData;
 
-// Realizar la petición GET al archivo PHP
-fetch(url)
+
+if(value=="finishedAll"){
+  fetch(url)
+  .then(response => response.json()) // Convertir la respuesta a JSON
+  .then(data => {
+      // Leer el atributo deseado de la respuesta JSON
+      var attributeValue = data.retrivePayment; // Reemplaza 'attribute' por el nombre del atributo deseado
+
+      // Mostrar el atributo en un alert
+      alert(attributeValue);
+  })
+  .catch(error => {
+      console.log('Error en la petición:', error);
+  })
+  .finally(() => {
+      document.getElementById("loading-container").style.display = "none";
+  });
+
+}else{
+  fetch(url)
   .then(response => {
     // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
     // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
@@ -221,12 +239,17 @@ fetch(url)
       );
 
     
+    
 
   })
   .catch(error => {
     // Aquí puedes manejar los errores en caso de que la petición falle
     console.log('Error en la petición:', error);
   });
+
+}
+// Realizar la petición GET al archivo PHP
+
   document.getElementById("loading-container").style.display = "none";
 
 }

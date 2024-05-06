@@ -133,6 +133,23 @@ getApiData(getOrdersOS,
   
   <!-- Contenido de la sección expandible -->
 </div>
+<script>
+// Obtener el valor del parámetro "clientId" de la URL
+const urlParam = window.location.href;
+const urlObj = new URL(urlParam);
+var clientId = urlObj.searchParams.get("clientId");
+var siteNow = sessionStorage.getItem('siteNow');
+var trackNow = 'ot'+sessionStorage.getItem('siteNow');
+var trackId = sessionStorage.getItem(trackNow);
+console.log(trackId);
+
+</script>
+
+<!-- Botón con el evento onClick para llamar a la función -->
+
+<button onclick="editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'orderStatus', 'finishedAll', 'status');">Orden</button>
+
+
       <div id="containerOrdersVerifyInfo" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
@@ -156,4 +173,4 @@ getApiData(getOrdersOS,
 
 
 
-<script  src="scripts/posts/os.postCategories.js"></script>
+<script  src="scripts/posts/os.CreateOrder.js"></script>
