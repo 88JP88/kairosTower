@@ -1862,3 +1862,260 @@ function drawTotalsOnScreen(containerData,total,subtotal,save){
   cardContainer11.appendChild(div2);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function getOrdersCalculateOSPromise(data, containerData, containerInfo,modelView) {
+  return new Promise(async (resolve, reject) => {
+      document.getElementById("loading-container").style.display = "flex";
+
+      var idin = 1;
+      try {
+          if (data.response && data.response.response == "true") {
+
+
+
+
+
+
+           
+            
+
+  if(modelView=="table"){
+             
+    const cardContainer11 = document.querySelector("#"+containerData+" tbody");
+    const cardContainer11Info = document.getElementById(containerInfo);
+    cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+    cardContainer11Info.innerHTML = ""; 
+    
+    const card11Info = document.createElement("div");
+    card11Info.classList.add("card");
+    
+        card11Info.innerHTML = ` <p><H4>ORDENES</H4></p><p>${data.response.apiMessage}</p>`;
+        cardContainer11Info.appendChild(card11Info);
+
+    
+        const ordersCalculate = data.ordersCalculate;
+
+        // Crear una fila para mostrar los datos de ordersCalculate
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${ordersCalculate.total}</td>
+            <td>${ordersCalculate.subTotal}</td>
+            <td>${ordersCalculate.saver}</td>
+            <td>${ordersCalculate.saver + ordersCalculate.pointsValue}</td>
+            <td>${ordersCalculate.previusTotal}</td>
+            <td>${ordersCalculate.productCounter}</td>
+
+            <td>${ordersCalculate.selectCounter}</td>
+            <td>${ordersCalculate.pointsValue}</td>
+            <td>${ordersCalculate.totalPoints}</td>
+            <td>${ordersCalculate.applyPointsTrue}</td>
+            <td>${ordersCalculate.applyPointsFalse}</td>
+            <td>${ordersCalculate.notApplyPoints}</td>
+
+
+
+
+
+
+
+            <!-- Agrega aquí más columnas si es necesario -->
+        `;
+        cardContainer11.appendChild(row);
+ 
+ // drawTotalsOnScreen('containerOrdersVerificationInfo',totalValue,subTotalValue,saveValue);
+  //drawPieChart([['Creadas', creadas], ['Abiertas', abiertas], ['En progreso', enprogreso], ['Listas', listas], ['Entregadas', entregadas],['Finalizadas', finalizadas],['Canceladas', canceladas]], 'chart_div_Orders_os', 'Total de Ordenes','circle');
+//console.log([['Creadas', creadas], ['Abiertas', abiertas], ['En progreso', enprogreso], ['Listas', listas], ['Entregadas', entregadas],['Finalizadas', finalizadas],['Canceladas', canceladas]]);
+
+}
+
+
+           
+              document.getElementById("loading-container").style.display = "none";
+              resolve("Repartidores obtenidos exitosamente: " + data.response.apiMessage);
+          } else {
+              const cardContainer11 = document.getElementById(containerData);
+              cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+              const cardContainer11Info = document.getElementById(containerInfo);
+              cardContainer11Info.innerHTML = "";
+              const card11Info = document.createElement("div");
+              card11Info.classList.add("card");
+              card11Info.innerHTML = `<p>ORDENES</p><p>${data.response.apiMessage}</p>
+                                       <p>El filtro solicitado fue-> FILTRO: ${data.response.sentData.filter}, PARÁMETRO: ${data.response.sentData.param}, VALOR: ${data.response.sentData.value}</p>`;
+              cardContainer11Info.appendChild(card11Info);
+
+  // Crear el primer botón
+  const button1 = document.createElement('button');
+  button1.setAttribute('type', 'button');
+  button1.classList.add('btn', 'btn-primary1', 'edit-button1');
+  button1.style.color = '#C70039';
+  button1.title = 'VER USUARIOS ACTIVOS';
+  button1.onclick = function() {
+    eraseContainers('containerOSData','containerOSInfo');
+    createTable('tableInternalClients2','containerOSData', [
+                      'Elemento',
+                      'Comentarios',
+                      'Puesto',
+                      'Tipo'
+                  ]);
+             getApiData(getElementsOS,
+           {
+             'apiService':'apiOS',
+             'apiVersion':'v1',
+             'endPoint':'getElements'
+         },
+           {
+             'containerData':'containerOSData',
+             'containerInfo':'containerOSInfo',
+             'modelView':'table',
+         },
+           {
+             'filter':'all',
+             'param':'all',
+             'value':'all'
+         }
+             );
+
+
+
+  
+  };
+  // Crear el icono del primer botón
+  const icon1 = document.createElement('i');
+  icon1.classList.add('fas', 'fa-globe');
+  button1.appendChild(icon1);
+  
+  // Crear el primer contenedor div
+  const div1 = document.createElement('div');
+  div1.classList.add('mb-3');
+  // Agregar la etiqueta y el select al primer contenedor div
+  const label1 = document.createElement('label');
+  label1.setAttribute('for', 'currency');
+  label1.textContent = 'Busqueda por parámetro';
+  div1.appendChild(label1);
+  const select = document.createElement('select');
+  select.id = 'OSElementsFilter';
+  select.classList.add('form-control');
+  select.name = 'currency';
+  select.required = true;
+ 
+  const option2 = document.createElement('option');
+  option2.value = 'name';
+  option2.textContent = 'Nombre elemento';
+  const option3 = document.createElement('option');
+  option3.value = 'comments';
+  option3.textContent = 'Comentarios';
+  const option4 = document.createElement('option');
+  option4.value = 'placeId';
+  option4.textContent = 'Ubicación';
+  const option5 = document.createElement('option');
+  option5.value = 'siteId';
+  option5.textContent = 'Puesto';
+  const option6 = document.createElement('option');
+  option6.value = 'type';
+  option6.textContent = 'Tipo de elemento';
+
+  
+  
+  select.appendChild(option2);
+  select.appendChild(option3);
+  select.appendChild(option4);
+  select.appendChild(option5);
+  div1.appendChild(select); 
+  cardContainer11Info.appendChild(button1);
+  cardContainer11Info.appendChild(div1);
+
+   // Crear el segundo botón
+   const button2 = document.createElement('button');
+   button2.setAttribute('type', 'button');
+   button2.classList.add('btn', 'btn-primary1', 'edit-button1');
+   button2.style.color = '#C70039';
+   button2.title = 'VER USUARIOS INACTIVOS';
+   button2.id = 'filtercatalogs';
+   // Crear el icono del segundo botón
+   const icon2 = document.createElement('i');
+   icon2.classList.add('fas', 'fa-sort');
+   
+
+   const div2 = document.createElement('div');
+   div2.classList.add('mb-3');
+   // Agregar la etiqueta y el input al segundo contenedor div
+   const label2 = document.createElement('label');
+   label2.classList.add('form-label');
+   label2.innerHTML = '<i class="fas fa-guitar"></i> Parámetro en especifico';
+   div2.appendChild(label2);
+   const input = document.createElement('input');
+   input.setAttribute('type', 'text');
+   input.classList.add('form-control');
+   input.id = 'OSElementsValue';
+   input.placeholder = 'Ingresa palabra a buscar';
+   div2.appendChild(input);
+   button2.appendChild(icon2);
+   cardContainer11Info.appendChild(div2);
+   cardContainer11Info.appendChild(button2);
+
+
+   button2.addEventListener('click', function() {
+            
+    var param = document.getElementById("OSElementsFilter").value;
+var value = document.getElementById("OSElementsValue").value;
+eraseContainers('containerOSData','containerOSInfo');
+createTable('tableInternalClients2','containerOSData', [
+                'Elemento',
+                'Comentarios',
+                'Puesto',
+                'Tipo'
+            ]);
+       getApiData(getElementsOS,
+     {
+       'apiService':'apiOS',
+       'apiVersion':'v1',
+       'endPoint':'getElements'
+   },
+     {
+       'containerData':'containerOSData',
+       'containerInfo':'containerOSInfo',
+       'modelView':'table',
+   },
+     {
+       'filter':'filter',
+       'param':param,
+       'value':value
+   }
+       );
+     // getApiData(getProducts,'apiCom','v1','getProducts','containerProductsData','containerProductsInfo','filter',param,value);
+    
+      // Aquí puedes agregar la funcionalidad que deseas para el botón 2
+  });
+              document.getElementById("loading-container").style.display = "none";
+              reject("Error al obtener los repartidores: " + data.response.apiMessage);
+          }
+      } catch (error) {
+          document.getElementById("loading-container").style.display = "none";
+          reject("Error al procesar los datos: " + error);
+      }
+  });
+}
+
+async function getOrdersCalculateOS(data, containerData, containerInfo,modelView) {
+  try {
+      const message = await getOrdersCalculateOSPromise(data, containerData, containerInfo,modelView);
+      console.log(message); // Manejar el mensaje de éxito
+  } catch (error) {
+      console.error(error); // Manejar el error
+  }
+}

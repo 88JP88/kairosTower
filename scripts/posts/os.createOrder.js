@@ -199,11 +199,38 @@ if(value=="finishedAll"){
   fetch(url)
   .then(response => response.json()) // Convertir la respuesta a JSON
   .then(data => {
-      // Leer el atributo deseado de la respuesta JSON
-      var attributeValue = data.retrivePayment; // Reemplaza 'attribute' por el nombre del atributo deseado
-
-      // Mostrar el atributo en un alert
-      alert(attributeValue);
+    createTable('tableInternalClients222','containerOrdersVerificationData', [
+  
+      'Total',
+      'SubTotal',
+      'Ahorro',
+      'Ahorro con puntos',
+      'Total previo',
+      '#Productos',
+      '#Selecciones',
+      '$Puntos',
+      '#Puntos',
+      'Aplica puntos',
+      'No aplica puntos',
+      'Sin puntuación',
+    ]);
+    getApiData(getOrdersCalculateOS,
+      {
+      'apiService':'apiOS',
+      'apiVersion':'v1',
+      'endPoint':'getOrdersCalculate'
+      },
+      {
+      'containerData':'containerOrdersVerificationData',
+      'containerInfo':'containerOrdersVerificationInfo1',
+      'modelView':'table',
+      },
+      {
+      'filter':'calculateOrdersByOrderTrackId',
+      'param':'finished',
+      'value':orderId
+      }
+      );
   })
   .catch(error => {
       console.log('Error en la petición:', error);
