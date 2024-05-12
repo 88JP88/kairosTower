@@ -293,9 +293,19 @@
             <h2>Suscripción Básica</h2>
             <p>El plan básico incluye las siguientes características:</p>
             <ul>
-                <li>Funcionalidades básicas de punto de venta</li>
+                <li>Funcionalidades básicas de punto de venta
+                    <p>Un establecimiento</p>
+                    <p>Creación y seguimiento de ordenes</p>
+                    <p>Creación de elementos ilimitados</p>
+                    <p>Creación de productos ilimitados</p>
+                    <p>Creación de catálogos ilimitados</p>
+                    <p>Creación de categorías ilimitadas</p>
+                    <p>Creación de elementos ilimitados</p>
+                    <p>Creación de equipo de trabajo ilimitado</p>
+                </li>
                 <li>Soporte técnico básico</li>
                 <li>Actualizaciones regulares del software</li>
+                <li>Una copia de seguridad descargable por mes</li>
             </ul>
             <a href="#" class="cta-button">Seleccionar Plan</a>
         </div>
@@ -303,29 +313,37 @@
             <h2>Suscripción Premium</h2>
             <p>El plan premium incluye todas las características del plan básico, además de:</p>
             <ul>
-                <li>Funcionalidades avanzadas de punto de venta</li>
+                <li>Funcionalidades avanzadas de punto de venta
+
+                <p>Multi establecimiento</p>
+                    <p>Creación y seguimiento de clientes</p>
+                    <p>Sistema de fidelización por puntos y estrellas</p>
+                    <p>Sstema de gráficas</p>
+                </li>
                 <li>Análisis de ventas detallados</li>
                 <li>Integraciones con herramientas de gestión</li>
+                <li>Cuatro copias de seguridad descargables por mes</li>
             </ul>
             <a href="#" class="cta-button">Seleccionar Plan</a>
         </div>
-        <div class="card">
-            <h2>Suscripción por Módulos</h2>
-            <p>Personaliza tu plan seleccionando módulos específicos según tus necesidades:</p>
-            <ul>
-                <li>Módulo de inventario</li>
-                <li>Módulo de gestión de clientes</li>
-                <li>Módulo de análisis de ventas</li>
-            </ul>
-            <a href="#" class="cta-button">Personalizar Plan</a>
-        </div>
+     
         <div class="card">
             <h2>Suscripción Personalizada</h2>
             <p>Construye tu plan de suscripción a medida con características específicas para tu negocio:</p>
             <ul>
-                <li>Asesoramiento personalizado</li>
-                <li>Desarrollo de funciones personalizadas</li>
-                <li>Soporte premium dedicado</li>
+            <li>Módulo de gestión de clientes</li>
+                <li>Módulo de análisis de ventas</li>
+               
+                <li>Módulo de gestión de pedidos</li>
+                <li>Módulo de gestión de devoluciones</li>
+                <li>Módulo de gráficas</li>
+                <li>Módulo de fidelización</li>
+                <li>Módulo contable</li>
+                <li>Módulo de cadena de producción</li>
+                <li>Módulo de clientes</li>
+                <li>Módulo de personal</li>
+                <li>Módulo de ordenes</li>
+                <li>M establecimiento</li>
             </ul>
             <a href="#" class="cta-button">Personalizar Plan</a>
         </div>
