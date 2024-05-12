@@ -58,7 +58,7 @@
     <div class="container">
         <h1>Bienvenido al Módulo POS</h1>
         <p>Transforma tu negocio con nuestro sistema de Punto de Venta fácil de usar y potente.</p>
-        <a href="#" class="cta-button">Empezar Ahora</a>
+        <a href="subscribe_pos.php" target="no_blank" class="cta-button">Empezar Ahora</a>
 
         <h2>El módulo POS proporciona una solución completa y eficiente para gestionar las operaciones de punto de venta de tu negocio. Con una amplia gama de funciones integradas, podrás llevar a cabo las transacciones de forma rápida y precisa, así como administrar todos los aspectos relacionados con las ventas y el inventario. Desde la gestión de productos hasta el procesamiento de pagos, el módulo POS te ofrece las herramientas necesarias para mejorar la eficiencia y la productividad de tu negocio. Con una interfaz fácil de usar y personalizable, podrás adaptar el sistema a tus necesidades específicas y garantizar una experiencia de compra fluida para tus clientes. Con el módulo POS, podrás impulsar el crecimiento de tu negocio y ofrecer un servicio excepcional a tus clientes.</h2>
 

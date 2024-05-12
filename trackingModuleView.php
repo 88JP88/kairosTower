@@ -58,7 +58,7 @@
     <div class="container">
         <h1>Bienvenido al Módulo de seguimiento</h1>
         <p>Transforma tu negocio con nuestro sistema de seguimiento fácil de usar y potente.</p>
-        <a href="#" class="cta-button">Empezar Ahora</a>
+        <a href="subscribe_tracking.php" target="no_blank" class="cta-button">Empezar Ahora</a>
       <!--  <img src="pos_illustration.jpg" alt="Ilustración POS" class="illustration">-->
 
         <h2>El módulo de Seguimiento ofrece herramientas avanzadas para gestionar eficientemente el tiempo y los recursos de tu negocio o establecimiento. Con una variedad de funciones integradas, podrás optimizar la organización y el control de tus actividades diarias.</h2>

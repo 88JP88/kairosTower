@@ -53,7 +53,7 @@
     <div class="container">
         <h1>Bienvenido al Módulo de E-Commerce</h1>
         <p>Transforma tu negocio con nuestro sistema de E-Commerce fácil de usar y potente.</p>
-        <a href="#" class="cta-button">Empezar Ahora</a>
+        <a href="subscribe_ecommerce.php" target="no_blank" class="cta-button">Empezar Ahora</a>
       <!--  <img src="pos_illustration.jpg" alt="Ilustración POS" class="illustration">-->
 
         <h2>El módulo eCommerce es una solución integral para crear y gestionar tu tienda en línea de manera efectiva. Con un conjunto completo de herramientas, podrás construir una plataforma de venta en línea robusta y escalable que impulse el crecimiento de tu negocio. Desde la gestión de productos hasta el procesamiento de pedidos, el módulo eCommerce te brinda todas las funciones necesarias para ofrecer una experiencia de compra excepcional a tus clientes y aumentar tus ventas en línea.</h2>

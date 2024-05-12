@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,9 +52,9 @@
         <form id="calculatorForm">
             <input type="text" id="display" readonly>
             <ul>
-                <!-- Opciones de cálculo por módulos -->
+               
                 <li>
-                    <input type="checkbox" id="value1_mod" value="1000">
+                    <input type="checkbox" id="value1_mod" value="14990">
                     <label for="value1_mod">Módulo calendario(básico)</label>
                 </li>
                 <li>
@@ -62,37 +62,45 @@
                     <label for="value2_mod">Módulo calendario(rooms elementos)</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="value3_mod" value="15990">
+                    <input type="checkbox" id="value3_mod" value="14990">
                     <label for="value3_mod">Módulo POS(básico)</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="value4_mod" value="15990">
+                    <input type="checkbox" id="value8_mod" value="5990">
+                    <label for="value8_mod">Módulo POS(multi tienda) se requiere POS(básico)</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="value4_mod" value="14990">
                     <label for="value4_mod">Módulo E-commerce(básico)</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="value5_mod" value="9990">
-                    <label for="value5_mod">Soporte 24/7</label>
+                    <input type="checkbox" id="value5_mod" value="5990">
+                    <label for="value5_mod">Módulo E-commerce(multi tienda) se requiere E-commerce(básico)</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="value6_mod" value="4990">
-                    <label for="value6_mod">Soporte 8/7</label>
+                    <input type="checkbox" id="value6_mod" value="9990">
+                    <label for="value6_mod">Soporte 24/7</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="value7_mod" value="4990">
+                    <label for="value7_mod">Soporte 8/7</label>
                 </li>
             </ul>
             <div>
-                <!-- Botones de cálculo por módulos -->
+               
                 <input type="button" value="Calcular Módulos Mensual" onclick="calculateModules('mensual')">
                 <input type="button" value="Calcular Módulos Trimestral" onclick="calculateModules('trimestral')">
                 <input type="button" value="Calcular Módulos Semestral" onclick="calculateModules('semestral')">
                 <input type="button" value="Calcular Módulos Anual" onclick="calculateModules('anual')">
             </div>
 
-            <hr> <!-- Separador -->
+            <hr> 
 
             <ul>
-                <!-- Opciones de cálculo por paquetes -->
+                
                 <li>
                     <input type="checkbox" id="value1_pack" value="12000">
-                    <label for="value1_pack">Paquete A</label>
+                    <label for="value1_pack">Paquete POS </label>
                 </li>
                 <li>
                     <input type="checkbox" id="value2_pack" value="20000">
@@ -104,17 +112,17 @@
                 </li>
             </ul>
             <div>
-                <!-- Botones de cálculo por paquetes -->
+                
                 <input type="button" value="Calcular Paquetes Mensual" onclick="calculatePackages('mensual')">
                 <input type="button" value="Calcular Paquetes Trimestral" onclick="calculatePackages('trimestral')">
                 <input type="button" value="Calcular Paquetes Semestral" onclick="calculatePackages('semestral')">
                 <input type="button" value="Calcular Paquetes Anual" onclick="calculatePackages('anual')">
             </div>
 
-            <hr> <!-- Separador -->
+            <hr> 
 
             <ul>
-                <!-- Opciones de cálculo por funciones -->
+                
                 <li>
                     <input type="checkbox" id="value1_func" value="3000">
                     <label for="value1_func">Función A</label>
@@ -129,7 +137,7 @@
                 </li>
             </ul>
             <div>
-                <!-- Botones de cálculo por funciones -->
+                
                 <input type="button" value="Calcular Funciones Mensual" onclick="calculateFunctions('mensual')">
                 <input type="button" value="Calcular Funciones Trimestral" onclick="calculateFunctions('trimestral')">
                 <input type="button" value="Calcular Funciones Semestral" onclick="calculateFunctions('semestral')">
@@ -137,7 +145,7 @@
             </div>
 
             <div>
-                <!-- Botón de limpiar -->
+                
                 <input type="button" value="Borrar" onclick="clearDisplay()">
             </div>
         </form>
@@ -213,5 +221,114 @@
             }
         }
     </script>
+</body>
+</html>
+    -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes de Suscripción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card {
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .card ul li {
+            margin-bottom: 5px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>Suscripción Básica</h2>
+            <p>El plan básico incluye las siguientes características:</p>
+            <ul>
+                <li>Funcionalidades básicas de punto de venta</li>
+                <li>Soporte técnico básico</li>
+                <li>Actualizaciones regulares del software</li>
+            </ul>
+            <a href="#" class="cta-button">Seleccionar Plan</a>
+        </div>
+        <div class="card">
+            <h2>Suscripción Premium</h2>
+            <p>El plan premium incluye todas las características del plan básico, además de:</p>
+            <ul>
+                <li>Funcionalidades avanzadas de punto de venta</li>
+                <li>Análisis de ventas detallados</li>
+                <li>Integraciones con herramientas de gestión</li>
+            </ul>
+            <a href="#" class="cta-button">Seleccionar Plan</a>
+        </div>
+        <div class="card">
+            <h2>Suscripción por Módulos</h2>
+            <p>Personaliza tu plan seleccionando módulos específicos según tus necesidades:</p>
+            <ul>
+                <li>Módulo de inventario</li>
+                <li>Módulo de gestión de clientes</li>
+                <li>Módulo de análisis de ventas</li>
+            </ul>
+            <a href="#" class="cta-button">Personalizar Plan</a>
+        </div>
+        <div class="card">
+            <h2>Suscripción Personalizada</h2>
+            <p>Construye tu plan de suscripción a medida con características específicas para tu negocio:</p>
+            <ul>
+                <li>Asesoramiento personalizado</li>
+                <li>Desarrollo de funciones personalizadas</li>
+                <li>Soporte premium dedicado</li>
+            </ul>
+            <a href="#" class="cta-button">Personalizar Plan</a>
+        </div>
+    </div>
 </body>
 </html>
