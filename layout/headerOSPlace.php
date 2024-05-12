@@ -144,100 +144,6 @@ const url = window.location.href;
   
 
 
-  <p class="card-text">Filtro por categoría:
-  
-
-           
-
-<div class="mb-3">
-
-<select id="list-categoriesListECM" class="form-control" name="lista" required></select>
-<button class="btn btn-primary" 
-onClick="
-
-getApiData(getCatalogsV2,
-                            {
-                              'apiService':'apiCom',
-                              'apiVersion':'v1',
-                              'endPoint':'getCatalogs'
-                          },
-                            {
-                              'containerData':'card-container2',
-                              'containerInfo':'card-container2info',
-                          },
-                            {
-                              'filter':'store|'+urlObj.searchParams.get('storeId'),
-                              'param':'categoryId',
-                              'value':'all'
-                          }
-                              );
-"><i class="fas fa-filter"></i></button>
-          
-
-  
-</div>
-              </p>
-
-
-              <p class="card-text">Filtro por similitud:
-  
-
-           
-
-<div class="mb-3">
-
-<input type="text" id="simil" class="form-control" aria-describedby="passwordHelpInline" placeholder="">
- 
-<button class="btn btn-primary" onClick="getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'simil','all');"><i class="fas fa-filter"></i></button>
-          
-
-  
-</div>
-              </p>
-
-  <button class="btn btn-primary" onClick="openModal('clientOrdersMod');createTable('tableClientOrders','containerOrdersTable', [
-        'Acciones',
-        'ID de orden',
-        'ID de carro',
-        'Número de orden',
-        'Vendedor',
-        'Cliente',
-        'Tienda',
-        'Total',
-        'Sub-Total',
-        'Descuento',
-        'Paga con',
-        'Cambio',
-        'Referencia de pago',
-        'Estado de orden',
-        'Estado de pago',
-        'Entidad de pago',
-        'Método de pago',
-        'Número de productos',
-        'Número de paquetes',
-        'Fecha y hora',
-        'Método de entrega',
-        'Dirección de entrega',
-        'Domiciliario'
-    ]);
-    getApiData(getClientOrders,
-                            {
-                              'apiService':'apiClient',
-                              'apiVersion':'v1',
-                              'endPoint':'getClientOrders'
-                          },
-                            {
-                              'containerData':'tableClientOrders',
-                              'containerInfo':'clientId',
-                          },
-                            {
-                              'filter':'byStore',
-                              'param':'storeId',
-                              'value':urlObj.searchParams.get('storeId')
-                          }
-                              );
-    
-">VER ORDENES</button>
 
     
   </div>
@@ -245,66 +151,12 @@ getApiData(getCatalogsV2,
 
 </div>
 
-<script> const url = window.location.href;
-
-// Crear un objeto URL a partir de la URL actual
-const urlObj = new URL(url);
-
-// Obtener el valor del parámetro "parametro1"
-var st = urlObj.searchParams.get("storeId");</script>
-<div id="card-container2info" class="card-container">
-            <!-- Contenido de la sección expandible -->
-            
-        </div>
-    <div id="card-container2" class="card-container">
-            <!-- Contenido de la sección expandible -->
-            
-        </div>
-        
         
 
-        <a class="dropdown-item" 
-        onclick="
-        profileInfoLog();
-        getApiData(getCatalogsV2,
-                            {
-                              'apiService':'apiCom',
-                              'apiVersion':'v1',
-                              'endPoint':'getCatalogs'
-                          },
-                            {
-                              'containerData':'card-container2',
-                              'containerInfo':'card-container2info',
-                          },
-                            {
-                              'filter':'store|'+urlObj.searchParams.get('storeId'),
-                              'param':'all',
-                              'value':'all'
-                          }
-                              );
-          getApiData(getClientCategoriesListBtn,
-        {
-          'apiService':'apiCom',
-          'apiVersion':'v1',
-          'endPoint':'getCategories'
-      },
-        {
-          'containerData':'list-categoriesListECM',
-          'containerInfo':'containerCatalogsInfo',
-      },
-        {
-          'filter':'all',
-          'param':'all',
-          'value':'all'
-      }
-          );
-       ">Todos los productos</a>
+       
   </div>
 
   <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
-  <div class="tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
-  <div class="tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
-  <div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">..eeee.</div>
   <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">.ddf..</div>
 </div>
 </body>
@@ -330,47 +182,6 @@ var st = urlObj.searchParams.get("storeId");</script>
 <div id="loading-container" class="loading-container">
   <div class="loading-icon"></div>
 </div>
-<script  src="scripts/gets/getClientCommerce.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  profileInfoLog();
-
-  getApiData(getClientCategoriesListBtn,
-        {
-          'apiService':'apiCom',
-          'apiVersion':'v1',
-          'endPoint':'getCategories'
-      },
-        {
-          'containerData':'list-categoriesListECM',
-          'containerInfo':'containerCatalogsInfo',
-      },
-        {
-          'filter':'all',
-          'param':'all',
-          'value':'all'
-      }
-          );
-   // getApiData(getClientCategoriesListBtn, 'apiCom', 'v1', 'getCategories', 'list-categoriesListECM', 'containerCatalogsInfo', 'all', 'all', 'all');
-   getApiData(getCatalogsV2,
-                            {
-                              'apiService':'apiCom',
-                              'apiVersion':'v1',
-                              'endPoint':'getCatalogs'
-                          },
-                            {
-                              'containerData':'card-container2',
-                              'containerInfo':'card-container2info',
-                          },
-                            {
-                              'filter':'store|'+urlObj.searchParams.get('storeId'),
-                              'param':'all',
-                              'value':'all'
-                          }
-                              );
-    //getApiData(getCatalogsV2,'apiCom','v1','getCatalogs','card-container2','card-container2info','store|'+urlObj.searchParams.get('storeId'),'all','all');
-});
-</script>
 
 
 <style>
