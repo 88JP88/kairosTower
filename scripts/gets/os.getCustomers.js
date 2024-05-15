@@ -7,6 +7,74 @@
 
         var idin = 1;
         try {
+
+
+          if(modelView=="alert"){
+               
+            var customersCounter=0;
+            data.customers.forEach(info => {
+ 
+ 
+              customersCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiClientNow')=="true"){
+            if(customersCounter<sessionStorage.getItem('maxClientNow')){
+              openModal('OSCustomerCreate');
+              getApiData(getPlacesList,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'list-OSPlaceOwnerCustomer',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'table',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+              }
+              if(customersCounter>=sessionStorage.getItem('maxClientNow')){
+                alert("Máximo de clientes creados (TOTAL: "+customersCounter+" / MÁXIMO:"+sessionStorage.getItem('maxCategoryNow')+")" );
+                  }
+          }
+          if(sessionStorage.getItem('isMultiClientNow')=="false"){
+              if(customersCounter>=sessionStorage.getItem('maxClientNow')){
+                alert("Máximo de clientes creados (TOTAL: "+customersCounter+" / MÁXIMO:"+sessionStorage.getItem('maxCategoryNow')+")" );
+                
+              }
+
+              if(customersCounter<sessionStorage.getItem('maxClientNow')){
+                openModal('OSCustomerCreate');
+                      getApiData(getPlacesList,
+                              {
+                                'apiService':'apiOS',
+                                'apiVersion':'v1',
+                                'endPoint':'getPlaces'
+                            },
+                              {
+                                'containerData':'list-OSPlaceOwnerCustomer',
+                                'containerInfo':'containerOSInfo',
+                                'modelView':'table',
+                            },
+                              {
+                                'filter':'all',
+                                'param':'all',
+                                'value':'all'
+                            }
+                                );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 
@@ -187,7 +255,7 @@ createTable('tableInternalClients2','containerOSData', [
       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.name}" title="${info.customerId}">
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
@@ -195,7 +263,7 @@ createTable('tableInternalClients2','containerOSData', [
        
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.comments}" title="${info.customerId}">
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;comments&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
@@ -203,21 +271,21 @@ createTable('tableInternalClients2','containerOSData', [
        
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.contact}" title="${info.customerId}">
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;contact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;contact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
   
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.email}" title="${info.customerId}">
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.customerId}" value="${info.infoCustomer.info.address}" title="${info.customerId}">
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>
@@ -225,7 +293,7 @@ createTable('tableInternalClients2','containerOSData', [
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       ${info.placeName}
       <select id="list-OSplaceCustomerOS${idin}" class="form-control" name="lista1" required></select>
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSCustomer(this,&quot;${info.clientId}&quot;,&quot;${info.customerId}&quot;,&quot;placeId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>

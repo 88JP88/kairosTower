@@ -343,7 +343,7 @@
                 <li>Módulo de clientes</li>
                 <li>Módulo de personal</li>
                 <li>Módulo de ordenes</li>
-                <li>M establecimiento</li>
+                
             </ul>
             <a href="#" class="cta-button">Personalizar Plan</a>
         </div>

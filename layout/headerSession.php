@@ -169,7 +169,8 @@
                                 'Tipo de Cliente',
                                 'Responsable',
                                 'Contacto',
-                                'Activo'
+                                'Activo',
+                                'Parámetros'
                             ]);
               getApiData(getInternalClients,
                       {
@@ -328,6 +329,7 @@
 <script  src="scripts/posts/postCustomer.js"></script>
 <script  src="scripts/posts/postDelivery.js"></script>
 <script  src="scripts/posts/postProducts.js"></script>
+<script  src="scripts/gets/main.CreateResources.js"></script>
 <script src="qrcodejs/qrcode.min.js"></script>
 
 <div id="loading-container" class="loading-container">

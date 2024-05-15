@@ -1,6 +1,11 @@
 
 
 function createOsOrder(tableId) {
+  const urlParam = window.location.href;
+  const urlObj = new URL(urlParam);
+
+  // Obtener el valor del parámetro "parametro1"
+  urlObj.searchParams.get("clientId");
     let shoppingCartOS = [];
     // Inicializar el arreglo para el carrito de compras
     let productCounter=0;
@@ -82,7 +87,9 @@ var otid=sessionStorage.getItem('siteNow');
     var orderStatus={
       'orderStatus':{
       'status':'created',
-      'orderTrackId':sessionStorage.getItem("ot"+otid)
+      'orderTrackId':sessionStorage.getItem("ot"+otid),
+      'oderType':urlObj.searchParams.get("st"),
+      'isDelivery':''
     },
     'paymentStatus':{
       
@@ -106,11 +113,7 @@ var otid=sessionStorage.getItem('siteNow');
     // Devolver el carrito de compras con los productos de la mesa especificada
     
     document.getElementById("loading-container").style.display = "flex";
-    const urlParam = window.location.href;
-    const urlObj = new URL(urlParam);
-  
-    // Obtener el valor del parámetro "parametro1"
-    urlObj.searchParams.get("clientId");
+   
 var apiData = {
   "clientId": urlObj.searchParams.get("clientId"),
   "siteId": sessionStorage.getItem('siteNow'),
@@ -259,9 +262,9 @@ if(value=="finishedAll"){
       'modelView':'tableOS',
       },
       {
-      'filter':'bySiteOrderStatusExcludeOne',
-      'param':'finished',
-      'value':sessionStorage.getItem('siteNow')
+      'filter':'bySiteOrderTrackIdStatusAll',
+      'param': sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')),
+      'value': sessionStorage.getItem('siteNow')
       }
       );
 

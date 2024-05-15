@@ -6,6 +6,7 @@ var apiData = {
   "clientId": sessionStorage.getItem('clientNow'),
   "placeName": document.getElementById("placeName").value,
   "placeAddress": document.getElementById("placeAdd").value,
+  "placeType": document.getElementById("list-OSplaceType").value,
   "placeComments": document.getElementById("placeComments").value,
   "placeContact": document.getElementById("placeContact").value,
   "placeEmail": document.getElementById("placeEmail").value,

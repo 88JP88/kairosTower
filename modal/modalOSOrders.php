@@ -17,46 +17,7 @@
       <div class="modal-body">
       <div id="chart_div_Orders_os" style="width: 400px; height: 200px;"></div>
 
-      <button onclick="
-
-openModal('OSOrdersVerify');
-      
-createTable('tableInternalClients22','containerOrdersVerifyData', [
-  
-  'Acciones',
-  'Estado',
-'Total',
-  'Sub-Total',
-  
-  'Ahorro',
-  'Pago',
-  'Responsable',
-  'Cliente',
-  'Catálogo'
-]);
-
-  
-getApiData(getOrdersOS,
-{
-'apiService':'apiOS',
-'apiVersion':'v1',
-'endPoint':'getOrders'
-},
-{
-'containerData':'containerOrdersVerifyData',
-'containerInfo':'containerOrdersVerifyInfo',
-'modelView':'tableOS',
-},
-{
-'filter':'bySiteOrderStatus',
-'param':'delivered',
-'value': sessionStorage.getItem('siteNow')
-}
-);
-
-"  title="EDITAR">
-<i class="fas fa-plus"> Ver ordenes</i>
-</button>
+   
       <div id="containerOrdersInfo" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>

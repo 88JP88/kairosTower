@@ -1309,6 +1309,152 @@ console.log([['Creadas', creadas], ['Abiertas', abiertas], ['En progreso', enpro
   }
 
 
+  if(modelView=="tableMarketOS"){
+               
+    const cardContainer11 = document.querySelector("#"+containerData+" tbody");
+    const cardContainer11Info = document.getElementById(containerInfo);
+    cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+    cardContainer11Info.innerHTML = ""; 
+    
+    const card11Info = document.createElement("div");
+    card11Info.classList.add("card");
+    
+        card11Info.innerHTML = ` <p><H4>ORDENES</H4></p><p>${data.response.apiMessage}</p>`;
+        cardContainer11Info.appendChild(card11Info);
+
+      let creadas=0;
+      let abiertas=0;
+      let enprogreso=0;
+      let listas=0;
+      let entregadas=0;
+      let finalizadas=0;
+      let canceladas=0;
+
+      var totalValue=0;
+      var subTotalValue=0;
+
+      var saveValue=0;
+
+        data.orders.forEach(info => {
+   
+   
+    const row = document.createElement("tr");
+    
+    const backgroundColor = info.infoOrder.params.isActive === "0" ? "  #cc0007" : "#ffffff";
+   // const activo1 = info.infoElement.params.isActive === "0" ? activo="INACTIVO" : activo="ACTIVO";
+   
+    row.innerHTML = `
+   
+  
+  
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+   
+   
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="created"?`${creadas++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;opened&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+   Abrir Orden
+    </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;cancelled&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Cancelar Orden
+     </button>`:``}
+
+
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="opened"?`${abiertas++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;inProgress&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Procesar Orden
+     </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;cancelled&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Cancelar Orden
+     </button>`:``}
+
+
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="inProgress"?`${enprogreso++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;ready&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Orden Lista
+     </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;cancelled&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Cancelar Orden
+     </button>`:``}
+
+
+
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="ready"?`${listas++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;inProgress&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Procesar Orden
+     </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;delivered&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+     Entregar Orden
+      </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;cancelled&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Cancelar Orden
+     </button>`:``}
+
+
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="delivered"?`${entregadas++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;inProgress&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Procesar Orden
+     </button> <button onclick="openModal('OSOrdersVerify');" class="btn btn-primary1 delete-button" title="EDITAR">
+     Finalizar Orden
+      </button> <button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;cancelled&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Cancelar Orden
+     </button>`:``}
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="finished"?`${finalizadas++}`:``}
+    ${info.infoOrder.info.infoOrder.orderStatus.status=="cancelled"?`${canceladas++}<button onclick="editOSOrder(this,&quot;${info.clientId}&quot;,&quot;${info.orderId}&quot;,&quot;orderStatus&quot;,&quot;created&quot;,&quot;status&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    Reabrir Orden
+     </button>`:``}
+
+
+   
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoOrder.orderStatus.status}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoPayload.infoPayment.total}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoPayload.infoPayment.subTotal}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoPayload.infoPayment.saver}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoOrder.paymentStatus.status}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoOrder.ownerStatus.name}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.infoOrder.info.infoOrder.customerStatus.name}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    
+    <ul>
+        ${info.infoOrder.info.infoProducts.map(product => `<li><button> Remover</button>${product.product.productName} ${product.product.qty}</li>`).join('')}
+      </ul>
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.siteName}
+    </td>
+    <td style="background-color: ${backgroundColor};"> <div class="edit-container">
+    ${info.placeName}
+    </td>
+    `;
+   
+    cardContainer11.appendChild(row);
+    
+    //getApiData(getClientCategoriesList,'apiCom','v1','getCategories','list-categoriesList'+idin,info.categoryId+"|"+info.parentId,'all','all','all');
+    //getClientCategoriesList('all','all','all',idin);
+   
+   // getApiData(getClientStoresList,'apiCom','v1','getStores','list-storesListstore'+idin,'containerCustomersInfo','all','all','all');
+
+ totalValue=(totalValue)+parseFloat(info.infoOrder.info.infoPayload.infoPayment.total);
+
+ subTotalValue=(subTotalValue)+parseFloat(info.infoOrder.info.infoPayload.infoPayment.subTotal);
+
+ saveValue=(saveValue)+parseFloat(info.infoOrder.info.infoPayload.infoPayment.saver);
+ idin++;
+   
+  });
+
+ 
+  drawTotalsOnScreen('containerOrdersVerificationInfo',totalValue,subTotalValue,saveValue);
+  drawPieChart([['Creadas', creadas], ['Abiertas', abiertas], ['En progreso', enprogreso], ['Listas', listas], ['Entregadas', entregadas],['Finalizadas', finalizadas],['Canceladas', canceladas]], 'chart_div_Orders_os', 'Total de Ordenes','circle');
+console.log([['Creadas', creadas], ['Abiertas', abiertas], ['En progreso', enprogreso], ['Listas', listas], ['Entregadas', entregadas],['Finalizadas', finalizadas],['Canceladas', canceladas]]);
+
+}
+
+
               if(modelView=="card"){
                 const cardContainer11 = document.getElementById(containerData);
                 const cardContainer11Info = document.getElementById(containerInfo);

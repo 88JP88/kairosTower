@@ -7,6 +7,75 @@
 
         var idin = 1;
         try {
+
+          if(modelView=="alert"){
+               
+            var productsCounter=0;
+            data.products.forEach(info => {
+ 
+ 
+              productsCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiProductNow')=="true"){
+            if(productsCounter<sessionStorage.getItem('maxProductNow')){
+            openModal('OSProductCreate');
+            
+            getApiData(getSitesList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getSites'
+            },
+              {
+                'containerData':'list-OSSite',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }
+              if(productsCounter>=sessionStorage.getItem('maxProductNow')){
+                alert("Máximo de productos creados (TOTAL: "+productsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxProductNow'));
+                  }
+          }
+          if(sessionStorage.getItem('isMultiProductNow')=="false"){
+              if(productsCounter>=sessionStorage.getItem('maxProductNow')){
+                alert("Máximo de productos creados (TOTAL: "+productsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxProductNow'));
+                
+              }
+
+              if(productsCounter<sessionStorage.getItem('maxProductNow')){
+                openModal('OSProductCreate');
+                
+                getApiData(getSitesList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getSites'
+                },
+                  {
+                    'containerData':'list-OSSite',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 

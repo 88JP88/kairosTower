@@ -32,11 +32,17 @@
   <input type="text" class="form-control" id="placeContact" placeholder="Ingresa nombre de room">
 </div>
 <div class="mb-3">
+<label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i> Tipo de establecimiento</label>
+  <div id="infoContent"></div>
+  
+
+
+</div>
+
+<div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i>E-mail de la ubicación</label>
   <input type="text" class="form-control" id="placeEmail" placeholder="Ingresa nombre de room">
 </div>
-
-
 <div class="mb-3">
   <input type="checkbox" id="checkDiscountPlace">
   <label for="checkDiscount">Opciones avanzadas</label>
@@ -219,3 +225,52 @@
 </div>
 
 <script  src="scripts/posts/os.postPlaces.js"></script>
+
+
+<script>
+function listTypePlace(){
+
+  var infoContent = document.getElementById('infoContent');
+
+  // Crear el elemento select
+  var selectElement = document.createElement('select');
+  infoContent.innerHTML='';
+  selectElement.classList.add('form-control');
+  selectElement.id = 'list-OSplaceType';
+  selectElement.name = 'unidad';
+  selectElement.setAttribute('required', '');
+  var options = [];
+
+  // Crear las opciones y agregarlas al select
+  if (sessionStorage.getItem('isMarketNow') == "true") {
+    options.push(
+      { value: 'market', text: 'Mercado' }
+    );
+  }
+  if (sessionStorage.getItem('isSiteNow') == "true") {
+    options.push(
+      { value: 'withSites', text: 'Con mesas' }
+    );
+  }
+  if (sessionStorage.getItem('isWorkNow') == "true") {
+    options.push(
+      { value: 'withSitesWork', text: 'Con puestos de trabajo' }
+    );
+  }
+  if (sessionStorage.getItem('isEcommerceNow') == "true") {
+    options.push(
+      { value: 'ecommerce', text: 'E-Commerce' }
+    );
+  }
+
+  options.forEach(function(optionData) {
+    var optionElement = document.createElement('option');
+    optionElement.value = optionData.value;
+    optionElement.textContent = optionData.text;
+    selectElement.appendChild(optionElement);
+  });
+
+  // Agregar el select al contenedor deseado
+  infoContent.appendChild(selectElement);
+}
+</script>

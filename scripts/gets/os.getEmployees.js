@@ -7,6 +7,75 @@
 
         var idin = 1;
         try {
+
+          if(modelView=="alert"){
+               
+            var teamCounter=0;
+            data.employees.forEach(info => {
+ 
+ 
+              teamCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiTeamNow')=="true"){
+            if(teamCounter<sessionStorage.getItem('maxTeamNow')){
+            openModal('OSEmployeeCreate');
+            
+            getApiData(getPlacesList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getPlaces'
+            },
+              {
+                'containerData':'list-OSPlaceOwner',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }
+              if(teamCounter>=sessionStorage.getItem('maxTeamNow')){
+                alert("Máximo de miembros creados (TOTAL: "+teamCounter+" / MÁXIMO: "+sessionStorage.getItem('maxTeamNow')+")" );
+                  }
+          }
+          if(sessionStorage.getItem('isMultiProductNow')=="false"){
+              if(teamCounter>=sessionStorage.getItem('maxTeamNow')){
+                alert("Máximo de miembros creados (TOTAL: "+teamCounter+" / MÁXIMO: "+sessionStorage.getItem('maxTeamNow')+")" );
+                
+              }
+
+              if(teamCounter<sessionStorage.getItem('maxTeamNow')){
+                openModal('OSEmployeeCreate');
+                
+                getApiData(getPlacesList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getPlaces'
+                },
+                  {
+                    'containerData':'list-OSPlaceOwner',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 
@@ -271,7 +340,7 @@ ${info.infoEmployee.info.rol=="superAdmin" ? `Super Administrador`:``}
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
       ${info.placeName}
       <select id="list-OSplaceEmployeesOS${idin}" class="form-control" name="lista1" required></select>
-      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.employeeId}&quot;,&quot;email&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <button onclick="editOSEmployee(this,&quot;${info.clientId}&quot;,&quot;${info.employeeId}&quot;,&quot;placeId&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div></td>

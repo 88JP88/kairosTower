@@ -7,6 +7,72 @@
 
         var idin = 1;
         try {
+          if(modelView=="alert"){
+               
+            var sitesCounter=0;
+            data.sites.forEach(info => {
+ 
+ 
+              sitesCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiSiteNow')=="true"){
+            if(sitesCounter<sessionStorage.getItem('maxSiteNow')){
+            openModal('OSSiteCreate');
+            listTypeSite();
+            getApiData(getPlacesList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getPlaces'
+            },
+              {
+                'containerData':'list-OSPlace',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }if(sitesCounter>=sessionStorage.getItem('maxSiteNow')){
+                alert("Máximo de sitios creados (TOTAL: "+sitesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxSiteNow'));
+                  }
+          }
+          if(sessionStorage.getItem('isMultiSiteNow')=="false"){
+              if(sitesCounter>=1){
+                alert("Máximo de sitios creados (TOTAL: "+sitesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxSiteNow'));
+                
+              }
+              if(sitesCounter<1){
+                openModal('OSSiteCreate');
+                listTypeSite();
+                getApiData(getPlacesList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getPlaces'
+                },
+                  {
+                    'containerData':'list-OSPlace',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 
@@ -208,6 +274,24 @@ createTable('tableInternalClients2','containerOSData', [
     
     </td>
 
+    <td style="background-color: ${backgroundColor};"> 
+      <div class="mb-3">
+    
+      
+      <p class="card-text" style="display: inline-block; margin-right: 10px;">${info.infoSite.params.siteType}</p>
+        <select id="list-placeType${idin}" class="form-control" name="lista1" required style="flex: 1;">
+        <option value="siteswork">puesto de trabajo</option>
+    <option value="site">Mesa</option>
+    <option value="marketbox">Caja registradora</option>
+        </select>
+        <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;siteType&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR" style="margin-left: 10px;">
+          <i class="fas fa-edit"></i>
+        </button>
+      
+    </div>
+    
+    </td>
+
       `;
      
       cardContainer11.appendChild(row);
@@ -368,9 +452,9 @@ getApiData(getEmployeesList,
     'modelView':'table',
 },
   {
-    'filter':'all',
-    'param':'all',
-    'value':'all'
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
 }
     );
     getApiData(getCustomersList,
@@ -385,19 +469,17 @@ getApiData(getEmployeesList,
         'modelView':'table',
     },
       {
-        'filter':'all',
-        'param':'all',
-        'value':'all'
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
     }
         );
 "  title="EDITAR">
-<i class="fas fa-plus"> Añadir productos</i>
+<i class="fas fa-plus"> Crear orden</i>
 </button>
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)"  title="EDITAR">
-<i class="fas fa-plus"> Remover productos</i>
-</button>
+
 <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
-<i class="fas fa-plus"> Remover orden</i>
+<i class="fas fa-plus"> Cerrar Proceso</i>
 </button>
 <button onclick="
 
@@ -417,23 +499,25 @@ createTable('tableInternalClients2','containerOrdersData', [
 ]);
 
   setSession('siteNow','${info.siteId}');
+
+  
 getApiData(getOrdersOS,
-{
-'apiService':'apiOS',
-'apiVersion':'v1',
-'endPoint':'getOrders'
-},
-{
-'containerData':'containerOrdersData',
-'containerInfo':'containerOrdersInfo',
-'modelView':'tableOS',
-},
-{
-'filter':'bySite',
-'param':'finished',
-'value':'${info.siteId}'
-}
-);
+  {
+  'apiService':'apiOS',
+  'apiVersion':'v1',
+  'endPoint':'getOrders'
+  },
+  {
+  'containerData':'containerOrdersData',
+  'containerInfo':'containerOrdersInfo',
+  'modelView':'tableOS',
+  },
+  {
+  'filter':'bySiteOrderTrackIdStatusAll',
+  'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+  'value': '${sessionStorage.getItem('siteNow')}'
+  }
+  );
 
 "  title="EDITAR">
 <i class="fas fa-plus"> Ver ordenes</i>
@@ -487,9 +571,9 @@ getApiData(getEmployeesList,
     'modelView':'table',
 },
   {
-    'filter':'all',
-    'param':'all',
-    'value':'all'
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
 }
     );
     getApiData(getCustomersList,
@@ -504,9 +588,9 @@ getApiData(getEmployeesList,
         'modelView':'table',
     },
       {
-        'filter':'all',
-        'param':'all',
-        'value':'all'
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
     }
         );
       "  title="EDITAR">
@@ -520,6 +604,916 @@ getApiData(getEmployeesList,
     
      "  title="EDITAR">
      <i class="fas fa-plus"> Ocupar</i>
+     </button>
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> Sin servicio</i>
+     </button>
+     `):` <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> En servicio</i>
+     </button>`}
+
+     
+
+
+
+
+
+      </p>
+              
+          </div>
+          
+      `;
+
+      cardContainer11.appendChild(card11);
+   //   getClientCategoriesList3('all','all','all',idin1);
+      //getClientStoresList13('all','all','all',idin1);
+
+      idin++;
+                }
+              }
+              if(modelView=="cardOSwork"){
+                const cardContainer11 = document.getElementById(containerData);
+                const cardContainer11Info = document.getElementById(containerInfo);
+                cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+                cardContainer11Info.innerHTML = "";
+                const card11Info = document.createElement("div");
+                card11Info.classList.add("card");
+                card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
+                cardContainer11Info.appendChild(card11Info);
+
+                for (const info of data.sites) {
+                    const card11 = document.createElement("div");
+                    card11.classList.add("mesa");
+                    const isOutService = info.infoSite.params.isOutService === 1 || info.infoSite.params.isOutService === true;
+const isBussy = info.infoSite.params.isBussy === 1 || info.infoSite.params.isBussy === true;
+const isOrder = info.infoSite.params.isOrder === 1 || info.infoSite.params.isOrder === true;
+
+let backgroundColor = "";
+if (isOutService) {
+    backgroundColor = "#F2473B";
+} else if (isBussy && !isOrder) {
+    backgroundColor = "#F26D20";
+} else if (isOrder) {
+    backgroundColor = "#9BD792";
+} else {
+    backgroundColor = "#6645E9";
+}
+                    const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
+                  
+                    card11.innerHTML = `
+          <div class="card-body" >
+          <h5 class="card-title">
+          <p class="card-text" style="background-color: ${backgroundColor};"> <i class="fas fa-table"> ${info.infoSite.info.name}</i></p>
+        
+         
+
+      </h5>
+      <p class="card-text">${info.infoSite.info.comments}
+     ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
+      (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
+      <button onclick="
+      
+openModal('OSOrdersVerify');
+      
+createTable('tableInternalClients22','containerOrdersVerifyData', [
+  
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  
+getApiData(getOrdersOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getOrders'
+},
+{
+'containerData':'containerOrdersVerifyData',
+'containerInfo':'containerOrdersVerifyInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'bySiteOrderTrackIdStatusFinished',
+'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+'value': '${sessionStorage.getItem('siteNow')}'
+}
+);
+      
+      
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Calcular</i>
+     </button>
+     <button onclick=" openModal('OSCatalogViewOS');
+      
+     createTable('tableInternalClients2','OSCatalogViewData', [
+       'Seleccionar',
+       'Producto',
+    'Categoría',
+       'Stock',
+       
+       'Comentarios',
+       'Precio',
+      'EAN1 / EAN2 / SKU',
+      'Descuento / Promoción'
+   ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+"  title="EDITAR">
+<i class="fas fa-plus"> Crear orden</i>
+</button>
+
+<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
+<i class="fas fa-plus"> Cerrar Proceso</i>
+</button>
+<button onclick="
+
+openModal('OSOrdersView');
+      
+createTable('tableInternalClients2','containerOrdersData', [
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  setSession('siteNow','${info.siteId}');
+
+  
+getApiData(getOrdersOS,
+  {
+  'apiService':'apiOS',
+  'apiVersion':'v1',
+  'endPoint':'getOrders'
+  },
+  {
+  'containerData':'containerOrdersData',
+  'containerInfo':'containerOrdersInfo',
+  'modelView':'tableOS',
+  },
+  {
+  'filter':'bySiteOrderTrackIdStatusAll',
+  'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+  'value': '${sessionStorage.getItem('siteNow')}'
+  }
+  );
+
+"  title="EDITAR">
+<i class="fas fa-plus"> Ver ordenes</i>
+</button>
+      
+      `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
+    
+      "  title="EDITAR">
+      <i class="fas fa-plus"> Desocupar</i>
+      </button>
+      <button onclick="
+      openModal('OSCatalogViewOS');
+      
+      createTable('tableInternalClients2','OSCatalogViewData', [
+        'Seleccionar',
+        'Producto',
+     'Categoría',
+        'Stock',
+        
+        'Comentarios',
+        'Precio',
+       'EAN1 / EAN2 / SKU',
+       'Descuento / Promoción'
+    ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Crear orden</i>
+     </button>`)
+      
+      :
+     `
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
+     setSessionUN('ot${info.siteId}');
+    
+     "  title="EDITAR">
+     <i class="fas fa-plus"> Ocupar</i>
+     </button>
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> Sin servicio</i>
+     </button>
+     `):` <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> En servicio</i>
+     </button>`}
+
+     
+
+
+
+
+
+      </p>
+              
+          </div>
+          
+      `;
+
+      cardContainer11.appendChild(card11);
+   //   getClientCategoriesList3('all','all','all',idin1);
+      //getClientStoresList13('all','all','all',idin1);
+
+      idin++;
+                }
+              }
+              if(modelView=="cardOSmarket"){
+                const cardContainer11 = document.getElementById(containerData);
+                const cardContainer11Info = document.getElementById(containerInfo);
+                cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+                cardContainer11Info.innerHTML = "";
+                const card11Info = document.createElement("div");
+                card11Info.classList.add("card");
+                card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
+                cardContainer11Info.appendChild(card11Info);
+
+                for (const info of data.sites) {
+                    const card11 = document.createElement("div");
+                    card11.classList.add("mesa");
+                    const isOutService = info.infoSite.params.isOutService === 1 || info.infoSite.params.isOutService === true;
+const isBussy = info.infoSite.params.isBussy === 1 || info.infoSite.params.isBussy === true;
+const isOrder = info.infoSite.params.isOrder === 1 || info.infoSite.params.isOrder === true;
+
+let backgroundColor = "";
+if (isOutService) {
+    backgroundColor = "#F2473B";
+} else if (isBussy && !isOrder) {
+    backgroundColor = "#F26D20";
+} else if (isOrder) {
+    backgroundColor = "#9BD792";
+} else {
+    backgroundColor = "#6645E9";
+}
+                    const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
+                  
+                    card11.innerHTML = `
+          <div class="card-body" >
+          <h5 class="card-title">
+          <p class="card-text" style="background-color: ${backgroundColor};"> <i class="fas fa-table"> ${info.infoSite.info.name}</i></p>
+        
+         
+
+      </h5>
+      <p class="card-text">${info.infoSite.info.comments}
+     ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
+      (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
+      <button onclick="
+      
+openModal('OSOrdersVerify');
+      
+createTable('tableInternalClients22','containerOrdersVerifyData', [
+  
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  
+getApiData(getOrdersOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getOrders'
+},
+{
+'containerData':'containerOrdersVerifyData',
+'containerInfo':'containerOrdersVerifyInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'bySiteOrderTrackIdStatusFinished',
+'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+'value': '${sessionStorage.getItem('siteNow')}'
+}
+);
+      
+      
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Calcular</i>
+     </button>
+     <button onclick=" openModal('OSCatalogViewOS');
+      
+     createTable('tableInternalClients2','OSCatalogViewData', [
+       'Seleccionar',
+       'Producto',
+    'Categoría',
+       'Stock',
+       
+       'Comentarios',
+       'Precio',
+      'EAN1 / EAN2 / SKU',
+      'Descuento / Promoción'
+   ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+"  title="EDITAR">
+<i class="fas fa-plus"> Crear ordene</i>
+</button>
+
+<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
+<i class="fas fa-plus"> Cerrar Proceso</i>
+</button>
+<button onclick="
+
+openModal('OSOrdersView');
+      
+createTable('tableInternalClients2','containerOrdersData', [
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  setSession('siteNow','${info.siteId}');
+
+  
+getApiData(getOrdersOS,
+  {
+  'apiService':'apiOS',
+  'apiVersion':'v1',
+  'endPoint':'getOrders'
+  },
+  {
+  'containerData':'containerOrdersData',
+  'containerInfo':'containerOrdersInfo',
+  'modelView':'tableOS',
+  },
+  {
+  'filter':'bySiteOrderTrackIdStatusAll',
+  'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+  'value': '${sessionStorage.getItem('siteNow')}'
+  }
+  );
+
+"  title="EDITAR">
+<i class="fas fa-plus"> Ver ordenes</i>
+</button>
+      
+      `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
+    
+      "  title="EDITAR">
+      <i class="fas fa-plus"> Cerrar Caja</i>
+      </button>
+      <button onclick="
+      openModal('OSCatalogViewOS');
+      
+      createTable('tableInternalClients2','OSCatalogViewData', [
+        'Seleccionar',
+        'Producto',
+     'Categoría',
+        'Stock',
+        
+        'Comentarios',
+        'Precio',
+       'EAN1 / EAN2 / SKU',
+       'Descuento / Promoción'
+    ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Crear ordenes</i>
+     </button>`)
+      
+      :
+     `
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
+     setSessionUN('ot${info.siteId}');
+    
+     "  title="EDITAR">
+     <i class="fas fa-plus"> Abrir Caja</i>
+     </button>
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> Sin servicio</i>
+     </button>
+     `):` <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <i class="fas fa-plus"> En servicio</i>
+     </button>`}
+
+     
+
+
+
+
+
+      </p>
+              
+          </div>
+          
+      `;
+
+      cardContainer11.appendChild(card11);
+   //   getClientCategoriesList3('all','all','all',idin1);
+      //getClientStoresList13('all','all','all',idin1);
+
+      idin++;
+                }
+              }
+
+              if(modelView=="cardOSecommerce"){
+                const cardContainer11 = document.getElementById(containerData);
+                const cardContainer11Info = document.getElementById(containerInfo);
+                cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
+                cardContainer11Info.innerHTML = "";
+                const card11Info = document.createElement("div");
+                card11Info.classList.add("card");
+                card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
+                cardContainer11Info.appendChild(card11Info);
+
+                for (const info of data.sites) {
+                    const card11 = document.createElement("div");
+                    card11.classList.add("mesa");
+                    const isOutService = info.infoSite.params.isOutService === 1 || info.infoSite.params.isOutService === true;
+const isBussy = info.infoSite.params.isBussy === 1 || info.infoSite.params.isBussy === true;
+const isOrder = info.infoSite.params.isOrder === 1 || info.infoSite.params.isOrder === true;
+
+let backgroundColor = "";
+if (isOutService) {
+    backgroundColor = "#F2473B";
+} else if (isBussy && !isOrder) {
+    backgroundColor = "#F26D20";
+} else if (isOrder) {
+    backgroundColor = "#9BD792";
+} else {
+    backgroundColor = "#6645E9";
+}
+                    const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
+                  
+                    card11.innerHTML = `
+          <div class="card-body" >
+          <h5 class="card-title">
+          <p class="card-text" style="background-color: ${backgroundColor};"> <i class="fas fa-table"> ${info.infoSite.info.name}</i></p>
+        
+         
+
+      </h5>
+      <p class="card-text">${info.infoSite.info.comments}
+     ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
+      (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
+      <button onclick="
+      
+openModal('OSOrdersVerify');
+      
+createTable('tableInternalClients22','containerOrdersVerifyData', [
+  
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  
+getApiData(getOrdersOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getOrders'
+},
+{
+'containerData':'containerOrdersVerifyData',
+'containerInfo':'containerOrdersVerifyInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'bySiteOrderTrackIdStatusFinished',
+'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+'value': '${sessionStorage.getItem('siteNow')}'
+}
+);
+      
+      
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Calcular</i>
+     </button>
+     <button onclick=" openModal('OSCatalogViewOS');
+      
+     createTable('tableInternalClients2','OSCatalogViewData', [
+       'Seleccionar',
+       'Producto',
+    'Categoría',
+       'Stock',
+       
+       'Comentarios',
+       'Precio',
+      'EAN1 / EAN2 / SKU',
+      'Descuento / Promoción'
+   ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+"  title="EDITAR">
+<i class="fas fa-plus"> Crear ordene</i>
+</button>
+
+<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
+<i class="fas fa-plus"> Cerrar Proceso</i>
+</button>
+<button onclick="
+
+openModal('OSOrdersView');
+      
+createTable('tableInternalClients2','containerOrdersData', [
+  'Acciones',
+  'Estado',
+'Total',
+  'Sub-Total',
+  
+  'Ahorro',
+  'Pago',
+  'Responsable',
+  'Cliente',
+  'Catálogo'
+]);
+
+  setSession('siteNow','${info.siteId}');
+
+  
+getApiData(getOrdersOS,
+  {
+  'apiService':'apiOS',
+  'apiVersion':'v1',
+  'endPoint':'getOrders'
+  },
+  {
+  'containerData':'containerOrdersData',
+  'containerInfo':'containerOrdersInfo',
+  'modelView':'tableOS',
+  },
+  {
+  'filter':'bySiteOrderTrackIdStatusAll',
+  'param': '${sessionStorage.getItem('ot'+info.siteId)}',
+  'value': '${sessionStorage.getItem('siteNow')}'
+  }
+  );
+
+"  title="EDITAR">
+<i class="fas fa-plus"> Ver ordenes</i>
+</button>
+      
+      `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
+    
+      "  title="EDITAR">
+      <i class="fas fa-plus"> Cerrar Caja</i>
+      </button>
+      <button onclick="
+      openModal('OSCatalogViewOS');
+      
+      createTable('tableInternalClients2','OSCatalogViewData', [
+        'Seleccionar',
+        'Producto',
+     'Categoría',
+        'Stock',
+        
+        'Comentarios',
+        'Precio',
+       'EAN1 / EAN2 / SKU',
+       'Descuento / Promoción'
+    ]);
+getApiData(getCatalogsOS,
+{
+'apiService':'apiOS',
+'apiVersion':'v1',
+'endPoint':'getCatalogs'
+},
+{
+'containerData':'OSCatalogViewData',
+'containerInfo':'OSCatalogViewInfo',
+'modelView':'tableOS',
+},
+{
+'filter':'placesOS',
+'param':'placeId',
+'value':'${info.placeId}'
+}
+);setSession('siteNow','${info.siteId}');updateCarContainer('${info.siteId}');
+getApiData(getEmployeesList,
+  {
+    'apiService':'apiOS',
+    'apiVersion':'v1',
+    'endPoint':'getEmployees'
+},
+  {
+    'containerData':'list-OSEmployeesList',
+    'containerInfo':'containerOSInfo',
+    'modelView':'table',
+},
+  {
+    'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+}
+    );
+    getApiData(getCustomersList,
+      {
+        'apiService':'apiOS',
+        'apiVersion':'v1',
+        'endPoint':'getCustomers'
+    },
+      {
+        'containerData':'list-OSCustomerListOS',
+        'containerInfo':'containerOSInfo',
+        'modelView':'table',
+    },
+      {
+        'filter':'filter',
+        'param':'placeId',
+        'value':'${info.placeId}'
+    }
+        );
+      "  title="EDITAR">
+     <i class="fas fa-plus"> Crear ordenes</i>
+     </button>`)
+      
+      :
+     `
+     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
+     setSessionUN('ot${info.siteId}');
+    
+     "  title="EDITAR">
+     <i class="fas fa-plus"> Abrir Caja</i>
      </button>
      <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
      <i class="fas fa-plus"> Sin servicio</i>

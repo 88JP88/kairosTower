@@ -33,7 +33,12 @@
 <option selected>Selecciona ubicacion</option>
 </div>
 
-
+<div class="mb-3">
+  
+<label for="exampleFormControlInput1" class="form-label"><i class="fas fa-guitar"></i> Tipo de puesto</label>
+ 
+<div id="infoContent1"></div>
+</div>
 <button type="button" class="btn btn-primary1 edit-button" id="postSiteBtn" title="CREAR UBICACIÓN" data-bs-dismiss="modal"><i class="fas fa-plus"></i></button>
 
 
@@ -83,3 +88,53 @@
 </div>
 
 <script  src="scripts/posts/os.postSites.js"></script>
+
+
+
+<script>
+function listTypeSite(){
+
+  var infoContent = document.getElementById('infoContent1');
+
+  // Crear el elemento select
+  var selectElement = document.createElement('select');
+  infoContent.innerHTML='';
+  selectElement.classList.add('form-control');
+  selectElement.id = 'list-OSSiteType';
+  selectElement.name = 'unidad';
+  selectElement.setAttribute('required', '');
+  var options = [];
+
+  // Crear las opciones y agregarlas al select
+  if (sessionStorage.getItem('isMarketNow') == "true") {
+    options.push(
+      { value: 'marketbox', text: 'Caja Registradora (Mercado)' }
+    );
+  }
+  if (sessionStorage.getItem('isSiteNow') == "true") {
+    options.push(
+      { value: 'site', text: 'Mesa (Con mesas)' }
+    );
+  }
+  if (sessionStorage.getItem('isWorkNow') == "true") {
+    options.push(
+      { value: 'siteswork', text: 'Puesto de trabajo (Con puestos de trabajo)' }
+    );
+  }
+  if (sessionStorage.getItem('isEcommerceNow') == "true") {
+    options.push(
+      { value: 'ecommerce', text: 'Operador E-Commerce (E-Commerce)' }
+    );
+  }
+
+  options.forEach(function(optionData) {
+    var optionElement = document.createElement('option');
+    optionElement.value = optionData.value;
+    optionElement.textContent = optionData.text;
+    selectElement.appendChild(optionElement);
+  });
+
+  // Agregar el select al contenedor deseado
+  infoContent.appendChild(selectElement);
+}
+</script>

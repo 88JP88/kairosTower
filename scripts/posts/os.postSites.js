@@ -7,6 +7,7 @@ var apiData = {
   "siteName": document.getElementById("siteName").value,
   "siteComments": document.getElementById("siteComments").value,
   "sitePlace": document.getElementById("list-OSPlace").value,
+  "siteType": document.getElementById("list-OSSiteType").value,
   "apiValues":{
     "apiName": "apiOS",
     "apiVersion": "v1",
@@ -117,6 +118,9 @@ const url = window.location.href;
 const urlObj = new URL(url);
 var place = urlObj.searchParams.get("placeId");
 //eraseContainers('placeOSData','placeOSInfo');
+if(urlObj.searchParams.get("st")=="sites"){
+
+
         getApiData(getSites,
           {
             'apiService':'apiOS',
@@ -130,13 +134,56 @@ var place = urlObj.searchParams.get("placeId");
         },
           {
             'filter':'filter',
-            'param':'placeIdCar',
+            'param':'placeIdCarSites',
+            'value':  place
+        }
+            );
+       }
+       if(urlObj.searchParams.get("st")=="siteswork"){
+
+
+        getApiData(getSites,
+          {
+            'apiService':'apiOS',
+            'apiVersion':'v1',
+            'endPoint':'getSites'
+        },
+          {
+            'containerData':'placeOSData',
+            'containerInfo':'placeOSInfo',
+            'modelView':'cardOSwork',
+        },
+          {
+            'filter':'filter',
+            'param':'placeIdCarSitesWork',
+            'value':  place
+        }
+            );
+       }
+       if(urlObj.searchParams.get("st")=="market"){
+
+
+        getApiData(getSites,
+          {
+            'apiService':'apiOS',
+            'apiVersion':'v1',
+            'endPoint':'getSites'
+        },
+          {
+            'containerData':'placeOSData',
+            'containerInfo':'placeOSInfo',
+            'modelView':'cardOSmarket',
+        },
+          {
+            'filter':'filter',
+            'param':'placeIdCarMarket',
             'value':  place
         }
             );
        }
 
-      
+       }
+       
 
     })
     .catch(error => {

@@ -146,7 +146,60 @@ if(data.response.sentData.param=="unlock"){
       <button class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES"
        onclick="
        createCalendarId(&quot;${info.clientId}&quot;);
-       changeSection('internalUsers');
+      
+       clientParamsStatus({
+        'isEcommerceNow':'${info.infoClient.params.placeParams.isEcommerce}',
+        'isMarketNow':'${info.infoClient.params.placeParams.isMarket}',
+        'isWorkNow':'${info.infoClient.params.placeParams.isWork}',
+        'isSiteNow':'${info.infoClient.params.placeParams.isPlace}',
+        'isMultiPlaceNow':'${info.infoClient.params.placeParams.isMultiPlace}',
+        'isMultiSiteNow':'${info.infoClient.params.siteParams.isMultiSite}',
+        'isMultiElementNow':'${info.infoClient.params.elementParams.isMultiElement}',
+        'isPointsSystemNow':'${info.infoClient.params.pointsParams.isPointsSystem}',
+        'isStarsSystemNow':'${info.infoClient.params.pointsParams.isStarsSystem}',
+        'isMultiClientNow':'${info.infoClient.params.clientParams.isMultiClient}',
+        'isMultiTeamNow':'${info.infoClient.params.teamParams.isMultiTeam}',
+        'isMultiProductNow':'${info.infoClient.params.productParams.isMultiProduct}',
+        'maxProductNow':'${info.infoClient.params.productParams.maxQty}',
+        'maxPlaceNow':'${info.infoClient.params.placeParams.maxQty}',
+        'maxElementNow':'${info.infoClient.params.elementParams.maxQty}',
+        'maxClientNow':'${info.infoClient.params.clientParams.maxQty}',
+        'maxTeamNow':'${info.infoClient.params.teamParams.maxQty}',
+        'maxSiteNow':'${info.infoClient.params.siteParams.maxQty}',
+        'isMultiCategoryNow':'${info.infoClient.params.categoryParams.isMultiCategory}',
+        'maxCategoryNow':'${info.infoClient.params.categoryParams.maxQty}',
+        'isMultiCatalogNow':'${info.infoClient.params.catalogParams.isMultiCatalog}',
+        'maxCatalogNow':'${info.infoClient.params.catalogParams.maxQty}',
+        'isGraficsOrderNow':'${info.infoClient.params.orderParams.isGrafics}',
+        'isAdvanceCalculateNow':'${info.infoClient.params.advanceCalculateParams.isAdvanceCalculate}',
+        'isSaleAnalysisNow':'${info.infoClient.params.advanceCalculateParams.isSaleAnalysis}',
+        'isGraficsNow':'${info.infoClient.params.graficParams.isGrafics}',
+        'isBackupNow':'${info.infoClient.params.backupParams.isBackup}',
+        'backupTimesNow':'${info.infoClient.params.backupParams.backupTimes}',
+        'isGetbackNow':'${info.infoClient.params.getbackParams.isGetBack}',
+        
+        'isProdChainNow':'${info.infoClient.params.prodchainParams.isProdChain}',
+        'isGetbackNow':'${info.infoClient.params.getbackParams.isGetBack}',
+        'isSupportNow':'${info.infoClient.params.supportParams.isSupport}',
+        'supportTypeNow':'${info.infoClient.params.supportParams.supportType}',
+
+        'supportTimeNow':'${info.infoClient.params.supportParams.supportTime}',
+        'isTrackerNow':'${info.infoClient.params.trackerParams.isTracker}',
+        'isRoomsNow':'${info.infoClient.params.trackerParams.isRooms}',
+        'isElementsNow':'${info.infoClient.params.trackerParams.isElements}',
+        'isStyleNow':'${info.infoClient.params.styleParams.isStyle}'
+
+
+
+
+
+
+
+
+
+
+      });
+     
        getClientStyle(&quot;${info.clientId}&quot;);
        eraseContainers('containerCalendarDaysData','containerCalendarDaysInfo');
               createTable('tableInternalClients','containerCalendarDaysData', [
@@ -173,13 +226,14 @@ if(data.response.sentData.param=="unlock"){
           'value':'all'
       }
           );
+          changeSection('internalUsers');
+          createResourceResourcesSection('resourceResource');
+          createResourceTrackerSection('trackingResource');
            " >
         <i class="fas fa-cog"></i>
       </button>
 
-      <a href="adminSchedule.php?clientId=${info.clientId}" target="_blank" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES">
-      <i class="fas fa-calendar"></i>
-    </a>
+     
       <button onclick="editExtClientStatus(this,&quot;${info.clientId}&quot;,&quot;status&quot;,&quot;0&quot;,&quot;client&quot;)" class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="BLOQUEAR">
       <i class="fas fa-ban"></i>
     </button>
@@ -203,7 +257,8 @@ if(data.response.sentData.param=="unlock"){
 
       <td>
       <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.comments}" title="${info.comments}"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;,&quot;client&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.comments}" title="${info.comments}"> 
+      <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;comments&quot;,&quot;client&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
       </div>
@@ -218,7 +273,523 @@ if(data.response.sentData.param=="unlock"){
       </button>
       </div>
       </td>
+      <td>
+      <button id="btnview${info.clientId}" onclick="openClose('btnview${info.clientId}','unview');openClose('btnunview${info.clientId}','view');openClose('allContainer${info.clientId}','view');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye"></i>
+</button>
+<button id="btnunview${info.clientId}" style="display: none;" onclick="openClose('btnunview${info.clientId}','unview');openClose('btnview${info.clientId}','view');openClose('allContainer${info.clientId}','unview');" class="btn btn-primary1 delete-button" title="EDITAR">
+<i class="fas fa-eye-slash"></i>
+</button>
+
+<div id="allContainer${info.clientId}" style="display: none;">
+<b>Modelos de negocio:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">E-Commerce: ${info.infoClient.params.placeParams.isEcommerce ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isEcommerce&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Market: ${info.infoClient.params.placeParams.isMarket ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isMarket&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Working: ${info.infoClient.params.placeParams.isWork ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isWork&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Place: ${info.infoClient.params.placeParams.isPlace ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isPlace&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<b>Calendario:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Calendario: ${info.infoClient.params.trackerParams.isTracker ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isTracker&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Rooms: ${info.infoClient.params.trackerParams.isRooms ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isRooms&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Elementos: ${info.infoClient.params.trackerParams.isElements ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isElements&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<b>Establecimiento:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.placeParams.isMultiPlace ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isMultiPlace&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.placeParams.maxQty}</p>
+  <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.placeParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+</p>
+
+<b>Puestos:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.siteParams.isMultiSite ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.isMultiSite&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.siteParams.maxQty}</p>
+  <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.siteParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+</p>
+
+<b>Elementos:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.elementParams.isMultiElement ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.isMultiElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.elementParams.maxQty}</p>
+  <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.elementParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+</p>
+
+
+<b>Productos:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.productParams.isMultiProduct ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.isMultiProduct&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.productParams.maxQty}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.productParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+</p>
+
+
+<b>Categorías:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.categoryParams.isMultiCategory ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.isMultiCategory&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.categoryParams.maxQty}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.categoryParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+</p>
+
+
+<b>Catálogos:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.catalogParams.isMultiCatalog ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.isMultiCatalog&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.catalogParams.maxQty}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.catalogParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+
+<b>Clientes:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.clientParams.isMultiClient ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.isMultiClient&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.clientParams.maxQty}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.clientParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+
+<b>Equipo de trabajo:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.teamParams.isMultiTeam ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.isMultiTeam&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.teamParams.maxQty}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.teamParams.maxQty}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+
+<b>Fidelización:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Puntos: ${info.infoClient.params.pointsParams.isPointsSystem ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;pointsParams.isPointsSystem&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estrellas: ${info.infoClient.params.pointsParams.isStarsSystem ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;pointsParams.isStarsSystem&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<b>Ordenes:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.orderParams.isGrafics ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;orderParams.isGrafics&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+
+
+
+<b>Calculos:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Contable: ${info.infoClient.params.advanceCalculateParams.isAdvanceCalculate ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isAdvanceCalculate&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Análisis de venta: ${info.infoClient.params.advanceCalculateParams.isSaleAnalysis ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isSaleAnalysis&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+
+
+<b>Gráficas:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.graficParams.isGrafics ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;graficParams.isGrafics&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-edit"></i>
+  </button>
+</div>
+     
+
+<b>Backups:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Backup: ${info.infoClient.params.backupParams.isBackup ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;backupParams.isBackup&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">: ${info.infoClient.params.backupParams.backupTimes}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.backupParams.backupTimes}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;backupParams.backupTimes&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+
+
+<b>Devoluciones:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Devolución: ${info.infoClient.params.getbackParams.isGetBack ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;getbackParams.isGetBack&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+
+<b>Cadena de producción:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Cadena: ${info.infoClient.params.prodchainParams.isProdChain ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;prodchainParams.isProdChain&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<b>Soporte:</b><br>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Soporte: ${info.infoClient.params.supportParams.isSupport ===true?`APICA`:`NO APLICA`}</p>
+
+  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.isSupport&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">Tipo: ${info.infoClient.params.supportParams.supportType}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.supportParams.supportType}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportType&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+<p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">Tiempo: ${info.infoClient.params.supportParams.supportTime}</p>
+  <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.supportParams.supportTime}" title="${info.keyWords}">
+  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportTime&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+</p>
+      </div>
+      </td>
       
+     
   
    
         
@@ -662,4 +1233,13 @@ fetch(sessionStorage.getItem('subDomain') +"/"+ serviceName+"/"+apiName+"/"+apiV
   sessionStorage.setItem('clientNow',clientId);
  
   
+}
+
+
+function clientParamsStatus(data){
+  for (const key in data) {
+    sessionStorage.setItem(key, data[key]);
+}
+
+
 }

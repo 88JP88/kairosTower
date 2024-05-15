@@ -7,6 +7,76 @@
 
         var idin = 1;
         try {
+
+          if(modelView=="alert"){
+               
+            var elementsCounter=0;
+            data.elements.forEach(info => {
+ 
+ 
+              elementsCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiElementNow')=="true"){
+            if(elementsCounter<sessionStorage.getItem('maxElementNow')){
+            openModal('OSElementCreate');
+            
+            getApiData(getSitesList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getSites'
+            },
+              {
+                'containerData':'list-OSSite',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }
+              if(elementsCounter>=sessionStorage.getItem('maxElementNow')){
+                alert("Máximo de elementos creados (TOTAL: "+elementsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxElementNow'));
+                  }
+         
+          }
+          if(sessionStorage.getItem('isMultiElementNow')=="false"){
+              if(elementsCounter>=sessionStorage.getItem('maxElementNow')){
+                alert("Máximo de elementos creados (TOTAL: "+elementsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxElementNow'));
+                
+              }
+
+              if(elementsCounter<sessionStorage.getItem('maxElementNow')){
+                openModal('OSElementCreate');
+                
+                getApiData(getSitesList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getSites'
+                },
+                  {
+                    'containerData':'list-OSSite',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 

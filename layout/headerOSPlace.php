@@ -65,101 +65,201 @@
   </li>
   
 </ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home-tab-pane1" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-    rtyu
-    <div class="cart-container">
-      
-  <h2>Carrito de Compras</h2>
-  <div id="cartItems" class="cart-items">
+
+
+
   
-  </div>
   
-  <div id="cartItems1" class="cart-items1"></div>
  
-
-
-
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Establecimiento con Mesas</title>
-    <link rel="stylesheet" href="styleSession.css">
-</head>
-<body>
-
-    <div class="establecimiento" id="placeOSInfo">
-       
-    </div>
-   
-    <div class="establecimiento" id="placeOSData">
-       
-       </div>
-</body>
-</html>
-<script>
-
+  <script>
 const url = window.location.href;
       const urlObj = new URL(url);
       var place = urlObj.searchParams.get("placeId");
+      var placeNAME = urlObj.searchParams.get("placeName");
+      var placeType = urlObj.searchParams.get("st");
+
+      // Crear el elemento <head>
+
+
+// Crear el elemento <meta> para el charset
+
+
+// Crea
+
+
+// Crear el elemento <link> para la hoja de estilos
+
+
+
+
+var heading = document.createElement('h2');
+
+// Agregar el texto "Establecimiento" al elemento h2
+heading.textContent = placeNAME;
+
+// Agregar el elemento h2 al body del documento
+document.body.appendChild(heading);
+
+if (placeType == "sites") {
+    // Crear elementos div para el establecimiento
+    var divEstablecimientoInfo = document.createElement('div');
+    divEstablecimientoInfo.classList.add('establecimiento');
+    divEstablecimientoInfo.id = 'placeOSInfo';
+
+    var divEstablecimientoData = document.createElement('div');
+    divEstablecimientoData.classList.add('establecimiento');
+    divEstablecimientoData.id = 'placeOSData';
+
+    // Agregar los elementos div al body
+    document.body.appendChild(divEstablecimientoInfo);
+    document.body.appendChild(divEstablecimientoData);
+
+    // Crear el botón de validar compra
+    var buttonValidarCompra = document.createElement('button');
+    buttonValidarCompra.classList.add('btn', 'btn-primary');
+    buttonValidarCompra.textContent = 'Validar compra';
+    buttonValidarCompra.onclick = function() {
+        eraseContainers('placeOSData', 'placeOSInfo');
+        getApiData(getSites, {
+                'apiService': 'apiOS',
+                'apiVersion': 'v1',
+                'endPoint': 'getSites'
+            }, {
+                'containerData': 'placeOSData',
+                'containerInfo': 'placeOSInfo',
+                'modelView': 'cardOS',
+            }, {
+                'filter': 'filter',
+                'param': 'placeIdCarSites',
+                'value': urlObj.searchParams.get('placeId')
+            }
+        );
+    };
+
+    // Agregar el botón al body
+    document.body.appendChild(buttonValidarCompra);
+}
+
+if (placeType == "market") {
+    // Agrega aquí el código para la opción "market" si es diferente
+    var divEstablecimientoInfo = document.createElement('div');
+    divEstablecimientoInfo.classList.add('establecimiento');
+    divEstablecimientoInfo.id = 'placeOSInfo';
+
+    var divEstablecimientoData = document.createElement('div');
+    divEstablecimientoData.classList.add('establecimiento');
+    divEstablecimientoData.id = 'placeOSData';
+
+    // Agregar los elementos div al body
+    document.body.appendChild(divEstablecimientoInfo);
+    document.body.appendChild(divEstablecimientoData);
+    var buttonValidarCompra = document.createElement('button');
+    buttonValidarCompra.classList.add('btn', 'btn-primary');
+    buttonValidarCompra.textContent = 'Validar compra';
+    buttonValidarCompra.onclick = function() {
+        eraseContainers('placeOSData', 'placeOSInfo');
+       
+    getApiData(getSites, {
+                'apiService': 'apiOS',
+                'apiVersion': 'v1',
+                'endPoint': 'getSites'
+            }, {
+                'containerData': 'placeOSData',
+                'containerInfo': 'placeOSInfo',
+                'modelView': 'cardOSmarket',
+            }, {
+                'filter': 'filter',
+                'param': 'placeIdCarMarket',
+                'value': urlObj.searchParams.get('placeId')
+            }
+        );
+
+    // Agregar el botón al body
+};
+document.body.appendChild(buttonValidarCompra);
+}
+
+if (placeType == "siteswork") {
+    // Agrega aquí el código para la opción "market" si es diferente
+    var divEstablecimientoInfo = document.createElement('div');
+    divEstablecimientoInfo.classList.add('establecimiento');
+    divEstablecimientoInfo.id = 'placeOSInfo';
+
+    var divEstablecimientoData = document.createElement('div');
+    divEstablecimientoData.classList.add('establecimiento');
+    divEstablecimientoData.id = 'placeOSData';
+
+    // Agregar los elementos div al body
+    document.body.appendChild(divEstablecimientoInfo);
+    document.body.appendChild(divEstablecimientoData);
+    var buttonValidarCompra = document.createElement('button');
+    buttonValidarCompra.classList.add('btn', 'btn-primary');
+    buttonValidarCompra.textContent = 'Validar compra';
+    buttonValidarCompra.onclick = function() {
+        eraseContainers('placeOSData', 'placeOSInfo');
+       
+    getApiData(getSites, {
+                'apiService': 'apiOS',
+                'apiVersion': 'v1',
+                'endPoint': 'getSites'
+            }, {
+                'containerData': 'placeOSData',
+                'containerInfo': 'placeOSInfo',
+                'modelView': 'cardOSwork',
+            }, {
+                'filter': 'filter',
+                'param': 'placeIdCarSitesWork',
+                'value': urlObj.searchParams.get('placeId')
+            }
+        );
+
+    // Agregar el botón al body
+};
+document.body.appendChild(buttonValidarCompra);
+}
+if (placeType == "ecommerce") {
+    // Agrega aquí el código para la opción "market" si es diferente
+    var divEstablecimientoInfo = document.createElement('div');
+    divEstablecimientoInfo.classList.add('establecimiento');
+    divEstablecimientoInfo.id = 'placeOSInfo';
+
+    var divEstablecimientoData = document.createElement('div');
+    divEstablecimientoData.classList.add('establecimiento');
+    divEstablecimientoData.id = 'placeOSData';
+
+    // Agregar los elementos div al body
+    document.body.appendChild(divEstablecimientoInfo);
+    document.body.appendChild(divEstablecimientoData);
+    var buttonValidarCompra = document.createElement('button');
+    buttonValidarCompra.classList.add('btn', 'btn-primary');
+    buttonValidarCompra.textContent = 'Validar compra';
+    buttonValidarCompra.onclick = function() {
+        eraseContainers('placeOSData', 'placeOSInfo');
+       
+    getApiData(getSites, {
+                'apiService': 'apiOS',
+                'apiVersion': 'v1',
+                'endPoint': 'getSites'
+            }, {
+                'containerData': 'placeOSData',
+                'containerInfo': 'placeOSInfo',
+                'modelView': 'cardOSecommerce',
+            }, {
+                'filter': 'filter',
+                'param': 'placeIdCarEcommerce',
+                'value': urlObj.searchParams.get('placeId')
+            }
+        );
+
+    // Agregar el botón al body
+};
+document.body.appendChild(buttonValidarCompra);
+}
+
 </script>
 
-  <button class="btn btn-primary" onClick="
-  eraseContainers('placeOSData','placeOSInfo');
-  getApiData(getSites,
-             {
-               'apiService':'apiOS',
-               'apiVersion':'v1',
-               'endPoint':'getSites'
-           },
-             {
-               'containerData':'placeOSData',
-               'containerInfo':'placeOSInfo',
-               'modelView':'cardOS',
-           },
-             {
-               'filter':'filter',
-               'param':'placeIdCar',
-               'value':  urlObj.searchParams.get('placeId')
-           }
-               );
-  
-  
-  
-  ">Validar compra</button>
 
 
-
-
-
-
-
-
-
-
-
-  
-
-
-
-    
-  </div>
-                </p>
-
-</div>
-
-        
-
-       
-  </div>
-
-  <div class="tab-pane fade" id="api-tab-pane1" role="tabpanel" aria-labelledby="api-tab" tabindex="0">..www.</div>
-  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">.ddf..</div>
-</div>
-</body>
 </html>
 <script  src="scripts/data/credentials.js"></script>
 <script  src="scripts/data/endPoints.js"></script>
@@ -171,9 +271,9 @@ const url = window.location.href;
 <script  src="scripts/gets/getMySessions.js"></script>
 <script  src="scripts/gets/getClientCommerceAdmin.js"></script>
 <script  src="scripts/gets/getClientCommerce.js"></script>
-<script  src="scripts/gets/getOrders.js"></script>
-<script  src="scripts/posts/cart.js"></script>
-<script  src="scripts/posts/postCreateEcmOrder.js"></script>
+
+
+
 <script  src="scripts/gets/os.getSites.js"></script>
 <script  src="scripts/posts/os.postSites.js"></script>
 <script  src="scripts/gets/os.getOrders.js"></script>

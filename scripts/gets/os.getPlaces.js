@@ -7,12 +7,47 @@
 
         var idin1 = 1;
         try {
+          if(modelView=="alert"){
+               
+            var placesCounter=0;
+            data.places.forEach(info => {
+ 
+ 
+              placesCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiPlaceNow')=="true"){
+            if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
+
+            openModal('OSPlaceCreate');
+            listTypePlace();
+            }if(placesCounter>=sessionStorage.getItem('maxPlaceNow')){
+              alert("Máximo de esyablecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxPlaceNow'));
+                }
+         
+          }
+          if(sessionStorage.getItem('isMultiPlaceNow')=="false"){
+              if(placesCounter>=sessionStorage.getItem('maxPlaceNow')){
+                alert("Máximo de establecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO:"+sessionStorage.getItem('maxPlaceNow')+")" );
+                
+              }
+              if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
+                openModal('OSPlaceCreate');
+                listTypePlace();
+                
+              }
+          }
+          
+      
+        }
             if (data.response && data.response.response == "true") {
 
 
 
 
-
+              
 
               
 
@@ -189,6 +224,9 @@ createTable('tableInternalClients2','containerOSData', [
       <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
+      <a href="place.php?clientId=${info.clientId}&placeId=${info.placeId}&st=${info.infoPlace.params.placeType}&placeName=${info.infoPlace.info.name}" target="_blank">
+      IR AL SITIO
+      </a>
       </div></td>
 
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
@@ -231,7 +269,31 @@ createTable('tableInternalClients2','containerOSData', [
       <div id="allContainer${info.placeId}" style="display: none;">
       
      
-      
+      <p class="card-text">
+<div class="edit-container" style="margin-bottom: 10px;">
+  <p class="card-text" style="display: inline-block; margin-right: 10px;">RTipo de establecimiento: ${info.infoPlace.params.placeType }</p>
+  <select class="form-control" id="list-OSProductDiscount1Place" name="unidad" required>
+  ${sessionStorage.getItem('isMarketNow')=="true" ?`
+  <option value="market">Market</option>
+  
+  `:`` }
+  ${sessionStorage.getItem('isSiteNow')=="true" ?`
+  <option value="sites">Con mesas</option> 
+   `:`` }
+   ${sessionStorage.getItem('isWorkNow')=="true" ?`
+   <option value="siteswork">Con puestos de trabajo</option>
+    `:`` }
+    
+    ${sessionStorage.getItem('isEcommerceNow')=="true" ?`
+    <option value="ecommerce">E-Commerce</option>
+    `:`` }
+    
+  </select>
+  <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;placeType&quot;,&quot;params&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+    <i class="fas fa-edit"></i>
+  </button>
+</div>
+</p>
       <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Sistema de puntos: ${info.infoPlace.params.isPoint === true ? `APLICA`:`NO APLICA`}</p>

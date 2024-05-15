@@ -42,27 +42,12 @@
 
 
 
-
+<div id="trackingResource"></div>
                      
 
-                      
-<p class="expand-button" onclick="toggleExpandableSection();"><i class="fas fa-calendar"></i> CALENDARIO</p>
-    <a onclick="changeSection('gtask');getIndentFullCalendar();"
-               id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
-               role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-               
-              
-              </a>
-    <div class="expandable-section" id="expandable-section">
-      
-        <div id="containerCalendarDaysInfo" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-        <div id="containerCalendarDaysData" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-    </div>
+        
     <script>
+      
         function toggleExpandableSection() {
             const expandableSection = document.getElementById("expandable-section");
             if (expandableSection.style.display === "block") {
@@ -76,128 +61,7 @@
 
 
 
-
-    <p class="expand-button1" onclick="toggleExpandableSection1()"><i class="fas fa-guitar"></i> RECURSOS</p>
-    <div class="expandable-section1" id="expandable-section1">
-  
-
-      
-            <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-home"></i>Rooms</h5>
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                      //  openModClientRooms();
-                         eraseContainers('containerResourcesData','containerResourcesInfo');
-               createTable('tableInternalClients1','containerResourcesData', [
-                                 'Room',
-                                 'Editar room',
-                                 'Estado',
-                                 'Asignaciones',
-                                 'Asignar elemento',
-                                 'Eliminar'
-                             ]);
-                        getApiData(getClientRooms,
-                      {
-                        'apiService':'apiCompanies',
-                        'apiVersion':'v1',
-                        'endPoint':'getClientRooms'
-                    },
-                      {
-                        'containerData':'containerResourcesData',
-                        'containerInfo':'containerResourcesInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );" 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-              
-                </p>
-                      
-                      
-              <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="openModClientRoomsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;">
-    <i class="fas fa-plus"></i>
-  </button>
-</div>
-              </p>
-
-            
-                      
-                  </div>
-                  <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-guitar"></i>Elementos</h5>
-
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        
-                          eraseContainers('containerResourcesData','containerResourcesInfo');
-               createTable('tableInternalClients1','containerResourcesData', [
-                                 'Imágen',
-                                 'Editar imágen',
-                                 'Elemento',
-                                 'Estado',
-                                 'Caracteristicas',
-                                 'Marca',
-                                 'Tipo',
-                                 'Estado Asignación',
-                                 'Comentarios',
-                                 'Valor por hora',
-                                 'Eliminar'
-                             ]);
-                        getApiData(getElements,
-                      {
-                        'apiService':'apiCompanies',
-                        'apiVersion':'v1',
-                        'endPoint':'getClientElements'
-                    },
-                      {
-                        'containerData':'containerResourcesData',
-                        'containerInfo':'containerResourcesInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    });
-                        " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-                      
-                <p class="card-text">
-              <div class="edit-container">
-  
-  <button onclick="openModClientElementsCreate();" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;">
-    <i class="fas fa-plus"></i>
-  </button>
-</div>
-              </p>
-                      
-                  </div>
-                  <div id="card-clientresources" class="card-container">
-            <!-- Contenido de la sección expandible -->
-            <div id="containerResourcesInfo" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-        <div id="containerResourcesData" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-        </div>
-    </div>
+<div id="resourceResource"></div>
     <script>
         function toggleExpandableSection1() {
             const expandableSection1 = document.getElementById("expandable-section1");
@@ -213,393 +77,6 @@
 
 
 
-<p class="expand-button1" onclick="toggleExpandableSection3()"><i class="fas fa-store"></i> COMERCIO</p>
-    <div class="expandable-section1" id="expandable-section3">
-        <div id="card-clientresources" class="card-container">
-            <!-- Contenido de la sección expandible -->
-          
-            <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-cube"></i> INVENTARIOS</h5>
-                <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                                 'PRODUCTO',
-                                 'SKU',
-                                 'EAN1',
-                                 'EAN2',
-                                 'QR',
-                                 'ESTADO',
-                                 'EDICIÒN'
-                             ]);
-                        getApiData(getProducts,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getProducts'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                        " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-                      <p class="card-text"><button onclick="openModal('clientProductCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
-                    </p>
-                      
-                  </div>
-
-                  <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-box"></i> CATÁLOGO</h5>
-
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                         eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                                 
-                                 'Producto',
-                                
-                                
-                                 'Stock',
-                                 'Precio',
-                                 
-                                 'Locación',
-                                'ean1',
-                                'ean2',
-                                'sku',
-                                 
-                                 'QR',
-                                 'Estado',
-                                 'Ampliar',
-                                 'Edición'
-                             ]);
-                        getApiData(getCatalogs,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getCatalogs'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all|all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                       
-                        
-                       
-                        " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-                      
-                <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        openModal('clientCatalogCreate');
-                        getApiData(getClientCategoriesListBtn,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getCategories'
-                    },
-                      {
-                        'containerData':'list-categoryListstadd',
-                        'containerInfo':''
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-
-                        getApiData(getClientStoresList,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getStores'
-                    },
-                      {
-                        'containerData':'list-storeListstadd',
-                        'containerInfo':'containerCustomersInfo'
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-
-                        getApiData(getClientProductList,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getProducts'
-                    },
-                      {
-                        'containerData':'list-productListstadd',
-                        'containerInfo':'containerProductsInfo'
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                        " 
-                      >
-                      <i class="fas fa-plus"></i>
-                    </button>
-                </p>
-                      
-                      
-                  </div>
-                  <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-filter"></i> CATEGORÍAS</h5>
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                                 'Categoría',
-                                 'Palabras clave',
-                                 'QR',
-                                 'Estado',
-                                 'Edición'
-                             ]);
-                        getApiData(getCategories,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getCategories'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                   " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-
-                    
-                <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        openModal('clientCategorieCreate');
-                        getApiData(getClientCategoriesListBtnParent,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getCategories'
-                    },
-                      {
-                        'containerData':'list-categoryListstadd96',
-                        'containerInfo':''
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );" 
-                      >
-                      <i class="fas fa-plus"></i>
-                    </button>
-                </p>
-
-                     
-                      
-                  </div>
-                  <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-store"></i> TIENDAS</h5>
-
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                                 
-                                 'Tienda',
-                                 'Palabras clave',
-                                 'QR',
-                                 'Estado',
-                                 'Edición'
-                             ]);
-                        getApiData(getStores,
-                      {
-                        'apiService':'apiCom',
-                        'apiVersion':'v1',
-                        'endPoint':'getStores'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                       " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-
-                     
-                      <p class="card-text"><button onclick="openModal('clientStoreCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
-                    </p>
-                      
-                  </div>
-       
-
-        
-        <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-phone"></i> CLIENTES</h5>
-
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                        eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                                 'Nombre',
-                                 'Apellido',
-                                 'Estado',
-                                 'Correo',
-                                 'Contacto',
-                                 'Puntos',
-                                 'Estrellas',
-                                 'Tipo',
-                                 'Eliminar'
-                             ]);
-                        getApiData(getCustomers,
-                      {
-                        'apiService':'apiClient',
-                        'apiVersion':'v1',
-                        'endPoint':'getCustomers'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                      " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-
-                     
-
-                
-                      <p class="card-text"><button onclick="openModal('clientCustomerCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
-                    </p>
-                      
-                  </div>
-
-                     
-        <div class="card-body">
-                      <h5 style="color: #C70039"><i class="fas fa-truck"></i> REPARTIDORES</h5>
-
-                      <p class="card-text">
-                    <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
-
-                        onclick="
-                         eraseContainers('containerCommerceData','containerCommerceInfo');
-               createTable('tableInternalClients1','containerCommerceData', [
-                'Nombre',
-          'Apellido',
-          'Estado',
-          'Correo',
-          'Contacto',
-          'Parámetros',
-          
-          'Eliminar'
-                             ]);
-                        getApiData(getDelivery,
-                      {
-                        'apiService':'apiClient',
-                        'apiVersion':'v1',
-                        'endPoint':'getDelivery'
-                    },
-                      {
-                        'containerData':'containerCommerceData',
-                        'containerInfo':'containerCommerceInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                        " 
-                      >
-                      <i class="fas fa-eye"></i>
-                    </button>
-                </p>
-
-
-                         <p class="card-text"><button onclick="openModal('clientDeliveryCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
-                    </p>
-                      
-                  </div>
-                
-        </div>
-        <p class="card-text">
-        <div class="card-container"> 
-          
-                      <div id="containerCommerceInfo" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-        <div id="containerCommerceData" class="card-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-                      </div></p>
-                      </div>
                       
     <script>
         function toggleExpandableSection3() {
@@ -656,7 +133,23 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="openModal('OSPlaceCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="getApiData(getPlaces,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getPlaces'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'alert',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
@@ -696,16 +189,16 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="openModal('OSSiteCreate');getApiData(getPlacesList,
+                      <p class="card-text"><button onclick="getApiData(getSites,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
-                        'endPoint':'getPlaces'
+                        'endPoint':'getSites'
                     },
                       {
-                        'containerData':'list-OSPlace',
+                        'containerData':'containerOSData',
                         'containerInfo':'containerOSInfo',
-                        'modelView':'table',
+                        'modelView':'alert',
                     },
                       {
                         'filter':'all',
@@ -756,17 +249,17 @@
                     </button>
                 </p>
                       <p class="card-text"><button onclick="
-                      openModal('OSElementCreate');
-                      getApiData(getSitesList,
+                      
+                      getApiData(getElementsOS,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
-                        'endPoint':'getSites'
+                        'endPoint':'getElements'
                     },
                       {
                         'containerData':'list-OSSite',
                         'containerInfo':'containerOSInfo',
-                        'modelView':'table',
+                        'modelView':'alert',
                     },
                       {
                         'filter':'all',
@@ -819,7 +312,23 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="openModal('OSProductCreate');" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="getApiData(getProductsOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getProducts'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'alert',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
@@ -863,8 +372,8 @@
                     </button>
                 </p>
                       <p class="card-text"><button onclick="
-                      openModal('OSCatCreate');
-                      getApiData(getCategoriesOSList,
+                     
+                      getApiData(getCategoriesOS,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
@@ -873,7 +382,7 @@
                       {
                         'containerData':'list-OSCategories',
                         'containerInfo':'containerOSInfo',
-                        'modelView':'table',
+                        'modelView':'alert',
                     },
                       {
                         'filter':'all',
@@ -937,51 +446,16 @@
                     </button>
                 </p>
                       <p class="card-text"><button onclick="
-                      openModal('OSCatalogCreate');
-                      getApiData(getProductsOSList,
+                      getApiData(getCatalogsOS,
                       {
                         'apiService':'apiOS',
                         'apiVersion':'v1',
-                        'endPoint':'getProducts'
+                        'endPoint':'getCatalogs'
                     },
                       {
-                        'containerData':'list-OSProductList',
+                        'containerData':'containerOSData',
                         'containerInfo':'containerOSInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                        getApiData(getPlacesList,
-                      {
-                        'apiService':'apiOS',
-                        'apiVersion':'v1',
-                        'endPoint':'getPlaces'
-                    },
-                      {
-                        'containerData':'list-OSPlaceList',
-                        'containerInfo':'containerOSInfo',
-                        'modelView':'table',
-                    },
-                      {
-                        'filter':'all',
-                        'param':'all',
-                        'value':'all'
-                    }
-                        );
-                        getApiData(getCategoriesOSList,
-                      {
-                        'apiService':'apiOS',
-                        'apiVersion':'v1',
-                        'endPoint':'getCategories'
-                    },
-                      {
-                        'containerData':'list-OSCategoryList',
-                        'containerInfo':'containerOSInfo',
-                        'modelView':'table',
+                        'modelView':'alert',
                     },
                       {
                         'filter':'all',
@@ -1146,24 +620,23 @@
                     </button>
                 </p>
                       <p class="card-text"><button onclick="
-                      openModal('OSEmployeeCreate');
-                      getApiData(getPlacesList,
-                              {
-                                'apiService':'apiOS',
-                                'apiVersion':'v1',
-                                'endPoint':'getPlaces'
-                            },
-                              {
-                                'containerData':'list-OSPlaceOwner',
-                                'containerInfo':'containerOSInfo',
-                                'modelView':'table',
-                            },
-                              {
-                                'filter':'all',
-                                'param':'all',
-                                'value':'all'
-                            }
-                                );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      getApiData(getEmployeesOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getEmployees'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'alert',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>
@@ -1206,25 +679,24 @@
                       <i class="fas fa-eye"></i>
                     </button>
                 </p>
-                      <p class="card-text"><button onclick="
-                      openModal('OSCustomerCreate');
-                      getApiData(getPlacesList,
-                              {
-                                'apiService':'apiOS',
-                                'apiVersion':'v1',
-                                'endPoint':'getPlaces'
-                            },
-                              {
-                                'containerData':'list-OSPlaceOwnerCustomer',
-                                'containerInfo':'containerOSInfo',
-                                'modelView':'table',
-                            },
-                              {
-                                'filter':'all',
-                                'param':'all',
-                                'value':'all'
-                            }
-                                );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                      <p class="card-text"><button onclick="getApiData(getCustomersOS,
+                      {
+                        'apiService':'apiOS',
+                        'apiVersion':'v1',
+                        'endPoint':'getCustomers'
+                    },
+                      {
+                        'containerData':'containerOSData',
+                        'containerInfo':'containerOSInfo',
+                        'modelView':'alert',
+                    },
+                      {
+                        'filter':'all',
+                        'param':'all',
+                        'value':'all'
+                    }
+                        );
+                     " class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
                     </p>
                       
                   </div>

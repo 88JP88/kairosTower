@@ -7,6 +7,75 @@
 
         var idin = 1;
         try {
+
+          if(modelView=="alert"){
+               
+            var categoriesCounter=0;
+            data.categories.forEach(info => {
+ 
+ 
+              categoriesCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiCategoryNow')=="true"){
+            if(categoriesCounter<sessionStorage.getItem('maxCategoryNow')){
+            openModal('OSCatCreate');
+            
+            getApiData(getCategoriesOSList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getCategories'
+            },
+              {
+                'containerData':'list-OSCategories',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }
+              if(categoriesCounter>=sessionStorage.getItem('maxCategoryNow')){
+                alert("Máximo de categorias creadas (TOTAL: "+categoriesCounter+" / MÁXIMO:"+sessionStorage.getItem('maxCategoryNow')+")" );
+                  }
+          }
+          if(sessionStorage.getItem('isMultiCategoryNow')=="false"){
+              if(categoriesCounter>=sessionStorage.getItem('maxCategoryNow')){
+                alert("Máximo de categorias creadas (TOTAL: "+categoriesCounter+" / MÁXIMO:"+sessionStorage.getItem('maxCategoryNow')+")" );
+                
+              }
+
+              if(categoriesCounter<sessionStorage.getItem('maxCategoryNow')){
+                openModal('OSCatCreate');
+                
+                getApiData(getCategoriesOSList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getCategories'
+                },
+                  {
+                    'containerData':'list-OSCategories',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 

@@ -85,7 +85,7 @@ function csvToJsonPostCustomer(csvData) {
 
 
 
-function editOSEmployee(button, clientId,employeeId,param,value,reason) {
+function editOSCustomer(button, clientId,customerId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
   document.getElementById("loading-container").style.display = "flex";
   if(reason=="data"){
@@ -96,14 +96,14 @@ function editOSEmployee(button, clientId,employeeId,param,value,reason) {
   
   }
   var apiData = {
-    "employeeId": employeeId,
+    "customerId": customerId,
     "clientId": clientId,
     "param": param,
     "value": value,
     "apiValues":{
       "apiName": "apiOS",
       "apiVersion": "v1",
-      "endPoint": "putEmployee"
+      "endPoint": "putCustomer"
     }
     
   };
@@ -121,7 +121,7 @@ fetch(url)
 
     getMessage();
     
-    getApiData(getEmployeesOS,
+    getApiData(getCustomersOS,
       {
         'apiService':'apiOS',
         'apiVersion':'v1',

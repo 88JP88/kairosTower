@@ -7,6 +7,143 @@ let idin1 = 1;
 
         
         try {
+
+          if(modelView=="alert"){
+               
+            var catalogsCounter=0;
+            data.catalogs.forEach(info => {
+ 
+ 
+              catalogsCounter++;
+            
+              
+             
+            });
+          if(sessionStorage.getItem('isMultiCatalogNow')=="true"){
+            if(catalogsCounter<sessionStorage.getItem('maxCatalogNow')){
+            openModal('OSCatalogCreate');
+            
+            getApiData(getProductsOSList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getProducts'
+            },
+              {
+                'containerData':'list-OSProductList',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+                getApiData(getPlacesList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getPlaces'
+            },
+              {
+                'containerData':'list-OSPlaceList',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+                getApiData(getCategoriesOSList,
+              {
+                'apiService':'apiOS',
+                'apiVersion':'v1',
+                'endPoint':'getCategories'
+            },
+              {
+                'containerData':'list-OSCategoryList',
+                'containerInfo':'containerOSInfo',
+                'modelView':'table',
+            },
+              {
+                'filter':'all',
+                'param':'all',
+                'value':'all'
+            }
+                );
+              }
+              if(catalogsCounter>=sessionStorage.getItem('maxCatalogNow')){
+                alert("Máximo de productos creados (TOTAL: "+catalogsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxCatalogNow'));
+                  }
+          }
+          if(sessionStorage.getItem('isMultiProductNow')=="false"){
+              if(catalogsCounter>=sessionStorage.getItem('maxCatalogNow')){
+                alert("Máximo de productos creados (TOTAL: "+catalogsCounter+" / MÁXIMO: "+sessionStorage.getItem('maxCatalogNow'));
+                
+              }
+
+              if(catalogsCounter<sessionStorage.getItem('maxCatalogNow')){
+                openModal('OSCatalogCreate');
+                
+                getApiData(getProductsOSList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getProducts'
+                },
+                  {
+                    'containerData':'list-OSProductList',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                    getApiData(getPlacesList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getPlaces'
+                },
+                  {
+                    'containerData':'list-OSPlaceList',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                    getApiData(getCategoriesOSList,
+                  {
+                    'apiService':'apiOS',
+                    'apiVersion':'v1',
+                    'endPoint':'getCategories'
+                },
+                  {
+                    'containerData':'list-OSCategoryList',
+                    'containerInfo':'containerOSInfo',
+                    'modelView':'table',
+                },
+                  {
+                    'filter':'all',
+                    'param':'all',
+                    'value':'all'
+                }
+                    );
+                
+              }
+          }
+      
+        }
             if (data.response && data.response.response == "true") {
 
 
@@ -589,9 +726,7 @@ eraseContainers('containerOSData','containerOSInfo');
 
        <td>${info.infoPlace.info.name} - ${info.infoPlace.info.comments}
        
-       <a href="place.php?clientId=${info.clientId}&placeId=${info.placeId}&st=${info.placeId}" target="_blank">
-      q
-      </a>
+       
        </td>
        <td style="background-color: ${backgroundColor};">
        <p style="margin-bottom: 5px;">${info.infoCategory.info.type =="secondary" ? `SUB-CATEGORÍA`:``}
@@ -1211,7 +1346,7 @@ ${info.infoCatalog.info.isPromo ===true || info.infoCatalog.info.isPromo === 1 ?
 }
 
 
-              if(modelView=="card"){
+              if(modelView=="cardEcommerce"){
                 const cardContainer11 = document.getElementById(containerData);
                 const cardContainer11Info = document.getElementById(containerInfo);
                 cardContainer11.innerHTML = ""; // Borra las tarjetas antiguas
@@ -1221,12 +1356,28 @@ ${info.infoCatalog.info.isPromo ===true || info.infoCatalog.info.isPromo === 1 ?
                 card11Info.innerHTML = `<p>${data.response.apiMessage}</p>`;
                 cardContainer11Info.appendChild(card11Info);
 
-                for (const info of data.delivery) {
+                for (const info of data.catalogs) {
                     const card11 = document.createElement("div");
                     card11.classList.add("card");
                     const backgroundColor = info.isActive === "0" ? "#cc0007" : "#ffffff";
                     const activo1 = info.isActive === "0" ? "INACTIVO" : "ACTIVO";
-                    const disRulesArray = JSON.parse(info.distanceRules);
+                    let idGenerado = generarID();
+
+
+                    if (info.infoCatalog.info.isDiscount !== false) {
+                      var result = info.infoCatalog.info.discount *info.infoCatalog.info.price;
+                      var mult= result/100;
+                      var rest=info.infoCatalog.info.price-mult;
+                      priceToShow = `${rest}`;
+      
+                      originPrice=info.infoCatalog.info.price;
+                      saver=mult;
+                      dicounter=info.infoCatalog.info.discount;
+                      
+                    } else {
+                      priceToShow = `${info.infoCatalog.info.price}`;
+                      dicounter=0;
+                    }
                     card11.innerHTML = `
           <div class="card-body" style="background-color: ${backgroundColor};">
           <h5 class="card-title">
@@ -1235,12 +1386,31 @@ ${info.infoCatalog.info.isPromo ===true || info.infoCatalog.info.isPromo === 1 ?
          
 
       </h5>
-      <p class="card-text">Nombre del repartidor:
+      <p class="card-text">${info.infoProduct.info.name}
       <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryName}" title="${info.deliveryName}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryName&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
+      input type="number" id="qty${info.catalogId}${idin1}" class="form-control label-input" value="1">
+  <button" onclick="toCarOS('${info.catalogId}','toCar','qty${info.catalogId}${idin1}', {
+    'catalogPrice':${info.infoCatalog.info.price},
+    'productName':'${info.infoProduct.info.name}',
+    'qty':1,
+    'discount':${info.infoCatalog.info.discount},
+    'isDiscount':${info.infoCatalog.info.isDiscount},
+    'categoryName':'${info.infoCategory.info.name}',
+    'productType':'${info.infoProduct.info.type}',
+    'productPrice':'${info.infoProduct.info.value}',
+    'sku':'${info.infoProduct.info.sku}',
+    'ean1':'${info.infoProduct.info.ean1}',
+    'ean2':'${info.infoProduct.info.ean2}',
+    'productCaracts':'${info.infoProduct.info.caracts}',
+    'placeName':'${info.infoPlace.info.name}',
+    'catalogComments':'${info.infoCatalog.info.comments}',
+    'isPromo':'${info.infoCatalog.info.isPromo}',
+    'promo':'${info.infoCatalog.info.promo}',
+    'stock':'${info.infoCatalog.info.stock}'
+},'${sessionStorage.getItem('siteNow')}');" class="btn btn-primary1 delete-button" title="EDITAR">
+  <i class="fas fa-eye-slash"></i>
+  </button>
+     
 </div>
       </p>
       <p class="card-text">Apellido del repartidor:
@@ -1254,129 +1424,76 @@ ${info.infoCatalog.info.isPromo ===true || info.infoCatalog.info.isPromo === 1 ?
       
       
       
-     <p class="card-text">
-      <div class="edit-container">
-      ${info.isActive !== "0" ? `<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;isActive&quot;,&quot;0&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="DESACTIVAR">
-<i class="fas fa-ban"></i>
-</button>` 
-: `<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;isActive&quot;,&quot;1&quot;,&quot;isActive&quot;)" class="btn btn-primary1 delete-button" title="ACTIVAR">
-<i class="fas fa-check"></i>
-</button>`}${activo1} 
-
-</div>
-             
-          
-
-
-      <p class="card-text">Correo:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryMail}" title="${info.customerMail}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryMail&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-      <p class="card-text">Teléfono:
-      <div class="edit-container">
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value="${info.deliveryContact}" title="${info.deliveryContact}">
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;deliveryContact&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-
-      <p class="card-text">Reglas de distancia y tiempo:
-      <div class="edit-container">
-      <p class="card-text">
-      Calle inicio
-      <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startStreet']}" title=" ${disRulesArray[0]['distance']['startStreet']}">
-    </p>
-    </div>
-    <p class="card-text"> Cardinalidad inicio
-    <button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarStreetStart');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-    <!-- Popup -->
-    <div id="popCarStreetStart" class="popup">
-      <p>NORTE (N)<br>SUR (S)</p>
-      <button onclick="closePopup('popCarStreetStart')">Cerrar</button>
-    </div>
-    <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startLocationStreet']}" title=" ${disRulesArray[0]['distance']['startLocationStreet']}">
-  </p>
-    <p class="card-text">
-    Calle fin
-    <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endStreet']}" title=" ${disRulesArray[0]['distance']['endStreet']}">
-  </p>
-  <p class="card-text">
-  Cardinalidad fin
-  <button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarStreetEnd');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-  <!-- Popup -->
-  <div id="popCarStreetEnd" class="popup">
-    <p>NORTE (N)<br>SUR (S)</p>
-    <button onclick="closePopup('popCarStreetEnd')">Cerrar</button>
-  </div>
-  <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endLocationStreet']}" title=" ${disRulesArray[0]['distance']['endLocationStreet']}">
-</p>
-  <p class="card-text">
-  carrera inicio
-  <input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startAvenue']}" title=" ${disRulesArray[0]['distance']['startAvenue']}">
-</p>
-<p class="card-text">
-Cardinalidad inicio
-<button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarAvenueStart');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-<!-- Popup -->
-<div id="popCarAvenueStart" class="popup">
-  <p>ESTE (EST)<br>OESTE (OES)</p>
-  <button onclick="closePopup('popCarAvenueStart')">Cerrar</button>
-</div>
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startLocationAvenue']}" title=" ${disRulesArray[0]['distance']['startLocationAvenue']}">
-</p>
-<p class="card-text">
-Carrera fin
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endAvenue']}" title=" ${disRulesArray[0]['distance']['endAvenue']}">
-</p>
-<p class="card-text">
-Cardinalidad fin
-<button  class="btn btn-primary1 delete-button" onClick="openPopup('popCarAvenueEnd');"><i id="infoIcon" class="fas fa-info" style="cursor: pointer;"></i></button>
-   
-
-<!-- Popup -->
-<div id="popCarAvenueEnd" class="popup">
-<p>ESTE (EST)<br>OESTE (OES)</p>
-<button onclick="closePopup('popCarAvenueEnd')">Cerrar</button>
-</div>
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endLocationAvenue']}" title=" ${disRulesArray[0]['distance']['endLocationAvenue']}">
-</p>
-
-<p class="card-text">
-Tiempo inicio
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['startTime']}" title=" ${disRulesArray[0]['distance']['startTime']}">
-</p>
-<p class="card-text">
-Cardinalidad fin
-<input type="text" class="form-control label-input" id="${info.deliveryId}" value=" ${disRulesArray[0]['distance']['endTime']}" title=" ${disRulesArray[0]['distance']['endTime']}">
-</p>
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;customerPhone&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-<i class="fas fa-edit"></i>
-</button>
-</div>
-      </p>
-     
-      
-      <p class="card-text">
-      <div class="edit-container">
-
-<button onclick="editClientDelivery(this,&quot;${info.clientId}&quot;,&quot;${info.deliveryId}&quot;,&quot;del&quot;,&quot;data&quot;,&quot;del&quot;)" class="btn btn-primary1 delete-button" title="ELIMINAR">
-<i class="fas fa-trash"></i>
-</button>
-</div>
-      </p>
               
           </div>
+
+
+          <div class="edit-container">
+                  
+                               
+                  
+          <div class="card">
+          <div class="card-header">
+          <div id="cartItems1${idGenerado}" class="cart-items1"></div>
+          <img src="${info.infoProduct.info.imgProduct}'" alt="Icono" style="max-width: 120px; max-height: 120px;">
+          <h2>${info.infoProduct.info.name}</h2>
+          <p class="item-price">${info.infoCategory.info.name}</p>
+        </div>
+        <div class="card-body">
+          <p class="item-name">${info.infoProduct.info.caracts}</p>
+
+
+          <p class="card-text">
+          <div class="edit-container">
+      
+
+</div>
+
+${info.infoCatalog.info.isDiscount !== false ? `<p class="item-price" style="color: green;">Valor con descuento: $${priceToShow}</p><p class="item-price">Valor original: <del style="color: red;">$${originPrice}</del></p><p class="item-price" style="color: blue;">Ahorro: $${saver}</p>` 
+: `<p class="item-price" style="color: green;">$${priceToShow}</p>`}
+        
+${info.infoCatalog.info.isDiscount !== false ? ` <p class="card-text">Promoción: </p>` 
+: ``}
+${info.infoCatalog.info.isDiscount !== false ? `  <p class="card-text" style="color: green;">Descuento: ${dicounter}%</p>` 
+: ``}
+         
+        </div>
+        <div class="card-footer">
+          <div>
+          <p class="card-text">Cantidad:</p>
+            <input type="text" id="qty${info.catalogId}${idin1}" value="1">
+          </div>
+          <button  onclick="toCarOS('${info.catalogId}','toCar','qty${info.catalogId}${idin1}', {
+            'catalogPrice':${info.infoCatalog.info.price},
+            'productName':'${info.infoProduct.info.name}',
+            'qty':1,
+            'discount':${info.infoCatalog.info.discount},
+            'isDiscount':${info.infoCatalog.info.isDiscount},
+            'categoryName':'${info.infoCategory.info.name}',
+            'productType':'${info.infoProduct.info.type}',
+            'productPrice':'${info.infoProduct.info.value}',
+            'sku':'${info.infoProduct.info.sku}',
+            'ean1':'${info.infoProduct.info.ean1}',
+            'ean2':'${info.infoProduct.info.ean2}',
+            'productCaracts':'${info.infoProduct.info.caracts}',
+            'placeName':'${info.infoPlace.info.name}',
+            'catalogComments':'${info.infoCatalog.info.comments}',
+            'isPromo':'${info.infoCatalog.info.isPromo}',
+            'promo':'${info.infoCatalog.info.promo}',
+            'stock':'${info.infoCatalog.info.stock}'
+        },'${sessionStorage.getItem('siteNow')}');" class="btn btn-primary1 delete-button" title="EDITAR">
+          <i class="fas fa-plus"></i>
+          </button>
+         
+        </div>
+        
+        
+        
+</div>
+
+         
+</div>
+         
           
       `;
 
