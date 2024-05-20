@@ -118,9 +118,10 @@ button2.onclick = function() {
 buttonContainer.appendChild(button2);
 document.body.appendChild(buttonContainer); // Puedes ajustar el contenedor según tu necesidad
 
-
+var counterUp=0;
 
 if (data.response && data.response.response == "true") {
+ 
  //  const subInternalClients = `${subDomain}/kairosGateway/apiCore/v1/getInternalClients/${ranCodetask} ${apiKeytask}/`;
 if(data.response.sentData.param=="unlock"){
   const cardContainer11 = document.querySelector("#"+containerData+" tbody");
@@ -151,7 +152,9 @@ if(data.response.sentData.param=="unlock"){
         'isEcommerceNow':'${info.infoClient.params.placeParams.isEcommerce}',
         'isMarketNow':'${info.infoClient.params.placeParams.isMarket}',
         'isWorkNow':'${info.infoClient.params.placeParams.isWork}',
-        'isSiteNow':'${info.infoClient.params.placeParams.isPlace}',
+        'isSiteNow':'${info.infoClient.params.siteParams.isSite}',
+        'isPlaceNow':'${info.infoClient.params.placeParams.isPlace}',
+        'isPlaceActiveNow':'${info.infoClient.params.placeParams.isActive}',
         'isMultiPlaceNow':'${info.infoClient.params.placeParams.isMultiPlace}',
         'isMultiSiteNow':'${info.infoClient.params.siteParams.isMultiSite}',
         'isMultiElementNow':'${info.infoClient.params.elementParams.isMultiElement}',
@@ -159,18 +162,29 @@ if(data.response.sentData.param=="unlock"){
         'isStarsSystemNow':'${info.infoClient.params.pointsParams.isStarsSystem}',
         'isMultiClientNow':'${info.infoClient.params.clientParams.isMultiClient}',
         'isMultiTeamNow':'${info.infoClient.params.teamParams.isMultiTeam}',
+        'isProductNow':'${info.infoClient.params.productParams.isProduct}',
+
         'isMultiProductNow':'${info.infoClient.params.productParams.isMultiProduct}',
         'maxProductNow':'${info.infoClient.params.productParams.maxQty}',
         'maxPlaceNow':'${info.infoClient.params.placeParams.maxQty}',
+        'isElementNow':'${info.infoClient.params.elementParams.isElement}',
+
         'maxElementNow':'${info.infoClient.params.elementParams.maxQty}',
+        'isClientNow':'${info.infoClient.params.clientParams.isClient}',
+
         'maxClientNow':'${info.infoClient.params.clientParams.maxQty}',
+        'isTeamNow':'${info.infoClient.params.teamParams.isTeam}',
+
         'maxTeamNow':'${info.infoClient.params.teamParams.maxQty}',
         'maxSiteNow':'${info.infoClient.params.siteParams.maxQty}',
         'isMultiCategoryNow':'${info.infoClient.params.categoryParams.isMultiCategory}',
+        'isCategoryNow':'${info.infoClient.params.categoryParams.isCategory}',
         'maxCategoryNow':'${info.infoClient.params.categoryParams.maxQty}',
         'isMultiCatalogNow':'${info.infoClient.params.catalogParams.isMultiCatalog}',
+        'isCatalogNow':'${info.infoClient.params.catalogParams.isCatalog}',
         'maxCatalogNow':'${info.infoClient.params.catalogParams.maxQty}',
         'isGraficsOrderNow':'${info.infoClient.params.orderParams.isGrafics}',
+        'isOrderNow':'${info.infoClient.params.orderParams.isOrder}',
         'isAdvanceCalculateNow':'${info.infoClient.params.advanceCalculateParams.isAdvanceCalculate}',
         'isSaleAnalysisNow':'${info.infoClient.params.advanceCalculateParams.isSaleAnalysis}',
         'isGraficsNow':'${info.infoClient.params.graficParams.isGrafics}',
@@ -201,7 +215,7 @@ if(data.response.sentData.param=="unlock"){
       });
      
        getClientStyle(&quot;${info.clientId}&quot;);
-       eraseContainers('containerCalendarDaysData','containerCalendarDaysInfo');
+      
               createTable('tableInternalClients','containerCalendarDaysData', [
                                 'Mes / Año',
                                 'Días del mes',
@@ -229,6 +243,7 @@ if(data.response.sentData.param=="unlock"){
           changeSection('internalUsers');
           createResourceResourcesSection('resourceResource');
           createResourceTrackerSection('trackingResource');
+          createResourceOnSiteSection('onSiteResource');
            " >
         <i class="fas fa-cog"></i>
       </button>
@@ -287,9 +302,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">E-Commerce: ${info.infoClient.params.placeParams.isEcommerce ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">E-Commerce: ${info.infoClient.params.placeParams.isEcommerce ===true?`APLICA`:`NO APLICA`}</p>
 
-  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <select id="list-${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
@@ -300,7 +315,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Market: ${info.infoClient.params.placeParams.isMarket ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Market: ${info.infoClient.params.placeParams.isMarket ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -313,7 +328,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Working: ${info.infoClient.params.placeParams.isWork ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Working: ${info.infoClient.params.placeParams.isWork ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -326,7 +341,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Place: ${info.infoClient.params.placeParams.isPlace ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Place: ${info.infoClient.params.placeParams.isPlace ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -343,54 +358,83 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Calendario: ${info.infoClient.params.trackerParams.isTracker ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Calendario: ${info.infoClient.params.trackerParams.isTracker ===true?`APLICA`:`NO APLICA`}</p>
 
-  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isTracker&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isTracker&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>
 </div>
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Rooms: ${info.infoClient.params.trackerParams.isRooms ===true?`APICA`:`NO APLICA`}</p>
-
-  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Rooms: ${info.infoClient.params.trackerParams.isRooms ===true?`APLICA`:`NO APLICA`}</p>
+${info.infoClient.params.trackerParams.isTracker ===true?`
+<select id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`
+:`<select disabled id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`}
+  
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isRooms&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.trackerParams.isTracker ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isRooms&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isRooms&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
+  
+  
       <i class="fas fa-edit"></i>
       </button>
+     
 </div>
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Elementos: ${info.infoClient.params.trackerParams.isElements ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Elementos: ${info.infoClient.params.trackerParams.isElements ===true?`APLICA`:`NO APLICA`}</p>
 
-  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
-  <option value="false">No Aplica</option>
+${info.infoClient.params.trackerParams.isTracker ===true?`
+<select id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`
+:`<select disabled id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`}
+    <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isElements&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
-      <i class="fas fa-edit"></i>
+  ${info.infoClient.params.trackerParams.isTracker ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
+        <i class="fas fa-edit"></i>
       </button>
 </div>
 <b>Establecimiento:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.placeParams.isMultiPlace ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.placeParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
 
-  <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isMultiPlace&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isActive&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.placeParams.isMultiPlace ===true?`APLICA`:`NO APLICA`}</p>
+
+
+${info.infoClient.params.placeParams.isActive ===true?`
+<select id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`
+:`<select disabled id="isRoom" class="form-control" name="lista1" required style="flex: 1;">`}  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  ${info.infoClient.params.placeParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.isMultiPlace&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;trackerParams.isRooms&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -398,8 +442,11 @@ if(data.response.sentData.param=="unlock"){
 <p class="card-text">
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.placeParams.maxQty}</p>
+  
   <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.placeParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.placeParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -410,13 +457,29 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.siteParams.isMultiSite ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.siteParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.isSite&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.siteParams.isMultiSite ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.isMultiSite&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.siteParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.isMultiSite&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
   <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -425,7 +488,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.siteParams.maxQty}</p>
   <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.siteParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.siteParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;siteParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -433,16 +498,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Elementos:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.elementParams.isMultiElement ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.elementParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.isElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.elementParams.isMultiElement ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.isMultiElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.elementParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.isMultiElement&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -451,7 +534,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.elementParams.maxQty}</p>
   <input type="number" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.elementParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.elementParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;elementParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -460,16 +545,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Productos:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.productParams.isMultiProduct ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.productParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.isProduct&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.productParams.isMultiProduct ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.isMultiProduct&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.productParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.isMultiProduct&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
   <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -478,7 +581,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.productParams.maxQty}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.productParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.productParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;productParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -487,16 +592,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Categorías:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.categoryParams.isMultiCategory ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px; " >Estado: ${info.infoClient.params.categoryParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.isCategory&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.categoryParams.isMultiCategory ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.isMultiCategory&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.categoryParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.isMultiCategory&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -505,7 +628,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.categoryParams.maxQty}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.categoryParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;categoryParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.categoryParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catgoryParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -514,16 +639,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Catálogos:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.catalogParams.isMultiCatalog ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.catalogParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.isCatalog&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.catalogParams.isMultiCatalog ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.isMultiCatalog&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.catalogParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.isMultiCatalog&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -532,7 +675,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.catalogParams.maxQty}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.catalogParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.catalogParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;catalogParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -541,16 +686,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Clientes:</b><br>
 
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.clientParams.isMultiClient ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.clientParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.isClient&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.clientParams.isMultiClient ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.isMultiClient&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.clientParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.isMultiClient&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -559,7 +722,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.clientParams.maxQty}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.clientParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.categoryParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -568,16 +733,34 @@ if(data.response.sentData.param=="unlock"){
 
 <b>Equipo de trabajo:</b><br>
 
+
+
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.teamParams.isMultiTeam ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.teamParams.isActive ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.isTeam&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Multiple: ${info.infoClient.params.teamParams.isMultiTeam ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.isMultiTeam&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.teamParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.isMultiTeam&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -586,7 +769,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">max Qty: ${info.infoClient.params.teamParams.maxQty}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.teamParams.maxQty}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.teamParams.isActive ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;teamParams.maxQty&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -598,7 +783,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Puntos: ${info.infoClient.params.pointsParams.isPointsSystem ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Puntos: ${info.infoClient.params.pointsParams.isPointsSystem ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -612,7 +797,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Estrellas: ${info.infoClient.params.pointsParams.isStarsSystem ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estrellas: ${info.infoClient.params.pointsParams.isStarsSystem ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -627,13 +812,29 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.orderParams.isGrafics ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Estado: ${info.infoClient.params.orderParams.isOrder ===true?`APLICA`:`NO APLICA`}</p>
+
+  <select id="isCalendar${counterUp}" class="form-control" name="lista1" required style="flex: 1;">
+  <option value="false">No Aplica</option>
+  <option value="true">Aplica</option>
+  </select>
+  <button id="isCalendarbtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;orderParams.isOrder&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+      <i class="fas fa-edit"></i>
+      </button>
+</div>
+
+<div class="edit-container" style="display: flex;">
+
+
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.orderParams.isGrafics ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;orderParams.isGrafics&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.orderParams.isOrder ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;orderParams.isGrafics&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
   <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -645,26 +846,30 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Contable: ${info.infoClient.params.advanceCalculateParams.isAdvanceCalculate ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Contable: ${info.infoClient.params.advanceCalculateParams.isAdvanceCalculate ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isAdvanceCalculate&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.orderParams.isOrder ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isAdvanceCalculate&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
   <i class="fas fa-edit"></i>
   </button>
 </div>
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Análisis de venta: ${info.infoClient.params.advanceCalculateParams.isSaleAnalysis ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Análisis de venta: ${info.infoClient.params.advanceCalculateParams.isSaleAnalysis ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
   <option value="true">Aplica</option>
   </select>
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isSaleAnalysis&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.orderParams.isOrder ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;advanceCalculateParams.isSaleAnalysis&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
   <i class="fas fa-edit"></i>
   </button>
 </div>
@@ -675,7 +880,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.graficParams.isGrafics ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Gráficas: ${info.infoClient.params.graficParams.isGrafics ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -692,7 +897,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Backup: ${info.infoClient.params.backupParams.isBackup ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Backup: ${info.infoClient.params.backupParams.isBackup ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -707,7 +912,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">: ${info.infoClient.params.backupParams.backupTimes}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.backupParams.backupTimes}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;backupParams.backupTimes&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.backupParams.isBackup ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;backupParams.backupTimes&quot;,&quot;paramsNum&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -720,7 +927,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Devolución: ${info.infoClient.params.getbackParams.isGetBack ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Devolución: ${info.infoClient.params.getbackParams.isGetBack ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -738,7 +945,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Cadena: ${info.infoClient.params.prodchainParams.isProdChain ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Cadena: ${info.infoClient.params.prodchainParams.isProdChain ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -755,7 +962,7 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="display: flex;">
 
 
-<p class="card-text" style="display: inline-block; margin-right: 10px;">Soporte: ${info.infoClient.params.supportParams.isSupport ===true?`APICA`:`NO APLICA`}</p>
+<p class="card-text" style="display: inline-block; margin-right: 10px;">Soporte: ${info.infoClient.params.supportParams.isSupport ===true?`APLICA`:`NO APLICA`}</p>
 
   <select id="list-producttype${info.clientId}" class="form-control" name="lista1" required style="flex: 1;">
   <option value="false">No Aplica</option>
@@ -770,7 +977,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Tipo: ${info.infoClient.params.supportParams.supportType}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.supportParams.supportType}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportType&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.supportParams.isSupport ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportType&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -780,7 +989,9 @@ if(data.response.sentData.param=="unlock"){
 <div class="edit-container" style="margin-bottom: 10px;">
   <p class="card-text" style="display: inline-block; margin-right: 10px;">Tiempo: ${info.infoClient.params.supportParams.supportTime}</p>
   <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.infoClient.params.supportParams.supportTime}" title="${info.keyWords}">
-  <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportTime&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
+  ${info.infoClient.params.supportParams.isSupport ===true?`
+  <button id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;supportParams.supportTime&quot;,&quot;paramsStr&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`
+:`<button disabled id="isRoombtn${counterUp}" onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;placeParams.maxQty&quot;,&quot;paramsBool&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">`}
       <i class="fas fa-edit"></i>
       </button>
 </div>
@@ -795,7 +1006,11 @@ if(data.response.sentData.param=="unlock"){
         
       `;
  
- 
+      
+        // Verificar el valor de isTracker y deshabilitar los elementos según sea necesario
+       
+  
+ counterUp++;
       cardContainer11.appendChild(row);
     });
     document.getElementById("loading-container").style.display = "none";

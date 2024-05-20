@@ -481,3 +481,9 @@ text-align: center;
   border-radius: 5px;
 }
 
+.elemento-deshabilitado {
+  opacity: 0.5; /* Reduce la opacidad para dar la apariencia de desactivado */
+  pointer-events: none; /* Evita que el elemento responda a eventos del ratón */
+  cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+  /* También podrías agregar otros estilos para hacerlo visualmente diferente */
+}
