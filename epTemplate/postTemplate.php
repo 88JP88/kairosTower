@@ -15,6 +15,7 @@ public static function epTemplate($apiName,$apiVersion,$endPoint,$apiData){
     $trackId = substr($myuuid, 0, 8);
     $apiData['trackId']=$trackId;
     $url = $sub_domain . "/kairosGateway/$apiName/$apiVersion/$endPoint/".$_SESSION['ranCode']."/".$_SESSION['key'];
+   echo $url;
     $json_data = json_encode($apiData);
     try{
     $curl = curl_init();
