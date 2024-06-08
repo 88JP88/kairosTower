@@ -436,3 +436,4 @@ document.getElementById('swalBtn').onclick = function() {
 
 </body>
 </html>
+<script  src="scripts/gets/main.createResources.js"></script>
