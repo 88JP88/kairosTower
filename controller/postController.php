@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../epTemplate/postTemplate.php';
 
 
@@ -12,6 +12,13 @@ try {
   
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $decodedData = urldecode($_POST['data']);
+        $secApiKey = urldecode($_POST['apiKey']);
+        $secRanCode = urldecode($_POST['ranCode']);
+$_SESSION['key']=$secApiKey;
+$_SESSION['ranCode']=$secRanCode;
+
+
+        
     } if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $decodedData = urldecode($_GET['data']);
     }
