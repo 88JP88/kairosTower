@@ -1017,7 +1017,9 @@ getApiData(getOrdersOS,
       "  title="EDITAR">
      <i class="fas fa-plus"> Calcular</i>
      </button>
-     <button onclick=" openModal('OSCatalogViewOS');
+     <button id="swalBtn" onclick=" 
+     
+  
      createResourceBtnCreateOrder('containerBtnCreateOrder');
 
      createTable('tableInternalClients2','OSCatalogViewData', [
