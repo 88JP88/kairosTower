@@ -155,7 +155,7 @@ var url = 'controller/postController.php';
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: 'data=' + encodeURIComponent(apiInfo)+'apiKey=' + encodeURIComponent(sessionStorage.getItem('key')) + '&ranCode=' + encodeURIComponent(sessionStorage.getItem('ranCode'))
+    body: 'data=' + encodeURIComponent(apiInfo)+'&apiKey=' + encodeURIComponent(sessionStorage.getItem('key')) + '&ranCode=' + encodeURIComponent(sessionStorage.getItem('ranCode'))
 })
     .then(response => {
       getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
