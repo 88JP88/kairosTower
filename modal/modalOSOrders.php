@@ -117,7 +117,7 @@ console.log(trackId);
 <!-- Botón con el evento onClick para llamar a la función -->
 
 <button onclick="editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'orderStatus', 'finishedAll', 'status');">Calcular</button>
-<button onclick="openModal('OSOrdersVerifyPayment');">Validar pago</button>
+<button onclick="openModal('OSOrdersVerifyPayment');createResourceBtnPay('contaionerBtnPay');">Validar pago</button>
 
 
       <div id="containerOrdersVerifyInfo" class="card-container">
@@ -157,8 +157,7 @@ console.log(trackId);
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModal('clientDeliveryCreate')"></button>
       </div>
       <div class="modal-body">
-
-      <button onclick="payEditOrder();">Pagar</button>
+<div id="contaionerBtnPay"></div>
 
       <p>Tipo de pago</p>
 <select id="os-payment-type" class="form-control" name="lista1" required>
@@ -229,9 +228,15 @@ console.log(trackId);
 
 <script>
 
-  function payEditOrder(){
-
-    editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentType', document.getElementById('os-payment-type').value, 'status');
+ async function payEditOrder(paymentSource){
+if (paymentSource=="fromMarket") {
+ await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentType_Market', document.getElementById('os-payment-type').value, 'status');
+   
+}
+if (paymentSource=="fromSite") {
+  await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentType', document.getElementById('os-payment-type').value, 'status');
+   
+}
    
 
     var transferElements = document.getElementById('transfer-elements');
@@ -245,43 +250,91 @@ console.log(trackId);
    
     // Ocultar todos los elementos adicionales
     if(transferElements.style.display = 'block'){
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method2').value, 'status');
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'transactionCode', document.getElementById('os-input-trcode').value, 'status');
+
+
+      if (paymentSource=="fromMarket") {
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentMethod_Market', document.getElementById('os-payment-method2').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'transactionCode_Market', document.getElementById('os-input-trcode').value, 'status');
       if(document.getElementById('os-payment-method2').value=='ot'){
-        editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
-      }
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'otherMethod_Market', document.getElementById('os-input-otmethod').value, 'status');
+      }      
+}
+if (paymentSource=="fromSite") {
+  await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method2').value, 'status');
+  await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'transactionCode', document.getElementById('os-input-trcode').value, 'status');
+      if(document.getElementById('os-payment-method2').value=='ot'){
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
+      }   
+}
+     
 
     }
     if(cardElements.style.display = 'block'){
-
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method1').value, 'status');
+      if (paymentSource=="fromMarket") {
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentMethod_Market', document.getElementById('os-payment-method1').value, 'status');
       if(document.getElementById('os-payment-method1').value=='ot'){
-        editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
-      }
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'otherMethod_Market', document.getElementById('os-input-otmethod').value, 'status');
+      }      
+}
+
+      if (paymentSource=="fromSite") {
+        await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method1').value, 'status');
+      if(document.getElementById('os-payment-method1').value=='ot'){
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
+      }   
+}
+      
     }
 
     if(document.getElementById('os-payment-type').value=='crypto'){
 
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoName', document.getElementById('os-input-crypto-coin').value, 'status');
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoUser', document.getElementById('os-input-crypto-user').value, 'status');
-      editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoValue', document.getElementById('os-input-crypto-cointotal').value, 'status');
-
+      if (paymentSource=="fromMarket") {
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoName_Market', document.getElementById('os-input-crypto-coin').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoUser_Market', document.getElementById('os-input-crypto-user').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoValue_Market', document.getElementById('os-input-crypto-cointotal').value, 'status');
+   
+}
+      if (paymentSource=="fromSite") {
+        await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoName', document.getElementById('os-input-crypto-coin').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoUser', document.getElementById('os-input-crypto-user').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoValue', document.getElementById('os-input-crypto-cointotal').value, 'status');
+   
+}
+     
 
     }
     if(document.getElementById('os-payment-type').value=='cash'){
+      if (paymentSource=="fromMarket") {
+        await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'payWith_Market', document.getElementById('os-input-cash-paywith').value, 'status');
+        await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'change_Market', document.getElementById('os-input-cash-paywithchange').value, 'status');
 
-editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'payWith', document.getElementById('os-input-cash-paywith').value, 'status');
-editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'change', document.getElementById('os-input-cash-paywithchange').value, 'status');
+}
+
+      if (paymentSource=="fromSite") {
+        await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'payWith', document.getElementById('os-input-cash-paywith').value, 'status');
+        await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'change', document.getElementById('os-input-cash-paywithchange').value, 'status');
+
+}
 
 
 }
  
+
+
+if (paymentSource=="fromMarket") {
+  await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentStatus_Market', 'payed', 'status');
+  await editOSOrder(this, urlObj.searchParams.get('clientId'), sessionStorage.getItem('orderRandomCodeNow'), 'orderStatus', 'fromMarketFinished', 'status');
+}
+if (paymentSource=="fromSite") {
+  await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentStatus', 'payed', 'status');
+
+}
     
-    
-editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentStatus', 'payed', 'status');
 
 
   }
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('os-payment-type').addEventListener('change', function() {

@@ -410,7 +410,8 @@ getApiData(getOrdersOS,
      <i class="fas fa-plus"> Calcular orden</i>
      </button>
      <button onclick=" openModal('OSCatalogViewOS');
-      
+     createResourceBtnCreateOrder('containerBtnCreateOrder');
+
      createTable('tableInternalClients2','OSCatalogViewData', [
        'Seleccionar',
        'Producto',
@@ -530,7 +531,8 @@ getApiData(getOrdersOS,
       </button>
       <button onclick="
       openModal('OSCatalogViewOS');
-      
+      createResourceBtnCreateOrder('containerBtnCreateOrder');
+
       createTable('tableInternalClients2','OSCatalogViewData', [
         'Seleccionar',
         'Producto',
@@ -977,7 +979,7 @@ if (isOutService) {
       <button onclick="
       
 openModal('OSOrdersVerify');
-      
+createResourceBtnCreateOrder('containerBtnCreateOrder');
 createTable('tableInternalClients22','containerOrdersVerifyData', [
   
   'Acciones',
@@ -1016,7 +1018,8 @@ getApiData(getOrdersOS,
      <i class="fas fa-plus"> Calcular</i>
      </button>
      <button onclick=" openModal('OSCatalogViewOS');
-      
+     createResourceBtnCreateOrder('containerBtnCreateOrder');
+
      createTable('tableInternalClients2','OSCatalogViewData', [
        'Seleccionar',
        'Producto',
@@ -1136,7 +1139,8 @@ getApiData(getOrdersOS,
       </button>
       <button onclick="
       openModal('OSCatalogViewOS');
-      
+      createResourceBtnCreateOrder('containerBtnCreateOrder');
+
       createTable('tableInternalClients2','OSCatalogViewData', [
         'Seleccionar',
         'Producto',

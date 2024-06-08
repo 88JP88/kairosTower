@@ -858,3 +858,60 @@ function createResourceOnSiteSection(containerId) {
 
     container.innerHTML = htmlContent;
 }
+
+
+
+
+
+function createResourceBtnCreateOrder(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+      console.error("El contenedor especificado no existe.");
+      return;
+  }
+
+  const htmlContent = `
+  ${urlObj.searchParams.get("st")==="market"?
+      `
+      <button onClick="editSiteHtml();createOsOrder('','createBtn');
+      ">Crear orden</button>
+`:
+`
+`}
+${urlObj.searchParams.get("st")==="sites"?
+      `
+      <button onClick="editSiteHtml();createOsOrder('','');">Crear orden</button>
+`:
+`
+`}
+  `;
+
+  container.innerHTML = htmlContent;
+  //console.log('llego a la funcion');
+}
+
+function createResourceBtnPay(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+      console.error("El contenedor especificado no existe.");
+      return;
+  }
+
+  const htmlContent = `
+  ${urlObj.searchParams.get("st")==="market"?
+      `
+      <button onclick="payEditOrder('fromMarket');">Pagar</button>
+`:
+`
+`}
+${urlObj.searchParams.get("st")==="sites"?
+      `
+      <button onclick="payEditOrder('fromSite');">Pagar</button>
+      `:
+`
+`}
+  `;
+
+  container.innerHTML = htmlContent;
+  //console.log('llego a la funcion');
+}

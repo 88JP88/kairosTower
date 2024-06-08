@@ -337,8 +337,16 @@ Cliente:
         <div id="OSCatalogViewData" class="scard-container">
             <!-- Contenido de la sección expandible -->
         </div>
-        <button onClick="editSiteHtml();createOsOrder();">Crear orden</button>
 
+<script>
+
+
+
+
+</script>
+<div id="containerBtnCreateOrder"></div>
+      
+    
 </div>
 
 
@@ -358,3 +366,4 @@ Cliente:
 <script  src="scripts/posts/os.postSites.js"></script>
 
 <script  src="scripts/posts/os.createOrder.js"></script>
+<script  src="scripts/gets/main.createResources.js"></script>

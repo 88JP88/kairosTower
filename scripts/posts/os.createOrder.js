@@ -1,6 +1,15 @@
 
+function generarCodigoAleatorio(longitud) {
+  const caracteresValidos = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-function createOsOrder(tableId) {
+  let codigo = '';
+  for (let i = 0; i < longitud; i++) {
+    const indice = Math.floor(Math.random() * caracteresValidos.length);
+    codigo += caracteresValidos.charAt(indice);
+  }
+  return codigo;
+}
+function createOsOrder(tableId,parametter) {
   const urlParam = window.location.href;
   const urlObj = new URL(urlParam);
 
@@ -10,6 +19,18 @@ function createOsOrder(tableId) {
     // Inicializar el arreglo para el carrito de compras
     let productCounter=0;
     let selectCounter=0;
+   
+var codigoAleatorio = generarCodigoAleatorio(8);
+  sessionStorage.setItem("orderRandomCodeNow",codigoAleatorio);
+    if(parametter=="createBtn"){
+//var clientId=urlObj.searchParams.get("clientId");
+     // editOSOrder(this,clientId,sessionStorage.getItem('orderRandomCodeNow'),'orderStatus','fromMarketOpened','status');
+var tableid1="createBtn";
+
+    }else{
+      var tableid1="";
+
+}
 tableId=sessionStorage.getItem('siteNow');
     // Verificar si hay elementos seleccionados para esta mesa
     if (selectedItemsByTable[tableId] && Array.isArray(selectedItemsByTable[tableId])) {
@@ -24,13 +45,10 @@ tableId=sessionStorage.getItem('siteNow');
                 catalogPrice,
                 qty,
                 discount,
-                categoryName,
                 catalogId,
                 productType,
                 productPrice,
                 sku,
-                ean1,
-                ean2,
                 productCaracts,
                 placeName,
                 catalogComments,
@@ -48,13 +66,10 @@ tableId=sessionStorage.getItem('siteNow');
                 catalogPrice,
                 qty,
                 discount,
-                categoryName,
                 catalogId,
                 productType,
                 productPrice,
                 sku,
-                ean1,
-                ean2,
                 productCaracts,
                 placeName,
                 catalogComments,
@@ -84,12 +99,14 @@ const selectElement1 = document.getElementById('list-OSCustomerListOS');
 const selectedOption1 = selectElement1.options[selectElement1.selectedIndex];
 const selectedText1 = selectedOption1.textContent;
 var otid=sessionStorage.getItem('siteNow');
-    var orderStatus={
+
+var orderStatus={
       'orderStatus':{
       'status':'created',
       'orderTrackId':sessionStorage.getItem("ot"+otid),
       'oderType':urlObj.searchParams.get("st"),
-      'isDelivery':''
+      'isDelivery':'',
+      'frontId': codigoAleatorio
     },
     'paymentStatus':{
       
@@ -104,7 +121,6 @@ var otid=sessionStorage.getItem('siteNow');
     },
     'customerStatus':{
       'customerId':document.getElementById('list-OSCustomerListOS').value,
-      
       'name':selectedText1
 
     }
@@ -130,11 +146,17 @@ var apiData = {
 };
 // Construir la URL con los parámetros de la petición GET
 
-const apiInfo = JSON.stringify(apiData);
-//console.log(apiInfo);
-var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
+var apiInfo = JSON.stringify(apiData);
 
-  fetch(url)
+var url = 'controller/postController.php';
+//console.log('logguer UTF8: '+encodeURIComponent(compressedData));
+  fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'data=' + encodeURIComponent(apiInfo)
+})
     .then(response => {
       getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
@@ -151,6 +173,27 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
       updateCarContainer(sessionStorage.getItem('siteNow'));
      // console.log("shoppingCartOS");
       //console.log(shoppingCartOS);
+
+       if(tableid1=="createBtn"){
+var clientId=urlObj.searchParams.get("clientId");
+return new Promise((resolve, reject) => {
+  // Lógica de tu función editOSOrder
+  // Aquí deberías llamar a la API o ejecutar la acción asincrónica
+  // Luego, resuelve o rechaza la Promise según el resultado
+  // Ejemplo de llamada a la API ficticia
+  executeEditOSOrderSequence(clientId, codigoAleatorio)
+      .then(response => {
+          resolve(response);
+      })
+      .catch(error => {
+          reject(error);
+      });
+});
+     
+
+    }else{
+      
+}
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
@@ -165,9 +208,76 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 }
 
 
+async function executeEditOSOrderSequence(clientId,codigoAleatorio) {
+  try {
+      await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketOpened', 'status');
+      await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketInProgress', 'status');
+      await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketReady', 'status');
+      await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketDelivered', 'status');
+      openModal('OSOrdersVerifyPayment');
+      createResourceBtnPay('contaionerBtnPay');
+    
+      //  await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketFinished', 'status');
+     // await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketFinished', 'status');
+
+    } catch (error) {
+      console.error('Error executing sequence:', error);
+  }
+}
+// Algoritmo LZ77 simplificado para compresión
+function compress(uncompressed) {
+  let dictionary = {}, c, wc, w = "", result = [], dictSize = 256;
+  for (let i = 0; i < 256; i++) dictionary[String.fromCharCode(i)] = i;
+  for (let i = 0; i < uncompressed.length; i++) {
+      c = uncompressed.charAt(i);
+      wc = w + c;
+      if (dictionary[wc] !== undefined) {
+          w = wc;
+      } else {
+          result.push(dictionary[w]);
+          dictionary[wc] = dictSize++;
+          w = String(c);
+      }
+  }
+  if (w !== "") result.push(dictionary[w]);
+  return result;
+}
 
 
 
+
+
+
+function lzwCompress(uncompressed) {
+    // Build the dictionary.
+   const dictionary = {};
+    const data = (uncompressed + "").split("");
+    const out = [];
+    let currChar;
+    let phrase = data[0];
+    let code = 256;
+    for (let i = 1; i < data.length; i++) {
+        currChar = data[i];
+        if (dictionary[phrase + currChar] != null) {
+            phrase += currChar;
+        } else {
+            out.push(phrase.length > 1 ? dictionary[phrase] : phrase.charCodeAt(0));
+            dictionary[phrase + currChar] = code;
+            code++;
+            phrase = currChar;
+        }
+    }
+    out.push(phrase.length > 1 ? dictionary[phrase] : phrase.charCodeAt(0));
+    for (let i = 0; i < out.length; i++) {
+        out[i] = String.fromCharCode(out[i]);
+    }
+    return out.join("");
+}
+
+// Codificar en Base64
+function toBase64(input) {
+  return btoa(input);
+}
 
 function editOSOrder(button, clientId,orderId,param,value,reason) {
   // Obtener el valor del campo de texto correspondiente al botón
