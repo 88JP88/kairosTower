@@ -370,7 +370,7 @@ document.body.appendChild(buttonValidarCompra);
 </head>
 <body>
 
-<button id="swalBtn" onClick="">Open Modal</button>
+<button id="swalBtn1" onClick="">Open Modal</button>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>

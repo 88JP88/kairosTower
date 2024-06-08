@@ -1018,7 +1018,7 @@ getApiData(getOrdersOS,
      <i class="fas fa-plus"> Calcular</i>
      </button>
      <button id="swalBtn" onclick=" 
-     
+     modalTry();
   
      createResourceBtnCreateOrder('containerBtnCreateOrder');
 
@@ -1086,7 +1086,7 @@ getApiData(getEmployeesList,
     }
         );
 "  title="EDITAR">
-<i class="fas fa-plus"> Crear ordene</i>
+<i class="fas fa-plus"> Crear ordenee</i>
 </button>
 
 <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
@@ -1139,8 +1139,9 @@ getApiData(getOrdersOS,
       "  title="EDITAR">
       <i class="fas fa-plus"> Cerrar Caja</i>
       </button>
-      <button onclick="
-      openModal('OSCatalogViewOS');
+      <button  id="swalBtn" onclick="
+      modalTry();
+
       createResourceBtnCreateOrder('containerBtnCreateOrder');
 
       createTable('tableInternalClients2','OSCatalogViewData', [
@@ -1769,3 +1770,98 @@ var longitud=8;
 
 
 
+function modalTry(){
+
+
+
+
+  
+  Swal.fire({
+      title: 'Formulario',
+      html: `
+          <div id="placeOSCar"></div>
+          <div id="placeOSCarTotal"></div>
+          <div id="placeOSCarsubTotal"></div>
+          <div id="placeOSCarSaver"></div>
+
+          <div class="card-container">
+              Responsable:
+              <select id="list-OSEmployeesList" class="form-control" name="lista1" required>
+                  <option value="1">Empleado 1</option>
+                  <option value="2">Empleado 2</option>
+                  <option value="3">Empleado 3</option>
+              </select>
+          </div>
+
+          <div class="card-container">
+              Cliente:
+              <select id="list-OSCustomerListOS" class="form-control" name="lista1" required>
+                  <option value="1">Cliente 1</option>
+                  <option value="2">Cliente 2</option>
+                  <option value="3">Cliente 3</option>
+              </select>
+          </div>
+
+          <div id="OSCatalogViewInfo" class="card-container">
+              <!-- Contenido de la sección expandible -->
+          </div>
+
+          <div id="OSCatalogViewData" class="scard-container">
+              <!-- Contenido de la sección expandible -->
+          </div>
+
+          <div id="containerBtnCreateOrder"></div>
+      `,customClass: {
+        container: 'custom-container',
+        popup: 'custom-popup',
+        header: 'custom-header',
+        title: 'custom-title',
+        closeButton: 'custom-close-button',
+        icon: 'custom-icon',
+        image: 'custom-image',
+        content: 'custom-content',
+        input: 'custom-input',
+        actions: 'custom-actions',
+        confirmButton: 'custom-confirm-button',
+        denyButton: 'custom-deny-button',
+        cancelButton: 'custom-cancel-button',
+        footer: 'custom-footer'
+    },
+    background: '#222',
+    color: '#fff',
+    width: '900px',
+    padding: '1rem',
+    backdrop: `
+        rgba(0,0,123,0.4)
+        url("https://example.com/nyan-cat.gif")
+        left top
+        no-repeat
+    `,
+    position: 'center',
+    grow: 'row',
+    showConfirmButton: true,
+    confirmButtonColor: '#3085d6',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    cancelButtonColor: '#d33',
+      confirmButtonText: 'Submit',
+      preConfirm: () => {
+          const selectedEmployee = document.getElementById('list-OSEmployeesList').value;
+          const selectedCustomer = document.getElementById('list-OSCustomerListOS').value;
+          if (!selectedEmployee || !selectedCustomer) {
+              Swal.showValidationMessage(`Please select both an employee and a customer`);
+          }
+          return {
+              selectedEmployee: selectedEmployee,
+              selectedCustomer: selectedCustomer
+          };
+      }
+  }).then((result) => {
+      if (result.isConfirmed) {
+          // Aquí puedes manejar los datos del formulario
+          console.log('Submitted Data:', result.value);
+          Swal.fire(`Empleado seleccionado: ${result.value.selectedEmployee}\nCliente seleccionado: ${result.value.selectedCustomer}`);
+      }
+  });
+
+}

@@ -299,62 +299,6 @@
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="OSCatalogViewOS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-Xl">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #001219; color: #C70039;">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel"><img src="public/KAIROS2.png" alt="LUGMA" width="30" height="30" style="background-color: #001219; color: #C70039;">Crear Catálogo</h1>
-        
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="closeModal('OSCatalogViewOS')"></button>
-      </div>
-      <div class="modal-body">
-      <div id="placeOSCar">
-       
-       </div>
-       <div id="placeOSCarTotal">
-       
-       </div>
-       <div id="placeOSCarsubTotal">
-       
-       </div>
-       <div id="placeOSCarSaver">
-       
-       </div>
-       <div class="card-container">
-Responsable:
-       <select id="list-OSEmployeesList" class="form-control" name="lista1" required></select>
-       </div>
-       <div class="card-container">
-Cliente:
-       <select id="list-OSCustomerListOS" class="form-control" name="lista1" required></select>
-       </div>
-
-      <div id="OSCatalogViewInfo" class="card-container">
-
-            <!-- Contenido de la sección expandible -->
-        </div>
-        <div id="OSCatalogViewData" class="scard-container">
-            <!-- Contenido de la sección expandible -->
-        </div>
-
-
-<div id="containerBtnCreateOrder"></div>
-      
-    
-</div>
-
-
-
-      </div>
-     
-    </div>
-  </div>
-</div>
-
-
-
-
 
 <script  src="scripts/posts/os.postCatalogs.js"></script>
 
