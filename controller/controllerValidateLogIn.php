@@ -17,13 +17,6 @@ $myuuid = $gen_uuid->guidv4();
 
 $trackId = substr($myuuid, 0, 8);
  
- require_once 'postLog.php';
- $backtrace = debug_backtrace();
- $info['Función'] = $backtrace[1]['function']; // 1 para obtener la función actual, 2 para la anterior, etc.
- $currentFile = __FILE__; // Obtiene la ruta completa y el nombre del archivo actual
-$justFileName = basename($currentFile);
-$rutaCompleta = __DIR__;
-$status = http_response_code();
 //final log ESTRUCTURA
 
 require_once '../env/domain.php';
@@ -88,7 +81,7 @@ $data = array(
 // Convertir los datos a formato JSON
 $json_data = json_encode($data);
 
- kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
+ ////kronos('true','sentData','sentData', $info['Función'],$justFileName,$rutaCompleta,$clientId,$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'sent');
 
 // Inicializar la sesión cURL
 $curl = curl_init();
@@ -143,7 +136,7 @@ if (strtolower($_SESSION['response']) === "true") { // Convertir la respuesta a 
     //echo $_SESSION['clientId1'];
     
 
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
+//kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
   header ('Location: ../session.php');
 }
@@ -156,7 +149,7 @@ elseif (strtolower($_SESSION['response']) === "false") { // Convertir la respues
   
  
 
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
+//kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
   
   header ('Location: ../index.php');
@@ -173,7 +166,7 @@ kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info[
   //echo $response11;
   
 
-kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
+//kronos( $_SESSION["respuesta"],$_SESSION["mensaje"],$_SESSION["mensaje"], $info['Función'],$justFileName,$rutaCompleta,$_SESSION['clientId1'],$json_data,$url,$_SESSION['userId'],$_SERVER['HTTP_REFERER'],$status,$trackId,'received');
 //final de log
     header ('Location: ../index.php');
     //header ('Location: ../room.php?roomId='.$roomId);

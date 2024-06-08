@@ -48,7 +48,7 @@ function domCore() {
 
    }
    if($option==2){//desarrollo
-$sub_domain="https://dev-lugmagateway.lugma.tech"; // o dirección IP del servidor de la base de datos remota
+$sub_domain="https://dev-gateway.lugma.network"; // o dirección IP del servidor de la base de datos remota
 return $sub_domain;
 
    }
