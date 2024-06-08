@@ -361,3 +361,48 @@ document.body.appendChild(buttonValidarCompra);
 </style>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetAlert2 Example</title>
+    <!-- Incluye SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+
+<h2>SweetAlert2 Modal Example</h2>
+<button id="swalBtn">Open SweetAlert2 Modal</button>
+
+<!-- Incluye SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('swalBtn').onclick = function() {
+        Swal.fire({
+            title: 'Custom Modal',
+            html:
+                '<label for="swal-username">Username:</label>' +
+                '<input id="swal-username" class="swal2-input">' +
+                '<label for="swal-password">Password:</label>' +
+                '<input id="swal-password" type="password" class="swal2-input">',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            preConfirm: () => {
+                const username = Swal.getPopup().querySelector('#swal-username').value;
+                const password = Swal.getPopup().querySelector('#swal-password').value;
+                if (!username || !password) {
+                    Swal.showValidationMessage(`Please enter username and password`);
+                }
+                return { username: username, password: password };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(`Username: ${result.value.username}\nPassword: ${result.value.password}`);
+            }
+        });
+    };
+</script>
+
+</body>
+</html>
