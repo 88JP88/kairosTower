@@ -368,9 +368,8 @@ if (isOutService) {
       <p class="card-text">${info.infoSite.info.comments}
      ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
       (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
-      <button onclick="
+      <button   onclick="
       
-openModal('OSOrdersVerify');
       
 createTable('tableInternalClients22','containerOrdersVerifyData', [
   
@@ -409,7 +408,8 @@ getApiData(getOrdersOS,
       "  title="EDITAR">
      <i class="fas fa-plus"> Calcular orden</i>
      </button>
-     <button onclick=" openModal('OSCatalogViewOS');
+     <button id="swalBtn" onclick=" 
+     
      createResourceBtnCreateOrder('containerBtnCreateOrder');
 
      createTable('tableInternalClients2','OSCatalogViewData', [

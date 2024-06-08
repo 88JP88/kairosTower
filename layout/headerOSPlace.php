@@ -360,48 +360,78 @@ document.body.appendChild(buttonValidarCompra);
     }
 </style>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetAlert2 Example</title>
-    <!-- Incluye SweetAlert2 -->
+    <title>SweetAlert2 Form Submit Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
 
-<h2>SweetAlert2 Modal Example</h2>
-<button id="swalBtn">Open SweetAlert2 Modal</button>
+<button id="swalBtn" onClick="">Open Modal</button>
 
-<!-- Incluye SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.getElementById('swalBtn').onclick = function() {
-        Swal.fire({
-            title: 'Custom Modal',
-            html:
-                '<label for="swal-username">Username:</label>' +
-                '<input id="swal-username" class="swal2-input">' +
-                '<label for="swal-password">Password:</label>' +
-                '<input id="swal-password" type="password" class="swal2-input">',
-            showCancelButton: true,
-            confirmButtonText: 'Submit',
-            preConfirm: () => {
-                const username = Swal.getPopup().querySelector('#swal-username').value;
-                const password = Swal.getPopup().querySelector('#swal-password').value;
-                if (!username || !password) {
-                    Swal.showValidationMessage(`Please enter username and password`);
-                }
-                return { username: username, password: password };
+document.getElementById('swalBtn').onclick = function() {
+    Swal.fire({
+        title: 'Formulario',
+        html: `
+            <div id="placeOSCar"></div>
+            <div id="placeOSCarTotal"></div>
+            <div id="placeOSCarsubTotal"></div>
+            <div id="placeOSCarSaver"></div>
+
+            <div class="card-container">
+                Responsable:
+                <select id="list-OSEmployeesList" class="form-control" name="lista1" required>
+                    <option value="1">Empleado 1</option>
+                    <option value="2">Empleado 2</option>
+                    <option value="3">Empleado 3</option>
+                </select>
+            </div>
+
+            <div class="card-container">
+                Cliente:
+                <select id="list-OSCustomerListOS" class="form-control" name="lista1" required>
+                    <option value="1">Cliente 1</option>
+                    <option value="2">Cliente 2</option>
+                    <option value="3">Cliente 3</option>
+                </select>
+            </div>
+
+            <div id="OSCatalogViewInfo" class="card-container">
+                <!-- Contenido de la sección expandible -->
+            </div>
+
+            <div id="OSCatalogViewData" class="scard-container">
+                <!-- Contenido de la sección expandible -->
+            </div>
+
+            <div id="containerBtnCreateOrder"></div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        preConfirm: () => {
+            const selectedEmployee = document.getElementById('list-OSEmployeesList').value;
+            const selectedCustomer = document.getElementById('list-OSCustomerListOS').value;
+            if (!selectedEmployee || !selectedCustomer) {
+                Swal.showValidationMessage(`Please select both an employee and a customer`);
             }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(`Username: ${result.value.username}\nPassword: ${result.value.password}`);
-            }
-        });
-    };
+            return {
+                selectedEmployee: selectedEmployee,
+                selectedCustomer: selectedCustomer
+            };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Aquí puedes manejar los datos del formulario
+            console.log('Submitted Data:', result.value);
+            Swal.fire(`Empleado seleccionado: ${result.value.selectedEmployee}\nCliente seleccionado: ${result.value.selectedCustomer}`);
+        }
+    });
+};
 </script>
 
 </body>

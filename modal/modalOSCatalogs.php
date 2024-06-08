@@ -338,12 +338,7 @@ Cliente:
             <!-- Contenido de la sección expandible -->
         </div>
 
-<script>
 
-
-
-
-</script>
 <div id="containerBtnCreateOrder"></div>
       
     
