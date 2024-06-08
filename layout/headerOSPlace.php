@@ -436,4 +436,9 @@ document.getElementById('swalBtn').onclick = function() {
 
 </body>
 </html>
+<script  src="scripts/posts/os.postCatalogs.js"></script>
+
+<script  src="scripts/posts/os.postSites.js"></script>
+
+<script  src="scripts/posts/os.createOrder.js"></script>
 <script  src="scripts/gets/main.createResources.js"></script>
