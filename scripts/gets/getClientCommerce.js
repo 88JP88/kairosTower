@@ -272,7 +272,7 @@ async function createTablePromise(tableId, container, header) {
       }
       // Crear la tabla
       const table = document.createElement('table');
-      table.className = 'table table-hover table-striped';
+      table.className = 'table table-hover is-striped is-hoverable';
       table.id = tableId;
 
       // Crear el encabezado de la tabla
@@ -283,13 +283,17 @@ async function createTablePromise(tableId, container, header) {
       headers.forEach(headerText => {
           const th = document.createElement('th');
           th.scope = 'col';
-          th.innerHTML = `<i>${headerText}</i>`;
+          th.innerHTML = `<abbr><i style="color: #a7adbb; background-color:#14161a">${headerText}</i></abbr>`;
           headerRow.appendChild(th);
       });
 
       thead.appendChild(headerRow);
       table.appendChild(thead);
-
+      const thCells = thead.querySelectorAll('th');
+      thCells.forEach(th => {
+          th.style.backgroundColor = '#14161a';
+          th.style.color = '#a7adbb';
+      });
       // Crear el cuerpo de la tabla
       const tbody = document.createElement('tbody');
 
@@ -301,6 +305,7 @@ async function createTablePromise(tableId, container, header) {
 
       resolve(table); // Resolvemos la promesa con la tabla creada
   });
+ 
 }
 
  

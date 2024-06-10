@@ -976,7 +976,7 @@ if (isOutService) {
       <p class="card-text">${info.infoSite.info.comments}
      ${info.infoSite.params.isOutService === false || info.infoSite.params.isOutService===0 ?( info.infoSite.params.isBussy === true || info.infoSite.params.isBussy=== 1 ? 
       (info.infoSite.params.isOrder===true || info.infoSite.params.isOrder===1 ? `
-      <button onclick="
+      <button class="button is-dark" onclick="
       
 openModal('OSOrdersVerify');
 createResourceBtnCreateOrder('containerBtnCreateOrder');
@@ -1017,7 +1017,7 @@ getApiData(getOrdersOS,
       "  title="EDITAR">
      <i class="fas fa-plus"> Calcular</i>
      </button>
-     <button id="swalBtn" onclick=" 
+     <button class="button is-dark" id="swalBtn" onclick=" 
      modalTry();
   
      createResourceBtnCreateOrder('containerBtnCreateOrder');
@@ -1089,10 +1089,10 @@ getApiData(getEmployeesList,
 <i class="fas fa-plus"> Crear ordenee</i>
 </button>
 
-<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
+<button class="button is-dark" onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOrder&quot;,&quot;false&quot;,&quot;osdata&quot;); removeOrder('${info.siteId}')"  title="EDITAR">
 <i class="fas fa-plus"> Cerrar Proceso</i>
 </button>
-<button onclick="
+<button class="button is-dark" onclick="
 
 openModal('OSOrdersView');
       
@@ -1134,12 +1134,12 @@ getApiData(getOrdersOS,
 <i class="fas fa-plus"> Ver ordenes</i>
 </button>
       
-      `:`<button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
+      `:`<button  class="button is-dark" onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;false&quot;,&quot;osdata&quot;);
     
       "  title="EDITAR">
       <i class="fas fa-plus"> Cerrar Caja</i>
       </button>
-      <button  id="swalBtn" onclick="
+      <button class="button is-rounded is-outlined is-responsive" id="swalBtn" onclick="
       modalTry();
 
       createResourceBtnCreateOrder('containerBtnCreateOrder');
@@ -1212,16 +1212,16 @@ getApiData(getEmployeesList,
       
       :
      `
-     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
+     <button class="button is-dark" onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isBussy&quot;,&quot;true&quot;,&quot;osdata&quot;);
      setSessionUN('ot${info.siteId}');
     
      "  title="EDITAR">
      <i class="fas fa-plus"> Abrir Caja</i>
      </button>
-     <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     <button class="button is-dark" onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;true&quot;,&quot;osdata&quot;);"  title="EDITAR">
      <i class="fas fa-plus"> Sin servicio</i>
      </button>
-     `):` <button onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
+     `):` <button class="button is-dark" onclick="editOSSite(this,&quot;${info.clientId}&quot;,&quot;${info.siteId}&quot;,&quot;isOutService&quot;,&quot;false&quot;,&quot;osdata&quot;);"  title="EDITAR">
      <i class="fas fa-plus"> En servicio</i>
      </button>`}
 
@@ -1445,7 +1445,7 @@ getApiData(getOrdersOS,
       "  title="EDITAR">
       <i class="fas fa-plus"> Cerrar Caja</i>
       </button>
-      <button onclick="
+      <button class="button is-dark" onclick="
       openModal('OSCatalogViewOS');
       
       createTable('tableInternalClients2','OSCatalogViewData', [
@@ -1779,38 +1779,45 @@ function modalTry(){
   Swal.fire({
       title: 'Formulario',
       html: `
-          <div id="placeOSCar"></div>
+      
+      <div class="box">
+          <div id="placeOSCar" class="box"></div>
           <div id="placeOSCarTotal"></div>
           <div id="placeOSCarsubTotal"></div>
           <div id="placeOSCarSaver"></div>
 
-          <div class="card-container">
+          </div>
+         
+          <div class="box">
               Responsable:
-              <select id="list-OSEmployeesList" class="form-control" name="lista1" required>
-                  <option value="1">Empleado 1</option>
-                  <option value="2">Empleado 2</option>
-                  <option value="3">Empleado 3</option>
+              <div class="select is-rounded">
+              <select id="list-OSEmployeesList"  name="lista1" required>
+               
               </select>
           </div>
+          
 
-          <div class="card-container">
+          
               Cliente:
-              <select id="list-OSCustomerListOS" class="form-control" name="lista1" required>
-                  <option value="1">Cliente 1</option>
-                  <option value="2">Cliente 2</option>
-                  <option value="3">Cliente 3</option>
+              <div class="select is-rounded">
+              <select id="list-OSCustomerListOS"  name="lista1" required>
+                 
               </select>
+         
           </div>
-
-          <div id="OSCatalogViewInfo" class="card-container">
-              <!-- Contenido de la sección expandible -->
           </div>
-
-          <div id="OSCatalogViewData" class="scard-container">
-              <!-- Contenido de la sección expandible -->
-          </div>
-
+          <div class="box">
           <div id="containerBtnCreateOrder"></div>
+          <div id="OSCatalogViewInfo" class="">
+              <!-- Contenido de la sección expandible -->
+          </div>
+
+          <div id="OSCatalogViewData" class="box">
+              <!-- Contenido de la sección expandible -->
+          </div>
+
+          
+          </div>
       `,customClass: {
         container: 'custom-container',
         popup: 'custom-popup',
@@ -1845,6 +1852,20 @@ function modalTry(){
     cancelButtonText: 'Cancel',
     cancelButtonColor: '#d33',
       confirmButtonText: 'Submit',
+      showClass: {
+        popup: `
+          animate__animated
+          animate__rotateIn
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__rotateOut
+          animate__faster
+        `
+      },
       preConfirm: () => {
           const selectedEmployee = document.getElementById('list-OSEmployeesList').value;
           const selectedCustomer = document.getElementById('list-OSCustomerListOS').value;
@@ -1865,3 +1886,299 @@ function modalTry(){
   });
 
 }
+function modalPaymentMethod(){
+
+Swal.fire({
+  title: 'Formulario de Pago',
+  html: `
+      <div id="contaionerBtnPay"></div>
+
+      <p>Tipo de pago</p>
+      <select id="os-payment-type" class="select is-rounded" name="lista1" required>
+          <option selected value=""></option>
+          <option value="cash">Efectivo</option>
+          <option value="transfer">Transferencia</option>
+          <option value="card">Tarjeta</option>
+          <option value="points">Puntos</option>
+          <option value="crypto">Crypto</option>
+      </select>
+
+      <!-- Elementos adicionales a mostrar según la selección de tipo de pago -->
+      <div id="additional-elements">
+          <div id="transfer-elements" style="display: none;">
+              <p>Método de pago para Transferencia</p>
+              <select id="os-payment-method2" class="form-control" name="lista1" required>
+                  <option selected value=""></option>
+                  <option value="neq">NEQUI</option>
+                  <option value="dap">DAVIPLATA</option>
+                  <option value="bac">BANCOLOMBIA</option>
+                  <option value="nuB">NUBANK</option>
+                  <option value="ot">OTRO</option>
+              </select>
+              <p>Código de transacción</p>
+              <input type="text" class="" id="os-input-trcode" value="" title="">
+          </div>
+
+          <div id="card-elements" style="display: none;">
+              <p>Método de pago para Tarjeta</p>
+              <select id="os-payment-method1" class="form-control" name="lista1" required>
+                  <option selected value=""></option>
+                  <option value="cv">VISA - DÉBITO</option>
+                  <option value="dv">VISA - CRÉDITO</option>
+                  <option value="dm">MASTERCARD - DÉBITO</option>
+                  <option value="cm">MASTERCARD - CRÉDITO</option>
+                  <option value="cd">DINNERS - CRÉDITO</option>
+                  <option value="ot">OTRO</option>
+              </select>
+          </div>
+
+          <div id="otmeth-elements" style="display: none;">
+              <p>Detalles de método</p>
+              <p>Nombre de método</p>
+              <input type="text" class="" id="os-input-otmethod" step="1.000" value="" title="">
+          </div>
+
+          <div id="crypto-elements" style="display: none;">
+              <p>Detalles de Crypto</p>
+              <p>Nombre de Crypto</p>
+              <input type="text" class="" id="os-input-crypto-coin" value="" title="">
+              <p>Usuario de Crypto</p>
+              <input type="text" class="" id="os-input-crypto-user" value="" title="">
+              <p>Cantidad de Crypto</p>
+              <input type="number" class="" id="os-input-crypto-cointotal" step="0.0000000000001" value="" title="">
+          </div>
+
+          <div id="cash-elements" style="display: none;">
+              <p>Detalles de Efectivo</p>
+              <p>Paga con</p>
+              <input type="number" class="" id="os-input-cash-paywith" step="1.000" value="" title="">
+              <p>Cambio</p>
+              <input type="number" class="" id="os-input-cash-paywithchange" value="" title="">
+          </div>
+      </div>
+  `,
+  customClass: {
+    container: 'custom-container',
+    popup: 'custom-popup',
+    header: 'custom-header',
+    title: 'custom-title',
+    closeButton: 'custom-close-button',
+    icon: 'custom-icon',
+    image: 'custom-image',
+    content: 'custom-content',
+    input: 'custom-input',
+    actions: 'custom-actions',
+    confirmButton: 'custom-confirm-button',
+    denyButton: 'custom-deny-button',
+    cancelButton: 'custom-cancel-button',
+    footer: 'custom-footer'
+},
+background: '#222',
+color: '#fff',
+width: '900px',
+padding: '1rem',
+backdrop: `
+    rgba(0,0,123,0.4)
+    url("https://example.com/nyan-cat.gif")
+    left top
+    no-repeat
+`,
+position: 'center',
+grow: 'row',
+showConfirmButton: true,
+confirmButtonColor: '#3085d6',
+showCancelButton: true,
+cancelButtonText: 'Cancel',
+cancelButtonColor: '#d33',
+  confirmButtonText: 'Submit',
+  allowOutsideClick: false,
+  showClass: {
+    popup: `
+      animate__animated
+      animate__rotateIn
+      animate__faster
+    `
+  },
+  hideClass: {
+    popup: `
+      animate__animated
+      animate__rotateOut
+      animate__faster
+    `
+  },
+  didOpen: () => {
+    // Configurar eventos de cambio para los selectores dentro del modal
+    document.getElementById('os-payment-type').addEventListener('change', function() {
+        var selectedValue = this.value;
+        var transferElements = document.getElementById('transfer-elements');
+        var cardElements = document.getElementById('card-elements');
+        var cryptoElements = document.getElementById('crypto-elements');
+        var cashElements = document.getElementById('cash-elements');
+        var otmet = document.getElementById('otmeth-elements');
+
+        // Ocultar todos los elementos adicionales
+        otmet.style.display = 'none';
+        transferElements.style.display = 'none';
+        cardElements.style.display = 'none';
+        cryptoElements.style.display = 'none';
+        cashElements.style.display = 'none';
+
+        // Mostrar los elementos adicionales según la selección del tipo de pago
+        if (selectedValue === 'transfer') {
+            transferElements.style.display = 'block';
+        } else if (selectedValue === 'card') {
+            cardElements.style.display = 'block';
+        } else if (selectedValue === 'crypto') {
+            cryptoElements.style.display = 'block';
+        } else if (selectedValue === 'cash') {
+            cashElements.style.display = 'block';
+        }
+    });
+
+    document.getElementById('os-payment-method1').addEventListener('change', function() {
+        var selectedValue = this.value;
+        var otmet = document.getElementById('otmeth-elements');
+
+        // Ocultar todos los elementos adicionales
+        otmet.style.display = 'none';
+
+        // Mostrar los elementos adicionales según la selección del método de pago
+        if (selectedValue === 'ot') {
+            otmet.style.display = 'block';
+        }
+    });
+
+    document.getElementById('os-payment-method2').addEventListener('change', function() {
+        var selectedValue = this.value;
+        var otmet = document.getElementById('otmeth-elements');
+
+        // Ocultar todos los elementos adicionales
+        otmet.style.display = 'none';
+
+        // Mostrar los elementos adicionales según la selección del método de pago
+        if (selectedValue === 'ot') {
+            otmet.style.display = 'block';
+        }
+    });
+}
+
+});
+
+
+
+
+
+
+
+
+}
+
+
+
+async function payEditOrder(paymentSource){
+  if (paymentSource=="fromMarket") {
+   await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentType_Market', document.getElementById('os-payment-type').value, 'status');
+     
+  }
+  if (paymentSource=="fromSite") {
+    await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentType', document.getElementById('os-payment-type').value, 'status');
+     
+  }
+     
+  
+      var transferElements = document.getElementById('transfer-elements');
+      var cardElements = document.getElementById('card-elements');
+      var cryptoElements = document.getElementById('crypto-elements');
+      var cashElements = document.getElementById('cash-elements');
+      var otmet = document.getElementById('otmeth-elements');
+     
+     // Ocultar todos los elementos adicionales
+  
+     
+      // Ocultar todos los elementos adicionales
+      if(transferElements.style.display = 'block'){
+  
+  
+        if (paymentSource=="fromMarket") {
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentMethod_Market', document.getElementById('os-payment-method2').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'transactionCode_Market', document.getElementById('os-input-trcode').value, 'status');
+        if(document.getElementById('os-payment-method2').value=='ot'){
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'otherMethod_Market', document.getElementById('os-input-otmethod').value, 'status');
+        }      
+  }
+  if (paymentSource=="fromSite") {
+    await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method2').value, 'status');
+    await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'transactionCode', document.getElementById('os-input-trcode').value, 'status');
+        if(document.getElementById('os-payment-method2').value=='ot'){
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
+        }   
+  }
+       
+  
+      }
+      if(cardElements.style.display = 'block'){
+        if (paymentSource=="fromMarket") {
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentMethod_Market', document.getElementById('os-payment-method1').value, 'status');
+        if(document.getElementById('os-payment-method1').value=='ot'){
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'otherMethod_Market', document.getElementById('os-input-otmethod').value, 'status');
+        }      
+  }
+  
+        if (paymentSource=="fromSite") {
+          await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentMethod', document.getElementById('os-payment-method1').value, 'status');
+        if(document.getElementById('os-payment-method1').value=='ot'){
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'otherMethod', document.getElementById('os-input-otmethod').value, 'status');
+        }   
+  }
+        
+      }
+  
+      if(document.getElementById('os-payment-type').value=='crypto'){
+  
+        if (paymentSource=="fromMarket") {
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoName_Market', document.getElementById('os-input-crypto-coin').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoUser_Market', document.getElementById('os-input-crypto-user').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'cryptoValue_Market', document.getElementById('os-input-crypto-cointotal').value, 'status');
+     
+  }
+        if (paymentSource=="fromSite") {
+          await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoName', document.getElementById('os-input-crypto-coin').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoUser', document.getElementById('os-input-crypto-user').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'cryptoValue', document.getElementById('os-input-crypto-cointotal').value, 'status');
+     
+  }
+       
+  
+      }
+      if(document.getElementById('os-payment-type').value=='cash'){
+        if (paymentSource=="fromMarket") {
+          await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'payWith_Market', document.getElementById('os-input-cash-paywith').value, 'status');
+          await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'change_Market', document.getElementById('os-input-cash-paywithchange').value, 'status');
+  
+  }
+  
+        if (paymentSource=="fromSite") {
+          await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'payWith', document.getElementById('os-input-cash-paywith').value, 'status');
+          await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'change', document.getElementById('os-input-cash-paywithchange').value, 'status');
+  
+  }
+  
+  
+  }
+   
+  
+  
+  if (paymentSource=="fromMarket") {
+    await  editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('orderRandomCodeNow'), 'paymentStatus_Market', 'payed', 'status');
+    await editOSOrder(this, urlObj.searchParams.get('clientId'), sessionStorage.getItem('orderRandomCodeNow'), 'orderStatus', 'fromMarketFinished', 'status');
+  }
+  if (paymentSource=="fromSite") {
+    await editOSOrder(this, urlObj.searchParams.get('clientId'),sessionStorage.getItem('ot'+sessionStorage.getItem('siteNow')), 'paymentStatus', 'payed', 'status');
+  
+  }
+      
+  
+  
+    }
+  
+  

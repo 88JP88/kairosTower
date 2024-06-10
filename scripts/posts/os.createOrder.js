@@ -214,7 +214,8 @@ async function executeEditOSOrderSequence(clientId,codigoAleatorio) {
       await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketInProgress', 'status');
       await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketReady', 'status');
       await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketDelivered', 'status');
-      openModal('OSOrdersVerifyPayment');
+    //  openModal('OSOrdersVerifyPayment');
+    modalPaymentMethod();
       createResourceBtnPay('contaionerBtnPay');
     
       //  await editOSOrder(this, clientId, codigoAleatorio, 'orderStatus', 'fromMarketFinished', 'status');

@@ -29,7 +29,7 @@
            // Crear el primer botón
     const button1 = document.createElement('button');
     button1.setAttribute('type', 'button');
-    button1.classList.add('btn', 'btn-primary1', 'edit-button1');
+    button1.classList.add('button','is-rounded');
     button1.style.color = '#C70039';
     button1.title = 'VER USUARIOS ACTIVOS';
     button1.style.height = '50px'; 
@@ -125,7 +125,7 @@
     
     // Crear el primer contenedor div
     const div1 = document.createElement('div');
-    div1.classList.add('mb-3');
+    div1.classList.add('select','is-rounded');
     // Agregar la etiqueta y el select al primer contenedor div
     const label1 = document.createElement('label');
     label1.setAttribute('for', 'currency');
@@ -133,7 +133,6 @@
     div1.appendChild(label1);
     const select = document.createElement('select');
     select.id = 'OSOrdersOSFilter';
-    select.classList.add('form-control');
     select.name = 'currency';
     select.required = true;
    
@@ -177,7 +176,7 @@
      // Crear el segundo botón
      const button2 = document.createElement('button');
      button2.setAttribute('type', 'button');
-     button2.classList.add('btn', 'btn-primary1', 'edit-button1');
+     button2.classList.add('button','is-rounded');
      button2.style.color = '#C70039';
      button2.title = 'VER USUARIOS INACTIVOS';
      button2.id = 'filtercatalogs';

@@ -7,12 +7,36 @@ function showNotify(mensaje, tipo) {
 
     if (tipo === 'error') {
         notificacion.classList.add('error');
+        iconType="warning";
+    }else{
+        iconType="success";
+
     }
    
-    notificacion.style.display = 'block';
+  
 
     // Desaparecer la notificación después de 3 segundos
-    setTimeout(() => {
-        notificacion.style.display = 'none';
-    }, 3000);
+   
+
+    Swal.fire({
+        position: "top-end",
+        icon: iconType,
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 1500,
+        showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInTopRight
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+      });
 }

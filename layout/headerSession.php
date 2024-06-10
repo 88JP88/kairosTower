@@ -1,3 +1,5 @@
+
+
 <! DOCTYPE html>
 
 <html lang="es">
@@ -21,23 +23,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-  </head>
-  <body class="container-flex " style="width: 100%; height:100%;">
-
-<div class="notification" id="notification">
-        <p id="notificationText"></p>
-    </div>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+>
+ 
 
 
        <!--BARRA DE NAVEGACION DE PRUEBA-->
-<nav class="navbar navbar-expand-lg  navbarBootstrap">
-  <div class="container-fluid">
+       <nav class="navbar navbar-expand-lg  navbarBootstrap">
+  <div class="container-fluid" style="backgroud-color:#13161a;">
     
     <button class="nav-link active" onclick="changeSection('inbox');" id="home-tab" 
     data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" 
-    aria-controls="home-tab-pane" aria-selected="true" style="color: #C70039;">
+    aria-controls="home-tab-pane" aria-selected="true" style="color: #14161a;">
       <a class="navbar-brand btn-primary1 text-light mt-4 fs-4 " href="#">
         <img src="public/KAIROS2.png" alt="LUGMA" class="me-1" width="45" height="45">
         Kairos Tower
@@ -52,15 +56,15 @@
     </button>
 
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="backgroud-color:#13161a;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="backgroud-color:#13161a;">
 
       <li class="nav-item dropdown br-0 btn-primary1" >
           <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
             data-bs-toggle="dropdown" aria-expanded="false"  >
             <i class="fas fa-users"></i> Usuarios
           </a>
-          <ul class="dropdown-menu br-0">
+          <ul class="dropdown-menu br-0" style="backgroud-color:#13161a;">
             <li>
               <a class="dropdown-item" 
               onclick="
@@ -293,6 +297,15 @@
       </div>
   </div> 
 </nav>
+  </head>
+
+  <body style="backgroud-color:#13161a;">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="notification" id="notification">
+        <p id="notificationText"></p>
+    </div>
+
+
 
 
     
@@ -331,6 +344,8 @@
 <script  src="scripts/posts/postProducts.js"></script>
 <script  src="scripts/gets/main.CreateResources.js"></script>
 <script src="qrcodejs/qrcode.min.js"></script>
+<script  src="scripts/gets/modal.os.js"></script>
+<script  src="scripts/posts/os.postPlaces.js"></script>
 
 <div id="loading-container" class="loading-container">
   <div class="loading-icon"></div>

@@ -1,3 +1,7 @@
+
+
+
+
 <! DOCTYPE html>
 
 <html lang="en">
@@ -10,7 +14,14 @@
     <link rel="icon" type="image/x-icon" href="public/KAIROS2.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
   </head>
@@ -237,6 +248,13 @@ document.body.appendChild(buttonValidarCompra);
 </script>
 
 
+<section class="section is-large">
+  <h1 class="title">Section</h1>
+  <h2 class="subtitle">
+    A simple container to divide your page into <strong>sections</strong>, like
+    the one you're currently reading.
+  </h2>
+</section>
 
 </html>
 <script  src="scripts/data/credentials.js"></script>
@@ -367,6 +385,11 @@ document.body.appendChild(buttonValidarCompra);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SweetAlert2 Form Submit Example</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+>
 </head>
 <body>
 
@@ -442,3 +465,4 @@ document.getElementById('swalBtn').onclick = function() {
 
 <script  src="scripts/posts/os.createOrder.js"></script>
 <script  src="scripts/gets/main.createResources.js"></script>
+

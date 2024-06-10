@@ -7,10 +7,10 @@
     <button type="button" class="btn btn-primary1 edit-button1" onclick="getInternalClients('lock');" style="color: #C70039;" title="CLIENTES INACTIVOS"><i class="fas fa-eye-slash"></i></button>
 
 
-    <div id="containerInternalClientsInfo" class="card-container">
+    <div id="containerInternalClientsInfo" class="box">
             <!-- Contenido de la sección expandible -->
         </div>
-        <div id="containerInternalClientsData" class="card-container">
+        <div id="containerInternalClientsData" class="box">
             <!-- Contenido de la sección expandible -->
         </div>
 

@@ -183,9 +183,9 @@ function createResourceOnSiteSection(containerId) {
         `
                      
 
-        <p class="expand-button1" onclick="toggleExpandableSection4()"><i class="fas fa-store"></i> On-Site</p>
-        <div class="expandable-section1" id="expandable-section4">
-            <div id="card-clientresources" class="card-container">
+        <p class="expand-button1 class="box" onclick="toggleExpandableSection4()"><i class="fas fa-store"></i> On-Site</p>
+        <div class="expandable-section1 box" id="expandable-section4">
+            <div id="card-clientresources" class="card-container box">
                 <!-- Contenido de la sección expandible -->
                 ${sessionStorage.getItem('isPlaceActiveNow')==="true" ? `
                 
@@ -873,14 +873,14 @@ function createResourceBtnCreateOrder(containerId) {
   const htmlContent = `
   ${urlObj.searchParams.get("st")==="market"?
       `
-      <button onClick="editSiteHtml();createOsOrder('','createBtn');
+      <button style="color: white;" class="button is-rounded is-outlined is-responsive" onClick="editSiteHtml();createOsOrder('','createBtn');
       ">Crear orden</button>
 `:
 `
 `}
 ${urlObj.searchParams.get("st")==="sites"?
       `
-      <button onClick="editSiteHtml();createOsOrder('','');">Crear orden</button>
+      <button class="button is-rounded is-outlined is-responsive" onClick="editSiteHtml();createOsOrder('','');">Crear orden</button>
 `:
 `
 `}

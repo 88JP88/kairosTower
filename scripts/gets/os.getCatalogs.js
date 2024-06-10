@@ -161,7 +161,7 @@ let idin1 = 1;
       cardContainer11Info.innerHTML = ""; 
       
       const card11Info = document.createElement("div");
-      card11Info.classList.add("card");
+      card11Info.classList.add("box");
       
           card11Info.innerHTML = ` <p><H4>CATÁLOGOS</H4></p><p>${data.response.apiMessage}</p>`;
           cardContainer11Info.appendChild(card11Info);
@@ -169,9 +169,10 @@ let idin1 = 1;
     // Crear el primer botón
     const button1 = document.createElement('button');
     button1.setAttribute('type', 'button');
-    button1.classList.add('btn', 'btn-primary1', 'edit-button1');
+    button1.classList.add('button','is-rounded');
     button1.style.color = '#C70039';
     button1.title = 'VER USUARIOS ACTIVOS';
+    button1.style.height = '50px'; 
     button1.onclick = function() {
       eraseContainers('containerOSData','containerOSInfo');
       createTable('tableInternalClients2','containerOSData', [
@@ -217,15 +218,19 @@ let idin1 = 1;
     
     // Crear el primer contenedor div
     const div1 = document.createElement('div');
-    div1.classList.add('mb-3');
+    div1.classList.add('select', 'is-rounded');
     // Agregar la etiqueta y el select al primer contenedor div
     const label1 = document.createElement('label');
     label1.setAttribute('for', 'currency');
     label1.textContent = 'Busqueda por parámetro';
+    label1.classList.add('tag');
     div1.appendChild(label1);
+
+  
+
     const select = document.createElement('select');
     select.id = 'OSCatalogsFilter';
-    select.classList.add('form-control');
+   
     select.name = 'currency';
     select.required = true;
    
@@ -268,6 +273,8 @@ let idin1 = 1;
     option13.value = 'isInternal';
     option13.textContent = 'Uso interno';
 
+    const div2 = document.createElement('div');
+    div2.classList.add('select', 'is-rounded');
     const option14 = document.createElement('option');
     option14.value = 'keyWords';
     option14.textContent = 'Palabras clave';
@@ -287,14 +294,15 @@ let idin1 = 1;
     select.appendChild(option12);
     select.appendChild(option13);
     select.appendChild(option14);
-    div1.appendChild(select); 
+    div2.appendChild(select); 
+   
     cardContainer11Info.appendChild(button1);
-    cardContainer11Info.appendChild(div1);
+    div2.appendChild(div1);
 
      // Crear el segundo botón
      const button2 = document.createElement('button');
      button2.setAttribute('type', 'button');
-     button2.classList.add('btn', 'btn-primary1', 'edit-button1');
+     button2.classList.add('button','is-rounded');
      button2.style.color = '#C70039';
      button2.title = 'VER USUARIOS INACTIVOS';
      button2.id = 'filtercatalogs';
@@ -303,22 +311,22 @@ let idin1 = 1;
      icon2.classList.add('fas', 'fa-sort');
      
 
-     const div2 = document.createElement('div');
-     div2.classList.add('mb-3');
+     
      // Agregar la etiqueta y el input al segundo contenedor div
      const label2 = document.createElement('label');
      label2.classList.add('form-label');
      label2.innerHTML = '<i class="fas fa-guitar"></i> Parámetro en especifico';
+    label2.classList.add('tag');
      div2.appendChild(label2);
      const input = document.createElement('input');
      input.setAttribute('type', 'text');
-     input.classList.add('form-control');
+     input.classList.add('input','is-rounded');
      input.id = 'OSCatalogsValue';
      input.placeholder = 'Ingresa palabra a buscar';
      div2.appendChild(input);
      button2.appendChild(icon2);
      cardContainer11Info.appendChild(div2);
-     cardContainer11Info.appendChild(button2);
+     div2.appendChild(button2);
 
 
      button2.addEventListener('click', function() {
@@ -366,15 +374,15 @@ eraseContainers('containerOSData','containerOSInfo');
 
 
     const div1pro = document.createElement('div');
-    div1pro.classList.add('mb-3');
+    div1pro.classList.add('select','is-rounded');
 
     const labelpro = document.createElement('label');
     labelpro.setAttribute('for', 'currency');
     labelpro.textContent = 'Busqueda por producto';
+    labelpro.classList.add('tag');
     div1pro.appendChild(labelpro);
     const selectpro = document.createElement('select');
     selectpro.id = 'OSProductsOSFilter';
-    selectpro.classList.add('form-control');
     selectpro.name = 'currency';
     selectpro.required = true;
    
@@ -415,7 +423,7 @@ eraseContainers('containerOSData','containerOSInfo');
      // Crear el segundo botón
      const button3 = document.createElement('button');
      button3.setAttribute('type', 'button');
-     button3.classList.add('btn', 'btn-primary1', 'edit-button1');
+     button3.classList.add('button','is-rounded');
      button3.style.color = '#C70039';
      button3.title = 'VER USUARIOS INACTIVOS';
      button3.id = 'filtercatalogs';
@@ -430,10 +438,11 @@ eraseContainers('containerOSData','containerOSInfo');
      const label2pro = document.createElement('label');
      label2pro.classList.add('form-label');
      label2pro.innerHTML = '<i class="fas fa-guitar"></i> Parámetro de producto';
+    label2pro.classList.add('tag');
      div2pro.appendChild(label2pro);
      const inputpro = document.createElement('input');
      inputpro.setAttribute('type', 'text');
-     inputpro.classList.add('form-control');
+     inputpro.classList.add('input','is-rounded');
      inputpro.id = 'OSProductsOSValue';
      inputpro.placeholder = 'Ingresa palabra a buscar';
      div2pro.appendChild(inputpro);
@@ -445,16 +454,17 @@ eraseContainers('containerOSData','containerOSInfo');
 
 
      const div1cat = document.createElement('div');
-div1cat.classList.add('mb-3');
+div1cat.classList.add('select','is-rounded');
 
 const labelcat = document.createElement('label');
 labelcat.setAttribute('for', 'currency');
 labelcat.textContent = 'Busqueda por categoría';
+labelcat.classList.add('tag');
 div1cat.appendChild(labelcat);
 
 const selectcat = document.createElement('select');
 selectcat.id = 'OSCategoriesOSFilter';
-selectcat.classList.add('form-control');
+
 selectcat.name = 'currency';
 selectcat.required = true;
 
@@ -479,7 +489,7 @@ div1cat.appendChild(selectcat);
 cardContainer11Info.appendChild(div1cat);
 const button4 = document.createElement('button');
 button4.setAttribute('type', 'button');
-button4.classList.add('btn', 'btn-primary1', 'edit-button1');
+button4.classList.add('button','is-rounded');
 button4.style.color = '#C70039';
 button4.title = 'VER USUARIOS INACTIVOS';
 button4.id = 'filtercatalogs';
@@ -494,11 +504,12 @@ div2cat.classList.add('mb-3');
 const label2cat = document.createElement('label');
 label2cat.classList.add('form-label');
 label2cat.innerHTML = '<i class="fas fa-guitar"></i> Parámetro de categoría';
+label2cat.classList.add('tag');
 div2cat.appendChild(label2cat);
 
 const inputcat = document.createElement('input');
 inputcat.setAttribute('type', 'text');
-inputcat.classList.add('form-control');
+inputcat.classList.add('input','is-rounded');
 inputcat.id = 'OSCategoriesOSValue';
 inputcat.placeholder = 'Ingresa palabra a buscar';
 div2cat.appendChild(inputcat);
@@ -514,16 +525,17 @@ cardContainer11Info.appendChild(button4);
 
 
 const div1plc = document.createElement('div');
-div1plc.classList.add('mb-3');
+div1plc.classList.add('select','is-rounded');
 
 const labelplc = document.createElement('label');
 labelplc.setAttribute('for', 'currency');
 labelplc.textContent = 'Busqueda por establecimiento';
+labelplc.classList.add('tag');
 div1plc.appendChild(labelplc);
 
 const selectplc = document.createElement('select');
 selectplc.id = 'OSPlacesOSFilter';
-selectplc.classList.add('form-control');
+
 selectplc.name = 'currency';
 selectplc.required = true;
 
@@ -545,7 +557,7 @@ cardContainer11Info.appendChild(div1plc);
 
 const button5 = document.createElement('button');
 button5.setAttribute('type', 'button');
-button5.classList.add('btn', 'btn-primary1', 'edit-button1');
+button5.classList.add('button','is-rounded');
 button5.style.color = '#C70039';
 button5.title = 'VER USUARIOS INACTIVOS';
 button5.id = 'filtercatalogs';
@@ -559,12 +571,13 @@ div2plc.classList.add('mb-3');
 // Agregar la etiqueta y el input al segundo contenedor div
 const label2plc = document.createElement('label');
 label2plc.classList.add('form-label');
+label2plc.classList.add('tag');
 label2plc.innerHTML = '<i class="fas fa-guitar"></i> Parámetro de establecimiento';
 div2plc.appendChild(label2plc);
 
 const inputplc = document.createElement('input');
 inputplc.setAttribute('type', 'text');
-inputplc.classList.add('form-control');
+inputplc.classList.add('input','is-rounded');
 inputplc.id = 'OSPlacesOSValue';
 inputplc.placeholder = 'Ingresa palabra a buscar';
 div2plc.appendChild(inputplc);
@@ -1160,7 +1173,7 @@ ${info.infoCatalog.info.isStocked === true || info.infoCatalog.info.isStocked ==
     cardContainer11Info.innerHTML = ""; 
     
     const card11Info = document.createElement("div");
-    card11Info.classList.add("card");
+    card11Info.classList.add("box");
     
         card11Info.innerHTML = ` <p><H4>CATÁLOGOS</H4></p><p>${data.response.apiMessage}</p>`;
         cardContainer11Info.appendChild(card11Info);

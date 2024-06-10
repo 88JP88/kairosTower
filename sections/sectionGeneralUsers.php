@@ -1,15 +1,15 @@
 
-<div class="container email-section" id="generalUsers" style="text-align: center;">
-
-  <div id="containerBtn" class="card-container">
+<div class="container email-section box" id="generalUsers" style="text-align: center; backgroud-color:#13161a;"  >
+<div class="box">
+  <div id="containerBtn" class="box">
             <!-- Contenido de la sección expandible -->
         </div>
-  
+</div>
     <div id="containerGeneralUsersInfo" class="card-container"> 
            <!-- Contenido de la sección expandible -->
            
         </div>
-        <div id="containerGeneralUsersData" class="card-container">
+        <div id="containerGeneralUsersData" class="box table-container">
             <!-- Contenido de la sección expandible -->
            
         </div>

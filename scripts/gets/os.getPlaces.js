@@ -21,20 +21,62 @@
           if(sessionStorage.getItem('isMultiPlaceNow')=="true"){
             if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
 
-            openModal('OSPlaceCreate');
+              modalCreatePlaces();
             listTypePlace();
             }if(placesCounter>=sessionStorage.getItem('maxPlaceNow')){
-              alert("Máximo de esyablecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxPlaceNow'));
-                }
+               
+    Swal.fire({
+      
+      icon: 'info',
+      title: "Máximo de establecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxPlaceNow')+")",
+      showConfirmButton: false,
+      timer: 3000,
+      showClass: {
+          popup: `
+            animate__animated
+            animate__flipInX
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__flipOutX
+            animate__faster
+          `
+        }
+    });
+            
+            }
          
           }
           if(sessionStorage.getItem('isMultiPlaceNow')=="false"){
               if(placesCounter>=sessionStorage.getItem('maxPlaceNow')){
-                alert("Máximo de establecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO:"+sessionStorage.getItem('maxPlaceNow')+")" );
-                
+
+                Swal.fire({
+      
+                  icon: 'info',
+                  title: "Máximo de establecimientos creados (TOTAL: "+placesCounter+" / MÁXIMO: "+sessionStorage.getItem('maxPlaceNow')+")",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  showClass: {
+                      popup: `
+                        animate__animated
+                        animate__flipInX
+                        animate__faster
+                      `
+                    },
+                    hideClass: {
+                      popup: `
+                        animate__animated
+                        animate__flipOutX
+                        animate__faster
+                      `
+                    }
+                });                
               }
               if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
-                openModal('OSPlaceCreate');
+                modalCreatePlaces();
                 listTypePlace();
                 
               }

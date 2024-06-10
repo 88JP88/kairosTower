@@ -130,7 +130,7 @@ if(data.response.sentData.param=="unlock"){
   cardContainer11Info.innerHTML = ""; 
   
   const card11Info = document.createElement("div");
-  card11Info.classList.add("card");
+  card11Info.classList.add("box");
       card11Info.innerHTML = ` <p><H2>CLIENTES</H2></p><p>${data.response.apiMessage}</p>`;
       cardContainer11Info.appendChild(card11Info);
     data.clients.forEach(info => {
@@ -260,7 +260,8 @@ if(data.response.sentData.param=="unlock"){
     
 
       </td>
-      <td>${info.clientId}</td>
+
+      <td style="background-color: #14161a; color:#a7adbb">${info.clientId}</td>
       <td>
       <div class="edit-container">
       <input type="text" class="form-control label-input" id="${info.clientId}" value="${info.clientName}" title="${info.clientName}" onclick="makeEditable(this)"> <button onclick="editExtClient(this,&quot;${info.clientId}&quot;,&quot;clientName&quot;,&quot;client&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
@@ -278,7 +279,7 @@ if(data.response.sentData.param=="unlock"){
       </button>
       </div>
       </td>
-      <td>${info.clientType}</td>
+      <td style="backgroud-color:#13161a;">${info.clientType}</td>
       <td>${info.name} ${info.lastName}</td>
       <td>${info.email} / ${info.contact}</td>
       <td>
@@ -1014,7 +1015,13 @@ ${info.infoClient.params.placeParams.isActive ===true?`
       cardContainer11.appendChild(row);
     });
     document.getElementById("loading-container").style.display = "none";
- 
+    const cells = document.querySelectorAll('td');
+
+    // Aplicar el estilo a cada celda
+    cells.forEach(cell => {
+        cell.style.backgroundColor = '#14161a';
+        cell.style.color = '#a7adbb';
+    });
  
 
 }
@@ -1026,7 +1033,7 @@ if(data.response.sentData.param=="lock"){
     cardContainer11Info.innerHTML = ""; 
     
     const card11Info = document.createElement("div");
-    card11Info.classList.add("card");
+    card11Info.classList.add("box");
         card11Info.innerHTML = `  <p><H2>CLIENTES</H2></p><p>${data.response.apiMessage}</p>`;
         cardContainer11Info.appendChild(card11Info);
     data.clients.forEach(info => {

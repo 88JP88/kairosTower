@@ -1,23 +1,23 @@
 .navbarBootstrap {
-  background-color: #001219;
+  background-color: #14161a;
 }
 
 .navbar-nav a.nav-link {
-  color: #001219; /* Cambia este valor al color deseado */
+  color: #14161a; /* Cambia este valor al color deseado */
 }
 
 /* Cambiar color del botón */
 .btn-outline-success {
   color: #C70039;            /* Color del texto en el botón */
-  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
+  background-color: #14161a;  /* Cambia este valor al color deseado para el fondo del botón */
   border-color: #C70039;      /* Cambia este valor al color deseado para el borde del botón */
 }
 
 /* Cambiar color del botón */
 .btn-primary1 {
   color: #ffffff;            /* Color del texto en el botón */
-  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
-  border-color: #001219;  
+  background-color: #14161a;  /* Cambia este valor al color deseado para el fondo del botón */
+  border-color: #14161a;  
   border-radius: 0%;    /* Cambia este valor al color deseado para el borde del botón */
 }
 .menuFrame {
@@ -27,45 +27,45 @@
 /* Cambiar color del botón */
 .btn-primary1:hover {
   color: #C70039;            /* Color del texto en el botón */
-  background-color: #001219;  /* Cambia este valor al color deseado para el fondo del botón */
-  border-color: #001219;      /* Cambia este valor al color deseado para el borde del botón */
+  background-color: #14161a;  /* Cambia este valor al color deseado para el fondo del botón */
+  border-color: #14161a;      /* Cambia este valor al color deseado para el borde del botón */
 }
 /* Cambiar color del botón en el hover */
 .btn-outline-success:hover {
   color: #C70039;             /* Cambia este valor al color deseado para el texto en hover */
-  background-color: #001219; /* Cambia este valor al color deseado para el fondo en hover */
-  border-color: #001219;      /* Cambia este valor al color deseado para el borde en hover */
+  background-color: #14161a; /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #14161a;      /* Cambia este valor al color deseado para el borde en hover */
 }
 
 
 .btn-outline-success:active {
   color: #C70039 !important;           /* Cambia este valor al color deseado para el texto en el clic */
-  background-color: #001219 !important; /* Cambia este valor al color deseado para el fondo en el clic */
+  background-color: #14161a !important; /* Cambia este valor al color deseado para el fondo en el clic */
   border-color: #C70039 !important;     /* Cambia este valor al color deseado para el borde en el clic */
 }
 
 .dropdown-item:active {
   color: #C70039 !important;           /* Cambia este valor al color deseado para el texto en el clic */
-  background-color: #001219 !important; /* Cambia este valor al color deseado para el fondo en el clic */
-  border-color: #001219 !important;     /* Cambia este valor al color deseado para el borde en el clic */
+  background-color: #14161a !important; /* Cambia este valor al color deseado para el fondo en el clic */
+  border-color: #14161a !important;     /* Cambia este valor al color deseado para el borde en el clic */
 }
 
 .nav-item:hover {
   color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
-  background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
-  border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
+  background-color: #14161a !important;   /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #14161a !important;        /* Cambia este valor al color deseado para el borde en hover */
   border-radius: 5px;
 }
 .dropdown-item:hover {
   color: #C70039 !important;            /* Cambia este valor al color deseado para el texto en hover */
-  background-color: #001219 !important;   /* Cambia este valor al color deseado para el fondo en hover */
-  border-color: #001219 !important;        /* Cambia este valor al color deseado para el borde en hover */
+  background-color: #14161a !important;   /* Cambia este valor al color deseado para el fondo en hover */
+  border-color: #14161a !important;        /* Cambia este valor al color deseado para el borde en hover */
   border-radius: 5px;
 }
 
 .dropdown:active {
              /* Cambia este valor al color deseado para el texto en el clic */
-  background-color: #001219;   /* Cambia este valor al color deseado para el borde en el clic */
+  background-color: #14161a;   /* Cambia este valor al color deseado para el borde en el clic */
 }
 .dropdown-menu {       /* Cambia este valor al color deseado para el borde en hover */
   border-radius: 5px;
@@ -298,7 +298,7 @@
   font-weight: bold; /* Cambia el grosor de la fuente a tu preferencia */
   text-decoration: none; /* Agrega un subrayado al texto */
   padding: 5px; /* Añade un poco de espacio alrededor del texto */
-  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  background-color: #14161a; /* Cambia el color de fondo al pasar el mouse */
   border: 1px solid #ccc; /* Agrega un borde alrededor del párrafo */
   border-radius: 5px; /* Agrega esquinas redondeadas al borde */
   transition: background-color 0.3s; /* Agrega una transición suave al cambio de color de fondo al pasar el mouse */
@@ -316,7 +316,7 @@ text-align: center;
 /* Estilo para la sección expandible */
 .expandable-section {
   display: none; /* Oculta la sección por defecto */
-  background-color: #f0f0f0; /* Cambia el color de fondo a tu preferencia */
+  background-color: #14161a; /* Cambia el color de fondo a tu preferencia */
   padding: 10px; /* Agrega relleno interno a tu preferencia */
   border: 1px solid #ccc; /* Agrega un borde a tu preferencia */
   border-radius: 5px; /* Agrega esquinas redondeadas a tu preferencia */
@@ -331,7 +331,7 @@ text-align: center;
   font-weight: bold; /* Cambia el grosor de la fuente a tu preferencia */
   text-decoration: none; /* Agrega un subrayado al texto */
   padding: 5px; /* Añade un poco de espacio alrededor del texto */
-  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  background-color: #14161a; /* Cambia el color de fondo al pasar el mouse */
   border: 1px solid #ccc; /* Agrega un borde alrededor del párrafo */
   border-radius: 5px; /* Agrega esquinas redondeadas al borde */
   transition: background-color 0.3s; /* Agrega una transición suave al cambio de color de fondo al pasar el mouse */
@@ -349,7 +349,7 @@ text-align: center;
 /* Estilo para la sección expandible */
 .expandable-section1 {
   display: none; /* Oculta la sección por defecto */
-  background-color: #f0f0f0; /* Cambia el color de fondo a tu preferencia */
+  background-color: #14161a; /* Cambia el color de fondo a tu preferencia */
   padding: 10px; /* Agrega relleno interno a tu preferencia */
   border: 1px solid #ccc; /* Agrega un borde a tu preferencia */
   border-radius: 5px; /* Agrega esquinas redondeadas a tu preferencia */
