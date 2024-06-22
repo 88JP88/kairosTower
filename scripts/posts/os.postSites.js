@@ -1,5 +1,4 @@
-
-document.getElementById("postSiteBtn").addEventListener("click", function() {
+function osCreateSites(){
   // Obtén los valores de los campos
   document.getElementById("loading-container").style.display = "flex";
 var apiData = {
@@ -33,9 +32,8 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
     });
     document.getElementById("loading-container").style.display = "none";
 
-});
 
-
+}
 
 function csvToJsonPostCustomer(csvData) {
   const lines = csvData.split('\n');

@@ -35,42 +35,35 @@
  
 
 
-       <!--BARRA DE NAVEGACION DE PRUEBA-->
-       <nav class="navbar navbar-expand-lg  navbarBootstrap">
-  <div class="container-fluid" style="backgroud-color:#13161a;">
-    
-    <button class="nav-link active" onclick="changeSection('inbox');" id="home-tab" 
-    data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" 
-    aria-controls="home-tab-pane" aria-selected="true" style="color: #14161a;">
-      <a class="navbar-brand btn-primary1 text-light mt-4 fs-4 " href="#">
-        <img src="public/KAIROS2.png" alt="LUGMA" class="me-1" width="45" height="45">
-        Kairos Tower
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+    <img  viewBox="0 0 640 160" fill="none" src="public/KAIROS2.png">
+
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navMenu" class="navbar-menu">
+    <div class="navbar-start">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+      <i class="fas fa-users"></i>Usuarios
       </a>
-    </button>
-   
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-     aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="backgroud-color:#13161a;">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="backgroud-color:#13161a;">
-
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-users"></i> Usuarios
-          </a>
-          <ul class="dropdown-menu br-0" style="backgroud-color:#13161a;">
-            <li>
-              <a class="dropdown-item" 
-              onclick="
+      <div class="navbar-dropdown">
+          <a class="navbar-item"
+          onclick="
 
              
-              changeSection('generalUsers');
+             
               eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
               createTable('tableGeneralUsers','containerGeneralUsersData', [
                                 'Acciones',
@@ -98,22 +91,12 @@
                         'value':'all'
                     }
                         );
-               "
-                
-                id="schedule-tab" data-bs-toggle="tab" 
-                data-bs-target="#schedule-tab-pane" type="button" role="tab" 
-                aria-controls="schedule-tab-pane" aria-selected="true" 
-                style="color: #3c3c3b;">
-                <i class="fas fa-users"></i> 
-                Usuarios generales
-              </a>
-            </li>
-            
-            <li>
-              <a class="dropdown-item" 
-              
-              onclick="
-              changeSection('generalUsers');
+               ">
+            Generales
+          </a>
+          <a class="navbar-item is-selected"
+          onclick="
+             
               eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
               createTable('tableGeneralUsers','containerGeneralUsersData', [
                                 'Acciones',
@@ -141,30 +124,25 @@
                         'value':'all'
                     }
                         );
-              " id="schedule-tab" data-bs-toggle="tab"
-               data-bs-target="#schedule-tab-pane" type="button" role="tab"
-                aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-                <i class="fas fa-toolbox"></i> 
-                Usuarios internos
-              </a>
-            </li>
-
-          </ul>
-      </li>
-
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-users"></i> 
-            Clientes
+              ">
+            Internos
           </a>
-          <ul class="dropdown-menu br-0">
           
-            <li> 
-              <a class="dropdown-item" 
-              onclick="
-              changeSection('generalUsers');
-              eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+        </div>
+</div>
+     
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+        <i class="fas fa-users"></i>Clientes
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item"
+          onclick="
+             
+                            eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
+
               createTable('tableInternalClients','containerGeneralUsersData', [
                                 'Acciones',
                                 'Id',
@@ -193,134 +171,107 @@
                     }
                         );
 
-              "
-                 id="schedule-tab" data-bs-toggle="tab" 
-                data-bs-target="#schedule-tab-pane" type="button" role="tab" 
-                aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-                <i class="fas fa-building"></i> 
-                Clientes externos
-              </a>
-            </li>
-
-            <li> 
-              <a class="dropdown-item" onclick="changeSection('gtask');getIndentFullCalendar();"
-               id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
-               role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-               <i class="fas fa-warehouse"></i> 
-               Clientes internos
-              </a>
-            </li>
-          </ul>
-      </li>
-
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-headset"></i> 
-             Soporte
+              ">
+            Generales
           </a>
-          <ul class="dropdown-menu br-0">
-            <li> 
-              <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" 
-                id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
-                role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-                Soporte externo
-              </a>
-            </li>
          
-            <li> 
-              <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" 
-                id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" 
-                role="tab" aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-                Soporte interno
-              </a>
-            </li>
-       
-          </ul>
-      </li>
-
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" href="#" role="button" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-info"></i> Informes
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
           </a>
-          <ul class="dropdown-menu br-0">
-            <li> 
-              <a class="dropdown-item" onclick="changeSection('ptask');getPersonalTask('created');" id="schedule-tab" 
-                data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" aria-controls="schedule-tab-pane"
-                 aria-selected="true" style="color: #3c3c3b;">
-                 Generar informe
-              </a>
-            </li>
-      
-         
-            <li> 
-              <a class="dropdown-item" onclick="changeSection('gtask');getPagesAssignModelsHislogs();" id="schedule-tab"
-               data-bs-toggle="tab" data-bs-target="#schedule-tab-pane" type="button" role="tab" 
-               aria-controls="schedule-tab-pane" aria-selected="true" style="color: #3c3c3b;">
-               Verificar informes
-              </a>
-            </li>
-       
-          </ul>
-      </li>
-    
-  
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" onclick="openModMyProfile('importantes');profileInfoLog();"
-           href="#" role="button" type="button" id="actualizarButton"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-user-check"></i> 
-            Perfil
-          </a>
-      </li>
-
-
-
-     
-      <li class="nav-item dropdown br-0 btn-primary1" >
-          <a class="btn btn-primary1 dropdown-toggle" onclick="openModCloseSession();"
-           href="#" role="button" type="button" id="actualizarButton"
-            data-bs-toggle="dropdown" aria-expanded="false"  >
-            <i class="fas fa-user-check"></i> 
-            Cerrar sesión
-          </a>
-      </li>
-
-  
-  
-
-
-
-      
-   
+        </div>
       </div>
-  </div> 
+      <a class="navbar-item">
+        Documentation
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-info is-rounded"
+          onclick="openModMyProfile('importantes');profileInfoLog();">
+            <strong>Perfil</strong>
+          </a>
+          <a class="button is-light"
+          onclick="openModCloseSession();">
+            Log out
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
   </head>
 
-  <body style="backgroud-color:#13161a;">
+  <body class="box" style="backgroud-color:#2a2b2e;">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<div class="notification" id="notification">
-        <p id="notificationText"></p>
-    </div>
 
 
+
+
+  <div id="containerGeneralUsersInfo" class="card-container"> 
+           <!-- Contenido de la sección expandible -->
+           
+        </div>
+        <div id="containerGeneralUsersData" class="box table-container">
+            <!-- Contenido de la sección expandible -->
+           
+
+        </div>
+       
+
+
+
+                     
+
+        
+    <script>
+     
+        function toggleExpandableSection() {
+            const expandableSection = document.getElementById("expandable-section");
+            if (expandableSection.style.display === "block") {
+                expandableSection.style.display = "none";
+            } else {
+                expandableSection.style.display = "block";
+            }
+        }
+ 
+
+
+
+
+
+        function toggleExpandableSection1() {
+            const expandableSection1 = document.getElementById("expandable-section1");
+            if (expandableSection1.style.display === "block") {
+                expandableSection1.style.display = "none";
+            } else {
+                expandableSection1.style.display = "block";
+            }
+        }
+   
+        function toggleExpandableSection3() {
+            const expandableSection1 = document.getElementById("expandable-section3");
+            if (expandableSection1.style.display === "block") {
+                expandableSection1.style.display = "none";
+            } else {
+                expandableSection1.style.display = "block";
+            }
+        }
+   
+        function toggleExpandableSection4() {
+            const expandableSection1 = document.getElementById("expandable-section4");
+            if (expandableSection1.style.display === "block") {
+                expandableSection1.style.display = "none";
+            } else {
+                expandableSection1.style.display = "block";
+            }
+        }
+    </script>
 
 
     
-<!-- 
-<div class="container tab-content" id="myTabContent">
-  <div class="container tab-pane fade show active" id="home-tab-pane" style="background-color: green;" role="tabpanel" aria-labelledby="home-tab" tabindex="0">rtyu</div>
-  <div class="container tab-pane fade" id="api-tab-pane" role="tabpanel" aria-labelledby="api-tab"  tabindex="0">..www.</div>
-  <div class="container tab-pane fade" id="tools-tab-pane" role="tabpanel" aria-labelledby="tools-tab" tabindex="0">qqq</div>
-  <div class="container tab-pane fade" id="alerts-tab-pane" role="tabpanel" aria-labelledby="alerts-tab" tabindex="0">..eeee.</div>
-  <div class="container tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">..eeee.</div>
-  <div class="container tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">.ddf..</div>
-</div>
-
--->
-
 </body>
 </html>
 
@@ -353,56 +304,108 @@
 
 
 
-<style>
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: none;
-    z-index: 9999;
-    animation: slideIn 8s forwards, slideOut 10s forwards;
-}
-.notification.error {
-    background-color: #f44336;
-}
-@keyframes slideIn {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    80% {
-        transform: translateX(-10%);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-@keyframes slideOut {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-</style>
-<style>
-    .password-container {
-        position: relative;
-    }
 
-    .toggle-password {
-        display: block; /* Muestra el botón como un bloque, debajo del campo de contraseña */
-        margin-top: 5px; /* Agrega un margen superior para separar el botón del campo de contraseña */
-        cursor: pointer;
-    }
-</style>
+
+
+
+
+<div class="tabs is-centered is-boxed box">
+  <ul>
+    <li class="is-active" data-tab="pictures">
+      <a>
+        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+        <span>Pictures</span>
+      </a>
+    </li>
+    <li data-tab="music">
+      <a>
+        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span>Music</span>
+      </a>
+    </li>
+    <li data-tab="videos">
+      <a>
+        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+        <span>Videos</span>
+      </a>
+    </li>
+    <li data-tab="documents">
+      <a>
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="pictures" class="tab-content is-active box">
+    <h2>Pictures</h2>
+    <p>This is the content for the Pictures tab.</p>
+</div>
+
+<div id="music" class="tab-content box">
+    <h2>Music</h2>
+    <p>This is the content for the Music tab.</p>
+</div>
+
+<div id="videos" class="tab-content box">
+    <h2>Videos</h2>
+    <p>This is the content for the Videos tab.</p>
+</div>
+
+<div id="documents" class="tab-content box">
+    <h2>Documents</h2>
+    <p>This is the content for the Documents tab.</p>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tabs ul li');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      
+      const target = tab.getAttribute('data-tab');
+      tabContents.forEach(content => {
+        if (content.id === target) {
+          content.classList.add('is-active');
+        } else {
+          content.classList.remove('is-active');
+        }
+      });
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+
+// Get all "navbar-burger" elements
+const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+// Add a click event on each of them
+$navbarBurgers.forEach( el => {
+  el.addEventListener('click', () => {
+
+    // Get the target from the "data-target" attribute
+    const target = el.dataset.target;
+    const $target = document.getElementById(target);
+
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    el.classList.toggle('is-active');
+    $target.classList.toggle('is-active');
+
+  });
+});
+
+});
+</script>
+<style>
+        .tab-content {
+            display: none;
+        }
+        .tab-content.is-active {
+            display: block;
+        }
+    </style>

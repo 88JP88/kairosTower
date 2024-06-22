@@ -1,5 +1,6 @@
 
-document.getElementById("postPlaceBtn").addEventListener("click", function() {
+async function osCreatePlace(){
+
   // Obtén los valores de los campos
   document.getElementById("loading-container").style.display = "flex";
 var apiData = {
@@ -32,19 +33,19 @@ var url = 'controller/postController.php?data=' + encodeURIComponent(apiInfo);
 
   fetch(url)
     .then(response => {
-      getMessage();      // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
+           // Aquí puedes realizar alguna acción con la respuesta del servidor, si lo deseas
       // Por ejemplo, mostrar un mensaje de éxito o actualizar la información en la página
-    
+      document.getElementById("loading-container").style.display = "none"; // Luego oculta el loader
+
+      getMessage();
       
     })
     .catch(error => {
       // Aquí puedes manejar los errores en caso de que la petición falle
       console.log('Error en la petición:', error);
     });
-    document.getElementById("loading-container").style.display = "none";
-
-});
-
+    
+}
 
 
 function csvToJsonPostCustomer(csvData) {

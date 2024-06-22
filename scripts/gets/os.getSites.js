@@ -20,7 +20,7 @@
             });
           if(sessionStorage.getItem('isMultiSiteNow')=="true"){
             if(sitesCounter<sessionStorage.getItem('maxSiteNow')){
-            openModal('OSSiteCreate');
+           
             listTypeSite();
             getApiData(getPlacesList,
               {
@@ -49,7 +49,7 @@
                 
               }
               if(sitesCounter<1){
-                openModal('OSSiteCreate');
+              
                 listTypeSite();
                 getApiData(getPlacesList,
                   {
@@ -90,7 +90,7 @@
       cardContainer11Info.innerHTML = ""; 
       
       const card11Info = document.createElement("div");
-      card11Info.classList.add("card");
+      card11Info.classList.add("box");
       
           card11Info.innerHTML = ` <p><H4>PUESTOS</H4></p><p>${data.response.apiMessage}</p>`;
           cardContainer11Info.appendChild(card11Info);

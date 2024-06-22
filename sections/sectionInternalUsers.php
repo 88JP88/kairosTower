@@ -1,4 +1,4 @@
-<div class="container email-section box" id="internalUsers" style="text-align: left; backgroud-color:#13161a;" >
+<div class="container email-section" id="internalUsers" style="text-align: left; backgroud-color:#13161a;" >
 <p><button class="btn-primary1 edit-button1" style ="color: #C70039;"
               onclick="
               changeSection('generalUsers');
@@ -42,7 +42,7 @@
 
 
 
-<div id="trackingResource" class="box"></div>
+<div id="trackingResource1" class="box"></div>
                      
 
         
@@ -61,7 +61,7 @@
 
 
 
-<div id="resourceResource" class="box"></div>
+<div id="resourceResource1" class="box"></div>
     <script>
         function toggleExpandableSection1() {
             const expandableSection1 = document.getElementById("expandable-section1");
@@ -75,7 +75,7 @@
 
 
 
-<div id="onSiteResource" class="box"></div>
+<div id="onSiteResource1" class="box"></div>
 
                       
     <script>
@@ -110,7 +110,7 @@
 
 <p class="expand-button1 box" onclick="toggleExpandableSection2()"><i class="fas fa-brush " ></i> ESTILO</p>
     <div class="expandable-section1" id="expandable-section2">
-        <div id="card-clientStyle" class="card-container">
+        <div id="card-clientStyle1" class="card-container">
             <!-- Contenido de la sección expandible -->
         </div>
     </div>

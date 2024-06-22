@@ -68,7 +68,7 @@ button1.setAttribute("title", "VER USUARIOS INACTIVOS");
 button1.innerHTML = '<i class="fas fa-eye-slash"></i>';
 
 button1.onclick = function() {
-  changeSection('generalUsers');
+  
               eraseContainers('containerGeneralUsersData','containerGeneralUsersInfo');
               createTable('tableInternalClients','containerGeneralUsersData', [
                 'Acciones',
@@ -146,8 +146,9 @@ if(data.response.sentData.param=="unlock"){
     
       <button class="btn btn-primary1 edit-button" style="width: 54px;height: 52px; font-size: 24px;" title="CONFIGURACIONES"
        onclick="
-       createCalendarId(&quot;${info.clientId}&quot;);
-      
+       modalClientModules();
+     
+      createCalendarId('${info.clientId}');
        clientParamsStatus({
         'isEcommerceNow':'${info.infoClient.params.placeParams.isEcommerce}',
         'isMarketNow':'${info.infoClient.params.placeParams.isMarket}',
@@ -214,37 +215,107 @@ if(data.response.sentData.param=="unlock"){
 
       });
      
-       getClientStyle(&quot;${info.clientId}&quot;);
       
-              createTable('tableInternalClients','containerCalendarDaysData', [
-                                'Mes / Año',
-                                'Días del mes',
-                                'Días Disponibles',
-                                'Activo',
-                                'Acciones'
-                            ]);
-       getApiData(getCalendarDays,
-        {
-          'apiService':'apiCompanies',
-          'apiVersion':'v1',
-          'endPoint':'getCalendarDays'
-      },
-        {
-          'containerData':'containerCalendarDaysData',
-          'containerInfo':'containerCalendarDaysInfo',
-          'modelView':'table',
-      },
-        {
-          'filter':'${info.clientId}',
-          'param':'all',
-          'value':'all'
-      }
-          );
-          changeSection('internalUsers');
+       
           createResourceResourcesSection('resourceResource');
           createResourceTrackerSection('trackingResource');
           createResourceOnSiteSection('onSiteResource');
-           " >
+           
+          ${ sessionStorage.setItem('clientModulesConfigNow'+info.clientId, `
+             sessionStorage.setItem('clientNow','${info.clientId}');
+           modalClientModules();
+     
+          
+           clientParamsStatus({
+            'isEcommerceNow':${info.infoClient.params.placeParams.isEcommerce},
+            'isMarketNow': ${info.infoClient.params.placeParams.isMarket},
+    'isWorkNow': ${info.infoClient.params.placeParams.isWork},
+    'isSiteNow': ${info.infoClient.params.siteParams.isSite},
+    'isPlaceNow': ${info.infoClient.params.placeParams.isPlace},
+    'isPlaceActiveNow': ${info.infoClient.params.placeParams.isActive},
+    'isMultiPlaceNow': ${info.infoClient.params.placeParams.isMultiPlace},
+    'isMultiSiteNow': ${info.infoClient.params.siteParams.isMultiSite},
+    'isMultiElementNow':${ info.infoClient.params.elementParams.isMultiElement},
+    'isPointsSystemNow': ${info.infoClient.params.pointsParams.isPointsSystem},
+    'isStarsSystemNow':${ info.infoClient.params.pointsParams.isStarsSystem},
+    'isMultiClientNow':${ info.infoClient.params.clientParams.isMultiClient},
+    'isMultiTeamNow': ${info.infoClient.params.teamParams.isMultiTeam},
+    'isProductNow': ${info.infoClient.params.productParams.isProduct},
+    'isMultiProductNow':${ info.infoClient.params.productParams.isMultiProduct},
+    'maxProductNow':${ info.infoClient.params.productParams.maxQty},
+    'maxPlaceNow': ${info.infoClient.params.placeParams.maxQty},
+    'isElementNow': ${info.infoClient.params.elementParams.isElement},
+    'maxElementNow':${ info.infoClient.params.elementParams.maxQty},
+    'isClientNow':${ info.infoClient.params.clientParams.isClient},
+    'maxClientNow': ${info.infoClient.params.clientParams.maxQty},
+    'isTeamNow': ${info.infoClient.params.teamParams.isTeam},
+    'maxTeamNow':${ info.infoClient.params.teamParams.maxQty},
+    'maxSiteNow': ${info.infoClient.params.siteParams.maxQty},
+    'isMultiCategoryNow':${ info.infoClient.params.categoryParams.isMultiCategory},
+    'isCategoryNow': ${info.infoClient.params.categoryParams.isCategory},
+    'maxCategoryNow':${ info.infoClient.params.categoryParams.maxQty},
+    'isMultiCatalogNow': ${info.infoClient.params.catalogParams.isMultiCatalog},
+    'isCatalogNow': ${info.infoClient.params.catalogParams.isCatalog},
+    'maxCatalogNow':${ info.infoClient.params.catalogParams.maxQty},
+    'isGraficsOrderNow': ${info.infoClient.params.orderParams.isGrafics},
+    'isOrderNow':${ info.infoClient.params.orderParams.isOrder},
+    'isAdvanceCalculateNow':${ info.infoClient.params.advanceCalculateParams.isAdvanceCalculate},
+    'isSaleAnalysisNow':${ info.infoClient.params.advanceCalculateParams.isSaleAnalysis},
+    'isGraficsNow': ${info.infoClient.params.graficParams.isGrafics},
+    'isBackupNow': ${info.infoClient.params.backupParams.isBackup},
+    'backupTimesNow':${ info.infoClient.params.backupParams.backupTimes},
+    'isGetbackNow':${ info.infoClient.params.getbackParams.isGetBack},
+    'isProdChainNow': ${info.infoClient.params.prodchainParams.isProdChain},
+    'isSupportNow':${ info.infoClient.params.supportParams.isSupport},
+    'supportTypeNow': ${info.infoClient.params.supportParams.supportType},
+    'supportTimeNow': ${info.infoClient.params.supportParams.supportTime},
+    'isTrackerNow':${ info.infoClient.params.trackerParams.isTracker},
+    'isRoomsNow':${ info.infoClient.params.trackerParams.isRooms},
+    'isElementsNow':${ info.infoClient.params.trackerParams.isElements},
+    'isStyleNow': ${info.infoClient.params.styleParams.isStyle}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+          });
+         
+           getClientStyle('${info.clientId}');
+          
+                  createTable('tableInternalClients','containerCalendarDaysData', [
+                                    'Mes / Año',
+                                    'Días del mes',
+                                    'Días Disponibles',
+                                    'Activo',
+                                    'Acciones'
+                                ]);
+           getApiData(getCalendarDays,
+            {
+              'apiService':'apiCompanies',
+              'apiVersion':'v1',
+              'endPoint':'getCalendarDays'
+          },
+            {
+              'containerData':'containerCalendarDaysData',
+              'containerInfo':'containerCalendarDaysInfo',
+              'modelView':'table',
+          },
+            {
+              'filter':'${info.clientId}',
+              'param':'all',
+              'value':'all'
+          }
+              );
+            
+              createResourceResourcesSection('resourceResource');
+              createResourceTrackerSection('trackingResource');
+              createResourceOnSiteSection('onSiteResource');
+           `)}
+        " >
         <i class="fas fa-cog"></i>
       </button>
 

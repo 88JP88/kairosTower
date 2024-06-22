@@ -50,7 +50,7 @@
     <meta charset="UTF-8">
     <title>Cargar archivo CSV y convertirlo en JSON</title>
 </head>
-<body>
+<body style="background-color: #001219;">
   <h3>CARGA MASIVA</h3>
     <input type="file" id="fileInputStore">
     <div id="resultStore"></div>
@@ -71,6 +71,7 @@
 
         
     </script>
+    
 </body>
 </html>
 
@@ -89,7 +90,12 @@
 
 <script  src="scripts/posts/os.postSites.js"></script>
 
-
+<style>
+        .my-custom-alert {
+            background-color: #ffcccb !important; /* Custom background color */
+            color: #333 !important; /* Custom text color */
+        }
+    </style>
 
 <script>
 function listTypeSite(){

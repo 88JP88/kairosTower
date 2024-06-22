@@ -21,8 +21,47 @@
           if(sessionStorage.getItem('isMultiPlaceNow')=="true"){
             if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
 
-              modalCreatePlaces();
-            listTypePlace();
+             
+           
+            const elementsToCreate = [
+              { tag: 'label', html: '',text:'Nombre de la ubicación', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'text', class: 'input is-rounded', id: 'placeName',placeholder:'...' } },
+             
+              { tag: 'label', text: 'Dirección de la ubicación', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'text', class: 'input is-rounded', id: 'placeAdd',placeholder:'...' } },
+
+              { tag: 'label', text: 'Comentarios de la ubicación', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'text', class: 'input is-rounded', id: 'placeComments',placeholder:'...' } },
+
+              { tag: 'label', text: 'Contacto de la ubicación', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'text', class: 'input is-rounded', id: 'placeContact',placeholder:'...' } },
+
+              { tag: 'label', text: 'Tipo de establecimiento', attributes: { class: 'tag' } },
+              { tag: 'div', attributes: { class: 'select is-rounded', id: 'infoContent' } },
+
+              { tag: 'label', text: 'Email de la ubicación', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'text', class: 'input is-rounded', id: 'placeEmail',placeholder:'...' } },
+
+              { tag: 'label', text: 'Opciones avanzadas', attributes: { class: 'tag' } },
+              { tag: 'input', attributes: {type:'checkbox', class: 'checkbox is-rounded', id: 'checkDiscountPlace',placeholder:'...' } },
+
+             { tag: 'div', html: '<label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i> Sistema de puntos</label><div class="select is-rounded"> <select id="list-OSProductDiscountPlace" name="unidad" required><option value="false">No</option> <option value="true">Sí</option></select></div>', attributes: { class: 'box is-rounded', id: 'unidadSelect2Place' },style:{ display: 'none' } },
+
+             { tag: 'div', html: '<label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i>Puntos por compra</label> <input type="number" class="input is-rounded" id="pointBySale" value="0">', attributes: { class: 'box is-rounded', id: 'unidadSelect3Place' },style:{ display: 'none' } },
+
+             { tag: 'div', html: '  <label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i>Valor minimo para puntos</label><input type="number" class="input is-rounded" id="minValBySale" value="0">', attributes: { id: 'unidadSelect4Place' },style:{ display: 'none' } },
+             { tag: 'div', html: '   <label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i>Valor minimo de puntos para redimir</label><input type="number" class="input is-rounded" id="minValToRedem" value="0">', attributes: { id: 'unidadSelect5Place' },style:{ display: 'none' } },
+             { tag: 'div', html: '     <label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i>Precio de cada punto</label><input type="number" class="input is-rounded" id="pointsPriceOS" value="0">', attributes: {  id: 'unidadSelect8Place' },style:{ display: 'none' } },
+             { tag: 'div', html: '   <label for="exampleFormControlInput1" class="ftag"><i class="fas fa-guitar"></i> Auto descuento de puntos</label><div class="select is-rounded"><select  id="list-OSProductDiscount1Place" name="unidad" required><option value="false">No</option><option value="true">Sí</option> </select> </div>', attributes: {  id: 'unidadSelect6Place' },style:{ display: 'none' } },
+             { tag: 'div', html: '  <label for="exampleFormControlInput1" class="tag"><i class="fas fa-guitar"></i> Descontar total de puntos</label><div class="select is-rounded"><select  id="list-OSProductDiscount2Place" name="unidad" required><option value="false">No</option><option value="true">Sí</option></select></div>', attributes: {  id: 'unidadSelect7Place' },style:{ display: 'none' } },
+
+            ];
+            
+            // Llama a la función para agregar los elementos al div con ID "targetDiv"
+            createElements(osCreatePlace,listenerPlaces,{'modalTitle':'CREAR UBICACIÓN','targetBody':'targetDiv'},elementsToCreate,listTypePlace);
+           // createHtmlElements('targetDiv', elementsToCreate);
+           // listTypePlace();
+           
             }if(placesCounter>=sessionStorage.getItem('maxPlaceNow')){
                
     Swal.fire({
@@ -78,6 +117,14 @@
               if(placesCounter<sessionStorage.getItem('maxPlaceNow')){
                 modalCreatePlaces();
                 listTypePlace();
+                const elementsToCreate = [
+                  { tag: 'p', text: 'Este es un párrafo.', attributes: { class: 'text-paragraph' } },
+                  { tag: 'button', text: 'Click Me', attributes: { class: 'btn', id: 'myButton' } },
+                  { tag: 'a', text: 'Google', attributes: { href: 'https://www.google.com', target: '_blank' } }
+                ];
+                
+                // Llama a la función para agregar los elementos al div con ID "targetDiv"
+                createHtmlElements('targetDiv', elementsToCreate);
                 
               }
           }
@@ -101,7 +148,7 @@
       cardContainer11Info.innerHTML = ""; 
       
       const card11Info = document.createElement("div");
-      card11Info.classList.add("card");
+      card11Info.classList.add("box");
       
           card11Info.innerHTML = ` <p><H4>UBICACIONES</H4></p><p>${data.response.apiMessage}</p>`;
           cardContainer11Info.appendChild(card11Info);
@@ -262,7 +309,7 @@ createTable('tableInternalClients2','containerOSData', [
     
       
       <td style="background-color: ${backgroundColor};"> <div class="edit-container">
-      <input type="text" class="form-control label-input" id="${info.placeId}" value="${info.infoPlace.info.name}" title="${info.deliveryName}">
+      <input type="text" class="input is-rounded" id="${info.placeId}" value="${info.infoPlace.info.name}" title="${info.deliveryName}">
       <button onclick="editOSPlace(this,&quot;${info.clientId}&quot;,&quot;${info.placeId}&quot;,&quot;name&quot;,&quot;data&quot;,&quot;data&quot;)" class="btn btn-primary1 delete-button" title="EDITAR">
       <i class="fas fa-edit"></i>
       </button>

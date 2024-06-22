@@ -1,5 +1,5 @@
 
-function getMessage() {
+async function getMessage() {
     fetch('controller/getPHPVariables.php')
       .then(response => response.json())
       .then(data => {

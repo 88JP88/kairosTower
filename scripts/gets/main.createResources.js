@@ -182,20 +182,26 @@ function createResourceOnSiteSection(containerId) {
     ${sessionStorage.getItem('isElementNow')==="true" || sessionStorage.getItem('isPlaceActiveNow')==="true" || sessionStorage.getItem('isSiteNow')==="true" || sessionStorage.getItem('isProductNow')==="true" || sessionStorage.getItem('isCategoryNow')==="true" || sessionStorage.getItem('isCatalogNow')==="true" || sessionStorage.getItem('isTeamNow')==="true" || sessionStorage.getItem('isClientNow')==="true" || sessionStorage.getItem('isOrderNow')==="true"?
         `
                      
-
-        <p class="expand-button1 class="box" onclick="toggleExpandableSection4()"><i class="fas fa-store"></i> On-Site</p>
-        <div class="expandable-section1 box" id="expandable-section4">
+        <p class="expand-button1 box" onclick="
+        saverResources(
+        {
+        'isOpenedBefore':'true',
+        'openedBefore':'toggleExpandableSection4();',
+        
+        });toggleExpandableSection4()"><i class="fas fa-store"></i> On-Site</p>
+        <div class="expandable-section1" id="expandable-section4">
             <div id="card-clientresources" class="card-container box">
                 <!-- Contenido de la sección expandible -->
                 ${sessionStorage.getItem('isPlaceActiveNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Ubicaciones</h5>
           <p class="card-text">
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
-                  
+                  modalClientVisualizer();
+                 
          createTable('tableInternalClients2','containerOSData', [
                            'Ubicación',
                            'Dirección',
@@ -225,7 +231,9 @@ function createResourceOnSiteSection(containerId) {
                 <i class="fas fa-eye"></i>
               </button>
           </p>
-                <p class="card-text"><button onclick="getApiData(getPlaces,
+                <p class="card-text"><button onclick="
+                
+                getApiData(getPlaces,
                 {
                   'apiService':'apiOS',
                   'apiVersion':'v1',
@@ -241,7 +249,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -251,13 +259,13 @@ function createResourceOnSiteSection(containerId) {
 
                 ${sessionStorage.getItem('isSiteNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Puestos</h5>
           <p class="card-text">
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
-                
+                 modalClientVisualizer();
          createTable('tableInternalClients2','containerOSData', [
                            'Puesto',
                            'Comentarios',
@@ -285,7 +293,9 @@ function createResourceOnSiteSection(containerId) {
                 <i class="fas fa-eye"></i>
               </button>
           </p>
-                <p class="card-text"><button onclick="getApiData(getSites,
+                <p class="card-text"><button onclick="
+                modalCreateSites();
+                getApiData(getSites,
                 {
                   'apiService':'apiOS',
                   'apiVersion':'v1',
@@ -301,7 +311,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -310,10 +320,10 @@ function createResourceOnSiteSection(containerId) {
 
                 ${sessionStorage.getItem('isElementNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Elementos</h5>
           <p class="card-text">
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
                  
@@ -363,7 +373,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -376,10 +386,10 @@ function createResourceOnSiteSection(containerId) {
                      
                 ${sessionStorage.getItem('isProductNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Productos</h5>
           <p class="card-text">
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
                
@@ -432,7 +442,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -444,10 +454,10 @@ function createResourceOnSiteSection(containerId) {
                            
                 ${sessionStorage.getItem('isCategoryNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Categorias</h5>
           <p class="card-text">
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
                  
@@ -499,7 +509,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -512,12 +522,12 @@ function createResourceOnSiteSection(containerId) {
     
                 ${sessionStorage.getItem('isCatalogNow')==="true" ? `
                 
-                <div class="card-body">
+                <div class="box">
                 <h5 style="color: #C70039"><i class="fas fa-cube"></i> Catálogos</h5>
           <p class="card-text">
           <div id="chart_div_Catalogs_os" style="width: 200px; height: 200px;"></div>
 
-              <button class="btn btn-primary1 view-button" style="width: 52px;height: 52px; font-size: 24px;"
+              <button class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"
 
                   onclick="
                 
@@ -574,7 +584,7 @@ function createResourceOnSiteSection(containerId) {
                   'param':'all',
                   'value':'all'
               }
-                  );" class="btn btn-primary1 create-button" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
+                  );" class="button is-rounded" style="width: 52px;height: 52px; font-size: 24px;"><i class="fas fa-plus"></i></button>
               </p>
                 
             </div>
@@ -843,12 +853,7 @@ function createResourceOnSiteSection(containerId) {
             <p class="card-text">
             <div class="card-container"> 
               
-                          <div id="containerOSInfo" class="card-container">
-                <!-- Contenido de la sección expandible -->
-            </div>
-            <div id="containerOSData" class="card-container">
-                <!-- Contenido de la sección expandible -->
-            </div>
+                       
                           </div></p>
                           </div>
 `:
@@ -915,3 +920,74 @@ ${urlObj.searchParams.get("st")==="sites"?
   container.innerHTML = htmlContent;
   //console.log('llego a la funcion');
 }
+
+function saverResources(params){
+if(params.isOpenedBefore=="true"){
+  sessionStorage.setItem('isOpenedBefore',params.isOpenedBefore);
+
+sessionStorage.setItem('openedBefore',params.openedBefore);
+
+}
+
+}
+function returnSaverResources(){
+  if(sessionStorage.getItem('isOpenedBefore')=="true"){
+  
+    const clientCode1 = sessionStorage.getItem('openedBefore');
+    eval(clientCode1);  }
+  
+  
+  }
+
+
+  // Función para crear y agregar elementos HTML dentro de un div específico
+function createHtmlElements(targetId, elements) {
+  // Obtén el div objetivo usando su ID
+  const targetDiv = document.getElementById(targetId);
+  
+  if (!targetDiv) {
+      console.error(`No se encontró ningún elemento con el ID "${targetId}".`);
+      return;
+  }
+
+  // Recorre el array de elementos para crear y agregar al div
+  elements.forEach(element => {
+      // Crea un nuevo elemento HTML
+      const newElement = document.createElement(element.tag);
+
+      if (element.html) {
+        newElement.innerHTML = element.html;
+    } else if (element.text) {
+        newElement.textContent = element.text;
+    }
+
+      // Agrega atributos si se proporcionan
+      if (element.attributes) {
+          for (const [key, value] of Object.entries(element.attributes)) {
+              newElement.setAttribute(key, value);
+          }
+      }
+ // Si el elemento es un <select> y tiene opciones, agrégalas
+ if (element.tag === 'select' && element.options) {
+  element.options.forEach(option => {
+      const newOption = document.createElement('option');
+      newOption.textContent = option.text;
+      newOption.value = option.value;
+      if (option.attributes) {
+          for (const [key, value] of Object.entries(option.attributes)) {
+              newOption.setAttribute(key, value);
+          }
+      }
+      newElement.appendChild(newOption);
+  });
+} // Si el elemento tiene hijos, crea y agrega sus hijos
+if (element.children) {
+    createHtmlElements(newElement, element.children);
+}
+      // Agrega el nuevo elemento al div objetivo
+      targetDiv.appendChild(newElement);
+  });
+}
+
+// Uso de la función para crear elementos dinámicamente
+

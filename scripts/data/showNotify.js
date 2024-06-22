@@ -1,4 +1,4 @@
-function showNotify(mensaje, tipo) {
+async function showNotify(mensaje, tipo) {
     const notificacion = document.getElementById('notification');
     const notificacionText = document.getElementById('notificationText');
 
@@ -18,12 +18,14 @@ function showNotify(mensaje, tipo) {
     // Desaparecer la notificación después de 3 segundos
    
 
-    Swal.fire({
+  await  Swal.fire({
         position: "top-end",
+        allowOutsideClick: false,
         icon: iconType,
         title: mensaje,
         showConfirmButton: false,
         timer: 1500,
+        timerProgressBar: true,
         showClass: {
             popup: `
               animate__animated
@@ -37,6 +39,12 @@ function showNotify(mensaje, tipo) {
               animate__fadeOutDown
               animate__faster
             `
+          },
+           willClose: () => {
+           
+           
+            
           }
       });
+
 }
